@@ -32,7 +32,12 @@ LINKS = [
 
 PAGES = ['index.html', 'offres.html', 'comment-ca-marche.html',
          'tarifs.html', 'pourquoi-talos.html', 'reserver.html',
-         'espace-client.html', 'simulateur.html', 'blog.html']
+         'espace-client.html', 'simulateur.html', 'blog.html',
+         # les fiches assistants portent la même barre : oubliées ici,
+         # elles gardaient un menu « Offres » d'une version en retard
+         'assistant-commercial.html', 'assistant-tresorerie.html',
+         'assistant-client.html', 'assistant-facturation.html',
+         'assistant-administratif.html']
 
 LOGO_SVG = ('<svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true">'
             '<mask id="navsync-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550">'
@@ -68,8 +73,13 @@ EQUIPE = [
     ('client',        u'Assistante client',       u'Réponses et rendez-vous',       'assistant-client.html'),
     ('facturation',   u'Assistant facturation',   u'Factures conformes 2026',       'assistant-facturation.html'),
     ('administratif', u'Assistante administrative', u'Tri des mails et classement',   'assistant-administratif.html'),
+    ('chantier',      u'Assistant chef de chantier', u'Planning, suivi, rapports',     None),
+    ('stock',         u'Assistant gestion de stock', u'Stocks, commandes, alertes',    None),
 ]
-BIENTOT = set()   # les cinq assistants sont disponibles
+# Ceux-là n'ont pas encore de page : on les montre quand même, marqués
+# « Bientôt » et non cliquables — un lien vers une page absente serait pire
+# que pas de lien du tout.
+BIENTOT = {'chantier', 'stock'}
 
 CHEV = (u'<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" '
         u'stroke="currentColor" stroke-width="2.6" stroke-linecap="round" '
@@ -82,11 +92,16 @@ FLECHE = (u'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="
 def offres_html(page):
     items = []
     for slug, nom, mission, href in EQUIPE:
-        soon = (u'<i class="tnav-soon">Bientôt</i>' if slug in BIENTOT else u'')
-        items.append(
-            u'<a class="tnav-ag" href="%s">'
-            u'<img src="perso/avatar-%s.webp" alt="" width="36" height="36" loading="lazy" decoding="async">'
-            u'<b>%s%s</b><small>%s</small></a>' % (href, slug, nom, soon, mission))
+        img = (u'<img src="perso/avatar-%s.webp" alt="" width="36" height="36" '
+               u'loading="lazy" decoding="async">' % slug)
+        if slug in BIENTOT:
+            items.append(
+                u'<span class="tnav-ag is-soon">%s'
+                u'<b>%s <i class="tnav-soon">Bientôt</i></b><small>%s</small></span>'
+                % (img, nom, mission))
+        else:
+            items.append(u'<a class="tnav-ag" href="%s">%s<b>%s</b><small>%s</small></a>'
+                         % (href, img, nom, mission))
     return (u'<span class="tnav-drop">'
             u'<a class="tnav-drop-t" href="offres.html"%s>Offres%s</a>'
             u'<span class="tnav-pan">%s'
@@ -133,7 +148,7 @@ PANEL_CSS = u"""<style id="tnav-drop-css">
 .tnav-drop:hover .tnav-chev,.tnav-drop:focus-within .tnav-chev{transform:rotate(180deg)}
 .tnav-pan{position:absolute;top:100%;left:-18px;z-index:60;
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;
-  width:min(560px,86vw);margin-top:16px;padding:10px;border-radius:20px;
+  width:min(640px,88vw);margin-top:16px;padding:10px;border-radius:20px;
   background:color-mix(in oklab,var(--surface-tint) 96%,transparent);
   border:1px solid var(--border);box-shadow:0 24px 60px rgba(0,0,0,.42);
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
@@ -151,12 +166,21 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 .tnav-ag::after{display:none}
 .tnav-ag img{grid-row:1/3;width:36px;height:36px;border-radius:50%;object-fit:cover;
   background:color-mix(in oklab,var(--ink) 8%,transparent)}
-.tnav-ag b{display:flex;align-items:center;gap:7px;
-  font-size:14px;font-weight:600;letter-spacing:-.2px;color:var(--ink)}
+.tnav-ag b{display:block;font-size:14px;font-weight:600;
+  letter-spacing:-.2px;color:var(--ink)}
 .tnav-ag small{font-size:12.5px;color:var(--ink-soft);letter-spacing:-.1px}
-.tnav-soon{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.06em;
-  text-transform:uppercase;padding:2px 7px;border-radius:100px;
-  color:var(--indigo);border:1px solid color-mix(in oklab,var(--indigo) 40%,transparent)}
+.tnav-soon{display:inline-block;vertical-align:1px;white-space:nowrap;
+  font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;padding:2px 6px;border-radius:100px;
+  /* teintée par l'encre : assez sombre sur fond clair, assez claire sur
+     fond sombre — 5:1 dans les deux thèmes, sans couleur en dur */
+  color:color-mix(in oklab,var(--indigo) 72%,var(--ink));
+  background:color-mix(in oklab,var(--indigo) 12%,transparent);
+  border:1px solid color-mix(in oklab,var(--indigo) 55%,transparent)}
+/* pas encore livré : on montre le personnage et la mission, mais rien à
+   cliquer — donc ni curseur main, ni survol qui promettrait un lien */
+.tnav-ag.is-soon{cursor:default}
+.tnav-ag.is-soon:hover{background:none}
 .tnav-pan-all{grid-column:1/-1;display:inline-flex;align-items:center;justify-content:center;
   gap:8px;margin-top:4px;padding:11px;border-radius:14px;
   background:color-mix(in oklab,var(--ink) 5%,transparent);

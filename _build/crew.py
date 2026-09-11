@@ -38,30 +38,57 @@ EQUIPE = [
      'assistant-client.html'),
 ]
 
+# Pas encore livrés : ils tournent dans le carrousel comme les autres, mais
+# marqués « Bientôt » et sans lien — leur fiche n'existe pas. Le jour où elle
+# existe, il suffit de déplacer la ligne dans EQUIPE avec son href.
+A_VENIR = [
+    ('chantier', u'Chantiers &amp; plannings', u'Assistant chef de chantier',
+     u'Vos plannings tiennent. Vos comptes rendus s’écrivent seuls.',
+     u'Tient le planning de vos équipes, suit l’avancement de chaque chantier et '
+     u'rédige les comptes rendus de journée.',
+     None),
+    ('stock', u'Stocks &amp; commandes', u'Assistant gestion de stock',
+     u'Vous savez ce qu’il reste et ce qu’il faut commander.',
+     u'Suit vos stocks de matériel et de matériaux, vous alerte avant la rupture et '
+     u'prépare vos commandes fournisseurs.',
+     None),
+]
+
 FLECHE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" '
           'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
           '<path d="M5 12h14M13 6l6 6-6 6"/></svg>')
 
-cartes = []
-for i, (slug, role, nom, accroche, promesse, href) in enumerate(EQUIPE):
-    cartes.append(u'''      <li class="crew-c" data-i="%d">
-        <a href="%s">
+TOUS = EQUIPE + A_VENIR
+
+CARTE = u'''      <li class="crew-c" data-i="%(i)d">
+        <%(ouvre)s>
           <span class="crew-vis">
-            <img src="perso/assistant-%s.webp" alt="" width="430" height="1400"
-                 loading="lazy" decoding="async">
+            <img src="perso/assistant-%(slug)s.webp" alt="" width="430" height="1400"
+                 loading="lazy" decoding="async">%(pastille)s
           </span>
           <span class="crew-txt">
-            <small>%s</small>
-            <b>%s</b>
-            <span class="crew-h">%s</span>
-            <span class="crew-go">Découvrir %s</span>
+            <small>%(role)s</small>
+            <b>%(nom)s</b>
+            <span class="crew-h">%(accroche)s</span>
+            <span class="crew-go%(go_cl)s">%(go)s</span>
           </span>
-        </a>
-      </li>''' % (i, href, slug, role, nom, accroche, FLECHE))
+        </%(ferme)s>
+      </li>'''
+
+cartes = []
+for i, (slug, role, nom, accroche, promesse, href) in enumerate(TOUS):
+    soon = href is None
+    cartes.append(CARTE % dict(
+        i=i, slug=slug, role=role, nom=nom, accroche=accroche,
+        ouvre=(u'span class="crew-x"' if soon else u'a href="%s"' % href),
+        ferme=(u'span' if soon else u'a'),
+        pastille=(u'\n            <i class="crew-soon">Bientôt</i>' if soon else u''),
+        go_cl=(u' pending' if soon else u''),
+        go=(u'En préparation' if soon else u'Découvrir %s' % FLECHE)))
 
 dots = u''.join(u'<button type="button" role="tab" aria-label="%s"%s></button>'
                 % (e[2], u' aria-selected="true"' if i == 0 else u' aria-selected="false"')
-                for i, e in enumerate(EQUIPE))
+                for i, e in enumerate(TOUS))
 
 CHEV = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" '
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -100,12 +127,13 @@ html[data-theme="light"] .t-crew{--bronze:#C5531C;--bronze-2:#E0631F;--bronze-rg
   margin-left:calc(clamp(230px,24vw,286px) / -2);
   transition:transform .62s var(--e),opacity .62s var(--e),filter .62s var(--e);
   will-change:transform}
-.crew-c a{display:flex;flex-direction:column;height:100%;overflow:hidden;
+.crew-c a,.crew-c .crew-x{display:flex;flex-direction:column;height:100%;overflow:hidden;
   border-radius:26px;text-decoration:none;color:inherit;
   background:var(--ink-2);border:1px solid var(--line);
   box-shadow:0 30px 70px -30px rgba(0,0,0,.8)}
-html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.34)}
-.crew-c[data-act] a{border-color:rgba(var(--bronze-rgb),.42);
+html[data-theme="light"] .crew-c a,
+html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25,16,.34)}
+.crew-c[data-act] a,.crew-c[data-act] .crew-x{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
 .crew-vis{position:relative;display:block;height:60%;overflow:hidden;
@@ -117,10 +145,11 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-vis::after{content:"";position:absolute;left:0;right:0;bottom:0;height:38%;
   pointer-events:none;
   background:linear-gradient(180deg,color-mix(in srgb,var(--ink-2),transparent 100%),var(--ink-2))}
-.crew-soon{position:absolute;top:12px;right:12px;font-style:normal;
+.crew-soon{position:absolute;top:12px;right:12px;z-index:2;font-style:normal;
   font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-  padding:4px 9px;border-radius:100px;color:var(--bronze);
-  background:color-mix(in srgb,var(--ink) 72%,transparent);
+  padding:4px 9px;border-radius:100px;
+  color:color-mix(in oklab,var(--bronze) 74%,var(--parch));
+  background:color-mix(in srgb,var(--ink) 88%,transparent);
   border:1px solid rgba(var(--bronze-rgb),.42)}
 .crew-txt{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
 .crew-txt small{font-family:ui-monospace,"SF Mono",Menlo,monospace;
@@ -133,6 +162,8 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-go{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
   font-size:13.5px;font-weight:700;color:var(--bronze)}
 .crew-go svg{width:14px;height:14px}
+.crew-go.pending{color:var(--lin);font-weight:600}
+.crew-c .crew-x{cursor:default}
 
 /* flèches et pastilles */
 .crew-nav{position:absolute;top:50%;z-index:20;display:grid;place-items:center;
@@ -283,12 +314,13 @@ html[data-theme="light"] .crew-head h2 em{
   margin-left:calc(clamp(230px,24vw,286px) / -2);
   transition:transform .62s var(--e),opacity .62s var(--e),filter .62s var(--e);
   will-change:transform}
-.crew-c a{display:flex;flex-direction:column;height:100%;overflow:hidden;
+.crew-c a,.crew-c .crew-x{display:flex;flex-direction:column;height:100%;overflow:hidden;
   border-radius:26px;text-decoration:none;color:inherit;
   background:var(--ink-2);border:1px solid var(--line);
   box-shadow:0 30px 70px -30px rgba(0,0,0,.8)}
-html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.34)}
-.crew-c[data-act] a{border-color:rgba(var(--bronze-rgb),.42);
+html[data-theme="light"] .crew-c a,
+html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25,16,.34)}
+.crew-c[data-act] a,.crew-c[data-act] .crew-x{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
 .crew-vis{position:relative;display:block;height:60%;overflow:hidden;
@@ -300,10 +332,11 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-vis::after{content:"";position:absolute;left:0;right:0;bottom:0;height:38%;
   pointer-events:none;
   background:linear-gradient(180deg,color-mix(in srgb,var(--ink-2),transparent 100%),var(--ink-2))}
-.crew-soon{position:absolute;top:12px;right:12px;font-style:normal;
+.crew-soon{position:absolute;top:12px;right:12px;z-index:2;font-style:normal;
   font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-  padding:4px 9px;border-radius:100px;color:var(--bronze);
-  background:color-mix(in srgb,var(--ink) 72%,transparent);
+  padding:4px 9px;border-radius:100px;
+  color:color-mix(in oklab,var(--bronze) 74%,var(--parch));
+  background:color-mix(in srgb,var(--ink) 88%,transparent);
   border:1px solid rgba(var(--bronze-rgb),.42)}
 .crew-txt{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
 .crew-txt small{font-family:ui-monospace,"SF Mono",Menlo,monospace;
@@ -316,6 +349,8 @@ html[data-theme="light"] .crew-c a{box-shadow:0 30px 70px -34px rgba(40,25,16,.3
 .crew-go{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
   font-size:13.5px;font-weight:700;color:var(--bronze)}
 .crew-go svg{width:14px;height:14px}
+.crew-go.pending{color:var(--lin);font-weight:600}
+.crew-c .crew-x{cursor:default}
 
 /* flèches et pastilles */
 .crew-nav{position:absolute;top:50%;z-index:20;display:grid;place-items:center;

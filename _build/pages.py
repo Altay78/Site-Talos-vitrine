@@ -209,7 +209,6 @@ page('reserver.html',
 #      pages qu'on vient d'écrire n'auraient pas leur aria-current="page"
 # ═══════════════════════════════════════════════════════════════════════════
 import nav_sync
-for _p in (nav_sync.PAGES
-          + ['assistant-%s.html' % a['slug'] for a in assistants.ASSISTANTS]
-          + [d[0] for d in legal.DOCS]):
+# (les fiches assistants sont désormais dans nav_sync.PAGES)
+for _p in nav_sync.PAGES + [d[0] for d in legal.DOCS]:
     print(u'%-24s %s' % nav_sync.sync(_p))
