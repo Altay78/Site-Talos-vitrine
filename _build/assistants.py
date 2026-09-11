@@ -81,7 +81,7 @@ def _b1(a):
 
         <p class="proof">
           <span class="proof-i">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg>
             <b>+30 artisans</b> accompagnés
           </span>
           <span class="proof-sep" aria-hidden="true"></span>
@@ -122,7 +122,7 @@ def _b2(a):
           </p>
           <details class="fx-info">
             <summary>
-              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 10.5v6"/><path d="M12 6.9v.2"/></svg></span>
+              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg></span>
               <span class="fx-lbl-off">Comment ça marche</span>
               <span class="fx-lbl-on">Réduire</span>
               <svg class="fx-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>
@@ -143,7 +143,7 @@ def _b2(a):
             <div class="fx-glare"></div>
           </div>
           <button class="fx-open" type="button" aria-label="Voir l'écran en entier">
-            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8.5v5M8.5 11h5"/></svg></span>
+            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.78 11.77a8.99 8.99 0 1 0 17.98 0a8.99 8.99 0 1 0 -17.98 0"/><path d="M18.02 18.49L21.54 22"/></svg></span>
           </button>
         </div>
       </article>''' % (titre, _svg(ico), accroche, detail, i, ph, ecran, ph))

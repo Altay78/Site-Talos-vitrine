@@ -80,7 +80,7 @@ HTML = u"""<!-- ═══ CALCULATEUR DE COÛT ADMINISTRATIF ═══ -->
           </span>
         </div>
         <p class="panel note">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3 1.8"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 21.25 12C 21.25 17.11 17.11 21.25 12 21.25C 6.89 21.25 2.75 17.11 2.75 12C 2.75 6.89 6.89 2.75 12 2.75C 17.11 2.75 21.25 6.89 21.25 12Z"/><path d="M15.43 14.94L11.66 12.69L11.66 7.85"/></svg>
           Durées moyennes constatées chez nos clients artisans du bâtiment.
         </p>
       </div>
@@ -106,7 +106,7 @@ HTML = u"""<!-- ═══ CALCULATEUR DE COÛT ADMINISTRATIF ═══ -->
     <!-- ── colonne verdict ── -->
     <aside class="panel g-out">
       <div class="lgd">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3 1.8"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M 21.25 12C 21.25 17.11 17.11 21.25 12 21.25C 6.89 21.25 2.75 17.11 2.75 12C 2.75 6.89 6.89 2.75 12 2.75C 17.11 2.75 21.25 6.89 21.25 12Z"/><path d="M15.43 14.94L11.66 12.69L11.66 7.85"/></svg>
         Votre estimation
       </div>
       <div class="tiles">
@@ -117,7 +117,7 @@ HTML = u"""<!-- ═══ CALCULATEUR DE COÛT ADMINISTRATIF ═══ -->
       </div>
 
       <div class="lgd">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><path d="M12 3v18"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M 6.69 11.38C 7.38 10.23 8.12 9.1 8.85 7.97L 6.87 4.28C 6.87 4.28 7.02 4.15 7.4 3.85C 8.53 2.98 9.76 2.76 11.09 3.27C 12.36 3.77 13.65 4.14 15.02 4.06C 15.42 4.04 16.96 3.84 16.96 3.84L 15.16 7.96C 15.88 9.09 16.62 10.23 17.31 11.38C 18.44 13.26 19.53 15.37 18.65 17.56C 17.63 20.11 14.64 20.96 12 21C 9.35 20.96 6.37 20.11 5.35 17.56C 4.47 15.37 5.56 13.26 6.69 11.38Z"/><path d="M 8.85 7.98C 10.95 8.46 13.05 8.46 15.16 7.98"/></svg>
         Coût de votre administratif
       </div>
       <div class="tiles">
@@ -128,7 +128,7 @@ HTML = u"""<!-- ═══ CALCULATEUR DE COÛT ADMINISTRATIF ═══ -->
       </div>
 
       <div class="lgd">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 18 10 12 14 16 20 9"/><path d="M20 14V9h-5"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7.24 14.78L10.24 10.89L13.65 13.57L16.58 9.79"/><path d="M18.07 4.2a1.92 1.92 0 1 0 3.84 0a1.92 1.92 0 1 0 -3.84 0"/><path d="M 14.92 3.12L 7.66 3.12C 4.65 3.12 2.78 5.25 2.78 8.26L 2.78 16.35C 2.78 19.36 4.61 21.48 7.66 21.48L 16.26 21.48C 19.27 21.48 21.14 19.36 21.14 16.35L 21.14 9.31"/></svg>
         Votre comparaison
       </div>
       <div class="vs">
@@ -163,7 +163,7 @@ HTML = u"""<!-- ═══ CALCULATEUR DE COÛT ADMINISTRATIF ═══ -->
   <!-- ── réinvestissement ── -->
   <div class="panel g-reinv">
     <div class="lead">
-      <span class="bolt"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span>
+      <span class="bolt"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M 11.99 15.9L 14.11 12H 9.89L 12.01 8.1"/><path d="M 12 3C 16.97 3 21 7.03 21 12C 21 16.97 16.97 21 12 21C 7.03 21 3 16.97 3 12C 3 7.03 7.03 3 12 3Z"/></svg></span>
       <div>
         <h3>Réinvestissez votre temps là où ça compte vraiment.</h3>
         <p>Ce temps peut aller à vos chantiers, à votre développement commercial, ou tout simplement à votre vie personnelle.</p>

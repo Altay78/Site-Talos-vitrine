@@ -214,8 +214,7 @@ ESPACE_URL = 'https://talos-app-pearl.vercel.app'
 
 ICON_USER = ('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
              'stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'
-             '<circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="10" r="3.2"/>'
-             '<path d="M5.6 19a7 7 0 0 1 12.8 0"/></svg>')
+             '<path d="M 11.98 15.35C 8.12 15.35 4.81 15.93 4.81 18.27C 4.81 20.61 8.1 21.22 11.98 21.22C 15.85 21.22 19.15 20.63 19.15 18.29C 19.15 15.95 15.87 15.35 11.98 15.35Z"/><path d="M 11.98 12.01C 14.52 12.01 16.58 9.95 16.58 7.41C 16.58 4.87 14.52 2.81 11.98 2.81C 9.45 2.81 7.39 4.87 7.39 7.41C 7.38 9.94 9.42 12 11.95 12.01L 11.98 12.01Z"/></svg>')
 
 
 def nav_html(logo_mark, toggle_btn):
@@ -420,7 +419,7 @@ TOGGLE_BTN = (
     'rounded-lg" aria-label="Changer de thème">'
     '<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
     'stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'
-    '<path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>'
+    '<path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg>'
     '<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
     'stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/>'
     '<path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22'
@@ -432,7 +431,7 @@ MOBILE_THEME_BTN = (
     '<button type="button" class="theme-toggle m-theme" aria-label="Changer de thème">'
     '<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
     'stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'
-    '<path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>'
+    '<path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg>'
     '<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
     'stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/>'
     '<path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22'
