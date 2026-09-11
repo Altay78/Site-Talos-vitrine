@@ -82,9 +82,9 @@ html[data-theme="light"] .t-story em,html[data-theme="light"] .t-how em,html[dat
 
 
 /* deux temps : décrocher le chantier (bronze), puis encaisser (olivier) */
-.t-feat .fx-card{--acc:var(--bronze);--acc-rgb:var(--bronze-rgb)}
+.t-feat .fx-card{--acc:var(--parch);--acc-rgb:var(--parch-rgb)}
 
-.t-feat .fx-card.act2{--acc:var(--olivier);--acc-rgb:var(--olivier-rgb)}
+.t-feat .fx-card.act2{--acc:var(--parch);--acc-rgb:var(--parch-rgb)}
 
 
 .t-feat .fx-card{position:relative;display:flex;flex-direction:column;overflow:hidden;
@@ -110,12 +110,12 @@ html[data-theme="light"] .t-feat .fx-card{background:#fff;box-shadow:0 1px 2px r
 
 
 /* l'avantage : une icône thématique propre à l'étape, pas une coche générique */
-.t-feat .fx-win{display:flex;align-items:flex-start;gap:13px;margin-top:18px;
+.t-feat .fx-win{display:flex;align-items:flex-start;gap:13px;margin-top:18px;min-height:calc(1.42em * 2);
   font-size:16px;font-weight:600;line-height:1.42;color:var(--parch);letter-spacing:-.3px}
 
 .t-feat .fx-win .fx-ic{display:flex;align-items:center;justify-content:center;flex:0 0 auto;
   width:38px;height:38px;margin-top:-3px;border-radius:12px;
-  border:1px solid rgba(var(--acc-rgb),.34);background:rgba(var(--acc-rgb),.1);color:var(--acc)}
+  border:1px solid rgba(var(--acc-rgb),.22);background:rgba(var(--acc-rgb),.07);color:var(--acc)}
 
 
 /* le détail est replié : la carte reste visuelle, l'artisan ouvre s'il veut */
@@ -123,7 +123,7 @@ html[data-theme="light"] .t-feat .fx-card{background:#fff;box-shadow:0 1px 2px r
 
 .t-feat .fx-info>summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;
   padding:7px 13px 7px 8px;border-radius:100px;border:1px solid rgba(var(--acc-rgb),.34);
-  background:rgba(var(--acc-rgb),.08);color:var(--acc);
+  background:rgba(var(--acc-rgb),.06);color:var(--acc);
   font-size:12.5px;font-weight:600;letter-spacing:-.1px;
   transition:background .3s var(--e),border-color .3s var(--e)}
 
