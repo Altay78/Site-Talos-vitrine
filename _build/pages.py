@@ -122,10 +122,12 @@ page('offres.html',
              u"a ses missions. Vous prenez ceux dont vous avez besoin.")
 
 
-#  L'assistant commercial a sa propre page, écrite à la main (parts/ac.*) :
-#  huit blocs qui ne rentrent pas dans le gabarit commun. Les quatre autres
-#  restent sur le gabarit tant qu'on ne leur a pas porté le nouveau dessin.
-REFAITS = {'commercial'}
+#  Les fiches refaites (gabarit v2, huit blocs) sont construites par
+#  offres.py, à partir de fiche.py + fiches.py. Les autres — s'il en reste —
+#  gardent le gabarit à quatre blocs de assistants.py.
+import fiches, offres
+
+REFAITS = set(f['slug'] for f in fiches.FICHES)
 
 for _a in assistants.ASSISTANTS:
     if _a['slug'] in REFAITS:
@@ -133,16 +135,9 @@ for _a in assistants.ASSISTANTS:
     page('assistant-%s.html' % _a['slug'], _a['titre'], _a['desc'],
          ASSIST_CSS, assistants.corps(_a), ASSIST_JS)
 
-page('assistant-commercial.html',
-     u"Assistant commercial — Talos | Il ne laisse passer aucune opportunité",
-     u"L'assistant commercial de Talos capte vos demandes même le soir, prépare vos devis "
-     u"depuis un mail, un vocal ou une photo, les fait signer avec l'acompte, puis relance "
-     u"jusqu'à la réponse du client.",
-     part('ac.css'), part('ac.html'), part('ac.js'),
-     og_title=u"Votre commercial qui ne laisse passer aucune opportunité",
-     og_desc=u"Il capte vos demandes, prépare vos devis et relance vos clients jusqu'à la "
-             u"signature. Même quand vous êtes sur un chantier.")
-
+for _f in fiches.FICHES:
+    # nav_sync repasse de toute façon sur toutes les pages en fin de script
+    offres.construire(_f, resync=False)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

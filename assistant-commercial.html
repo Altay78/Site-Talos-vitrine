@@ -437,7 +437,20 @@ html[data-theme="light"] .ac-hero::before{
 .ac-proof-i svg{width:16px;height:16px;color:var(--bronze);flex:0 0 auto}
 .ac-proof-sep{width:1px;height:16px;background:var(--line-2)}
 
-/* le petit bloc de réassurance : trois promesses cochées */
+/* les missions du hero — en grille, pas en flex : à cinq entrées, un
+   retour à la ligne libre laissait la troisième ligne en escalier */
+.ac-atouts{list-style:none;margin:0 0 32px;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 30px}
+.ac-atouts li{display:flex;align-items:center;gap:12px;
+  font-size:15.5px;font-weight:600;line-height:1.3;letter-spacing:-.25px;
+  color:var(--parch)}
+.ac-atouts i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:11px;
+  border:1px solid rgba(var(--bronze-rgb),.3);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze)}
+.ac-atouts svg{width:17px;height:17px}
+
+/* la rangée cochée ne sert plus qu'au pied de page */
 .ac-reassure{list-style:none;margin:0 0 32px;padding:0;
   display:flex;flex-wrap:wrap;gap:12px 26px}
 .ac-reassure li{display:flex;align-items:center;gap:10px;
@@ -556,8 +569,8 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
 .ac-story-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:60px;
   align-items:start}
 .ac-story-txt{position:sticky;top:124px}
-.ac-story-txt .ac-h2{max-width:none;font-size:clamp(28px,3.1vw,42px);
-  letter-spacing:-1.4px;line-height:1.06}
+.ac-story-txt .ac-h2{max-width:none;font-size:clamp(30px,3.3vw,46px);
+  letter-spacing:-1.6px;line-height:1.04}
 .ac-story-txt .ac-sub{max-width:none;font-size:16px}
 .ac-story-note{margin:26px 0 0;padding:18px 20px;border-radius:16px;
   background:var(--ink-2);border:1px solid var(--line);
@@ -575,11 +588,16 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
 .ac-step:last-child{margin-bottom:0}
 
 /* l'onglet : même hauteur pour tous, décalé d'un cran par fiche */
+/* l'onglet est la seule pièce translucide de la pile : il flotte au-dessus
+   de la fiche précédente, c'est là que le flou a un sens */
 .ac-step-tab{position:absolute;top:0;height:var(--tabh);
   left:calc(var(--i) * (100% / 7));width:calc(100% / 7);
   display:flex;align-items:center;justify-content:center;gap:5px;
-  padding:0 4px;border-radius:12px 12px 0 0;
-  background:var(--ink-3);border:1px solid var(--line-2);border-bottom:0;
+  padding:0 4px;border-radius:14px 14px 0 0;
+  background:color-mix(in oklab,var(--ink-3) 80%,transparent);
+  backdrop-filter:blur(18px) saturate(150%);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);
+  border:1px solid color-mix(in oklab,var(--parch) 9%,transparent);border-bottom:0;
   font-family:var(--mono);font-size:clamp(9.5px,.95vw,11.5px);letter-spacing:.02em;
   color:var(--lin);white-space:nowrap;overflow:hidden;
   transition:background .3s var(--e),color .3s var(--e),border-color .3s var(--e)}
@@ -588,14 +606,27 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
 .ac-step-tab .d{opacity:.75}
 
  /* l'angle haut-gauche reste droit : c'est là que se pose le premier onglet,
-    et dans la pile c'est toujours cet angle-là qui affleure sous lui */
-.ac-step-card{position:relative;padding:26px 28px 28px;border-radius:0 20px 20px 20px;
-  background:var(--ink-2);border:1px solid var(--line-2);
-  box-shadow:0 30px 60px -40px rgba(0,0,0,.85)}
-html[data-theme="light"] .ac-step-card{box-shadow:0 30px 60px -40px rgba(40,25,16,.4)}
+    et dans la pile c'est toujours cet angle-là qui affleure sous lui.
+    La fiche reste opaque — elle doit masquer celle du dessous.
+    Ombre en deux couches : un contact court, une ambiante très étalée. */
+.ac-step-card{position:relative;padding:32px 34px 34px;border-radius:0 26px 26px 26px;
+  background:var(--ink-2);
+  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),
+             0 2px 6px rgba(0,0,0,.2),
+             0 44px 90px -56px rgba(0,0,0,.95)}
+html[data-theme="light"] .ac-step-card{
+  border-color:rgba(40,25,16,.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),
+             0 2px 6px rgba(40,25,16,.05),
+             0 44px 90px -56px rgba(40,25,16,.42)}
 /* même hauteur pour toutes : sinon la fiche du dessous dépasse en bas de la
    pile et laisse traîner un liseré. 308 px couvre la plus haute à 961 px. */
 @media (min-width:961px){.ac-step-card{min-height:300px}}
+/* les fiches ont la même hauteur mais pas le même contenu : le corps se
+   centre dans la place qui reste, sinon les plus courtes sonnent creux */
+.ac-step-card{display:flex;flex-direction:column}
+.ac-step-body{flex:1;align-content:center}
 
 .ac-step-h{display:flex;align-items:center;gap:12px;margin:0 0 16px}
 .ac-step-ic{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
@@ -603,20 +634,22 @@ html[data-theme="light"] .ac-step-card{box-shadow:0 30px 60px -40px rgba(40,25,1
   border:1px solid rgba(var(--bronze-rgb),.3);background:rgba(var(--bronze-rgb),.10);
   color:var(--bronze)}
 .ac-step-ic svg{width:19px;height:19px}
-.ac-step-h b{font-size:17.5px;font-weight:800;letter-spacing:-.5px;color:var(--parch)}
-.ac-step-h time{margin-left:auto;font-family:var(--mono);font-size:12px;
+.ac-step-h b{font-size:19px;font-weight:800;letter-spacing:-.55px;color:var(--parch)}
+.ac-step-when{margin-left:auto;font-family:var(--mono);font-size:12px;
   color:var(--lin);white-space:nowrap}
 
-.ac-step-q{margin:0;padding:16px 18px;border-radius:14px;
-  background:var(--ink-3);border:1px solid var(--line);
-  font-size:15px;line-height:1.6;color:var(--parch);font-style:italic}
-.ac-step-p{margin:0;font-size:15px;line-height:1.6;color:var(--lin)}
+.ac-step-q{margin:0;padding:18px 20px;border-radius:18px;border:0;
+  background:color-mix(in oklab,var(--parch) 5%,transparent);
+  font-size:15.5px;line-height:1.62;letter-spacing:-.1px;
+  color:var(--parch);font-style:italic}
+.ac-step-p{margin:0;font-size:15px;line-height:1.62;color:var(--lin)}
 
 /* les puces d'une demande qualifiée */
 .ac-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .ac-chips li{display:inline-flex;align-items:center;gap:7px;
-  padding:8px 14px;border-radius:100px;
-  background:var(--ink-3);border:1px solid var(--line-2);
+  padding:9px 15px;border-radius:100px;
+  background:color-mix(in oklab,var(--parch) 5%,transparent);
+  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent);
   font-size:13.5px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
 .ac-chips li::before{content:"";width:5px;height:5px;border-radius:50%;
   background:var(--bronze);flex:0 0 auto}
@@ -624,8 +657,9 @@ html[data-theme="light"] .ac-step-card{box-shadow:0 30px 60px -40px rgba(40,25,1
 /* les trois variantes de prix */
 .ac-prices{list-style:none;margin:0;padding:0;display:grid;
   grid-template-columns:repeat(3,1fr);gap:10px}
-.ac-prices li{padding:14px 14px 13px;border-radius:14px;text-align:center;
-  background:var(--ink-3);border:1px solid var(--line-2)}
+.ac-prices li{padding:16px 14px 15px;border-radius:18px;text-align:center;
+  background:color-mix(in oklab,var(--parch) 5%,transparent);
+  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent)}
 .ac-prices small{display:block;margin:0 0 5px;font-family:var(--mono);font-size:11px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--lin)}
 .ac-prices b{font-size:17px;font-weight:800;letter-spacing:-.6px;color:var(--parch);
@@ -635,12 +669,13 @@ html[data-theme="light"] .ac-step-card{box-shadow:0 30px 60px -40px rgba(40,25,1
 .ac-prices li.hot b{color:var(--bronze)}
 
 /* la ligne de résultat, en fin de scénario */
-.ac-step-win{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  padding:16px 18px;border-radius:14px;
-  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.34)}
-.ac-step-win b{font-size:22px;font-weight:800;letter-spacing:-.8px;color:var(--bronze);
+.ac-step-win{display:flex;flex-direction:column;align-items:flex-start;gap:5px;
+  padding:18px 20px;border-radius:18px;
+  background:rgba(var(--bronze-rgb),.12);
+  border:1px solid rgba(var(--bronze-rgb),.26)}
+.ac-step-win b{font-size:25px;font-weight:800;letter-spacing:-1px;color:var(--bronze);
   font-variant-numeric:tabular-nums}
-.ac-step-win span{font-size:14.5px;color:var(--lin)}
+.ac-step-win span{font-size:14.5px;line-height:1.5;color:var(--lin)}
 .ac-step-body{display:grid;gap:14px}
 
 
@@ -652,11 +687,33 @@ html[data-theme="light"] .ac-step-card{box-shadow:0 30px 60px -40px rgba(40,25,1
 
 .ac-feat{padding:96px 0 108px;border-top:1px solid var(--line)}
 .ac-feat-head{max-width:720px;margin:0 0 46px}
-.ac-feat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 
-.ac-card{display:flex;flex-direction:column;padding:30px 30px 28px;
+/* On fait glisser au lieu d'empiler : une carte à la fois, calée sur son
+   bord. Les neuf rangées sont déclarées ici et reprises par chaque carte
+   en subgrid — vignette, titre, accroche, liste et bouton tombent donc au
+   même niveau d'une carte à l'autre, quelle que soit la longueur du texte. */
+.ac-feat-rail{display:grid;grid-auto-flow:column;
+  grid-auto-columns:var(--w,46%);
+  grid-template-rows:repeat(9,auto);
+  gap:22px;align-items:stretch;
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;
+  padding:4px 4px 10px;margin:-4px -4px -10px;
+  scrollbar-width:none}
+.ac-feat-rail::-webkit-scrollbar{display:none}
+.ac-feat-rail:focus-visible{outline:3px solid var(--bronze);outline-offset:4px;
+  border-radius:28px}
+
+.ac-card{grid-row:1 / -1;display:grid;grid-template-rows:subgrid;
+  scroll-snap-align:start;
+  padding:30px 30px 28px;
   border-radius:26px;background:var(--ink-2);border:1px solid var(--line-2);
   transition:border-color .3s var(--e),transform .3s var(--e)}
+/* sans subgrid la carte reste lisible, seules les rangées ne s'alignent plus */
+@supports not (grid-template-rows:subgrid){
+  .ac-card{display:flex;flex-direction:column}
+  .ac-card-go{margin-top:auto}
+}
 html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 .ac-card:hover{border-color:rgba(var(--bronze-rgb),.4);transform:translateY(-3px)}
 
@@ -686,7 +743,7 @@ html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
   width:24px;height:24px;margin-top:-1px;border-radius:8px;
   background:rgba(var(--bronze-rgb),.10);color:var(--bronze)}
 .ac-card li svg{width:14px;height:14px}
-.ac-card-go{margin-top:auto;display:inline-flex;align-items:center;gap:8px;
+.ac-card-go{display:inline-flex;align-items:center;gap:8px;
   align-self:flex-start;min-height:46px;padding:12px 22px;border-radius:100px;
   background:var(--ink-3);border:1px solid var(--line-2);color:var(--parch);
   font-size:14.5px;font-weight:700;letter-spacing:-.2px;text-decoration:none;
@@ -701,13 +758,17 @@ html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .ac-tools{padding:92px 0 96px;border-top:1px solid var(--line)}
-.ac-tools-head{text-align:center;max-width:640px;margin:0 auto 40px}
+.t-asst .ac-tools-head{text-align:center;max-width:640px;margin:0 auto 52px}
 .ac-tools-head .ac-h2{margin:0 0 14px}
 .ac-tools-head .ac-sub{margin:0 auto;max-width:52ch}
-.ac-tools-count{display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+/* l'icône est posée par le gabarit sans attribut de taille : c'est ici
+   qu'elle est dimensionnée, sinon elle prend toute la pastille */
+.ac-tools-count svg{width:14px;height:14px;flex:0 0 auto}
+.ac-tools-count{display:inline-flex;align-items:center;gap:8px;margin-top:24px;
   padding:8px 16px;border-radius:100px;
   background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.3);
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--bronze)}
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--bronze);
+  white-space:nowrap}
 
 .ac-belt{position:relative;display:flex;flex-direction:column;gap:14px;
   overflow:hidden;
@@ -784,20 +845,24 @@ html[data-theme="light"] .ac-chip{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 .ac-ba-head{max-width:640px;margin:0 0 40px}
 .ac-ba-svg{display:block;width:100%}
 .ac-ba-svg svg{display:block;width:100%;height:auto}
-.ac-ba-cards{list-style:none;margin:0;padding:0;display:none;gap:12px}
-.ac-ba-cards li{padding:18px 20px;border-radius:18px;
-  background:var(--ink-2);border:1px solid var(--line-2)}
-.ac-ba-cards .av,.ac-ba-cards .ap{display:flex;align-items:flex-start;gap:11px;
-  font-size:15px;line-height:1.45}
-.ac-ba-cards .av{color:var(--lin);padding-bottom:13px;margin-bottom:13px;
-  border-bottom:1px solid var(--line)}
-.ac-ba-cards .ap{color:var(--parch);font-weight:600}
-.ac-ba-cards i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
-  width:22px;height:22px;border-radius:50%;margin-top:-1px}
-.ac-ba-cards .av i{background:color-mix(in oklab,var(--lin) 18%,transparent);
-  color:var(--lin)}
-.ac-ba-cards .ap i{background:rgba(var(--bronze-rgb),.14);color:var(--bronze)}
-.ac-ba-cards svg{width:12px;height:12px}
+/* la version téléphone est un vrai tableau : deux colonnes, un en-tête,
+   des bandes alternées. C'est aussi elle que lisent les lecteurs d'écran —
+   le SVG au-dessus est décoratif (aria-hidden). */
+.ac-ba-table{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;
+  background:var(--ink-2);border:1px solid var(--line-2);border-radius:20px;
+  overflow:hidden}
+.ac-ba-table th{padding:15px 14px 13px;text-align:left;vertical-align:bottom;
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase}
+.ac-ba-table th:first-child{color:var(--lin)}
+.ac-ba-table th:last-child{color:var(--bronze)}
+.ac-ba-table td{padding:15px 14px;font-size:13.5px;line-height:1.42;
+  letter-spacing:-.1px;vertical-align:top;border-top:1px solid var(--line)}
+.ac-ba-table td + td,.ac-ba-table th + th{border-left:1px solid var(--line)}
+.ac-ba-table tbody tr:nth-child(even){
+  background:color-mix(in oklab,var(--parch) 3.5%,transparent)}
+.ac-ba-table .av{color:var(--lin)}
+.ac-ba-table .ap{color:var(--parch);font-weight:600}
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -828,6 +893,12 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
 /* ═══════════════════════════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════════════════════════ */
+
+/* combien de cartes de fonctionnalités tiennent à l'écran */
+@media (max-width:1180px){ .ac-feat-rail{--w:52%} }
+@media (max-width:960px){ .ac-feat-rail{--w:68%} }
+@media (max-width:700px){ .ac-feat-rail{--w:80%} }
+@media (max-width:560px){ .ac-feat-rail{--w:88%} }
 
 @media (max-width:1080px){
   .ac-step-tab .d{display:none}
@@ -872,9 +943,9 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
     background:var(--bronze)}
   .ac-step-card{border-radius:20px;padding:22px 22px 24px;min-height:0}
 
-  /* 4 · fonctionnalités : une colonne */
+  /* 4 · fonctionnalités : on glisse, on n'empile pas */
   .ac-feat{padding:72px 0 80px}
-  .ac-feat-grid{grid-template-columns:1fr}
+  .ac-feat-head{margin-bottom:34px}
 
   /* 6 · duo : empilé */
   .ac-duo{padding:72px 0 80px}
@@ -884,12 +955,18 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   /* 7 · 8 */
   .ac-ba{padding:72px 0 80px}
   .ac-tools{padding:72px 0 78px}
+  .t-asst .ac-tools-head{margin-bottom:44px}
   .ac-cta{padding:76px 0 86px}
 }
 
-@media (max-width:760px){
+/* au-dessus de 760 px c'est le SVG qu'on voit ; le tableau reste dans la
+   page pour les lecteurs d'écran, simplement hors du champ visuel */
+@media (min-width:760px){
+  .ac-ba-table{position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+    border:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+}
+@media (max-width:759px){
   .ac-ba-svg{display:none}
-  .ac-ba-cards{display:grid}
 }
 
 @media (max-width:560px){
@@ -897,15 +974,19 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-hero-media{margin:0 -18px}
   .ac-proof{width:100%;flex-direction:column;align-items:flex-start;gap:8px}
   .ac-proof-sep{display:none}
+  .ac-atouts{grid-template-columns:1fr;gap:13px}
   .ac-reassure{flex-direction:column;gap:12px}
   .t-asst .actions{flex-direction:column}
   .t-asst .btn{width:100%}
   .ac-mission{padding:20px 18px 20px 18px}
   .ac-card{padding:26px 22px 24px;border-radius:22px}
+  .ac-ba-table td{padding:13px 12px;font-size:13px}
+  .ac-ba-table th{padding:13px 12px 11px}
   .ac-card-go{width:100%;justify-content:center}
   .ac-prices{grid-template-columns:1fr}
+  .ac-step-card{padding:24px 22px 26px}
   .ac-step-h{flex-wrap:wrap}
-  .ac-step-h time{margin-left:0;width:100%;order:3}
+  .ac-step-when{margin-left:0;width:100%;order:3}
   .ac-duo-pair img{width:66px;height:66px;border-radius:20px}
   .ac-cta .ac-reassure{align-items:flex-start}
 }
@@ -916,6 +997,22 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-belt-track{animation:none}
   .ac-belt{-webkit-mask-image:none;mask-image:none}
   .ac-belt-row{overflow-x:auto}
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LA FICHE QUI ARRIVE — l'animation suit le défilement, elle n'est pas jouée
+   sur une durée : l'utilisateur la pilote, peut l'arrêter et la reprendre.
+   Ignorée là où les timelines de défilement n'existent pas encore.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@supports (animation-timeline:view()){
+  @media (min-width:961px) and (prefers-reduced-motion:no-preference){
+    .ac-step-card{animation:acMonte linear both;
+      animation-timeline:view();animation-range:entry 4% entry 46%}
+    @keyframes acMonte{
+      from{opacity:0;transform:translate3d(0,26px,0) scale(.975)}
+      to{opacity:1;transform:none}}
+  }
 }
 
 </style>
@@ -1021,25 +1118,19 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <h1>Votre commercial qui ne laisse passer <em>aucune opportunité</em>.</h1>
 
       <p class="ac-proof">
-        <span class="ac-proof-i">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg>
-          <b>+75 intégrations</b> comprises
-        </span>
+        <span class="ac-proof-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg><b>+75 intégrations</b> comprises</span>
         <span class="ac-proof-sep" aria-hidden="true"></span>
-        <span class="ac-proof-i">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          Mise en place <b>personnalisée</b>
-        </span>
+        <span class="ac-proof-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Mise en place <b>personnalisée</b></span>
       </p>
 
-      <p class="ac-lede">Il capte vos demandes, prépare vos devis et relance vos clients
-        jusqu'à la signature. Même quand vous êtes sur un chantier ou que votre journée
-        est terminée.</p>
+      <p class="ac-lede">Il capte vos demandes, prépare vos devis et relance vos clients jusqu'à la signature. Même quand vous êtes sur un chantier ou que votre journée est terminée.</p>
 
-      <ul class="ac-reassure">
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Mise en place personnalisée</li>
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Travaille avec vos outils</li>
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Vous gardez le contrôle</li>
+      <ul class="ac-atouts">
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Capte les demandes jour et nuit</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Rédige vos devis en minutes</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 8.72V 8.72"/><path d="M 14.45 5.05H 16.21C 18.85 5.05 21 7.2 21 9.86V 15.93C 21 18.58 18.85 20.74 16.21 20.74H 7.8C 5.15 20.74 3 18.58 3 15.93V 9.86C 3 7.2 5.15 5.05 7.8 5.05H 9.53"/><path d="M 14.46 5.17V 9.42C 14.46 10.47 13.61 11.32 12.56 11.32H 11.44C 10.39 11.32 9.54 10.47 9.54 9.42V 5.17C 9.54 4.12 10.39 3.27 11.44 3.27H 12.56C 13.61 3.27 14.46 4.12 14.46 5.17Z"/></svg></i>Chiffre sur votre grille tarifaire</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.75 20.44L21 20.44"/><path d="M 12.78 3.79C 13.56 2.87 14.95 2.73 15.9 3.49C 15.95 3.53 17.63 4.84 17.63 4.84C 18.67 5.47 18.99 6.8 18.35 7.82C 18.32 7.88 8.81 19.76 8.81 19.76C 8.5 20.16 8.02 20.39 7.5 20.4L 3.86 20.44L 3.04 16.97C 2.93 16.48 3.04 15.97 3.36 15.58L 12.78 3.79Z"/><path d="M11.02 6L16.47 10.19"/></svg></i>Fait signer et encaisse l'acompte</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></i>Relance à J+3, J+7 et J+14</li>
       </ul>
 
       <div class="actions">
@@ -1082,34 +1173,31 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <button class="ac-mission" type="button" role="tab" id="acT1" data-m="m1"
                 aria-selected="true" aria-controls="acScreen">
           <span class="ac-mission-h">
-            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
             <span class="ac-mission-n">01 — Capter</span>
           </span>
           <h3>Aucune demande ne reste sans réponse</h3>
-          <p>Votre assistant répond aux demandes, même le soir et le week-end, et récupère
-            les informations nécessaires pour comprendre le projet.</p>
+          <p>Votre assistant répond aux demandes, même le soir et le week-end, et récupère les informations nécessaires pour comprendre le projet.</p>
         </button>
 
         <button class="ac-mission" type="button" role="tab" id="acT2" data-m="m2"
                 aria-selected="false" aria-controls="acScreen">
           <span class="ac-mission-h">
-            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></span>
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></span>
             <span class="ac-mission-n">02 — Préparer les devis</span>
           </span>
           <h3>Vos devis commencent à se préparer tout seuls</h3>
-          <p>À partir d'un email, d'une photo ou d'une note vocale, Talos transforme la
-            demande en devis selon votre manière de chiffrer.</p>
+          <p>À partir d'un email, d'une photo ou d'une note vocale, Talos transforme la demande en devis selon votre manière de chiffrer.</p>
         </button>
 
         <button class="ac-mission" type="button" role="tab" id="acT3" data-m="m3"
                 aria-selected="false" aria-controls="acScreen">
           <span class="ac-mission-h">
-            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></span>
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></span>
             <span class="ac-mission-n">03 — Convertir</span>
           </span>
           <h3>Vos devis sont suivis jusqu'à la réponse</h3>
-          <p>Un devis envoyé n'est pas un devis oublié. Talos suit automatiquement chaque
-            dossier et adapte les relances à la réaction du client.</p>
+          <p>Un devis envoyé n'est pas un devis oublié. Talos suit automatiquement chaque dossier et adapte les relances à la réaction du client.</p>
         </button>
 
       </div>
@@ -1124,15 +1212,12 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
     <div class="ac-story-txt">
       <p class="ac-tag">Cas pratique</p>
-      <h2 class="ac-h2">La demande du vendredi soir devient un <em>devis signé</em> sans que
-        vous décrochiez le téléphone.</h2>
-      <p class="ac-sub">Un chantier de salle de bain à Paris, de la première question du
-        client jusqu'à l'acompte encaissé. Vous n'intervenez qu'une fois : pour valider.</p>
+      <h2 class="ac-h2">La demande du vendredi soir devient un <em>devis signé</em>.</h2>
+      <p class="ac-sub">Un chantier de salle de bain à Paris, de la première question du client jusqu'à l'acompte encaissé. Vous n'intervenez qu'une fois : pour valider.</p>
 
       <div class="ac-story-note">
         <b>Votre part du travail : deux minutes.</b>
-        Relire le devis préparé pendant la nuit, puis appuyer sur envoyer. Le reste est
-        déjà fait quand vous ouvrez Talos le matin.
+        Relire le devis préparé pendant la nuit, puis appuyer sur envoyer. Le reste est déjà fait quand vous ouvrez Talos le matin.
       </div>
 
       <div class="actions">
@@ -1146,15 +1231,11 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <span class="ac-step-tab" aria-hidden="true"><span class="d">Ven.</span>19:42</span>
         <div class="ac-step-card">
           <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></span>
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></span>
             <b>Nouveau message</b>
-            <time>Vendredi · 19:42</time>
+            <span class="ac-step-when">Vendredi · 19:42</span>
           </div>
-          <div class="ac-step-body">
-            <p class="ac-step-q">« Bonjour, je voudrais refaire ma salle de bain… »</p>
-            <p class="ac-step-p">Vous êtes encore sur un chantier. Personne ne décroche —
-              et pourtant la demande est déjà prise en charge.</p>
-          </div>
+          <div class="ac-step-body"><p class="ac-step-q">« Bonjour, je voudrais refaire ma salle de bain… »</p><p class="ac-step-p">Vous êtes encore sur un chantier. Personne ne décroche — et pourtant la demande est déjà prise en charge.</p></div>
         </div>
       </li>
 
@@ -1162,17 +1243,11 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <span class="ac-step-tab" aria-hidden="true"><span class="d">Ven.</span>19:43</span>
         <div class="ac-step-card">
           <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
             <b>Talos répond</b>
-            <time>Vendredi · 19:43</time>
+            <span class="ac-step-when">Vendredi · 19:43</span>
           </div>
-          <div class="ac-step-body">
-            <p class="ac-step-q">« Bonsoir, merci pour votre demande. Pour vous orienter au
-              mieux, pouvez-vous me préciser la surface, l'état actuel de la pièce et la
-              date de démarrage souhaitée ? »</p>
-            <p class="ac-step-p">Une minute après. Ton posé, questions utiles, votre
-              signature en bas du message.</p>
-          </div>
+          <div class="ac-step-body"><p class="ac-step-q">« Bonsoir, merci pour votre demande. Pour vous orienter au mieux, pouvez-vous me préciser la surface, l'état actuel de la pièce et la date de démarrage souhaitée ? »</p><p class="ac-step-p">Une minute après. Ton posé, questions utiles, votre signature en bas du message.</p></div>
         </div>
       </li>
 
@@ -1180,20 +1255,11 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <span class="ac-step-tab" aria-hidden="true"><span class="d">Ven.</span>19:45</span>
         <div class="ac-step-card">
           <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg></span>
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg></span>
             <b>Demande qualifiée</b>
-            <time>Vendredi · 19:45</time>
+            <span class="ac-step-when">Vendredi · 19:45</span>
           </div>
-          <div class="ac-step-body">
-            <ul class="ac-chips">
-              <li>Salle de bain</li>
-              <li>12 m²</li>
-              <li>Paris</li>
-              <li>Rénovation complète</li>
-              <li>Démarrage souhaité : octobre</li>
-            </ul>
-            <p class="ac-step-p">La fiche est complète avant même que vous rentriez.</p>
-          </div>
+          <div class="ac-step-body"><ul class="ac-chips"><li>Salle de bain</li><li>12 m²</li><li>Paris</li><li>Rénovation complète</li><li>Démarrage souhaité : octobre</li></ul><p class="ac-step-p">La fiche est complète avant même que vous rentriez.</p></div>
         </div>
       </li>
 
@@ -1201,19 +1267,11 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <span class="ac-step-tab" aria-hidden="true"><span class="d">Sam.</span>09:12</span>
         <div class="ac-step-card">
           <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13.75 20.44L21 20.44"/><path d="M 12.78 3.79C 13.56 2.87 14.95 2.73 15.9 3.49C 15.95 3.53 17.63 4.84 17.63 4.84C 18.67 5.47 18.99 6.8 18.35 7.82C 18.32 7.88 8.81 19.76 8.81 19.76C 8.5 20.16 8.02 20.39 7.5 20.4L 3.86 20.44L 3.04 16.97C 2.93 16.48 3.04 15.97 3.36 15.58L 12.78 3.79Z"/><path d="M11.02 6L16.47 10.19"/></svg></span>
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.75 20.44L21 20.44"/><path d="M 12.78 3.79C 13.56 2.87 14.95 2.73 15.9 3.49C 15.95 3.53 17.63 4.84 17.63 4.84C 18.67 5.47 18.99 6.8 18.35 7.82C 18.32 7.88 8.81 19.76 8.81 19.76C 8.5 20.16 8.02 20.39 7.5 20.4L 3.86 20.44L 3.04 16.97C 2.93 16.48 3.04 15.97 3.36 15.58L 12.78 3.79Z"/><path d="M11.02 6L16.47 10.19"/></svg></span>
             <b>Devis préparé</b>
-            <time>Samedi · 09:12</time>
+            <span class="ac-step-when">Samedi · 09:12</span>
           </div>
-          <div class="ac-step-body">
-            <ul class="ac-prices">
-              <li><small>Éco</small><b>8 450 €</b></li>
-              <li class="hot"><small>Standard</small><b>10 900 €</b></li>
-              <li><small>Premium</small><b>13 200 €</b></li>
-            </ul>
-            <p class="ac-step-p">Chiffré sur votre grille tarifaire, avec vos prestations et
-              vos marges. Vous relisez, vous corrigez si besoin.</p>
-          </div>
+          <div class="ac-step-body"><ul class="ac-prices"><li><small>Éco</small><b>8 450 €</b></li><li class="hot"><small>Standard</small><b>10 900 €</b></li><li><small>Premium</small><b>13 200 €</b></li></ul><p class="ac-step-p">Chiffré sur votre grille tarifaire, avec vos prestations et vos marges. Vous relisez, vous corrigez si besoin.</p></div>
         </div>
       </li>
 
@@ -1221,19 +1279,11 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <span class="ac-step-tab" aria-hidden="true"><span class="d">Sam.</span>09:15</span>
         <div class="ac-step-card">
           <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></span>
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></span>
             <b>Devis envoyé</b>
-            <time>Samedi · 09:15</time>
+            <span class="ac-step-when">Samedi · 09:15</span>
           </div>
-          <div class="ac-step-body">
-            <ul class="ac-chips">
-              <li>Signature électronique</li>
-              <li>Acompte 30 %</li>
-              <li>Valable 30 jours</li>
-            </ul>
-            <p class="ac-step-p">Le client signe depuis son téléphone, sans imprimer ni
-              scanner. L'acompte est demandé au moment de la signature.</p>
-          </div>
+          <div class="ac-step-body"><ul class="ac-chips"><li>Signature électronique</li><li>Acompte 30 %</li><li>Valable 30 jours</li></ul><p class="ac-step-p">Le client signe depuis son téléphone, sans imprimer ni scanner. L'acompte est demandé au moment de la signature.</p></div>
         </div>
       </li>
 
@@ -1241,16 +1291,11 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <span class="ac-step-tab" aria-hidden="true"><span class="d">Mar.</span>10:00</span>
         <div class="ac-step-card">
           <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></span>
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></span>
             <b>Relance automatique</b>
-            <time>Mardi · 10:00</time>
+            <span class="ac-step-when">Mardi · 10:00</span>
           </div>
-          <div class="ac-step-body">
-            <p class="ac-step-q">« Bonjour M. Dupont, avez-vous eu le temps de consulter
-              votre devis ? Je reste disponible si vous souhaitez en discuter. »</p>
-            <p class="ac-step-p">Celle que personne ne pense à faire. Elle s'arrête net dès
-              que le client répond.</p>
-          </div>
+          <div class="ac-step-body"><p class="ac-step-q">« Bonjour M. Dupont, avez-vous eu le temps de consulter votre devis ? Je reste disponible si vous souhaitez en discuter. »</p><p class="ac-step-p">Celle que personne ne pense à faire. Elle s'arrête net dès que le client répond.</p></div>
         </div>
       </li>
 
@@ -1258,18 +1303,11 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <span class="ac-step-tab" aria-hidden="true"><span class="d">Mar.</span>14:32</span>
         <div class="ac-step-card">
           <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></span>
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></span>
             <b>Devis signé</b>
-            <time>Mardi · 14:32</time>
+            <span class="ac-step-when">Mardi · 14:32</span>
           </div>
-          <div class="ac-step-body">
-            <div class="ac-step-win">
-              <b>3 270 €</b>
-              <span>d'acompte encaissé — le chantier démarre avec de la trésorerie.</span>
-            </div>
-            <p class="ac-step-p">Quatre jours entre la demande et la signature. Zéro appel
-              passé le soir.</p>
-          </div>
+          <div class="ac-step-body"><div class="ac-step-win"><b>3 270 €</b><span>d'acompte encaissé — le chantier démarre avec de la trésorerie.</span></div><p class="ac-step-p">Quatre jours entre la demande et la signature. Zéro appel passé le soir.</p></div>
         </div>
       </li>
 
@@ -1285,11 +1323,11 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     <div class="ac-feat-head">
       <p class="ac-tag">Ce qu'il prend en charge</p>
       <h2 class="ac-h2">Quatre étapes, <em>zéro oubli</em>.</h2>
-      <p class="ac-sub">De la demande reçue à 22 h jusqu'à l'acompte encaissé, voici
-        exactement ce que votre assistant commercial fait à votre place.</p>
+      <p class="ac-sub">De la demande reçue à 22 h jusqu'à l'acompte encaissé, voici exactement ce que votre assistant commercial fait à votre place.</p>
     </div>
 
-    <div class="ac-feat-grid">
+    <div class="ac-feat-rail" tabindex="0" role="group"
+         aria-label="Les fonctionnalités, à faire défiler horizontalement">
 
       <article class="ac-card">
         <div class="ac-card-top">
@@ -1300,16 +1338,15 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <p class="ac-card-lab">Capter la demande</p>
         <h3>Rien ne se perd, même à 22 h</h3>
         <p class="ac-card-acc">Réponse immédiate <span>· sur tous vos canaux</span></p>
-        <p>Mail, formulaire du site, WhatsApp ou appel manqué : la demande est prise en
-          charge, qualifiée, puis rangée au bon endroit avant que vous rentriez.</p>
+        <p>Mail, formulaire du site, WhatsApp ou appel manqué : la demande est prise en charge, qualifiée, puis rangée au bon endroit avant que vous rentriez.</p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 21.25 12C 21.25 17.11 17.11 21.25 12 21.25C 6.89 21.25 2.75 17.11 2.75 12C 2.75 6.89 6.89 2.75 12 2.75C 17.11 2.75 21.25 6.89 21.25 12Z"/><path d="M15.43 14.94L11.66 12.69L11.66 7.85"/></svg></i>Répond aux demandes reçues le soir et le week-end</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Pose les questions qui manquent au dossier</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 14.5 10.5C 14.5 9.12 13.38 8 12 8C 10.62 8 9.5 9.12 9.5 10.5C 9.5 11.88 10.62 13 12 13C 13.38 13 14.5 11.88 14.5 10.5Z"/><path d="M 12 21C 10.8 21 4.5 15.9 4.5 10.56C 4.5 6.39 7.86 3 12 3C 16.14 3 19.5 6.39 19.5 10.56C 19.5 15.9 13.2 21 12 21Z"/></svg></i>Récupère chantier, adresse, délai et budget évoqué</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></i>Rassemble mail, formulaire et WhatsApp au même endroit</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 12 17.85C 17.64 17.85 20.25 17.12 20.5 14.22C 20.5 11.32 18.68 11.51 18.68 7.95C 18.68 5.16 16.05 2 12 2C 7.95 2 5.32 5.16 5.32 7.95C 5.32 11.51 3.5 11.32 3.5 14.22C 3.75 17.14 6.36 17.85 12 17.85Z"/><path d="M 14.39 20.86C 13.02 22.37 10.9 22.39 9.52 20.86"/></svg></i>Vous prévient quand une demande mérite votre appel</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 21.25 12C 21.25 17.11 17.11 21.25 12 21.25C 6.89 21.25 2.75 17.11 2.75 12C 2.75 6.89 6.89 2.75 12 2.75C 17.11 2.75 21.25 6.89 21.25 12Z"/><path d="M15.43 14.94L11.66 12.69L11.66 7.85"/></svg></i>Répond aux demandes reçues le soir et le week-end</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Pose les questions qui manquent au dossier</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 14.5 10.5C 14.5 9.12 13.38 8 12 8C 10.62 8 9.5 9.12 9.5 10.5C 9.5 11.88 10.62 13 12 13C 13.38 13 14.5 11.88 14.5 10.5Z"/><path d="M 12 21C 10.8 21 4.5 15.9 4.5 10.56C 4.5 6.39 7.86 3 12 3C 16.14 3 19.5 6.39 19.5 10.56C 19.5 15.9 13.2 21 12 21Z"/></svg></i>Récupère chantier, adresse, délai et budget évoqué</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></i>Rassemble mail, formulaire et WhatsApp au même endroit</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 17.85C 17.64 17.85 20.25 17.12 20.5 14.22C 20.5 11.32 18.68 11.51 18.68 7.95C 18.68 5.16 16.05 2 12 2C 7.95 2 5.32 5.16 5.32 7.95C 5.32 11.51 3.5 11.32 3.5 14.22C 3.75 17.14 6.36 17.85 12 17.85Z"/><path d="M 14.39 20.86C 13.02 22.37 10.9 22.39 9.52 20.86"/></svg></i>Vous prévient quand une demande mérite votre appel</li>
         </ul>
         <a class="ac-card-go" href="#scenario">Voir le scénario complet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
       </article>
@@ -1323,16 +1360,15 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <p class="ac-card-lab">Préparer le devis</p>
         <h3>Le devis s'écrit pendant que vous roulez</h3>
         <p class="ac-card-acc">Cinq façons de le lancer <span>· une seule grille tarifaire</span></p>
-        <p>Un mail, une note vocale dictée en sortant du chantier, une photo du relevé :
-          le devis sort chiffré sur vos prix, jamais sur une moyenne du marché.</p>
+        <p>Un mail, une note vocale dictée en sortant du chantier, une photo du relevé : le devis sort chiffré sur vos prix, jamais sur une moyenne du marché.</p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></i>Depuis un e-mail client, sans une seule ressaisie</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M18.5 11.5a6.5 6.5 0 0 1-13 0M12 18.5V22"/></svg></i>Depuis une note vocale dictée sur place</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 15.04 4.05C 16.05 4.45 16.36 5.85 16.77 6.3C 17.19 6.75 17.78 6.91 18.1 6.91C 19.84 6.91 21.25 8.32 21.25 10.05L 21.25 15.85C 21.25 18.18 19.36 20.07 17.03 20.07L 6.97 20.07C 4.64 20.07 2.75 18.18 2.75 15.85L 2.75 10.05C 2.75 8.32 4.16 6.91 5.9 6.91C 6.22 6.91 6.81 6.75 7.23 6.3C 7.64 5.85 7.95 4.45 8.96 4.05C 9.97 3.65 14.03 3.65 15.04 4.05Z"/><path d="M17.5 9.5L17.5 9.5"/><path d="M 15.18 13.13C 15.18 11.37 13.76 9.95 12 9.95C 10.24 9.95 8.82 11.37 8.82 13.13C 8.82 14.88 10.24 16.31 12 16.31C 13.76 16.31 15.18 14.88 15.18 13.13Z"/></svg></i>Depuis une photo : plan, relevé, devis concurrent</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Depuis le formulaire de votre site, déjà structuré</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 12 8.72V 8.72"/><path d="M 14.45 5.05H 16.21C 18.85 5.05 21 7.2 21 9.86V 15.93C 21 18.58 18.85 20.74 16.21 20.74H 7.8C 5.15 20.74 3 18.58 3 15.93V 9.86C 3 7.2 5.15 5.05 7.8 5.05H 9.53"/><path d="M 14.46 5.17V 9.42C 14.46 10.47 13.61 11.32 12.56 11.32H 11.44C 10.39 11.32 9.54 10.47 9.54 9.42V 5.17C 9.54 4.12 10.39 3.27 11.44 3.27H 12.56C 13.61 3.27 14.46 4.12 14.46 5.17Z"/></svg></i>Chiffrage sur votre grille tarifaire, vos marges comprises</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></i>Depuis un e-mail client, sans une seule ressaisie</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M18.5 11.5a6.5 6.5 0 0 1-13 0M12 18.5V22"/></svg></i>Depuis une note vocale dictée sur place</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.04 4.05C 16.05 4.45 16.36 5.85 16.77 6.3C 17.19 6.75 17.78 6.91 18.1 6.91C 19.84 6.91 21.25 8.32 21.25 10.05L 21.25 15.85C 21.25 18.18 19.36 20.07 17.03 20.07L 6.97 20.07C 4.64 20.07 2.75 18.18 2.75 15.85L 2.75 10.05C 2.75 8.32 4.16 6.91 5.9 6.91C 6.22 6.91 6.81 6.75 7.23 6.3C 7.64 5.85 7.95 4.45 8.96 4.05C 9.97 3.65 14.03 3.65 15.04 4.05Z"/><path d="M17.5 9.5L17.5 9.5"/><path d="M 15.18 13.13C 15.18 11.37 13.76 9.95 12 9.95C 10.24 9.95 8.82 11.37 8.82 13.13C 8.82 14.88 10.24 16.31 12 16.31C 13.76 16.31 15.18 14.88 15.18 13.13Z"/></svg></i>Depuis une photo : plan, relevé, devis concurrent</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Depuis le formulaire de votre site, déjà structuré</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 8.72V 8.72"/><path d="M 14.45 5.05H 16.21C 18.85 5.05 21 7.2 21 9.86V 15.93C 21 18.58 18.85 20.74 16.21 20.74H 7.8C 5.15 20.74 3 18.58 3 15.93V 9.86C 3 7.2 5.15 5.05 7.8 5.05H 9.53"/><path d="M 14.46 5.17V 9.42C 14.46 10.47 13.61 11.32 12.56 11.32H 11.44C 10.39 11.32 9.54 10.47 9.54 9.42V 5.17C 9.54 4.12 10.39 3.27 11.44 3.27H 12.56C 13.61 3.27 14.46 4.12 14.46 5.17Z"/></svg></i>Chiffrage sur votre grille tarifaire, vos marges comprises</li>
         </ul>
         <a class="ac-card-go" href="reserver.html">Le voir chiffrer mes devis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
       </article>
@@ -1346,16 +1382,15 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <p class="ac-card-lab">Envoyer &amp; faire signer</p>
         <h3>Il repart signé, avec l'acompte</h3>
         <p class="ac-card-acc">Signature en ligne <span>· acompte encaissé à la commande</span></p>
-        <p>Trois variantes, une date de validité, des conditions claires. Le client choisit
-          son niveau de prestation au lieu de choisir un concurrent.</p>
+        <p>Trois variantes, une date de validité, des conditions claires. Le client choisit son niveau de prestation au lieu de choisir un concurrent.</p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.4" height="7.4" rx="2"/><rect x="13.6" y="3" width="7.4" height="7.4" rx="2"/><rect x="3" y="13.6" width="7.4" height="7.4" rx="2"/><path d="M17.3 13.6v7.4M13.6 17.3h7.4"/></svg></i>Trois variantes Éco, Standard, Premium</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.75 20.44L21 20.44"/><path d="M 12.78 3.79C 13.56 2.87 14.95 2.73 15.9 3.49C 15.95 3.53 17.63 4.84 17.63 4.84C 18.67 5.47 18.99 6.8 18.35 7.82C 18.32 7.88 8.81 19.76 8.81 19.76C 8.5 20.16 8.02 20.39 7.5 20.4L 3.86 20.44L 3.04 16.97C 2.93 16.48 3.04 15.97 3.36 15.58L 12.78 3.79Z"/><path d="M11.02 6L16.47 10.19"/></svg></i>Signature électronique depuis le téléphone du client</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 6.69 11.38C 7.38 10.23 8.12 9.1 8.85 7.97L 6.87 4.28C 6.87 4.28 7.02 4.15 7.4 3.85C 8.53 2.98 9.76 2.76 11.09 3.27C 12.36 3.77 13.65 4.14 15.02 4.06C 15.42 4.04 16.96 3.84 16.96 3.84L 15.16 7.96C 15.88 9.09 16.62 10.23 17.31 11.38C 18.44 13.26 19.53 15.37 18.65 17.56C 17.63 20.11 14.64 20.96 12 21C 9.35 20.96 6.37 20.11 5.35 17.56C 4.47 15.37 5.56 13.26 6.69 11.38Z"/><path d="M 8.85 7.98C 10.95 8.46 13.05 8.46 15.16 7.98"/></svg></i>Demande d'acompte de 30 % au moment de la signature</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.09 9.4L20.92 9.4"/><path d="M16.04 2L16.04 5.29"/><path d="M7.97 2L7.97 5.29"/><path d="M 16.24 3.58L 7.77 3.58C 4.83 3.58 3 5.22 3 8.22L 3 17.27C 3 20.33 4.83 22 7.77 22L 16.23 22C 19.17 22 21 20.35 21 17.35L 21 8.22C 21.01 5.22 19.18 3.58 16.24 3.58Z"/></svg></i>Date de validité sur chaque devis, l'urgence sans vous</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Conditions de paiement et retenue de garantie posées</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.4" height="7.4" rx="2"/><rect x="13.6" y="3" width="7.4" height="7.4" rx="2"/><rect x="3" y="13.6" width="7.4" height="7.4" rx="2"/><path d="M17.3 13.6v7.4M13.6 17.3h7.4"/></svg></i>Trois variantes Éco, Standard, Premium</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.75 20.44L21 20.44"/><path d="M 12.78 3.79C 13.56 2.87 14.95 2.73 15.9 3.49C 15.95 3.53 17.63 4.84 17.63 4.84C 18.67 5.47 18.99 6.8 18.35 7.82C 18.32 7.88 8.81 19.76 8.81 19.76C 8.5 20.16 8.02 20.39 7.5 20.4L 3.86 20.44L 3.04 16.97C 2.93 16.48 3.04 15.97 3.36 15.58L 12.78 3.79Z"/><path d="M11.02 6L16.47 10.19"/></svg></i>Signature électronique depuis le téléphone du client</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 6.69 11.38C 7.38 10.23 8.12 9.1 8.85 7.97L 6.87 4.28C 6.87 4.28 7.02 4.15 7.4 3.85C 8.53 2.98 9.76 2.76 11.09 3.27C 12.36 3.77 13.65 4.14 15.02 4.06C 15.42 4.04 16.96 3.84 16.96 3.84L 15.16 7.96C 15.88 9.09 16.62 10.23 17.31 11.38C 18.44 13.26 19.53 15.37 18.65 17.56C 17.63 20.11 14.64 20.96 12 21C 9.35 20.96 6.37 20.11 5.35 17.56C 4.47 15.37 5.56 13.26 6.69 11.38Z"/><path d="M 8.85 7.98C 10.95 8.46 13.05 8.46 15.16 7.98"/></svg></i>Demande d'acompte de 30 % au moment de la signature</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.09 9.4L20.92 9.4"/><path d="M16.44 13.31L16.45 13.31"/><path d="M12 13.31L12.01 13.31"/><path d="M7.56 13.31L7.57 13.31"/><path d="M16.44 17.2L16.45 17.2"/><path d="M12 17.2L12.01 17.2"/><path d="M7.56 17.2L7.57 17.2"/><path d="M16.04 2L16.04 5.29"/><path d="M7.97 2L7.97 5.29"/><path d="M 16.24 3.58L 7.77 3.58C 4.83 3.58 3 5.22 3 8.22L 3 17.27C 3 20.33 4.83 22 7.77 22L 16.23 22C 19.17 22 21 20.35 21 17.35L 21 8.22C 21.01 5.22 19.18 3.58 16.24 3.58Z"/></svg></i>Date de validité sur chaque devis, l'urgence sans vous</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Conditions de paiement et retenue de garantie posées</li>
         </ul>
         <a class="ac-card-go" href="reserver.html">Faire signer mes devis en ligne <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
       </article>
@@ -1369,18 +1404,17 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <p class="ac-card-lab">Relancer &amp; suivre</p>
         <h3>Il relance à votre place, et sait s'arrêter</h3>
         <p class="ac-card-acc">J+3, J+7, J+14 <span>· puis plus rien</span></p>
-        <p>La séquence s'adapte à la réaction du client et se coupe dès qu'il répond.
-          Personne n'est harcelé en votre nom.</p>
+        <p>La séquence s'adapte à la réaction du client et se coupe dès qu'il répond. Personne n'est harcelé en votre nom.</p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></i>Relance à J+3, courte et polie</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Relance à J+7, avec proposition d'échange de vive voix</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.09 9.4L20.92 9.4"/><path d="M16.04 2L16.04 5.29"/><path d="M7.97 2L7.97 5.29"/><path d="M 16.24 3.58L 7.77 3.58C 4.83 3.58 3 5.22 3 8.22L 3 17.27C 3 20.33 4.83 22 7.77 22L 16.23 22C 19.17 22 21 20.35 21 17.35L 21 8.22C 21.01 5.22 19.18 3.58 16.24 3.58Z"/></svg></i>Relance à J+14, avec la date de validité en rappel</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></i>Arrêt immédiat dès que le client répond</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></i>Arrêt à la signature — la facture prend le relais</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.78 11.77a8.99 8.99 0 1 0 17.98 0a8.99 8.99 0 1 0 -17.98 0"/><path d="M18.02 18.49L21.54 22"/></svg></i>Détection des devis relus plusieurs fois</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 13.1 4.18L 14.93 7.83C 15.11 8.19 15.46 8.43 15.86 8.49L 19.95 9.08C 20.96 9.23 21.36 10.45 20.63 11.15L 17.67 13.99C 17.38 14.27 17.25 14.67 17.32 15.07L 18.01 19.08C 18.19 20.07 17.13 20.83 16.23 20.36L 12.57 18.46C 12.22 18.28 11.79 18.28 11.43 18.46L 7.77 20.36C 6.87 20.83 5.81 20.07 5.99 19.08L 6.68 15.07C 6.75 14.67 6.62 14.27 6.33 13.99L 3.37 11.15C 2.64 10.45 3.04 9.23 4.05 9.08L 8.14 8.49C 8.54 8.43 8.89 8.19 9.07 7.83L 10.9 4.18C 11.35 3.27 12.65 3.27 13.1 4.18Z"/></svg></i>Les dossiers chauds remontent en haut de votre pile</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></i>Relance à J+3, courte et polie</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Relance à J+7, avec proposition d'échange de vive voix</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.09 9.4L20.92 9.4"/><path d="M16.44 13.31L16.45 13.31"/><path d="M12 13.31L12.01 13.31"/><path d="M7.56 13.31L7.57 13.31"/><path d="M16.44 17.2L16.45 17.2"/><path d="M12 17.2L12.01 17.2"/><path d="M7.56 17.2L7.57 17.2"/><path d="M16.04 2L16.04 5.29"/><path d="M7.97 2L7.97 5.29"/><path d="M 16.24 3.58L 7.77 3.58C 4.83 3.58 3 5.22 3 8.22L 3 17.27C 3 20.33 4.83 22 7.77 22L 16.23 22C 19.17 22 21 20.35 21 17.35L 21 8.22C 21.01 5.22 19.18 3.58 16.24 3.58Z"/></svg></i>Relance à J+14, avec la date de validité en rappel</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></i>Arrêt immédiat dès que le client répond</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></i>Arrêt à la signature — la facture prend le relais</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.78 11.77a8.99 8.99 0 1 0 17.98 0a8.99 8.99 0 1 0 -17.98 0"/><path d="M18.02 18.49L21.54 22"/></svg></i>Détection des devis relus plusieurs fois</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 13.1 4.18L 14.93 7.83C 15.11 8.19 15.46 8.43 15.86 8.49L 19.95 9.08C 20.96 9.23 21.36 10.45 20.63 11.15L 17.67 13.99C 17.38 14.27 17.25 14.67 17.32 15.07L 18.01 19.08C 18.19 20.07 17.13 20.83 16.23 20.36L 12.57 18.46C 12.22 18.28 11.79 18.28 11.43 18.46L 7.77 20.36C 6.87 20.83 5.81 20.07 5.99 19.08L 6.68 15.07C 6.75 14.67 6.62 14.27 6.33 13.99L 3.37 11.15C 2.64 10.45 3.04 9.23 4.05 9.08L 8.14 8.49C 8.54 8.43 8.89 8.19 9.07 7.83L 10.9 4.18C 11.35 3.27 12.65 3.27 13.1 4.18Z"/></svg></i>Les dossiers chauds remontent en haut de votre pile</li>
         </ul>
         <a class="ac-card-go" href="reserver.html">Ne plus relancer moi-même <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
       </article>
@@ -1394,12 +1428,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 <section class="t-asst ac-tools" id="outils">
   <div class="shell ac-tools-head">
     <h2 class="ac-h2">Vous gardez vos outils, <em>il travaille avec</em>.</h2>
-    <p class="ac-sub">Pas de migration, pas de logiciel à apprendre, pas de données à
-      ressaisir. Il se branche sur votre messagerie, votre agenda et vos outils actuels.</p>
-    <p class="ac-tools-count">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.4" height="7.4" rx="2"/><rect x="13.6" y="3" width="7.4" height="7.4" rx="2"/><rect x="3" y="13.6" width="7.4" height="7.4" rx="2"/><path d="M17.3 13.6v7.4M13.6 17.3h7.4"/></svg>
-      +75 intégrations disponibles
-    </p>
+    <p class="ac-sub">Pas de migration, pas de logiciel à apprendre, pas de données à ressaisir. Il se branche sur votre messagerie, votre agenda et vos outils actuels.</p>
+    <p class="ac-tools-count"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.4" height="7.4" rx="2"/><rect x="13.6" y="3" width="7.4" height="7.4" rx="2"/><rect x="3" y="13.6" width="7.4" height="7.4" rx="2"/><path d="M17.3 13.6v7.4M13.6 17.3h7.4"/></svg> +75 intégrations disponibles</p>
   </div>
 
   <div class="ac-belt" aria-hidden="true">
@@ -1470,23 +1500,20 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
     <div class="ac-duo-head">
       <p class="ac-tag">Encore plus fort à deux</p>
-      <h2 class="ac-h2">Combinez-le avec <em>l'Assistant Facturation</em> pour plus de
-        résultats.</h2>
+      <h2 class="ac-h2">Combinez-le avec <em>l'Assistant Facturation</em> pour plus de résultats.</h2>
     </div>
 
     <div class="ac-duo-card">
       <div class="ac-duo-pair">
         <img src="perso/avatar-commercial.webp" width="82" height="82" alt="Assistant commercial" loading="lazy" decoding="async">
-        <span class="ac-duo-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="ac-duo-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
         <img src="perso/avatar-facturation.webp" width="82" height="82" alt="Assistant facturation" loading="lazy" decoding="async">
       </div>
 
       <div class="ac-duo-txt">
         <span class="ac-card-role">Assistant facturation</span>
         <h3>Du devis signé à la facture.</h3>
-        <p>Dès que votre client signe, votre Assistant Facturation prend le relais :
-          acompte, facture, situations, archivage et export comptable. Vous ne ressaisissez
-          rien, et vous ne courez plus après une pièce manquante.</p>
+        <p>Dès que votre client signe, votre Assistant Facturation prend le relais : acompte, facture, situations, archivage et export comptable. Vous ne ressaisissez rien, et vous ne courez plus après une pièce manquante.</p>
       </div>
 
       <div class="ac-duo-act">
@@ -1509,107 +1536,43 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     </div>
 
     <div class="ac-ba-svg" aria-hidden="true">
-      <svg viewBox="0 0 1040 466" xmlns="http://www.w3.org/2000/svg"
+      <svg viewBox="0 0 1040 464" xmlns="http://www.w3.org/2000/svg"
            font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
-        <rect x=".5" y=".5" width="1039" height="465" rx="24"
+        <rect x=".5" y=".5" width="1039" height="462" rx="24"
               fill="var(--ink-2)" stroke="var(--line-2)"/>
-
-        <g fill="currentColor" color="var(--parch)" opacity=".035">
-          <rect x="1" y="134" width="1038" height="66"/>
-          <rect x="1" y="266" width="1038" height="66"/>
-          <rect x="1" y="398" width="1038" height="66"/>
-        </g>
-
-        <g stroke="var(--line)" stroke-width="1">
-          <path d="M1 68.5h1038"/><path d="M1 134.5h1038"/><path d="M1 200.5h1038"/>
-          <path d="M1 266.5h1038"/><path d="M1 332.5h1038"/><path d="M1 398.5h1038"/>
-          <path d="M520.5 1v464"/>
-        </g>
-
+        <g fill="currentColor" color="var(--parch)" opacity=".035"><rect x="1" y="134" width="1038" height="66"/><rect x="1" y="266" width="1038" height="66"/><rect x="1" y="398" width="1038" height="66"/></g>
+        <g stroke="var(--line)" stroke-width="1"><path d="M1 68.5h1038"/><path d="M1 134.5h1038"/><path d="M1 200.5h1038"/><path d="M1 266.5h1038"/><path d="M1 332.5h1038"/><path d="M1 398.5h1038"/><path d="M520.5 1v464"/></g>
         <text x="40" y="42" font-size="13" font-weight="700" letter-spacing="2.4"
               fill="var(--lin)">AVANT</text>
         <text x="560" y="42" font-size="13" font-weight="700" letter-spacing="2.4"
               fill="var(--bronze)">AVEC TALOS</text>
-
-        <g font-size="16.5" fill="var(--lin)">
-          <text x="92" y="107">Vous rappelez les demandes le soir</text>
-          <text x="92" y="173">Vous reprenez les infos à la main</text>
-          <text x="92" y="239">Vous faites vos devis le soir</text>
-          <text x="92" y="305">Vous devez penser aux relances</text>
-          <text x="92" y="371">Vous cherchez où en est chaque client</text>
-          <text x="92" y="437">Vous perdez parfois des demandes</text>
-        </g>
-
-        <g font-size="16.5" font-weight="600" fill="var(--parch)">
-          <text x="612" y="107">Talos répond immédiatement</text>
-          <text x="612" y="173">Talos les qualifie</text>
-          <text x="612" y="239">Talos les prépare</text>
-          <text x="612" y="305">Talos les effectue</text>
-          <text x="612" y="371">Talos vous le signale</text>
-          <text x="612" y="437">Chaque demande est suivie</text>
-        </g>
-
+        <g font-size="16.5" fill="var(--lin)"><text x="92" y="107">Vous rappelez les demandes le soir</text><text x="92" y="173">Vous reprenez les infos à la main</text><text x="92" y="239">Vous faites vos devis le soir</text><text x="92" y="305">Vous devez penser aux relances</text><text x="92" y="371">Vous cherchez où en est chaque client</text><text x="92" y="437">Vous perdez parfois des demandes</text></g>
+        <g font-size="16.5" font-weight="600" fill="var(--parch)"><text x="612" y="107">Talos répond immédiatement</text><text x="612" y="173">Talos les qualifie</text><text x="612" y="239">Talos les prépare</text><text x="612" y="305">Talos les effectue</text><text x="612" y="371">Talos vous le signale</text><text x="612" y="437">Chaque demande est suivie</text></g>
         <g fill="currentColor" color="var(--lin)">
-          <g opacity=".14">
-            <circle cx="62" cy="101" r="13"/><circle cx="62" cy="167" r="13"/>
-            <circle cx="62" cy="233" r="13"/><circle cx="62" cy="299" r="13"/>
-            <circle cx="62" cy="365" r="13"/><circle cx="62" cy="431" r="13"/>
-          </g>
-          <g stroke="var(--lin)" stroke-width="1.8" stroke-linecap="round" fill="none">
-            <path d="M57.5 96.5l9 9M66.5 96.5l-9 9"/>
-            <path d="M57.5 162.5l9 9M66.5 162.5l-9 9"/>
-            <path d="M57.5 228.5l9 9M66.5 228.5l-9 9"/>
-            <path d="M57.5 294.5l9 9M66.5 294.5l-9 9"/>
-            <path d="M57.5 360.5l9 9M66.5 360.5l-9 9"/>
-            <path d="M57.5 426.5l9 9M66.5 426.5l-9 9"/>
-          </g>
+          <g opacity=".14"><circle cx="62" cy="101" r="13"/><circle cx="62" cy="167" r="13"/><circle cx="62" cy="233" r="13"/><circle cx="62" cy="299" r="13"/><circle cx="62" cy="365" r="13"/><circle cx="62" cy="431" r="13"/></g>
+          <g stroke="var(--lin)" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M57.5 96.5l9 9M66.5 96.5l-9 9"/><path d="M57.5 162.5l9 9M66.5 162.5l-9 9"/><path d="M57.5 228.5l9 9M66.5 228.5l-9 9"/><path d="M57.5 294.5l9 9M66.5 294.5l-9 9"/><path d="M57.5 360.5l9 9M66.5 360.5l-9 9"/><path d="M57.5 426.5l9 9M66.5 426.5l-9 9"/></g>
         </g>
-
         <g>
-          <g fill="var(--bronze)" opacity=".16">
-            <circle cx="582" cy="101" r="13"/><circle cx="582" cy="167" r="13"/>
-            <circle cx="582" cy="233" r="13"/><circle cx="582" cy="299" r="13"/>
-            <circle cx="582" cy="365" r="13"/><circle cx="582" cy="431" r="13"/>
-          </g>
+          <g fill="var(--bronze)" opacity=".16"><circle cx="582" cy="101" r="13"/><circle cx="582" cy="167" r="13"/><circle cx="582" cy="233" r="13"/><circle cx="582" cy="299" r="13"/><circle cx="582" cy="365" r="13"/><circle cx="582" cy="431" r="13"/></g>
           <g stroke="var(--bronze)" stroke-width="2.1" stroke-linecap="round"
-             stroke-linejoin="round" fill="none">
-            <path d="M577 101.5l3.4 3.6 6.8-7.2"/>
-            <path d="M577 167.5l3.4 3.6 6.8-7.2"/>
-            <path d="M577 233.5l3.4 3.6 6.8-7.2"/>
-            <path d="M577 299.5l3.4 3.6 6.8-7.2"/>
-            <path d="M577 365.5l3.4 3.6 6.8-7.2"/>
-            <path d="M577 431.5l3.4 3.6 6.8-7.2"/>
-          </g>
+             stroke-linejoin="round" fill="none"><path d="M577 101.5l3.4 3.6 6.8-7.2"/><path d="M577 167.5l3.4 3.6 6.8-7.2"/><path d="M577 233.5l3.4 3.6 6.8-7.2"/><path d="M577 299.5l3.4 3.6 6.8-7.2"/><path d="M577 365.5l3.4 3.6 6.8-7.2"/><path d="M577 431.5l3.4 3.6 6.8-7.2"/></g>
         </g>
       </svg>
     </div>
 
-    <ul class="ac-ba-cards">
-      <li>
-        <p class="av"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></i>Vous rappelez les demandes le soir</p>
-        <p class="ap"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Talos répond immédiatement</p>
-      </li>
-      <li>
-        <p class="av"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></i>Vous reprenez les infos à la main</p>
-        <p class="ap"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Talos les qualifie</p>
-      </li>
-      <li>
-        <p class="av"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></i>Vous faites vos devis le soir</p>
-        <p class="ap"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Talos les prépare</p>
-      </li>
-      <li>
-        <p class="av"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></i>Vous devez penser aux relances</p>
-        <p class="ap"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Talos les effectue</p>
-      </li>
-      <li>
-        <p class="av"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></i>Vous cherchez où en est chaque client</p>
-        <p class="ap"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Talos vous le signale</p>
-      </li>
-      <li>
-        <p class="av"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></i>Vous perdez parfois des demandes</p>
-        <p class="ap"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Chaque demande est suivie</p>
-      </li>
-    </ul>
+    <table class="ac-ba-table">
+      <thead>
+        <tr><th scope="col">Avant</th><th scope="col">Avec Talos</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="av">Vous rappelez les demandes le soir</td><td class="ap">Talos répond immédiatement</td></tr>
+        <tr><td class="av">Vous reprenez les infos à la main</td><td class="ap">Talos les qualifie</td></tr>
+        <tr><td class="av">Vous faites vos devis le soir</td><td class="ap">Talos les prépare</td></tr>
+        <tr><td class="av">Vous devez penser aux relances</td><td class="ap">Talos les effectue</td></tr>
+        <tr><td class="av">Vous cherchez où en est chaque client</td><td class="ap">Talos vous le signale</td></tr>
+        <tr><td class="av">Vous perdez parfois des demandes</td><td class="ap">Chaque demande est suivie</td></tr>
+      </tbody>
+    </table>
 
   </div>
 </section>
@@ -1620,16 +1583,15 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   <div class="shell ac-cta-in">
     <img class="ac-cta-av" src="perso/avatar-commercial.webp" width="84" height="84" alt="" loading="lazy" decoding="async">
     <h2>Vous avez besoin d'un <em>commercial en plus</em> ?</h2>
-    <p>Celui-ci travaille les soirs, les week-ends et les jours de chantier. Il commence
-      une semaine après votre appel, sur vos vrais devis.</p>
+    <p>Celui-ci travaille les soirs, les week-ends et les jours de chantier. Il commence une semaine après votre appel, sur vos vrais devis.</p>
     <div class="actions">
       <a class="btn btn-1" href="reserver.html">Je veux mon assistant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
       <a class="btn btn-2" href="reserver.html">Voir une démonstration</a>
     </div>
     <ul class="ac-reassure">
-      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Mise en place personnalisée</li>
-      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Sans engagement</li>
-      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Données hébergées en France</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Mise en place personnalisée</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Sans engagement</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Données hébergées en France</li>
     </ul>
   </div>
 </section>

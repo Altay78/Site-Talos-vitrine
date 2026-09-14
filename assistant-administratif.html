@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Assistante administrative — Talos | Votre boîte mail triée avant votre café</title>
+<title>Assistante administrative — Talos | Elle ne laisse passer aucun mail important</title>
 <meta name="author" content="Talos">
 <meta name="description" content="L'assistante administrative de Talos trie votre boîte mail en six catégories, résume les longs échanges, remonte les urgences et classe chaque pièce au bon chantier.">
-<meta property="og:title" content="Assistante administrative — Talos | Votre boîte mail triée avant votre café">
-<meta property="og:description" content="L'assistante administrative de Talos trie votre boîte mail en six catégories, résume les longs échanges, remonte les urgences et classe chaque pièce au bon chantier.">
+<meta property="og:title" content="Votre boîte mail qui ne laisse passer aucune urgence">
+<meta property="og:description" content="Elle trie la nuit, résume les fils qui traînent, remonte ce qui ne peut pas attendre et range chaque pièce au bon chantier.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -339,90 +339,20 @@ html[data-theme="light"] .t-ft .ft-bottom a:hover{color:var(--parch)}
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   PAGE ASSISTANT — construite bloc par bloc, sur le gabarit Limova.
+   PAGE « ASSISTANT COMMERCIAL » — v2
+   Huit blocs, écrits pour cette page seule. Le nommage est préfixé « ac- »
+   pour qu'aucune règle ne fuie vers les autres fiches assistant.
 
-   BLOC 1 · PRÉSENTATION
-   Deux colonnes sur ordinateur (visuel à gauche, discours à droite),
-   empilées sur téléphone avec le visuel en premier, à fond perdu.
-
-   Aucune classe Tailwind : la feuille compilée du site ignore silencieusement
-   les classes arbitraires. Toutes les couleurs viennent des tokens posés par
-   shell.css sur .t-asst, donc le bloc suit le thème clair/sombre sans une
-   seule valeur en dur.
+   La racine de chaque bloc garde la classe .t-asst : c'est elle qui porte les
+   tokens Braise posés par shell.css, donc le thème clair/sombre suit sans une
+   seule couleur en dur. Rien ici ne doit écrire un #hex.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.t-asst{background:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.t-asst{position:relative;background:var(--ink);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased}
 .t-asst .shell{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
 
-/* ── le bloc et sa lueur de braise ─────────────────────────────────────── */
-.t-asst .b1{position:relative;overflow:hidden;padding:36px 0 92px}
-.t-asst .b1::before{content:"";position:absolute;inset:auto auto 0 -16%;
-  width:74%;aspect-ratio:1;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,rgba(var(--bronze-rgb),.20) 0%,transparent 64%);
-  transform:translateY(18%)}
-html[data-theme="light"] .t-asst .b1::before{background:radial-gradient(circle,rgba(var(--bronze-rgb),.12) 0%,transparent 64%)}
-/* le voile du bas : au lieu d'une coupe nette, le personnage s'efface dans le
-   fond. Peint après le personnage, mais sous le texte (qui monte en z-index). */
-.t-asst .b1::after{content:"";position:absolute;left:0;right:0;bottom:0;height:44%;
-  pointer-events:none;
-  background:linear-gradient(180deg,
-    color-mix(in srgb,var(--ink),transparent 100%) 0%,
-    color-mix(in srgb,var(--ink),transparent 58%) 34%,
-    color-mix(in srgb,var(--ink),transparent 16%) 64%,
-    var(--ink) 88%)}
-.t-asst .b1-grid{position:relative;display:grid;grid-template-columns:.78fr 1.22fr;
-  gap:48px;align-items:center;min-height:clamp(520px,46vw,640px)}
-
-/* ── le personnage ────────────────────────────────────────────────────────
-   Gabarit Limova : il n'est pas « posé » dans une colonne, il fait partie du
-   décor. Il sort du bord gauche de la fenêtre, il est coupé par le bas du
-   bloc, et rien ne l'encadre — ni cadre, ni ombre de contact. La colonne de
-   gauche de la grille ne sert plus qu'à lui réserver la place. */
-.t-asst .b1-media{grid-column:1;position:relative;align-self:stretch;pointer-events:none;user-select:none}
-.t-asst .b1-txt{grid-column:2;position:relative;z-index:3}
-/* il est calé sur le bord droit de sa colonne — donc toujours à la même
-   distance du discours, quelle que soit la largeur de l'écran — et il déborde
-   vers la gauche, jusqu'à sortir du cadre. */
-.t-asst .perso{position:absolute;right:-16px;top:34px;
-  width:min(46vw,560px);height:auto;max-width:none;display:block}
-
-/* ── la pastille de rôle ──────────────────────────────────────────────── */
-.t-asst .role{display:inline-flex;align-items:center;margin:0 0 20px;
-  padding:9px 19px;border-radius:100px;
-  background:var(--ink-3);border:1px solid var(--line-2);
-  font-size:14px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
-
-/* ── le titre ─────────────────────────────────────────────────────────── */
-.t-asst .b1 h1{margin:0 0 20px;font-size:clamp(36px,4vw,56px);line-height:1.04;
-  letter-spacing:-1.9px;font-weight:800;color:var(--parch)}
-
-/* ── la barre de confiance ────────────────────────────────────────────── */
-.t-asst .proof{display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;
-  margin:0 0 26px;padding:10px 18px;border-radius:12px;
-  background:var(--ink-2);border:1px solid var(--line-2);
-  font-size:14.5px;color:var(--lin)}
-.t-asst .proof b{color:var(--parch);font-weight:700}
-.t-asst .proof-i{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
-.t-asst .proof-i svg{width:16px;height:16px;color:var(--bronze);flex:0 0 auto}
-.t-asst .proof-sep{width:1px;height:16px;background:var(--line-2)}
-
-/* ── le paragraphe ────────────────────────────────────────────────────── */
-.t-asst .b1 .pitch{margin:0 0 30px;font-size:17.5px;line-height:1.62;
-  color:var(--lin);max-width:42ch}
-
-/* ── la liste de capacités : deux colonnes sur large, une sur étroit ──── */
-.t-asst .caps{list-style:none;margin:0 0 34px;padding:0;
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 30px}
-.t-asst .caps li{display:flex;align-items:center;gap:11px;
-  font-size:15.5px;font-weight:600;line-height:1.35;letter-spacing:-.2px;color:var(--parch)}
-/* pastille d'icône : même idiome que les cartes de fonctionnalités du site */
-.t-asst .caps i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
-  width:28px;height:28px;border-radius:50%;
-  border:1px solid rgba(var(--bronze-rgb),.42);background:rgba(var(--bronze-rgb),.10);
-  color:var(--bronze)}
-.t-asst .caps svg{width:15px;height:15px}
-
-/* ── les deux appels à l'action ───────────────────────────────────────── */
+/* ── boutons (repris du gabarit assistant, inchangés) ─────────────────── */
 .t-asst .actions{display:flex;flex-wrap:wrap;gap:12px}
 .t-asst .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
   min-height:52px;padding:15px 28px;border-radius:100px;
@@ -440,582 +370,649 @@ html[data-theme="light"] .t-asst .b1::before{background:radial-gradient(circle,r
 .t-asst .btn-2:hover{transform:translateY(-2px);border-color:rgba(var(--bronze-rgb),.5)}
 .t-asst .btn:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
 
-/* ═══ RESPONSIVE ═════════════════════════════════════════════════════════ */
-@media (max-width:960px){
-  /* le visuel passe au-dessus, à fond perdu, comme sur la maquette */
-  .t-asst .b1{padding:0 0 72px}
-  .t-asst .b1-grid{grid-template-columns:1fr;gap:30px;min-height:0}
-  .t-asst .b1-media{grid-column:1;order:-1;position:relative;
-    height:clamp(250px,50vw,330px);overflow:hidden;
-    -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent 99%);
-            mask-image:linear-gradient(180deg,#000 74%,transparent 99%)}
-  .t-asst .b1-txt{grid-column:1}
-  .t-asst .perso{left:50%;top:14px;transform:translateX(-50%);
-    width:min(58vw,300px)}
-  .t-asst .phone{width:min(268px,68%)}
-  .t-asst .b1 h1{letter-spacing:-1.6px}
-  .t-asst .caps{grid-template-columns:1fr;gap:14px}
-}
-@media (max-width:560px){
-  .t-asst .shell{padding:0 18px}
-  .t-asst .b1-media{margin:0 -18px}
-  /* empilée sur deux lignes, la barre laissait traîner un séparateur en
-     bout de ligne : on l'enlève et on passe en colonne */
-  .t-asst .proof{width:100%;flex-direction:column;align-items:flex-start;gap:8px}
-  .t-asst .proof-sep{display:none}
-  .t-asst .actions{flex-direction:column}
-  .t-asst .btn{width:100%}
-}
-@media (prefers-reduced-motion:reduce){
-  .t-asst .btn{transition:none}
-  .t-asst .btn-1:hover,.t-asst .btn-2:hover{transform:none}
-}
-
-/* ═══ BLOC 2 · repris tel quel du composant « Comment Talos travaille »
-   de la page d'accueil : mêmes classes .t-feat / .fx-*, donc même rendu.
-   Extrait automatiquement, non réécrit. ═══ */
-
-
-
-/* 2 · tokens v2.css pour les sections (mêmes noms qu'en production) */
-.t-story,.t-how,.t-how2,.t-roi,.t-cat,.t-price,.t-faq,.t-ft,.t-feat{
-  --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
-  --antique:#A8451A; --antique-rgb:168,69,26;
-  --olivier:#D69A66; --olivier-rgb:214,154,102;
-  --rouille:#C0432A;
-  --parch:#F6EEE7; --parch-rgb:246,238,231;
-  --lin:#AB9F95;
-  --ink:#140F0C; --ink-2:#1C1611; --ink-3:#241B15; --graphite:#352A20;
-  --line:rgba(246,238,231,.08); --line-2:rgba(246,238,231,.15);
-  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  --mono:ui-monospace,"SF Mono",Menlo,monospace;
-  --r:16px; --maxw:1180px; --e:cubic-bezier(.16,1,.3,1);
-  color:var(--parch);
-}
-
-html[data-theme="light"] .t-story,html[data-theme="light"] .t-how,html[data-theme="light"] .t-how2,html[data-theme="light"] .t-roi,html[data-theme="light"] .t-cat,html[data-theme="light"] .t-price,html[data-theme="light"] .t-faq,html[data-theme="light"] .t-ft,html[data-theme="light"] .t-feat{
-  --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
-  --antique:#9A3F12; --antique-rgb:154,63,18;
-  --olivier:#9A6A38; --olivier-rgb:154,106,56;
-  --rouille:#B0432A;
-  --parch:#1C1310; --parch-rgb:28,19,16;
-  --lin:#6E6058;
-  --ink:#FBF6F2; --ink-2:#FFFFFF; --ink-3:#F4EBE3; --graphite:#E7DACE;
-  --line:rgba(40,25,16,.12); --line-2:rgba(40,25,16,.22);
-}
-
-
-/* 3 · mot d'impact — signature obligatoire du brand book.
-   Helvetica, jamais de serif italique (DA v2). */
-.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em{
-  font-family:var(--sans);font-style:normal;font-weight:inherit;
-  background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 48%,var(--bronze) 100%);
-  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-  animation:daGradFlow 6s ease-in-out infinite}
-
-html[data-theme="light"] .t-story em,html[data-theme="light"] .t-how em,html[data-theme="light"] .t-roi em,html[data-theme="light"] .t-cat em,html[data-theme="light"] .t-price em,html[data-theme="light"] .t-faq em,html[data-theme="light"] .t-ft em,html[data-theme="light"] .t-feat em{
-  background:linear-gradient(100deg,#B14512 0%,var(--bronze) 58%,var(--bronze-2) 100%);
-  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent}
-
-
-/*  section fonctionnalités — carrousel swipé à toutes les tailles.
-    4 étapes de la journée, puis une tuile qui envoie sur la page complète.  */
-.t-feat{position:relative;padding:104px 0 112px;border-top:1px solid var(--line);
-  background:var(--ink)}
-
-.t-feat .fx-in{max-width:1180px;margin:0 auto}
-
-.t-feat .fx-head{max-width:760px;margin:0 auto 56px;text-align:center;padding-inline:32px}
-
-.t-feat .fx-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 15px;border-radius:100px;
-  border:1px solid var(--line-2);font-family:var(--mono);font-size:10.5px;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;color:var(--bronze)}
-
-.t-feat .fx-eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--bronze);flex:0 0 auto}
-
-.t-feat .fx-head h2{margin-top:24px;font-size:clamp(32px,4.4vw,54px);font-weight:800;
-  letter-spacing:-2.2px;line-height:1.04}
-
-.t-feat .fx-head p{margin-top:18px;font-size:clamp(15px,1.35vw,18px);line-height:1.6;color:var(--lin)}
-
-.t-feat .fx-kicker{margin-top:14px;color:var(--parch);font-weight:700;letter-spacing:-.4px}
-
-
-/* le rail : même comportement partout, on swipe, on ne scrolle pas la page */
-.t-feat .fx-rail{display:flex;gap:22px;align-items:stretch;
-  overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-  padding:4px 32px 10px;scroll-padding-left:32px}
-
-.t-feat .fx-rail::-webkit-scrollbar{display:none}
-
-.t-feat .fx-card{flex:0 0 31.5%;scroll-snap-align:start}
-
-
-/* deux temps : décrocher le chantier (bronze), puis encaisser (olivier) */
-.t-feat .fx-card{--acc:var(--bronze);--acc-rgb:var(--bronze-rgb)}
-
-.t-feat .fx-card.act2{--acc:var(--olivier);--acc-rgb:var(--olivier-rgb)}
-
-
-.t-feat .fx-card{position:relative;display:flex;flex-direction:column;overflow:hidden;
-  border:1px solid var(--line);border-radius:28px;background:var(--ink-2);
-  transition:border-color .45s var(--e),transform .45s var(--e)}
-
-.t-feat .fx-card::before{content:"";position:absolute;inset:0 0 auto;height:200px;pointer-events:none;z-index:0;
-  background:linear-gradient(180deg,rgba(var(--acc-rgb),.08),transparent)}
-
-.t-feat .fx-card::after{content:"";position:absolute;inset:auto 0 0;height:58%;pointer-events:none;z-index:0;
-  background:radial-gradient(120% 78% at 50% 100%,rgba(var(--acc-rgb),.15),transparent 70%)}
-
-html[data-theme="light"] .t-feat .fx-card{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.05)}
-@media (hover:hover){
-.t-feat .fx-card:hover{border-color:var(--line-2)}
-}
-
-
-.t-feat .fx-txt{position:relative;z-index:2;padding:34px 30px 26px}
-
-/* titre en un mot, comme la référence : c'est l'étape, pas la phrase */
-.t-feat .fx-card h3{font-size:clamp(30px,2.7vw,40px);font-weight:800;letter-spacing:-1.6px;line-height:1.02}
-
-
-/* l'avantage : une icône thématique propre à l'étape, pas une coche générique */
-.t-feat .fx-win{display:flex;align-items:flex-start;gap:13px;margin-top:18px;
-  font-size:16px;font-weight:600;line-height:1.42;color:var(--parch);letter-spacing:-.3px}
-
-.t-feat .fx-win .fx-ic{display:flex;align-items:center;justify-content:center;flex:0 0 auto;
-  width:38px;height:38px;margin-top:-3px;border-radius:12px;
-  border:1px solid rgba(var(--acc-rgb),.34);background:rgba(var(--acc-rgb),.1);color:var(--acc)}
-
-
-/* le détail est replié : la carte reste visuelle, l'artisan ouvre s'il veut */
-.t-feat .fx-info{margin-top:18px}
-
-.t-feat .fx-info>summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;
-  padding:7px 13px 7px 8px;border-radius:100px;border:1px solid rgba(var(--acc-rgb),.34);
-  background:rgba(var(--acc-rgb),.08);color:var(--acc);
-  font-size:12.5px;font-weight:600;letter-spacing:-.1px;
-  transition:background .3s var(--e),border-color .3s var(--e)}
-
-.t-feat .fx-info>summary::-webkit-details-marker{display:none}
-
-.t-feat .fx-info>summary::marker{content:""}
-@media (hover:hover){
-.t-feat .fx-info>summary:hover{background:rgba(var(--acc-rgb),.15);
-  border-color:rgba(var(--acc-rgb),.6)}
-}
-
-.t-feat .fx-info>summary:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
-
-.t-feat .fx-info .fx-i{display:flex;align-items:center;justify-content:center;flex:0 0 auto;
-  width:20px;height:20px;border-radius:50%;background:rgba(var(--acc-rgb),.2)}
-
-.t-feat .fx-info .fx-chev{margin-left:2px;transition:transform .35s var(--e)}
-
-.t-feat .fx-info[open]>summary .fx-chev{transform:rotate(180deg)}
-
-.t-feat .fx-info[open]>summary .fx-lbl-off{display:none}
-
-.t-feat .fx-info:not([open])>summary .fx-lbl-on{display:none}
-
-.t-feat .fx-info>p{margin-top:13px;font-size:14px;line-height:1.58;color:var(--lin)}
-
-.t-feat .fx-info[open]>p{animation:fxReveal .42s var(--e) both}
-
-
-/* align-items:flex-start — c'est le bas du téléphone qui doit être rogné,
-   jamais le haut : l'encoche et les angles doivent rester visibles */
-.t-feat .fx-vis{position:relative;z-index:1;margin-top:auto;height:300px;
-  display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
-
-/* châssis titane : mêmes rayons concentriques et même dégradé de tranche que
-   le device de la section story, pour que les deux mockups soient le même objet */
-.t-feat .fx-phone{position:relative;width:232px;flex:0 0 auto;padding:2.5px 2.5px 0;
-  border-radius:38px 38px 0 0;
-  background:linear-gradient(148deg,#9a9089 0%,#4c453f 5%,#2a2624 12%,#766c64 22%,#3b3531 33%,
-    #241f1d 46%,#574f48 58%,#938880 70%,#423b36 80%,#2b2724 88%,#7d736b 100%);
-  box-shadow:0 1px 2px rgba(0,0,0,.5),0 22px 44px -14px rgba(0,0,0,.6),
-    0 54px 100px -30px rgba(0,0,0,.7),inset 0 0 0 .5px rgba(255,255,255,.24)}
-
-html[data-theme="light"] .t-feat .fx-phone{box-shadow:0 1px 2px rgba(40,25,16,.2),
-    0 22px 44px -14px rgba(40,25,16,.22),0 54px 100px -30px rgba(40,25,16,.26),
-    inset 0 0 0 .5px rgba(255,255,255,.24)}
-
-.t-feat .fx-bezel{position:relative;border-radius:36px 36px 0 0;background:#070605;
-  padding:6px 6px 0;box-shadow:inset 0 0 3px 1px rgba(0,0,0,.95)}
-
-/* reflet de vitre en diagonale, par-dessus l'écran */
-.t-feat .fx-glare{position:absolute;inset:2.5px 2.5px 0;z-index:6;pointer-events:none;
-  border-radius:36px 36px 0 0;
-  background:linear-gradient(118deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.05) 14%,
-    rgba(255,255,255,0) 32%,rgba(255,255,255,0) 76%,rgba(255,255,255,.05) 100%)}
-
-/* tranches latérales : action, volumes, veille */
-.t-feat .fx-k{position:absolute;z-index:2;border-radius:1.5px;
-  background:linear-gradient(180deg,#8b817a,#4a433d 26%,#2b2724 72%,#6f665e)}
-
-.t-feat .fx-k.act{left:-2px;top:92px;width:2.5px;height:20px}
-
-.t-feat .fx-k.vu{left:-2px;top:130px;width:2.5px;height:38px}
-
-.t-feat .fx-k.vd{left:-2px;top:176px;width:2.5px;height:38px}
-
-.t-feat .fx-k.pw{right:-2px;top:144px;width:2.5px;height:62px}
-
-/* l'écran dépasse .fx-vis : le téléphone est volontairement coupé par le bas de la carte */
-.t-feat .fx-screen{position:relative;height:352px;border-radius:30px 30px 0 0;overflow:hidden;
-  background:var(--ink-3)}
-
-.t-feat .fx-screen img{display:none}
-
-.t-feat .fx-screen img[src]{display:block;width:100%;height:auto}
-
-.t-feat .fx-screen:has(img[src]) .fx-ph{display:none}
-
-.t-feat .fx-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:8px;text-align:center;padding:38px 18px 120px;color:var(--lin);
-  background:repeating-linear-gradient(45deg,rgba(var(--parch-rgb),.03) 0 12px,transparent 12px 24px)}
-
-.t-feat .fx-ph b{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--acc);font-weight:700}
-
-.t-feat .fx-ph span{font-size:12.5px;line-height:1.45;max-width:165px}
-
-.t-feat .fx-ph i{font-family:var(--mono);font-style:normal;font-size:10px;opacity:.6}
-
-.t-feat .fx-home{display:none}
-
-
-/* la capture est rognée par la carte : bouton pour l'ouvrir en entier.
-   Vrai <button> posé par-dessus le châssis plutôt qu'un role=button sur le
-   téléphone, qui n'a pas le droit d'être un enfant de <button>. */
-.t-feat .fx-open{position:absolute;inset:0;z-index:4;padding:0;border:0;background:none;
-  cursor:zoom-in;-webkit-tap-highlight-color:transparent}
-
-.t-feat .fx-open .fx-mag{position:absolute;right:14px;bottom:16px;
-  display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
-  border:1px solid var(--line-2);background:rgba(20,15,12,.72);color:var(--parch);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  box-shadow:0 4px 14px rgba(0,0,0,.35);
-  transition:transform .35s var(--e),background .35s var(--e),border-color .35s var(--e)}
-
-html[data-theme="light"] .t-feat .fx-open .fx-mag{background:rgba(255,255,255,.86);color:#1C1310;
-  box-shadow:0 4px 14px rgba(40,25,16,.18)}
-@media (hover:hover){
-
-.t-feat .fx-open:hover .fx-mag{transform:scale(1.1);border-color:var(--bronze);color:var(--bronze)}
-}
-
-.t-feat .fx-open:focus-visible{outline:2px solid var(--bronze);outline-offset:-4px;border-radius:20px}
-
-
-/* visionneuse plein écran : <dialog> natif pour le focus, Échap et le top layer */
-.t-feat .fx-zoom{--acc:var(--bronze);--acc-rgb:var(--bronze-rgb);
-  width:100%;height:100%;max-width:100vw;max-height:100svh;
-  margin:0;padding:0;border:0;background:none;overflow:visible;
-  place-items:center;color:var(--parch)}
-
-.t-feat .fx-zoom:not([open]){display:none}
-
-.t-feat .fx-zoom[open]{display:grid}
-
-.t-feat .fx-zoom::backdrop{background:rgba(8,6,5,.86);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
-
-html[data-theme="light"] .t-feat .fx-zoom::backdrop{background:rgba(28,19,16,.68)}
-
-.t-feat .fx-zoom figure{display:flex;flex-direction:column;align-items:center;gap:18px;
-  animation:fxZoomIn .34s var(--e) both}
-
-.t-feat .fx-zoom figcaption{text-align:center;max-width:min(420px,84vw)}
-
-.t-feat .fx-zoom figcaption b{display:block;font-size:19px;font-weight:800;letter-spacing:-.7px}
-
-.t-feat .fx-zoom figcaption span{display:block;margin-top:5px;font-size:13.5px;line-height:1.45;color:var(--lin)}
-
-.t-feat .fx-zoom-x{position:fixed;top:20px;right:20px;z-index:2;
-  display:flex;align-items:center;justify-content:center;width:44px;height:44px;
-  padding:0;border-radius:50%;cursor:pointer;
-  border:1px solid var(--line-2);background:var(--ink-2);color:var(--parch);
-  transition:border-color .3s var(--e),color .3s var(--e)}
-@media (hover:hover){
-.t-feat .fx-zoom-x:hover{border-color:var(--bronze);color:var(--bronze)}
-}
-
-.t-feat .fx-zoom-x:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
-
-
-/* le châssis reprend les mêmes pièces, mais refermé en bas et dimensionné par l'image */
-.t-feat .fx-zoom .fx-phone{width:auto;padding:2.5px;border-radius:38px}
-
-.t-feat .fx-zoom .fx-bezel{padding:6px;border-radius:36px}
-
-.t-feat .fx-zoom .fx-glare{inset:2.5px;border-radius:36px}
-
-.t-feat .fx-zoom .fx-screen{height:auto;border-radius:30px;background:#0E0B09}
-
-.t-feat .fx-zoom .fx-screen img[src]{width:auto;height:auto;
-  max-height:min(78svh,860px);max-width:min(330px,80vw)}
-
-.t-feat .fx-zoom .fx-home{display:block;position:absolute;z-index:5;left:50%;bottom:9px;
-  transform:translateX(-50%);width:96px;height:4px;border-radius:4px;background:rgba(255,255,255,.34)}
-
-/* boutons latéraux en pourcentage : la hauteur du châssis dépend de l'image */
-.t-feat .fx-zoom .fx-k.act{top:18.5%;height:4%}
-
-.t-feat .fx-zoom .fx-k.vu{top:26%;height:7.6%}
-
-.t-feat .fx-zoom .fx-k.vd{top:35.3%;height:7.6%}
-
-.t-feat .fx-zoom .fx-k.pw{top:28.9%;height:12.4%}
-
-html.fx-locked,html.fx-locked body{overflow:hidden}
-
-
-/* tuile de fin de rail : la journée continue sur la page fonctionnalités */
-.t-feat .fx-more{text-decoration:none}
-
-.t-feat .fx-more .fx-txt{display:flex;flex-direction:column;align-items:flex-start;
-  justify-content:center;height:100%;gap:15px;padding:48px 30px}
-
-.t-feat .fx-more .fx-ico{display:flex;align-items:center;justify-content:center;width:52px;height:52px;
-  border-radius:50%;border:1px solid rgba(var(--acc-rgb),.5);background:rgba(var(--acc-rgb),.1);
-  color:var(--acc);transition:transform .35s var(--e)}
-@media (hover:hover){
-.t-feat .fx-more:hover .fx-ico{transform:translateX(4px)}
-}
-
-.t-feat .fx-more b{font-size:30px;font-weight:800;letter-spacing:-1.4px;line-height:1.05}
-
-.t-feat .fx-more span{font-size:15px;line-height:1.55;color:var(--lin)}
-
-.t-feat .fx-more .fx-next{margin-top:4px;font-family:var(--mono);font-size:10.5px;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;color:var(--acc)}
-
-
-/* commandes du carrousel : flèches (souris) + pastilles (repère de position) */
-.t-feat .fx-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:28px}
-
-.t-feat .fx-arrow{display:flex;align-items:center;justify-content:center;width:42px;height:42px;
-  flex:0 0 auto;padding:0;border-radius:50%;cursor:pointer;
-  border:1px solid var(--line-2);background:var(--ink-2);color:var(--parch);
-  transition:border-color .3s var(--e),background .3s var(--e),opacity .3s var(--e)}
-
-html[data-theme="light"] .t-feat .fx-arrow{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.05)}
-@media (hover:hover){
-.t-feat .fx-arrow:hover:not(:disabled){border-color:var(--bronze);color:var(--bronze)}
-}
-
-.t-feat .fx-arrow:disabled{opacity:.3;cursor:default}
-
-.t-feat .fx-arrow:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
-
-.t-feat .fx-dots{display:flex;justify-content:center;gap:7px}
-
-.t-feat .fx-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;cursor:pointer;
-  background:var(--line-2);transition:width .35s var(--e),background .35s var(--e)}
-
-.t-feat .fx-dots button[aria-current="true"]{width:22px;border-radius:100px;background:var(--bronze)}
-
-.t-feat .fx-dots button:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
-@media (max-width:1120px){
-
-.t-feat{padding:92px 0 100px}
-
-.t-feat .fx-rail{gap:18px;padding-inline:26px;scroll-padding-left:26px}
-
-.t-feat .fx-card{flex:0 0 46%}
-}
-@media (max-width:760px){
-
-.t-feat{padding:76px 0 84px}
-
-.t-feat .fx-head{margin-bottom:34px;padding-inline:22px}
-
-.t-feat .fx-head h2{letter-spacing:-1.4px}
-
-.t-feat .fx-rail{gap:14px;padding:4px 22px 10px;scroll-padding-left:22px}
-
-.t-feat .fx-card{flex:0 0 84%;max-width:340px}
-
-.t-feat .fx-txt{padding:30px 24px 24px}
-
-.t-feat .fx-card h3{font-size:32px}
-
-.t-feat .fx-vis{height:274px}
-
-.t-feat .fx-arrow{display:none}
-}
-@media (prefers-reduced-motion:reduce){
-
-.t-feat .fx-card,.t-feat .fx-arrow,.t-feat .fx-dots button,
-.t-feat .fx-info>summary,.t-feat .fx-info .fx-chev,.t-feat .fx-more .fx-ico{transition:none}
-
-.t-feat .fx-info[open]>p,.t-feat .fx-zoom figure{animation:none}
-
-.t-feat .fx-open .fx-mag,.t-feat .fx-zoom-x{transition:none}
-
-.t-feat .fx-open:hover .fx-mag{transform:none}
-
-.t-feat .fx-more:hover .fx-ico{transform:none}
-}
-
-
-@keyframes daGradFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-
-@keyframes fxReveal{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
-
-@keyframes fxZoomIn{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   BLOC 3 · LA DOULEUR QUI DISPARAÎT + LE DÉTAIL DES MISSIONS
-   Gabarit Limova : à gauche la promesse et les deux boutons, à droite une
-   carte de synthèse, puis trois colonnes de missions dépliables en dessous.
-   Couleurs prises sur les tokens .t-asst — aucune valeur en dur.
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.t-asst .b3{position:relative;overflow:hidden;padding:104px 0 110px;
-  border-top:1px solid var(--line)}
-.t-asst .b3::before{content:"";position:absolute;inset:-30% -20% auto auto;
-  width:58%;aspect-ratio:1;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,rgba(var(--bronze-rgb),.16) 0%,transparent 62%)}
-html[data-theme="light"] .t-asst .b3::before{background:radial-gradient(circle,rgba(var(--bronze-rgb),.10) 0%,transparent 62%)}
-
-/* ── haut : promesse à gauche, carte de synthèse à droite ─────────────── */
-.t-asst .b3-top{position:relative;display:grid;grid-template-columns:1.08fr .92fr;
-  gap:56px;align-items:center;margin:0 0 74px}
-.t-asst .b3-tag{display:inline-flex;align-items:center;margin:0 0 24px;
-  padding:9px 17px;border-radius:10px;
-  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.32);
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--bronze)}
-.t-asst .b3 h2{margin:0 0 34px;font-size:clamp(34px,4.1vw,58px);line-height:1.03;
-  letter-spacing:-2.1px;font-weight:800;color:var(--parch);max-width:14ch}
-
-/* ── la carte de synthèse ─────────────────────────────────────────────── */
-.t-asst .synth{background:var(--ink-2);border:1px solid var(--line-2);
-  border-radius:26px;padding:32px 30px 28px;
-  box-shadow:0 30px 70px -34px rgba(0,0,0,.6)}
-html[data-theme="light"] .t-asst .synth{box-shadow:0 30px 70px -34px rgba(40,25,16,.24)}
-.t-asst .synth-h{display:flex;align-items:baseline;justify-content:space-between;
-  gap:16px;flex-wrap:wrap;margin:0 0 22px;padding:0 0 20px;border-bottom:1px solid var(--line)}
-.t-asst .synth-h b{font-size:19px;font-weight:800;letter-spacing:-.5px;color:var(--parch)}
-.t-asst .synth-h span{font-family:var(--mono);font-size:12px;letter-spacing:.06em;
-  color:var(--bronze);white-space:nowrap}
-.t-asst .synth ol{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:m}
-.t-asst .synth li{display:flex;align-items:center;gap:14px;counter-increment:m}
-.t-asst .synth li::before{content:counter(m,decimal-leading-zero);flex:0 0 auto;
-  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
-  border-radius:11px;background:rgba(var(--bronze-rgb),.12);
-  border:1px solid rgba(var(--bronze-rgb),.3);
-  font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--bronze)}
-.t-asst .synth li b{flex:1;font-size:15.5px;font-weight:600;letter-spacing:-.2px;color:var(--parch)}
-.t-asst .synth li i{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--lin)}
-.t-asst .synth-f{margin:24px 0 0;padding:18px 0 0;border-top:1px solid var(--line);
-  font-size:14px;line-height:1.55;color:var(--lin)}
-.t-asst .synth-f b{color:var(--parch);font-weight:700}
-
-/* ── bas : trois colonnes de missions ─────────────────────────────────── */
-.t-asst .b3-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);
-  gap:26px;align-items:start}
-.t-asst .mh{display:flex;align-items:center;justify-content:center;gap:10px;
-  margin:0 0 16px;padding:12px 18px;border-radius:11px;
-  background:rgba(var(--bronze-rgb),.10);border:1px solid rgba(var(--bronze-rgb),.28);
-  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--bronze);text-align:center;white-space:nowrap}
-.t-asst .mh .mh-n{opacity:.72;letter-spacing:.06em;font-weight:400}
-
-/* une fonctionnalité : pastille fermée, rectangle arrondi une fois ouverte */
-.t-asst .f{margin:0 0 10px;border-radius:100px;background:var(--ink-2);
-  border:1px solid var(--line);
-  transition:border-color .25s var(--e),border-radius .25s var(--e),background .25s var(--e)}
-.t-asst .f:hover{border-color:rgba(var(--bronze-rgb),.42)}
-.t-asst .f[open]{border-radius:22px;border-color:rgba(var(--bronze-rgb),.42);background:var(--ink-3)}
-.t-asst .f summary{list-style:none;cursor:pointer;min-height:56px;
-  padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;
-  font-size:15.5px;font-weight:600;letter-spacing:-.2px;color:var(--parch)}
-.t-asst .f summary::-webkit-details-marker{display:none}
-.t-asst .f summary:focus-visible{outline:3px solid var(--bronze);outline-offset:2px;border-radius:100px}
-.t-asst .f-chev{flex:0 0 auto;width:15px;height:15px;color:var(--lin);
-  transition:transform .3s var(--e),color .25s var(--e)}
-.t-asst .f[open] .f-chev{transform:rotate(180deg);color:var(--bronze)}
-.t-asst .f p{margin:0;padding:0 22px 20px;font-size:14.5px;line-height:1.58;color:var(--lin)}
-
-/* ═══ RESPONSIVE ═════════════════════════════════════════════════════════ */
-@media (max-width:960px){
-  .t-asst .b3{padding:76px 0 84px}
-  .t-asst .b3-top{grid-template-columns:1fr;gap:38px;margin:0 0 52px}
-  .t-asst .b3 h2{max-width:none}
-  .t-asst .b3-grid{grid-template-columns:1fr;gap:34px}
-}
-@media (max-width:560px){
-  .t-asst .synth{padding:26px 22px 24px;border-radius:22px}
-  .t-asst .f summary{padding:15px 20px;font-size:15px}
-}
-@media (prefers-reduced-motion:reduce){
-  .t-asst .f,.t-asst .f-chev{transition:none}
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   BLOC 4 · FAQ
-   Deux pastilles de catégorie qui filtrent, puis les questions dépliables.
-   Le dépliant réutilise .f du bloc 3 : même composant, donc même rendu.
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.t-asst .b4{position:relative;padding:100px 0 110px;border-top:1px solid var(--line)}
-.t-asst .b4-head{text-align:center;max-width:640px;margin:0 auto 34px}
-.t-asst .b4-tag{display:inline-flex;align-items:center;margin:0 0 20px;
+/* ── pièces communes : pastille d'œil-de-bœuf, titre de section ───────── */
+.t-asst .ac-eyebrow{display:inline-flex;align-items:center;gap:9px;
+  margin:0 0 22px;padding:8px 16px 8px 8px;border-radius:100px;
+  background:var(--ink-3);border:1px solid var(--line-2);
+  font-size:13.5px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
+.t-asst .ac-eyebrow img{width:26px;height:26px;border-radius:50%;flex:0 0 auto}
+.t-asst .ac-eyebrow svg{width:15px;height:15px;color:var(--bronze);
+  flex:0 0 auto;margin-left:8px}
+
+.t-asst .ac-tag{display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;
   padding:8px 16px;border-radius:10px;
   background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.32);
   font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--bronze)}
-.t-asst .b4 h2{margin:0 0 16px;font-size:clamp(30px,3.6vw,48px);line-height:1.05;
-  letter-spacing:-1.8px;font-weight:800;color:var(--parch)}
-.t-asst .b4-head p{margin:0;font-size:16.5px;line-height:1.6;color:var(--lin)}
+.t-asst .ac-tag svg{width:14px;height:14px}
 
-/* ── les deux pastilles de catégorie ──────────────────────────────────── */
-.t-asst .b4-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
-  margin:0 0 34px}
-.t-asst .tab{min-height:48px;padding:13px 26px;border-radius:100px;cursor:pointer;
-  background:var(--ink-2);border:1px solid var(--line-2);color:var(--lin);
-  font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:-.2px;
-  transition:background .25s var(--e),color .25s var(--e),border-color .25s var(--e)}
-.t-asst .tab:hover{color:var(--parch);border-color:rgba(var(--bronze-rgb),.42)}
-.t-asst .tab[aria-selected="true"]{background:var(--bronze);border-color:var(--bronze);
+.t-asst .ac-h2{margin:0 0 18px;font-size:clamp(32px,4.2vw,58px);line-height:1.03;
+  letter-spacing:-2px;font-weight:800;color:var(--parch);text-wrap:balance}
+.t-asst .ac-sub{margin:0;font-size:17px;line-height:1.6;color:var(--lin);max-width:56ch}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   1 · HERO
+   Le personnage sort du bord gauche, le discours occupe la colonne droite.
+   Identique au gabarit précédent côté décor : c'est le contenu qui change.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-hero{overflow:hidden;padding:28px 0 88px}
+.ac-hero::before{content:"";position:absolute;inset:auto auto 0 -16%;
+  width:74%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.20) 0%,transparent 64%);
+  transform:translateY(18%)}
+html[data-theme="light"] .ac-hero::before{
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.12) 0%,transparent 64%)}
+/* le personnage s'efface dans le fond au lieu d'être coupé net */
+.ac-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:44%;
+  pointer-events:none;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--ink),transparent 100%) 0%,
+    color-mix(in srgb,var(--ink),transparent 58%) 34%,
+    color-mix(in srgb,var(--ink),transparent 16%) 64%,
+    var(--ink) 88%)}
+
+.ac-hero-grid{position:relative;display:grid;grid-template-columns:.76fr 1.24fr;
+  gap:48px;align-items:center;min-height:clamp(540px,47vw,660px)}
+.ac-hero-media{grid-column:1;position:relative;align-self:stretch;
+  pointer-events:none;user-select:none}
+.ac-hero-txt{grid-column:2;position:relative;z-index:3}
+.ac-hero .perso{position:absolute;right:-16px;top:30px;
+  width:min(46vw,560px);height:auto;max-width:none;display:block}
+
+.ac-hero h1{margin:0 0 20px;font-size:clamp(36px,4.35vw,60px);line-height:1.03;
+  letter-spacing:-2px;font-weight:800;color:var(--parch);max-width:17ch;
+  text-wrap:balance}
+.ac-hero .ac-lede{margin:0 0 26px;font-size:17.5px;line-height:1.62;
+  color:var(--lin);max-width:46ch}
+
+/* la barre de preuve — le « screen » de la maquette */
+.ac-proof{display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;
+  margin:0 0 26px;padding:10px 18px;border-radius:12px;
+  background:var(--ink-2);border:1px solid var(--line-2);
+  font-size:14.5px;color:var(--lin)}
+.ac-proof b{color:var(--parch);font-weight:700}
+.ac-proof-i{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.ac-proof-i svg{width:16px;height:16px;color:var(--bronze);flex:0 0 auto}
+.ac-proof-sep{width:1px;height:16px;background:var(--line-2)}
+
+/* les missions du hero — en grille, pas en flex : à cinq entrées, un
+   retour à la ligne libre laissait la troisième ligne en escalier */
+.ac-atouts{list-style:none;margin:0 0 32px;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 30px}
+.ac-atouts li{display:flex;align-items:center;gap:12px;
+  font-size:15.5px;font-weight:600;line-height:1.3;letter-spacing:-.25px;
+  color:var(--parch)}
+.ac-atouts i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:11px;
+  border:1px solid rgba(var(--bronze-rgb),.3);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze)}
+.ac-atouts svg{width:17px;height:17px}
+
+/* la rangée cochée ne sert plus qu'au pied de page */
+.ac-reassure{list-style:none;margin:0 0 32px;padding:0;
+  display:flex;flex-wrap:wrap;gap:12px 26px}
+.ac-reassure li{display:flex;align-items:center;gap:10px;
+  font-size:15.5px;font-weight:600;line-height:1.35;letter-spacing:-.2px;
+  color:var(--parch)}
+.ac-reassure i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid rgba(var(--bronze-rgb),.42);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze)}
+.ac-reassure svg{width:14px;height:14px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   2 · LES TROIS MISSIONS
+   Titre pleine largeur, puis le téléphone à gauche et les missions à droite.
+   Cliquer une mission change l'écran : un seul visuel, trois états.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-miss{padding:96px 0 104px;border-top:1px solid var(--line)}
+.ac-miss-head{margin:0 0 54px;max-width:680px}
+.ac-miss-head .ac-h2{margin:0}
+.ac-miss-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;
+  align-items:start}
+
+/* ── la scène de gauche : un cadre, une lueur, un téléphone ───────────── */
+.ac-scene{position:relative;border-radius:28px;overflow:hidden;
+  border:1px solid var(--line-2);background:var(--ink-2);
+  height:clamp(430px,45vw,570px);
+  display:flex;align-items:flex-start;justify-content:center;padding-top:42px}
+.ac-scene::before{content:"";position:absolute;inset:-30% -20% auto -20%;height:90%;
+  pointer-events:none;
+  background:radial-gradient(ellipse at 50% 40%,rgba(var(--bronze-rgb),.26) 0%,transparent 66%)}
+html[data-theme="light"] .ac-scene::before{
+  background:radial-gradient(ellipse at 50% 40%,rgba(var(--bronze-rgb),.16) 0%,transparent 66%)}
+/* le bas du téléphone se fond dans la carte */
+.ac-scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26%;
+  pointer-events:none;z-index:4;
+  background:linear-gradient(180deg,transparent 0%,var(--ink-2) 88%)}
+
+/* châssis titane — même objet que les autres mockups du site */
+.ac-phone{position:relative;z-index:2;width:clamp(230px,25vw,300px);flex:0 0 auto;
+  padding:2.5px 2.5px 0;border-radius:40px 40px 0 0;
+  background:linear-gradient(148deg,#9a9089 0%,#4c453f 5%,#2a2624 12%,#766c64 22%,
+    #3b3531 33%,#241f1d 46%,#574f48 58%,#938880 70%,#423b36 80%,#2b2724 88%,#7d736b 100%);
+  box-shadow:0 1px 2px rgba(0,0,0,.5),0 22px 44px -14px rgba(0,0,0,.6),
+    0 54px 100px -30px rgba(0,0,0,.7),inset 0 0 0 .5px rgba(255,255,255,.24)}
+html[data-theme="light"] .ac-phone{box-shadow:0 1px 2px rgba(40,25,16,.2),
+  0 22px 44px -14px rgba(40,25,16,.22),0 54px 100px -30px rgba(40,25,16,.26),
+  inset 0 0 0 .5px rgba(255,255,255,.24)}
+.ac-phone-bezel{position:relative;border-radius:38px 38px 0 0;background:#070605;
+  padding:6px 6px 0;box-shadow:inset 0 0 3px 1px rgba(0,0,0,.95)}
+.ac-phone-glare{position:absolute;inset:2.5px 2.5px 0;z-index:6;pointer-events:none;
+  border-radius:38px 38px 0 0;
+  background:linear-gradient(118deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.05) 14%,
+    rgba(255,255,255,0) 32%,rgba(255,255,255,0) 76%,rgba(255,255,255,.05) 100%)}
+.ac-phone-k{position:absolute;z-index:2;border-radius:1.5px;
+  background:linear-gradient(180deg,#8b817a,#4a433d 26%,#2b2724 72%,#6f665e)}
+.ac-phone-k.act{left:-2px;top:96px;width:2.5px;height:20px}
+.ac-phone-k.vu{left:-2px;top:134px;width:2.5px;height:38px}
+.ac-phone-k.vd{left:-2px;top:180px;width:2.5px;height:38px}
+.ac-phone-k.pw{right:-2px;top:148px;width:2.5px;height:62px}
+
+/* les trois captures se superposent, une seule est visible */
+.ac-screen{position:relative;border-radius:32px 32px 0 0;overflow:hidden;
+  background:var(--ink-3);aspect-ratio:780/1500}
+.ac-screen img{position:absolute;inset:0;width:100%;height:auto;
+  opacity:0;transform:scale(1.015);
+  transition:opacity .45s var(--e),transform .55s var(--e)}
+.ac-screen img.on{opacity:1;transform:none}
+
+/* ── les trois missions ───────────────────────────────────────────────── */
+.ac-miss-list{display:flex;flex-direction:column;gap:14px}
+.ac-mission{position:relative;display:block;width:100%;text-align:left;
+  padding:24px 26px 24px 24px;border-radius:20px;cursor:pointer;
+  background:transparent;border:1px solid transparent;
+  font-family:var(--sans);color:inherit;
+  transition:background .3s var(--e),border-color .3s var(--e)}
+.ac-mission:hover{background:color-mix(in oklab,var(--ink-2) 70%,transparent);
+  border-color:var(--line)}
+.ac-mission[aria-selected="true"]{background:var(--ink-2);border-color:var(--line-2);
+  box-shadow:0 24px 54px -34px rgba(0,0,0,.7)}
+html[data-theme="light"] .ac-mission[aria-selected="true"]{
+  box-shadow:0 24px 54px -34px rgba(40,25,16,.3)}
+.ac-mission:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+.ac-mission-h{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+.ac-mission-ic{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:12px;
+  border:1px solid rgba(var(--bronze-rgb),.32);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze);transition:background .3s var(--e),color .3s var(--e)}
+.ac-mission-ic svg{width:20px;height:20px}
+.ac-mission[aria-selected="true"] .ac-mission-ic{background:var(--bronze);color:#fff;
+  border-color:var(--bronze)}
+.ac-mission-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--bronze)}
+.ac-mission h3{margin:0 0 8px;font-size:clamp(19px,1.65vw,22px);line-height:1.25;
+  letter-spacing:-.6px;font-weight:800;color:var(--parch)}
+.ac-mission p{margin:0;font-size:15px;line-height:1.6;color:var(--lin);max-width:52ch}
+
+/* barre de progression latérale, purement décorative */
+.ac-mission::before{content:"";position:absolute;left:0;top:22px;bottom:22px;width:2px;
+  border-radius:2px;background:var(--bronze);opacity:0;
+  transition:opacity .3s var(--e)}
+.ac-mission[aria-selected="true"]::before{opacity:1}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3 · LE SCÉNARIO
+   À gauche le titre, épinglé. À droite sept fiches qui se recouvrent au
+   défilement : chaque fiche est « sticky » au même endroit, et son onglet est
+   décalé horizontalement — d'où la rangée d'onglets qui se remplit.
+   Aucun parent ne doit porter overflow:hidden, sinon le sticky meurt.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-story{padding:96px 0 110px;border-top:1px solid var(--line)}
+.ac-story-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:60px;
+  align-items:start}
+.ac-story-txt{position:sticky;top:124px}
+.ac-story-txt .ac-h2{max-width:none;font-size:clamp(30px,3.3vw,46px);
+  letter-spacing:-1.6px;line-height:1.04}
+.ac-story-txt .ac-sub{max-width:none;font-size:16px}
+.ac-story-note{margin:26px 0 0;padding:18px 20px;border-radius:16px;
+  background:var(--ink-2);border:1px solid var(--line);
+  font-size:14.5px;line-height:1.55;color:var(--lin)}
+.ac-story-note b{display:block;margin:0 0 4px;color:var(--parch);font-weight:700}
+.ac-story-txt .actions{margin-top:24px}
+
+/* ── la pile de fiches ────────────────────────────────────────────────── */
+.ac-steps{--tabh:34px;--stick:112px;
+  list-style:none;margin:0;padding:0;position:relative}
+/* la fiche colle sous la barre : son cadre inclut la bande d'onglet, donc
+   « top » vise l'onglet et la carte se pose juste en dessous */
+.ac-step{position:sticky;top:var(--stick);
+  margin:0 0 26px;padding-top:var(--tabh)}
+.ac-step:last-child{margin-bottom:0}
+
+/* l'onglet : même hauteur pour tous, décalé d'un cran par fiche */
+/* l'onglet est la seule pièce translucide de la pile : il flotte au-dessus
+   de la fiche précédente, c'est là que le flou a un sens */
+.ac-step-tab{position:absolute;top:0;height:var(--tabh);
+  left:calc(var(--i) * (100% / 7));width:calc(100% / 7);
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  padding:0 4px;border-radius:14px 14px 0 0;
+  background:color-mix(in oklab,var(--ink-3) 80%,transparent);
+  backdrop-filter:blur(18px) saturate(150%);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);
+  border:1px solid color-mix(in oklab,var(--parch) 9%,transparent);border-bottom:0;
+  font-family:var(--mono);font-size:clamp(9.5px,.95vw,11.5px);letter-spacing:.02em;
+  color:var(--lin);white-space:nowrap;overflow:hidden;
+  transition:background .3s var(--e),color .3s var(--e),border-color .3s var(--e)}
+.ac-step.is-on .ac-step-tab{background:var(--bronze);border-color:var(--bronze);
   color:#fff}
-.t-asst .tab:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+.ac-step-tab .d{opacity:.75}
 
-/* ── la liste de questions ────────────────────────────────────────────── */
-.t-asst .b4-list{max-width:820px;margin:0 auto}
-.t-asst .b4-list[hidden]{display:none}
-.t-asst .b4-list .f summary{font-size:16px}
+ /* l'angle haut-gauche reste droit : c'est là que se pose le premier onglet,
+    et dans la pile c'est toujours cet angle-là qui affleure sous lui.
+    La fiche reste opaque — elle doit masquer celle du dessous.
+    Ombre en deux couches : un contact court, une ambiante très étalée. */
+.ac-step-card{position:relative;padding:32px 34px 34px;border-radius:0 26px 26px 26px;
+  background:var(--ink-2);
+  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),
+             0 2px 6px rgba(0,0,0,.2),
+             0 44px 90px -56px rgba(0,0,0,.95)}
+html[data-theme="light"] .ac-step-card{
+  border-color:rgba(40,25,16,.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),
+             0 2px 6px rgba(40,25,16,.05),
+             0 44px 90px -56px rgba(40,25,16,.42)}
+/* même hauteur pour toutes : sinon la fiche du dessous dépasse en bas de la
+   pile et laisse traîner un liseré. 308 px couvre la plus haute à 961 px. */
+@media (min-width:961px){.ac-step-card{min-height:300px}}
+/* les fiches ont la même hauteur mais pas le même contenu : le corps se
+   centre dans la place qui reste, sinon les plus courtes sonnent creux */
+.ac-step-card{display:flex;flex-direction:column}
+.ac-step-body{flex:1;align-content:center}
 
-/* ── le pied : il reste une question ──────────────────────────────────── */
-.t-asst .b4-foot{max-width:820px;margin:38px auto 0;padding:26px 28px;
-  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;
-  background:var(--ink-2);border:1px solid var(--line-2);border-radius:22px}
-/* sans base flexible, le bloc de texte prenait toute la largeur et poussait
-   le bouton à la ligne suivante */
-.t-asst .b4-foot > div{flex:1 1 340px;min-width:0}
-.t-asst .b4-foot > .btn{flex:0 0 auto}
-.t-asst .b4-foot b{display:block;font-size:17px;font-weight:700;letter-spacing:-.3px;
-  color:var(--parch);margin:0 0 4px}
-.t-asst .b4-foot span{font-size:14.5px;line-height:1.5;color:var(--lin)}
+.ac-step-h{display:flex;align-items:center;gap:12px;margin:0 0 16px}
+.ac-step-ic{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:11px;
+  border:1px solid rgba(var(--bronze-rgb),.3);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze)}
+.ac-step-ic svg{width:19px;height:19px}
+.ac-step-h b{font-size:19px;font-weight:800;letter-spacing:-.55px;color:var(--parch)}
+.ac-step-when{margin-left:auto;font-family:var(--mono);font-size:12px;
+  color:var(--lin);white-space:nowrap}
+
+.ac-step-q{margin:0;padding:18px 20px;border-radius:18px;border:0;
+  background:color-mix(in oklab,var(--parch) 5%,transparent);
+  font-size:15.5px;line-height:1.62;letter-spacing:-.1px;
+  color:var(--parch);font-style:italic}
+.ac-step-p{margin:0;font-size:15px;line-height:1.62;color:var(--lin)}
+
+/* les puces d'une demande qualifiée */
+.ac-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ac-chips li{display:inline-flex;align-items:center;gap:7px;
+  padding:9px 15px;border-radius:100px;
+  background:color-mix(in oklab,var(--parch) 5%,transparent);
+  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent);
+  font-size:13.5px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
+.ac-chips li::before{content:"";width:5px;height:5px;border-radius:50%;
+  background:var(--bronze);flex:0 0 auto}
+
+/* les trois variantes de prix */
+.ac-prices{list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(3,1fr);gap:10px}
+.ac-prices li{padding:16px 14px 15px;border-radius:18px;text-align:center;
+  background:color-mix(in oklab,var(--parch) 5%,transparent);
+  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent)}
+.ac-prices small{display:block;margin:0 0 5px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--lin)}
+.ac-prices b{font-size:17px;font-weight:800;letter-spacing:-.6px;color:var(--parch);
+  font-variant-numeric:tabular-nums}
+.ac-prices li.hot{border-color:rgba(var(--bronze-rgb),.5);
+  background:rgba(var(--bronze-rgb),.10)}
+.ac-prices li.hot b{color:var(--bronze)}
+
+/* la ligne de résultat, en fin de scénario */
+.ac-step-win{display:flex;flex-direction:column;align-items:flex-start;gap:5px;
+  padding:18px 20px;border-radius:18px;
+  background:rgba(var(--bronze-rgb),.12);
+  border:1px solid rgba(var(--bronze-rgb),.26)}
+.ac-step-win b{font-size:25px;font-weight:800;letter-spacing:-1px;color:var(--bronze);
+  font-variant-numeric:tabular-nums}
+.ac-step-win span{font-size:14.5px;line-height:1.5;color:var(--lin)}
+.ac-step-body{display:grid;gap:14px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   4 · LE DÉTAIL DES FONCTIONNALITÉS
+   Quatre grandes cartes — le gabarit « deux colonnes denses » : une vignette
+   de l'assistant, un titre, une ligne d'accroche, puis la liste complète.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-feat{padding:96px 0 108px;border-top:1px solid var(--line)}
+.ac-feat-head{max-width:720px;margin:0 0 46px}
+
+/* On fait glisser au lieu d'empiler : une carte à la fois, calée sur son
+   bord. Les neuf rangées sont déclarées ici et reprises par chaque carte
+   en subgrid — vignette, titre, accroche, liste et bouton tombent donc au
+   même niveau d'une carte à l'autre, quelle que soit la longueur du texte. */
+.ac-feat-rail{display:grid;grid-auto-flow:column;
+  grid-auto-columns:var(--w,46%);
+  grid-template-rows:repeat(9,auto);
+  gap:22px;align-items:stretch;
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;
+  padding:4px 4px 10px;margin:-4px -4px -10px;
+  scrollbar-width:none}
+.ac-feat-rail::-webkit-scrollbar{display:none}
+.ac-feat-rail:focus-visible{outline:3px solid var(--bronze);outline-offset:4px;
+  border-radius:28px}
+
+.ac-card{grid-row:1 / -1;display:grid;grid-template-rows:subgrid;
+  scroll-snap-align:start;
+  padding:30px 30px 28px;
+  border-radius:26px;background:var(--ink-2);border:1px solid var(--line-2);
+  transition:border-color .3s var(--e),transform .3s var(--e)}
+/* sans subgrid la carte reste lisible, seules les rangées ne s'alignent plus */
+@supports not (grid-template-rows:subgrid){
+  .ac-card{display:flex;flex-direction:column}
+  .ac-card-go{margin-top:auto}
+}
+html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
+.ac-card:hover{border-color:rgba(var(--bronze-rgb),.4);transform:translateY(-3px)}
+
+.ac-card-top{display:flex;align-items:center;gap:12px;margin:0 0 22px}
+.ac-card-av{width:42px;height:42px;border-radius:13px;flex:0 0 auto;
+  object-fit:cover;background:var(--ink-3);border:1px solid var(--line-2)}
+.ac-card-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--lin)}
+.ac-card-n{margin-left:auto;font-family:var(--mono);font-size:11.5px;
+  letter-spacing:.08em;color:var(--bronze);white-space:nowrap}
+
+.ac-card-lab{margin:0 0 6px;font-size:14px;font-weight:700;letter-spacing:-.2px;
+  color:var(--parch)}
+.ac-card h3{margin:0 0 10px;font-size:clamp(23px,2.2vw,29px);line-height:1.12;
+  letter-spacing:-1.1px;font-weight:800;color:var(--parch);text-wrap:balance}
+.ac-card-acc{margin:0 0 14px;font-size:15px;line-height:1.5;font-weight:700;
+  letter-spacing:-.2px;color:var(--bronze)}
+.ac-card-acc span{color:var(--lin);font-weight:500}
+.ac-card > p{margin:0 0 22px;font-size:15px;line-height:1.62;color:var(--lin)}
+
+.ac-card-sep{margin:0 0 16px;padding:0;border:0;border-top:1px solid var(--line)}
+.ac-card-cap{margin:0 0 14px;font-size:13px;font-weight:600;color:var(--lin)}
+.ac-card ul{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:12px}
+.ac-card li{display:flex;align-items:flex-start;gap:11px;
+  font-size:14.5px;line-height:1.45;letter-spacing:-.1px;color:var(--parch)}
+.ac-card li i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:24px;height:24px;margin-top:-1px;border-radius:8px;
+  background:rgba(var(--bronze-rgb),.10);color:var(--bronze)}
+.ac-card li svg{width:14px;height:14px}
+.ac-card-go{display:inline-flex;align-items:center;gap:8px;
+  align-self:flex-start;min-height:46px;padding:12px 22px;border-radius:100px;
+  background:var(--ink-3);border:1px solid var(--line-2);color:var(--parch);
+  font-size:14.5px;font-weight:700;letter-spacing:-.2px;text-decoration:none;
+  transition:background .25s var(--e),border-color .25s var(--e),color .25s var(--e)}
+.ac-card-go svg{width:15px;height:15px}
+.ac-card-go:hover{background:var(--bronze);border-color:var(--bronze);color:#fff}
+.ac-card-go:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5 · LES OUTILS — deux bandeaux qui défilent en sens inverse
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-tools{padding:92px 0 96px;border-top:1px solid var(--line)}
+.t-asst .ac-tools-head{text-align:center;max-width:640px;margin:0 auto 52px}
+.ac-tools-head .ac-h2{margin:0 0 14px}
+.ac-tools-head .ac-sub{margin:0 auto;max-width:52ch}
+/* l'icône est posée par le gabarit sans attribut de taille : c'est ici
+   qu'elle est dimensionnée, sinon elle prend toute la pastille */
+.ac-tools-count svg{width:14px;height:14px;flex:0 0 auto}
+.ac-tools-count{display:inline-flex;align-items:center;gap:8px;margin-top:24px;
+  padding:8px 16px;border-radius:100px;
+  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.3);
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--bronze);
+  white-space:nowrap}
+
+.ac-belt{position:relative;display:flex;flex-direction:column;gap:14px;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
+.ac-belt-row{overflow:hidden}
+.ac-belt-track{display:flex;align-items:center;gap:14px;width:max-content;
+  animation:acBelt 52s linear infinite}
+.ac-belt-row.rev .ac-belt-track{animation-duration:64s;animation-direction:reverse}
+.ac-belt:hover .ac-belt-track{animation-play-state:paused}
+@keyframes acBelt{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+.ac-chip{display:flex;flex-shrink:0;align-items:center;gap:11px;
+  padding:11px 18px;border-radius:14px;
+  background:var(--ink-2);border:1px solid var(--line-2)}
+html[data-theme="light"] .ac-chip{box-shadow:0 1px 2px rgba(40,25,16,.05)}
+.ac-chip img{width:22px;height:22px;flex:0 0 auto;object-fit:contain}
+.ac-chip span{font-size:14px;font-weight:600;letter-spacing:-.2px;color:var(--lin);
+  white-space:nowrap}
+
+.ac-tools-foot{max-width:760px;margin:38px auto 0;text-align:center;
+  font-size:14.5px;line-height:1.6;color:var(--lin)}
+.ac-tools-foot b{color:var(--parch);font-weight:700}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   6 · LE DUO — l'assistant qui complète celui-ci
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-duo{padding:92px 0 100px;border-top:1px solid var(--line)}
+.ac-duo-head{max-width:820px;margin:0 0 40px}
+.ac-duo-card{position:relative;display:grid;grid-template-columns:auto 1fr auto;
+  gap:40px;align-items:center;padding:38px 40px;border-radius:28px;
+  background:var(--ink-2);border:1px solid var(--line-2);overflow:hidden}
+.ac-duo-card::before{content:"";position:absolute;inset:auto -10% -60% auto;
+  width:44%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.20) 0%,transparent 64%)}
+
+/* width:max-content : empilée, la paire devenait aussi large que la carte et
+   le « + » (calé à 50 %) partait se poser au milieu du vide */
+.ac-duo-pair{position:relative;display:flex;align-items:center;flex:0 0 auto;
+  width:max-content}
+.ac-duo-pair img{width:82px;height:82px;border-radius:24px;object-fit:cover;
+  background:var(--ink-3);border:1px solid var(--line-2)}
+.ac-duo-pair img + img{margin-left:-16px}
+.ac-duo-plus{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  z-index:2;display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;
+  background:var(--bronze);color:#fff;border:3px solid var(--ink-2)}
+.ac-duo-plus svg{width:14px;height:14px}
+
+.ac-duo-txt{position:relative;min-width:0}
+.ac-duo-txt .ac-card-role{display:block;margin:0 0 8px}
+.ac-duo-txt h3{margin:0 0 10px;font-size:clamp(22px,2.3vw,30px);line-height:1.12;
+  letter-spacing:-1.1px;font-weight:800;color:var(--parch)}
+.ac-duo-txt p{margin:0;font-size:15.5px;line-height:1.6;color:var(--lin);max-width:56ch}
+.ac-duo-act{position:relative;display:flex;flex-direction:column;gap:10px;
+  align-items:stretch;flex:0 0 auto}
+.ac-duo-all{display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  font-size:14px;font-weight:600;color:var(--lin);text-decoration:none;
+  transition:color .25s var(--e)}
+.ac-duo-all:hover{color:var(--bronze)}
+.ac-duo-all svg{width:13px;height:13px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   7 · AVANT / AVEC TALOS
+   Le tableau est dessiné en SVG sur ordinateur (il suit le thème par
+   currentColor et var()). Sous 760 px il cède la place à la version empilée,
+   qui est aussi la version lue par les lecteurs d'écran.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-ba{padding:92px 0 100px;border-top:1px solid var(--line)}
+.ac-ba-head{max-width:640px;margin:0 0 40px}
+.ac-ba-svg{display:block;width:100%}
+.ac-ba-svg svg{display:block;width:100%;height:auto}
+/* la version téléphone est un vrai tableau : deux colonnes, un en-tête,
+   des bandes alternées. C'est aussi elle que lisent les lecteurs d'écran —
+   le SVG au-dessus est décoratif (aria-hidden). */
+.ac-ba-table{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;
+  background:var(--ink-2);border:1px solid var(--line-2);border-radius:20px;
+  overflow:hidden}
+.ac-ba-table th{padding:15px 14px 13px;text-align:left;vertical-align:bottom;
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase}
+.ac-ba-table th:first-child{color:var(--lin)}
+.ac-ba-table th:last-child{color:var(--bronze)}
+.ac-ba-table td{padding:15px 14px;font-size:13.5px;line-height:1.42;
+  letter-spacing:-.1px;vertical-align:top;border-top:1px solid var(--line)}
+.ac-ba-table td + td,.ac-ba-table th + th{border-left:1px solid var(--line)}
+.ac-ba-table tbody tr:nth-child(even){
+  background:color-mix(in oklab,var(--parch) 3.5%,transparent)}
+.ac-ba-table .av{color:var(--lin)}
+.ac-ba-table .ap{color:var(--parch);font-weight:600}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   8 · L'APPEL FINAL
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-cta{position:relative;overflow:hidden;padding:104px 0 112px;
+  border-top:1px solid var(--line)}
+.ac-cta::before{content:"";position:absolute;inset:auto auto -46% 50%;
+  width:76%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.22) 0%,transparent 62%)}
+html[data-theme="light"] .ac-cta::before{
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.14) 0%,transparent 62%)}
+.ac-cta-in{position:relative;text-align:center;max-width:760px;margin:0 auto}
+.ac-cta-av{width:84px;height:84px;border-radius:26px;margin:0 auto 26px;
+  object-fit:cover;background:var(--ink-3);border:1px solid var(--line-2);
+  box-shadow:0 26px 54px -26px rgba(0,0,0,.7)}
+html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.3)}
+.ac-cta h2{margin:0 0 18px;font-size:clamp(31px,4vw,52px);line-height:1.05;
+  letter-spacing:-1.8px;font-weight:800;color:var(--parch);text-wrap:balance}
+.ac-cta p{margin:0 auto 32px;font-size:17.5px;line-height:1.6;color:var(--lin);
+  max-width:48ch}
+.ac-cta .actions{justify-content:center}
+.ac-cta .ac-reassure{justify-content:center;margin:34px 0 0}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* combien de cartes de fonctionnalités tiennent à l'écran */
+@media (max-width:1180px){ .ac-feat-rail{--w:52%} }
+@media (max-width:960px){ .ac-feat-rail{--w:68%} }
+@media (max-width:700px){ .ac-feat-rail{--w:80%} }
+@media (max-width:560px){ .ac-feat-rail{--w:88%} }
+
+@media (max-width:1080px){
+  .ac-step-tab .d{display:none}
+}
 
 @media (max-width:960px){
-  .t-asst .b4{padding:76px 0 84px}
+  .t-asst .ac-h2{letter-spacing:-1.5px}
+
+  /* 1 · hero : le personnage passe au-dessus, à fond perdu */
+  .ac-hero{padding:0 0 68px}
+  .ac-hero-grid{grid-template-columns:1fr;gap:28px;min-height:0}
+  .ac-hero-media{grid-column:1;order:-1;position:relative;
+    height:clamp(250px,50vw,330px);overflow:hidden;
+    -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent 99%);
+            mask-image:linear-gradient(180deg,#000 74%,transparent 99%)}
+  .ac-hero-txt{grid-column:1}
+  .ac-hero .perso{left:50%;top:14px;right:auto;transform:translateX(-50%);
+    width:min(58vw,300px)}
+  .ac-hero h1{max-width:none;letter-spacing:-1.6px}
+  .ac-hero .ac-lede{max-width:none}
+
+  /* 2 · missions : la scène passe au-dessus */
+  .ac-miss{padding:72px 0 80px}
+  .ac-miss-head{margin-bottom:34px;max-width:none}
+  .ac-miss-grid{grid-template-columns:1fr;gap:28px}
+  .ac-scene{height:clamp(340px,62vw,440px);padding-top:34px}
+
+  /* 3 · scénario : plus d'empilement, une frise verticale classique */
+  .ac-story{padding:72px 0 84px}
+  .ac-story-grid{grid-template-columns:1fr;gap:34px}
+  .ac-story-txt{position:static;top:auto}
+  .ac-story-txt .ac-h2,.ac-story-txt .ac-sub{max-width:none}
+  .ac-steps{--tabh:0px}
+  .ac-step{position:relative;top:auto;padding-top:0;margin-bottom:14px;padding-left:26px}
+  .ac-step::before{content:"";position:absolute;left:9px;top:12px;bottom:-20px;
+    width:1px;background:var(--line-2)}
+  .ac-step:last-child::before{display:none}
+  .ac-step-tab{position:absolute;left:0;top:14px;width:19px;height:19px;
+    border-radius:50%;border:1px solid var(--line-2);background:var(--ink-3);
+    font-size:0;padding:0;z-index:2}
+  .ac-step-tab::after{content:"";width:6px;height:6px;border-radius:50%;
+    background:var(--bronze)}
+  .ac-step-card{border-radius:20px;padding:22px 22px 24px;min-height:0}
+
+  /* 4 · fonctionnalités : on glisse, on n'empile pas */
+  .ac-feat{padding:72px 0 80px}
+  .ac-feat-head{margin-bottom:34px}
+
+  /* 6 · duo : empilé */
+  .ac-duo{padding:72px 0 80px}
+  .ac-duo-card{grid-template-columns:1fr;gap:24px;padding:30px 26px;text-align:left}
+  .ac-duo-act{align-items:stretch}
+
+  /* 7 · 8 */
+  .ac-ba{padding:72px 0 80px}
+  .ac-tools{padding:72px 0 78px}
+  .t-asst .ac-tools-head{margin-bottom:44px}
+  .ac-cta{padding:76px 0 86px}
 }
+
+/* au-dessus de 760 px c'est le SVG qu'on voit ; le tableau reste dans la
+   page pour les lecteurs d'écran, simplement hors du champ visuel */
+@media (min-width:760px){
+  .ac-ba-table{position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+    border:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+}
+@media (max-width:759px){
+  .ac-ba-svg{display:none}
+}
+
 @media (max-width:560px){
-  .t-asst .b4-tabs{flex-direction:column}
-  .t-asst .tab{width:100%}
-  .t-asst .b4-foot{flex-direction:column;align-items:stretch;text-align:center;
-    padding:24px 22px}
-  .t-asst .b4-foot .btn{width:100%}
+  .t-asst .shell{padding:0 18px}
+  .ac-hero-media{margin:0 -18px}
+  .ac-proof{width:100%;flex-direction:column;align-items:flex-start;gap:8px}
+  .ac-proof-sep{display:none}
+  .ac-atouts{grid-template-columns:1fr;gap:13px}
+  .ac-reassure{flex-direction:column;gap:12px}
+  .t-asst .actions{flex-direction:column}
+  .t-asst .btn{width:100%}
+  .ac-mission{padding:20px 18px 20px 18px}
+  .ac-card{padding:26px 22px 24px;border-radius:22px}
+  .ac-ba-table td{padding:13px 12px;font-size:13px}
+  .ac-ba-table th{padding:13px 12px 11px}
+  .ac-card-go{width:100%;justify-content:center}
+  .ac-prices{grid-template-columns:1fr}
+  .ac-step-card{padding:24px 22px 26px}
+  .ac-step-h{flex-wrap:wrap}
+  .ac-step-when{margin-left:0;width:100%;order:3}
+  .ac-duo-pair img{width:66px;height:66px;border-radius:20px}
+  .ac-cta .ac-reassure{align-items:flex-start}
 }
+
 @media (prefers-reduced-motion:reduce){
-  .t-asst .tab{transition:none}
+  .t-asst .btn,.ac-card,.ac-mission,.ac-screen img,.ac-step-tab{transition:none}
+  .t-asst .btn-1:hover,.t-asst .btn-2:hover,.ac-card:hover{transform:none}
+  .ac-belt-track{animation:none}
+  .ac-belt{-webkit-mask-image:none;mask-image:none}
+  .ac-belt-row{overflow-x:auto}
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LA FICHE QUI ARRIVE — l'animation suit le défilement, elle n'est pas jouée
+   sur une durée : l'utilisateur la pilote, peut l'arrêter et la reprendre.
+   Ignorée là où les timelines de défilement n'existent pas encore.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@supports (animation-timeline:view()){
+  @media (min-width:961px) and (prefers-reduced-motion:no-preference){
+    .ac-step-card{animation:acMonte linear both;
+      animation-timeline:view();animation-range:entry 4% entry 46%}
+    @keyframes acMonte{
+      from{opacity:0;transform:translate3d(0,26px,0) scale(.975)}
+      to{opacity:1;transform:none}}
+  }
 }
 
 </style>
@@ -1098,410 +1095,502 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 <body>
 <main>
 
-<header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true"><mask id="tnav-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#tnav-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg><span>Talos</span></a><div class="tnav-links"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="assistant-facturation.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="assistant-administratif.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante administrative</b><small>Tri des mails et classement</small></a><span class="tnav-ag is-soon"><img src="perso/avatar-chantier.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant chef de chantier <i class="tnav-soon">Bientôt</i></b><small>Planning, suivi, rapports</small></span><span class="tnav-ag is-soon"><img src="perso/avatar-stock.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant gestion de stock <i class="tnav-soon">Bientôt</i></b><small>Stocks, commandes, alertes</small></span><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 18.36 5.64L 17.39 6.61M 6.61 17.39L 5.64 18.36M 18.36 18.36L 17.39 17.39M 6.61 6.61L 5.64 5.64"/><path d="M 12 7.8C 14.32 7.8 16.2 9.68 16.2 12C 16.2 14.32 14.32 16.2 12 16.2C 9.68 16.2 7.8 14.32 7.8 12C 7.8 9.68 9.68 7.8 12 7.8Z"/><path d="M 12 4.35V 4.37M 12 19.63V 19.65M 19.66 12H 19.63M 4.37 12H 4.34"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 15.35C 8.12 15.35 4.81 15.93 4.81 18.27C 4.81 20.61 8.1 21.22 11.98 21.22C 15.85 21.22 19.15 20.63 19.15 18.29C 19.15 15.95 15.87 15.35 11.98 15.35Z"/><path d="M 11.98 12.01C 14.52 12.01 16.58 9.95 16.58 7.41C 16.58 4.87 14.52 2.81 11.98 2.81C 9.45 2.81 7.39 4.87 7.39 7.41C 7.38 9.94 9.42 12 11.95 12.01L 11.98 12.01Z"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="assistant-facturation.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="assistant-administratif.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante administrative</b><small>Tri des mails et classement</small></a><span class="tnav-ag is-soon"><img src="perso/avatar-chantier.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant chef de chantier <i class="tnav-soon">Bientôt</i></b><small>Planning, suivi, rapports</small></span><span class="tnav-ag is-soon"><img src="perso/avatar-stock.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant gestion de stock <i class="tnav-soon">Bientôt</i></b><small>Stocks, commandes, alertes</small></span><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 18.36 5.64L 17.39 6.61M 6.61 17.39L 5.64 18.36M 18.36 18.36L 17.39 17.39M 6.61 6.61L 5.64 5.64"/><path d="M 12 7.8C 14.32 7.8 16.2 9.68 16.2 12C 16.2 14.32 14.32 16.2 12 16.2C 9.68 16.2 7.8 14.32 7.8 12C 7.8 9.68 9.68 7.8 12 7.8Z"/><path d="M 12 4.35V 4.37M 12 19.63V 19.65M 19.66 12H 19.63M 4.37 12H 4.34"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
+<header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true"><mask id="tnav-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#tnav-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg><span>Talos</span></a><div class="tnav-links"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="assistant-facturation.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="assistant-administratif.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante administrative</b><small>Tri des mails et classement</small></a><span class="tnav-ag is-soon"><img src="perso/avatar-chantier.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant chef de chantier <i class="tnav-soon">Bientôt</i></b><small>Planning, suivi, rapports</small></span><span class="tnav-ag is-soon"><img src="perso/avatar-stock.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant gestion de stock <i class="tnav-soon">Bientôt</i></b><small>Stocks, commandes, alertes</small></span><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 18.36 5.64L 17.39 6.61M 6.61 17.39L 5.64 18.36M 18.36 18.36L 17.39 17.39M 6.61 6.61L 5.64 5.64"/><path d="M 12 7.8C 14.32 7.8 16.2 9.68 16.2 12C 16.2 14.32 14.32 16.2 12 16.2C 9.68 16.2 7.8 14.32 7.8 12C 7.8 9.68 9.68 7.8 12 7.8Z"/><path d="M 12 4.35V 4.37M 12 19.63V 19.65M 19.66 12H 19.63M 4.37 12H 4.34"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 15.35C 8.12 15.35 4.81 15.93 4.81 18.27C 4.81 20.61 8.1 21.22 11.98 21.22C 15.85 21.22 19.15 20.63 19.15 18.29C 19.15 15.95 15.87 15.35 11.98 15.35Z"/><path d="M 11.98 12.01C 14.52 12.01 16.58 9.95 16.58 7.41C 16.58 4.87 14.52 2.81 11.98 2.81C 9.45 2.81 7.39 4.87 7.39 7.41C 7.38 9.94 9.42 12 11.95 12.01L 11.98 12.01Z"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="assistant-facturation.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="assistant-administratif.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante administrative</b><small>Tri des mails et classement</small></a><span class="tnav-ag is-soon"><img src="perso/avatar-chantier.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant chef de chantier <i class="tnav-soon">Bientôt</i></b><small>Planning, suivi, rapports</small></span><span class="tnav-ag is-soon"><img src="perso/avatar-stock.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant gestion de stock <i class="tnav-soon">Bientôt</i></b><small>Stocks, commandes, alertes</small></span><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
 
-<section class="t-asst">
+<!-- ═══ 1 · HERO ══════════════════════════════════════════════════════════ -->
+<section class="t-asst ac-hero">
+  <div class="shell ac-hero-grid">
 
-  <!-- ═══ BLOC 1 · PRÉSENTATION ═══════════════════════════════════════════ -->
-  <div class="b1">
-    <div class="shell b1-grid">
+    <div class="ac-hero-media">
+      <picture>
+        <source srcset="perso/assistant-administratif.webp" type="image/webp">
+        <img class="perso" src="perso/assistant-administratif.png" width="411" height="1400"
+             decoding="async" fetchpriority="high" alt="L'assistante administrative de Talos">
+      </picture>
+    </div>
 
-      <div class="b1-media">
-        <picture>
-          <source srcset="perso/assistant-administratif.webp" type="image/webp">
-          <img class="perso" src="perso/assistant-administratif.png" width="411" height="1400"
-               decoding="async" fetchpriority="high" alt="L'assistante administrative de Talos">
-        </picture>
+    <div class="ac-hero-txt">
+      <p class="ac-eyebrow">
+        <img src="perso/avatar-administratif.webp" width="26" height="26" alt="" decoding="async">
+        Assistante administrative
+      </p>
+
+      <h1>Votre boîte mail qui ne laisse passer <em>aucune urgence</em>.</h1>
+
+      <p class="ac-proof">
+        <span class="ac-proof-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg><b>+75 intégrations</b> comprises</span>
+        <span class="ac-proof-sep" aria-hidden="true"></span>
+        <span class="ac-proof-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Mise en place <b>personnalisée</b></span>
+      </p>
+
+      <p class="ac-lede">Elle trie vos mails pendant la nuit, résume les échanges qui traînent, remonte ce qui ne peut pas attendre et range chaque pièce au bon chantier. Vous ouvrez votre boîte une fois par jour, pas vingt.</p>
+
+      <ul class="ac-atouts">
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg></i>Trie votre boîte en six catégories</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Résume les longs échanges</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 17.85C 17.64 17.85 20.25 17.12 20.5 14.22C 20.5 11.32 18.68 11.51 18.68 7.95C 18.68 5.16 16.05 2 12 2C 7.95 2 5.32 5.16 5.32 7.95C 5.32 11.51 3.5 11.32 3.5 14.22C 3.75 17.14 6.36 17.85 12 17.85Z"/><path d="M 14.39 20.86C 13.02 22.37 10.9 22.39 9.52 20.86"/></svg></i>Remonte ce qui ne peut pas attendre</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Classe chaque pièce au bon chantier</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg></i>Signale ce qui manque au dossier</li>
+      </ul>
+
+      <div class="actions">
+        <a class="btn btn-1" href="reserver.html">Je veux mon assistante <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-2" href="reserver.html">Voir une démonstration</a>
       </div>
+    </div>
 
-      <div class="b1-txt">
-        <p class="role">Assistant Emails &amp; Demandes</p>
-        <h1>Découvrez votre assistante administrative</h1>
+  </div>
+</section>
 
-        <p class="proof">
-          <span class="proof-i">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg>
-            <b>+30 artisans</b> accompagnés
-          </span>
-          <span class="proof-sep" aria-hidden="true"></span>
-          <span class="proof-i">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            Mise en place <b>incluse</b>
-          </span>
-        </p>
 
-        <p class="pitch">Votre Assistante Administrative trie vos emails, en extrait ce qui compte — un devis à faire, une facture fournisseur, une urgence chantier — et ne vous sollicite que lorsque votre attention est vraiment nécessaire.</p>
+<!-- ═══ 2 · LES TROIS MISSIONS ════════════════════════════════════════════ -->
+<section class="t-asst ac-miss" id="missions">
+  <div class="shell">
 
-        <ul class="caps">
-          <li>
-            <i aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></i>
-            Trie votre boîte en six catégories</li>
-          <li>
-            <i aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>
-            Résume les longs échanges</li>
-          <li>
-            <i aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17v.1"/></svg></i>
-            Remonte les urgences</li>
-          <li>
-            <i aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>
-            Classe les pièces au bon chantier</li>
-        </ul>
+    <div class="ac-miss-head">
+      <h2 class="ac-h2">Transformez chaque boîte pleine en <em>pile du matin</em>.</h2>
+    </div>
 
-        <div class="actions">
-          <a class="btn btn-1" href="reserver.html">Je veux mon assistant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
-          <a class="btn btn-2" href="reserver.html">Réserver une démo</a>
+    <div class="ac-miss-grid">
+
+      <div class="ac-scene">
+        <div class="ac-phone">
+          <span class="ac-phone-k act"></span><span class="ac-phone-k vu"></span><span class="ac-phone-k vd"></span><span class="ac-phone-k pw"></span>
+          <div class="ac-phone-bezel">
+            <div class="ac-screen" id="acScreen" role="tabpanel" tabindex="0"
+                 aria-labelledby="acT1">
+              <img class="on" data-m="m1" src="shots/ec-tri_inbox.webp" width="780" height="1688" loading="lazy" decoding="async" alt="Écran de la boîte mail triée en catégories">
+              <img data-m="m2" src="shots/ec-reponse_247.webp" width="780" height="1688" loading="lazy" decoding="async" alt="Écran du résumé d'un long échange de mails">
+              <img data-m="m3" src="shots/ec-home.webp" width="780" height="1688" loading="lazy" decoding="async" alt="Écran du dossier de chantier avec ses pièces classées">
+            </div>
+          </div>
+          <div class="ac-phone-glare"></div>
         </div>
       </div>
+
+      <div class="ac-miss-list" role="tablist" aria-label="Les missions de l'assistante administrative">
+
+        <button class="ac-mission" type="button" role="tab" id="acT1" data-m="m1"
+                aria-selected="true" aria-controls="acScreen">
+          <span class="ac-mission-h">
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg></span>
+            <span class="ac-mission-n">01 — Trier</span>
+          </span>
+          <h3>Six catégories, plus rien au hasard</h3>
+          <p>Demande client, facture fournisseur, administratif, chantier, publicité, sans suite : chaque mail est rangé dès son arrivée, avec ce qu'il contient.</p>
+        </button>
+
+        <button class="ac-mission" type="button" role="tab" id="acT2" data-m="m2"
+                aria-selected="false" aria-controls="acScreen">
+          <span class="ac-mission-h">
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
+            <span class="ac-mission-n">02 — Résumer</span>
+          </span>
+          <h3>Vingt échanges tiennent en trois lignes</h3>
+          <p>Un fil qui traîne depuis dix jours est résumé : ce qui a été décidé, ce qui bloque, et ce qu'on attend de vous. Avec les montants et les dates sortis du texte.</p>
+        </button>
+
+        <button class="ac-mission" type="button" role="tab" id="acT3" data-m="m3"
+                aria-selected="false" aria-controls="acScreen">
+          <span class="ac-mission-h">
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></span>
+            <span class="ac-mission-n">03 — Classer</span>
+          </span>
+          <h3>Chaque pièce à son chantier</h3>
+          <p>Facture fournisseur, PV de réception, attestation : le document est détaché, nommé et rangé dans le dossier du bon chantier. Retrouvable en une question.</p>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 3 · LE SCÉNARIO ═══════════════════════════════════════════════════ -->
+<section class="t-asst ac-story" id="scenario">
+  <div class="shell ac-story-grid">
+
+    <div class="ac-story-txt">
+      <p class="ac-tag">Cas pratique</p>
+      <h2 class="ac-h2">Les quarante-trois mails de la nuit deviennent <em>trois décisions</em>.</h2>
+      <p class="ac-sub">Une boîte du lundi matin comme les autres. Elle a trié, résumé, classé et alerté pendant que vous dormiez.</p>
+
+      <div class="ac-story-note">
+        <b>Votre part du travail : deux minutes de lecture.</b>
+        Elle ne supprime rien et ne répond à personne à votre place. Elle range, elle résume, et elle vous montre ce qui compte vraiment.
+      </div>
+
+      <div class="actions">
+        <a class="btn btn-1" href="reserver.html">Je veux mon assistante <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+
+    <ol class="ac-steps" id="acSteps">
+
+      <li class="ac-step" style="--i:0">
+        <span class="ac-step-tab" aria-hidden="true">23:00</span>
+        <div class="ac-step-card">
+          <div class="ac-step-h">
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></span>
+            <b>Vous fermez votre boîte</b>
+            <span class="ac-step-when">Dimanche · 23:00</span>
+          </div>
+          <div class="ac-step-body"><ul class="ac-chips"><li>43 mails non lus</li><li>3 qui comptent vraiment</li></ul><p class="ac-step-p">Vous ne savez pas encore lesquels. C'est bien ça le problème.</p></div>
+        </div>
+      </li>
+
+      <li class="ac-step" style="--i:1">
+        <span class="ac-step-tab" aria-hidden="true">02:14</span>
+        <div class="ac-step-card">
+          <div class="ac-step-h">
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg></span>
+            <b>Tri en six catégories</b>
+            <span class="ac-step-when">Lundi · 02:14</span>
+          </div>
+          <div class="ac-step-body"><ul class="ac-chips"><li>Demandes client 6</li><li>Factures fournisseurs 9</li><li>Chantier 4</li><li>Administratif 3</li><li>Publicité 19</li><li>Sans suite 2</li></ul><p class="ac-step-p">Rien n'est supprimé. Les publicités sortent de la boîte principale, elles restent consultables.</p></div>
+        </div>
+      </li>
+
+      <li class="ac-step" style="--i:2">
+        <span class="ac-step-tab" aria-hidden="true">05:30</span>
+        <div class="ac-step-card">
+          <div class="ac-step-h">
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
+            <b>Un fil de 22 messages résumé</b>
+            <span class="ac-step-when">Lundi · 05:30</span>
+          </div>
+          <div class="ac-step-body"><p class="ac-step-q">« Décidé : la pose est reportée au 14. Bloque : l'attestation décennale manque au dossier. Attendu de vous : l'envoyer avant vendredi. »</p><p class="ac-step-p">Trois lignes au lieu de vingt-deux messages. Et l'action à faire, en clair.</p></div>
+        </div>
+      </li>
+
+      <li class="ac-step" style="--i:3">
+        <span class="ac-step-tab" aria-hidden="true">06:10</span>
+        <div class="ac-step-card">
+          <div class="ac-step-h">
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></span>
+            <b>Pièces détachées et classées</b>
+            <span class="ac-step-when">Lundi · 06:10</span>
+          </div>
+          <div class="ac-step-body"><ul class="ac-chips"><li>9 factures fournisseurs rangées</li><li>2 PV de réception</li><li>1 attestation manquante</li></ul><p class="ac-step-p">Chaque pièce jointe rejoint le dossier de son chantier, nommée proprement. Ce qui manque vous est signalé avant que ce soit un problème.</p></div>
+        </div>
+      </li>
+
+      <li class="ac-step" style="--i:4">
+        <span class="ac-step-tab" aria-hidden="true">06:40</span>
+        <div class="ac-step-card">
+          <div class="ac-step-h">
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 17.85C 17.64 17.85 20.25 17.12 20.5 14.22C 20.5 11.32 18.68 11.51 18.68 7.95C 18.68 5.16 16.05 2 12 2C 7.95 2 5.32 5.16 5.32 7.95C 5.32 11.51 3.5 11.32 3.5 14.22C 3.75 17.14 6.36 17.85 12 17.85Z"/><path d="M 14.39 20.86C 13.02 22.37 10.9 22.39 9.52 20.86"/></svg></span>
+            <b>Une urgence remonte</b>
+            <span class="ac-step-when">Lundi · 06:40</span>
+          </div>
+          <div class="ac-step-body"><p class="ac-step-q">« Chantier Val-Fleuri : la livraison de carrelage est annulée, l'équipe est sur place lundi matin. »</p><p class="ac-step-p">Ce mail-là passe devant les quarante-deux autres, avec le motif de l'alerte.</p></div>
+        </div>
+      </li>
+
+      <li class="ac-step" style="--i:5">
+        <span class="ac-step-tab" aria-hidden="true">07:00</span>
+        <div class="ac-step-card">
+          <div class="ac-step-h">
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></span>
+            <b>Accusés de réception partis</b>
+            <span class="ac-step-when">Lundi · 07:00</span>
+          </div>
+          <div class="ac-step-body"><p class="ac-step-p">Les six clients savent que leur message est arrivé et qu'on revient vers eux. C'est le seul message qui part automatiquement — et vous en fixez le texte.</p></div>
+        </div>
+      </li>
+
+      <li class="ac-step" style="--i:6">
+        <span class="ac-step-tab" aria-hidden="true">07:02</span>
+        <div class="ac-step-card">
+          <div class="ac-step-h">
+            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></span>
+            <b>Votre pile du matin</b>
+            <span class="ac-step-when">Lundi · 07:02</span>
+          </div>
+          <div class="ac-step-body"><div class="ac-step-win"><b>3 décisions</b><span>à prendre. Le reste est déjà rangé, résumé et classé.</span></div><p class="ac-step-p">Deux minutes de lecture au lieu d'une heure de tri. Et vous n'avez rien raté.</p></div>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+
+<!-- ═══ 4 · LE DÉTAIL DES FONCTIONNALITÉS ═════════════════════════════════ -->
+<section class="t-asst ac-feat" id="fonctionnalites">
+  <div class="shell">
+
+    <div class="ac-feat-head">
+      <p class="ac-tag">Ce qu'elle prend en charge</p>
+      <h2 class="ac-h2">Trois gestes, <em>zéro mail perdu</em>.</h2>
+      <p class="ac-sub">Du tri de la nuit jusqu'au classement des pièces au bon chantier, voici exactement ce que votre assistante administrative fait à votre place.</p>
+    </div>
+
+    <div class="ac-feat-rail" tabindex="0" role="group"
+         aria-label="Les fonctionnalités, à faire défiler horizontalement">
+
+      <article class="ac-card">
+        <div class="ac-card-top">
+          <img class="ac-card-av" src="perso/avatar-administratif.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
+          <span class="ac-card-role">Tri</span>
+          <span class="ac-card-n">05 fonctionnalités</span>
+        </div>
+        <p class="ac-card-lab">Vider la boîte</p>
+        <h3>Six catégories, dès l'arrivée</h3>
+        <p class="ac-card-acc">Trié pendant la nuit <span>· rien n'est jamais supprimé</span></p>
+        <p>Demande client, facture fournisseur, administratif, chantier, publicité, sans suite. Le démarchage sort de la boîte principale sans disparaître.</p>
+        <hr class="ac-card-sep">
+        <p class="ac-card-cap">Ce qu'elle fait :</p>
+        <ul>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg></i>Tri en six catégories dès la réception</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.78 11.77a8.99 8.99 0 1 0 17.98 0a8.99 8.99 0 1 0 -17.98 0"/><path d="M18.02 18.49L21.54 22"/></svg></i>Extraction des adresses, dates, montants et références</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.4" height="7.4" rx="2"/><rect x="13.6" y="3" width="7.4" height="7.4" rx="2"/><rect x="3" y="13.6" width="7.4" height="7.4" rx="2"/><path d="M17.3 13.6v7.4M13.6 17.3h7.4"/></svg></i>Mise à l'écart des publicités, sans suppression</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></i>Accusé de réception au client, au texte que vous fixez</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 16.42 9.45L 16.42 7.3C 16.42 4.79 14.39 2.75 11.87 2.75C 9.36 2.74 7.31 4.77 7.3 7.28L 7.3 7.3L 7.3 9.45"/><path d="M 15.68 21.25L 8.04 21.25C 5.95 21.25 4.25 19.55 4.25 17.46L 4.25 13.17C 4.25 11.07 5.95 9.38 8.04 9.38L 15.68 9.38C 17.78 9.38 19.48 11.07 19.48 13.17L 19.48 17.46C 19.48 19.55 17.78 21.25 15.68 21.25Z"/><path d="M11.86 14.2L11.86 16.42"/></svg></i>Expéditeurs et dossiers exclus sur simple demande</li>
+        </ul>
+        <a class="ac-card-go" href="#scenario">Voir le scénario complet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+      </article>
+
+      <article class="ac-card">
+        <div class="ac-card-top">
+          <img class="ac-card-av" src="perso/avatar-administratif.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
+          <span class="ac-card-role">Résumé</span>
+          <span class="ac-card-n">04 fonctionnalités</span>
+        </div>
+        <p class="ac-card-lab">Comprendre vite</p>
+        <h3>Vingt échanges en trois lignes</h3>
+        <p class="ac-card-acc">Décidé, bloqué, attendu de vous <span>· rien d'autre</span></p>
+        <p>Un fil qui s'éternise depuis dix jours se lit en dix secondes. Vous savez ce qui a été acté, ce qui coince et ce que le client attend.</p>
+        <hr class="ac-card-sep">
+        <p class="ac-card-cap">Ce qu'elle fait :</p>
+        <ul>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Résumé des longs fils, en trois lignes</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg></i>Ce qui a été décidé, ce qui bloque, ce qu'on attend de vous</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 8.72V 8.72"/><path d="M 14.45 5.05H 16.21C 18.85 5.05 21 7.2 21 9.86V 15.93C 21 18.58 18.85 20.74 16.21 20.74H 7.8C 5.15 20.74 3 18.58 3 15.93V 9.86C 3 7.2 5.15 5.05 7.8 5.05H 9.53"/><path d="M 14.46 5.17V 9.42C 14.46 10.47 13.61 11.32 12.56 11.32H 11.44C 10.39 11.32 9.54 10.47 9.54 9.42V 5.17C 9.54 4.12 10.39 3.27 11.44 3.27H 12.56C 13.61 3.27 14.46 4.12 14.46 5.17Z"/></svg></i>Montants, dates et références sortis du corps du mail</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 15.35C 8.12 15.35 4.81 15.93 4.81 18.27C 4.81 20.61 8.1 21.22 11.98 21.22C 15.85 21.22 19.15 20.63 19.15 18.29C 19.15 15.95 15.87 15.35 11.98 15.35Z"/><path d="M 11.98 12.01C 14.52 12.01 16.58 9.95 16.58 7.41C 16.58 4.87 14.52 2.81 11.98 2.81C 9.45 2.81 7.39 4.87 7.39 7.41C 7.38 9.94 9.42 12 11.95 12.01L 11.98 12.01Z"/></svg></i>Historique du client rattaché au fil</li>
+        </ul>
+        <a class="ac-card-go" href="reserver.html">Ne plus tout relire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+      </article>
+
+      <article class="ac-card">
+        <div class="ac-card-top">
+          <img class="ac-card-av" src="perso/avatar-administratif.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
+          <span class="ac-card-role">Urgences</span>
+          <span class="ac-card-n">04 fonctionnalités</span>
+        </div>
+        <p class="ac-card-lab">Faire remonter</p>
+        <h3>Ce qui ne peut pas attendre passe devant</h3>
+        <p class="ac-card-acc">En haut de la pile <span>· avec le motif de l'alerte</span></p>
+        <p>Un chantier bloqué, une relance d'assurance, une échéance qui tombe. Ces mails-là ne se perdent pas au milieu des dix-neuf publicités de la nuit.</p>
+        <hr class="ac-card-sep">
+        <p class="ac-card-cap">Ce qu'elle fait :</p>
+        <ul>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 17.85C 17.64 17.85 20.25 17.12 20.5 14.22C 20.5 11.32 18.68 11.51 18.68 7.95C 18.68 5.16 16.05 2 12 2C 7.95 2 5.32 5.16 5.32 7.95C 5.32 11.51 3.5 11.32 3.5 14.22C 3.75 17.14 6.36 17.85 12 17.85Z"/><path d="M 14.39 20.86C 13.02 22.37 10.9 22.39 9.52 20.86"/></svg></i>Détection des urgences chantier et administratives</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 21.25 12C 21.25 17.11 17.11 21.25 12 21.25C 6.89 21.25 2.75 17.11 2.75 12C 2.75 6.89 6.89 2.75 12 2.75C 17.11 2.75 21.25 6.89 21.25 12Z"/><path d="M15.43 14.94L11.66 12.69L11.66 7.85"/></svg></i>Échéances repérées dans le corps du mail</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 13.1 4.18L 14.93 7.83C 15.11 8.19 15.46 8.43 15.86 8.49L 19.95 9.08C 20.96 9.23 21.36 10.45 20.63 11.15L 17.67 13.99C 17.38 14.27 17.25 14.67 17.32 15.07L 18.01 19.08C 18.19 20.07 17.13 20.83 16.23 20.36L 12.57 18.46C 12.22 18.28 11.79 18.28 11.43 18.46L 7.77 20.36C 6.87 20.83 5.81 20.07 5.99 19.08L 6.68 15.07C 6.75 14.67 6.62 14.27 6.33 13.99L 3.37 11.15C 2.64 10.45 3.04 9.23 4.05 9.08L 8.14 8.49C 8.54 8.43 8.89 8.19 9.07 7.83L 10.9 4.18C 11.35 3.27 12.65 3.27 13.1 4.18Z"/></svg></i>Remontée en haut de pile avec le motif</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg></i>Rappel des pièces manquantes au dossier</li>
+        </ul>
+        <a class="ac-card-go" href="reserver.html">Ne plus rater une urgence <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+      </article>
+
+      <article class="ac-card">
+        <div class="ac-card-top">
+          <img class="ac-card-av" src="perso/avatar-administratif.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
+          <span class="ac-card-role">Classement</span>
+          <span class="ac-card-n">05 fonctionnalités</span>
+        </div>
+        <p class="ac-card-lab">Ranger au bon endroit</p>
+        <h3>Chaque pièce à son chantier</h3>
+        <p class="ac-card-acc">Détachée, nommée, rangée <span>· et prête pour le comptable</span></p>
+        <p>Par le client, l'adresse, la référence du devis ou le nom du fichier. En cas de doute, elle vous demande plutôt que de deviner — et elle retient la réponse.</p>
+        <hr class="ac-card-sep">
+        <p class="ac-card-cap">Ce qu'elle fait :</p>
+        <ul>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Mails et pièces jointes rattachés au bon chantier</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 6.69 11.38C 7.38 10.23 8.12 9.1 8.85 7.97L 6.87 4.28C 6.87 4.28 7.02 4.15 7.4 3.85C 8.53 2.98 9.76 2.76 11.09 3.27C 12.36 3.77 13.65 4.14 15.02 4.06C 15.42 4.04 16.96 3.84 16.96 3.84L 15.16 7.96C 15.88 9.09 16.62 10.23 17.31 11.38C 18.44 13.26 19.53 15.37 18.65 17.56C 17.63 20.11 14.64 20.96 12 21C 9.35 20.96 6.37 20.11 5.35 17.56C 4.47 15.37 5.56 13.26 6.69 11.38Z"/><path d="M 8.85 7.98C 10.95 8.46 13.05 8.46 15.16 7.98"/></svg></i>Factures fournisseurs prêtes pour la fin de mois</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></i>Devis, PV de réception et attestations au même endroit</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.78 11.77a8.99 8.99 0 1 0 17.98 0a8.99 8.99 0 1 0 -17.98 0"/><path d="M18.02 18.49L21.54 22"/></svg></i>Recherche dans l'historique en langage courant</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></i>Un classement corrigé une fois ne se répète pas</li>
+        </ul>
+        <a class="ac-card-go" href="reserver.html">Ranger mes chantiers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+      </article>
 
     </div>
   </div>
-
 </section>
 
-  <!-- ═══ BLOC 2 · LE PARCOURS ════════════════════════════════════════════ -->
-  <section class="t-feat" id="parcours">
-    <div class="fx-in">
-      <div class="fx-head">
-        <span class="fx-eyebrow"><i></i>Comment votre assistant travaille</span>
-        <h2>De la boîte pleine<br>à la <em>pile du matin</em>.</h2>
-        <p>Deux cents mails par semaine, et trois qui comptent vraiment. Votre assistant fait le tri pendant la nuit et vous montre les trois.</p>
-        <p class="fx-kicker">Vous ouvrez votre boîte une fois par jour, pas vingt.</p>
+
+<!-- ═══ 5 · VOS OUTILS ════════════════════════════════════════════════════ -->
+<section class="t-asst ac-tools" id="outils">
+  <div class="shell ac-tools-head">
+    <h2 class="ac-h2">Vous gardez votre boîte mail, <em>elle travaille dedans</em>.</h2>
+    <p class="ac-sub">On branche votre adresse professionnelle, pas votre boîte privée. Vos dossiers restent les vôtres : elle range, elle ne déménage rien.</p>
+    <p class="ac-tools-count"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.4" height="7.4" rx="2"/><rect x="13.6" y="3" width="7.4" height="7.4" rx="2"/><rect x="3" y="13.6" width="7.4" height="7.4" rx="2"/><path d="M17.3 13.6v7.4M13.6 17.3h7.4"/></svg> +75 intégrations disponibles</p>
+  </div>
+
+  <div class="ac-belt" aria-hidden="true">
+    <div class="ac-belt-row">
+      <div class="ac-belt-track">
+        <span class="ac-chip"><img src="logos/whatsapp-icon.svg" alt="" loading="lazy" width="22" height="22"><span>WhatsApp</span></span>
+        <span class="ac-chip"><img src="logos/gmail.svg" alt="" loading="lazy" width="22" height="22"><span>Gmail</span></span>
+        <span class="ac-chip"><img src="logos/google-calendar.svg" alt="" loading="lazy" width="22" height="22"><span>Google Agenda</span></span>
+        <span class="ac-chip"><img src="logos/microsoft-outlook.svg" alt="" loading="lazy" width="22" height="22"><span>Outlook</span></span>
+        <span class="ac-chip"><img src="logos/microsoft-teams.svg" alt="" loading="lazy" width="22" height="22"><span>Microsoft Teams</span></span>
+        <span class="ac-chip"><img src="logos/telegram.svg" alt="" loading="lazy" width="22" height="22"><span>Telegram</span></span>
+        <span class="ac-chip"><img src="logos/messenger.svg" alt="" loading="lazy" width="22" height="22"><span>Messenger</span></span>
+        <span class="ac-chip"><img src="logos/instagram-icon.svg" alt="" loading="lazy" width="22" height="22"><span>Instagram</span></span>
+        <span class="ac-chip"><img src="logos/facebook-icon.svg" alt="" loading="lazy" width="22" height="22"><span>Facebook</span></span>
+        <span class="ac-chip"><img src="logos/linkedin.svg" alt="" loading="lazy" width="22" height="22"><span>LinkedIn</span></span>
+        <span class="ac-chip"><img src="logos/drive.svg" alt="" loading="lazy" width="22" height="22"><span>Google Drive</span></span>
+        <span class="ac-chip"><img src="logos/whatsapp-icon.svg" alt="" loading="lazy" width="22" height="22"><span>WhatsApp</span></span>
+        <span class="ac-chip"><img src="logos/gmail.svg" alt="" loading="lazy" width="22" height="22"><span>Gmail</span></span>
+        <span class="ac-chip"><img src="logos/google-calendar.svg" alt="" loading="lazy" width="22" height="22"><span>Google Agenda</span></span>
+        <span class="ac-chip"><img src="logos/microsoft-outlook.svg" alt="" loading="lazy" width="22" height="22"><span>Outlook</span></span>
+        <span class="ac-chip"><img src="logos/microsoft-teams.svg" alt="" loading="lazy" width="22" height="22"><span>Microsoft Teams</span></span>
+        <span class="ac-chip"><img src="logos/telegram.svg" alt="" loading="lazy" width="22" height="22"><span>Telegram</span></span>
+        <span class="ac-chip"><img src="logos/messenger.svg" alt="" loading="lazy" width="22" height="22"><span>Messenger</span></span>
+        <span class="ac-chip"><img src="logos/instagram-icon.svg" alt="" loading="lazy" width="22" height="22"><span>Instagram</span></span>
+        <span class="ac-chip"><img src="logos/facebook-icon.svg" alt="" loading="lazy" width="22" height="22"><span>Facebook</span></span>
+        <span class="ac-chip"><img src="logos/linkedin.svg" alt="" loading="lazy" width="22" height="22"><span>LinkedIn</span></span>
+        <span class="ac-chip"><img src="logos/drive.svg" alt="" loading="lazy" width="22" height="22"><span>Google Drive</span></span>
+      </div>
+    </div>
+    <div class="ac-belt-row rev">
+      <div class="ac-belt-track">
+        <span class="ac-chip"><img src="logos/stripe.svg" alt="" loading="lazy" width="22" height="22"><span>Stripe</span></span>
+        <span class="ac-chip"><img src="logos/calendly.svg" alt="" loading="lazy" width="22" height="22"><span>Calendly</span></span>
+        <span class="ac-chip"><img src="logos/google-sheets.svg" alt="" loading="lazy" width="22" height="22"><span>Google Sheets</span></span>
+        <span class="ac-chip"><img src="logos/microsoft-excel.svg" alt="" loading="lazy" width="22" height="22"><span>Excel</span></span>
+        <span class="ac-chip"><img src="logos/microsoft-onedrive.svg" alt="" loading="lazy" width="22" height="22"><span>OneDrive</span></span>
+        <span class="ac-chip"><img src="logos/dropbox.svg" alt="" loading="lazy" width="22" height="22"><span>Dropbox</span></span>
+        <span class="ac-chip"><img src="logos/slack.svg" alt="" loading="lazy" width="22" height="22"><span>Slack</span></span>
+        <span class="ac-chip"><img src="logos/notion.svg" alt="" loading="lazy" width="22" height="22"><span>Notion</span></span>
+        <span class="ac-chip"><img src="logos/trello.svg" alt="" loading="lazy" width="22" height="22"><span>Trello</span></span>
+        <span class="ac-chip"><img src="logos/asana-logo.svg" alt="" loading="lazy" width="22" height="22"><span>Asana</span></span>
+        <span class="ac-chip"><img src="logos/salesforce.svg" alt="" loading="lazy" width="22" height="22"><span>Salesforce</span></span>
+        <span class="ac-chip"><img src="logos/stripe.svg" alt="" loading="lazy" width="22" height="22"><span>Stripe</span></span>
+        <span class="ac-chip"><img src="logos/calendly.svg" alt="" loading="lazy" width="22" height="22"><span>Calendly</span></span>
+        <span class="ac-chip"><img src="logos/google-sheets.svg" alt="" loading="lazy" width="22" height="22"><span>Google Sheets</span></span>
+        <span class="ac-chip"><img src="logos/microsoft-excel.svg" alt="" loading="lazy" width="22" height="22"><span>Excel</span></span>
+        <span class="ac-chip"><img src="logos/microsoft-onedrive.svg" alt="" loading="lazy" width="22" height="22"><span>OneDrive</span></span>
+        <span class="ac-chip"><img src="logos/dropbox.svg" alt="" loading="lazy" width="22" height="22"><span>Dropbox</span></span>
+        <span class="ac-chip"><img src="logos/slack.svg" alt="" loading="lazy" width="22" height="22"><span>Slack</span></span>
+        <span class="ac-chip"><img src="logos/notion.svg" alt="" loading="lazy" width="22" height="22"><span>Notion</span></span>
+        <span class="ac-chip"><img src="logos/trello.svg" alt="" loading="lazy" width="22" height="22"><span>Trello</span></span>
+        <span class="ac-chip"><img src="logos/asana-logo.svg" alt="" loading="lazy" width="22" height="22"><span>Asana</span></span>
+        <span class="ac-chip"><img src="logos/salesforce.svg" alt="" loading="lazy" width="22" height="22"><span>Salesforce</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell">
+    <p class="ac-tools-foot"><b>Et si votre outil n'est pas dans la liste ?</b>
+      On le branche pendant la mise en place. C'est compris dans l'installation.</p>
+  </div>
+</section>
+
+
+<!-- ═══ 6 · LE DUO ════════════════════════════════════════════════════════ -->
+<section class="t-asst ac-duo">
+  <div class="shell">
+
+    <div class="ac-duo-head">
+      <p class="ac-tag">Encore plus fort à deux</p>
+      <h2 class="ac-h2">Combinez-la avec <em>l'Assistante Client</em> pour plus de résultats.</h2>
+    </div>
+
+    <div class="ac-duo-card">
+      <div class="ac-duo-pair">
+        <img src="perso/avatar-administratif.webp" width="82" height="82" alt="Assistante administrative" loading="lazy" decoding="async">
+        <span class="ac-duo-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+        <img src="perso/avatar-client.webp" width="82" height="82" alt="Assistante client" loading="lazy" decoding="async">
       </div>
 
-      <div class="fx-rail" id="fxRail">
-      <article class="fx-card">
-        <div class="fx-txt">
-          <h3>Tri</h3>
-          <p class="fx-win">
-            <span class="fx-ic" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></span>
-            Six catégories, plus une boîte fourre-tout.
-          </p>
-          <details class="fx-info">
-            <summary>
-              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg></span>
-              <span class="fx-lbl-off">Comment ça marche</span>
-              <span class="fx-lbl-on">Réduire</span>
-              <svg class="fx-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>
-            </summary>
-            <p>Demande client, facture fournisseur, administratif, chantier, publicité, sans suite : chaque mail est rangé dès son arrivée, avec ce qu'il contient.</p>
-          </details>
-        </div>
-        <div class="fx-vis">
-          <div class="fx-phone">
-            <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
-            <div class="fx-bezel">
-              <div class="fx-screen">
-                <div class="fx-ph"><b>Écran 01</b><span>La boîte triée du matin</span><i>780 × 1688 px · PNG</i></div>
-                <img src="shots/ec-tri_inbox.webp" width="780" height="1688" loading="lazy"
-                     decoding="async" alt="La boîte triée du matin">
-              </div>
-            </div>
-            <div class="fx-glare"></div>
-          </div>
-          <button class="fx-open" type="button" aria-label="Voir l'écran en entier">
-            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.78 11.77a8.99 8.99 0 1 0 17.98 0a8.99 8.99 0 1 0 -17.98 0"/><path d="M18.02 18.49L21.54 22"/></svg></span>
-          </button>
-        </div>
-      </article>
-      <article class="fx-card">
-        <div class="fx-txt">
-          <h3>Résumé</h3>
-          <p class="fx-win">
-            <span class="fx-ic" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
-            Vingt échanges tiennent en trois lignes.
-          </p>
-          <details class="fx-info">
-            <summary>
-              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg></span>
-              <span class="fx-lbl-off">Comment ça marche</span>
-              <span class="fx-lbl-on">Réduire</span>
-              <svg class="fx-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>
-            </summary>
-            <p>Un fil qui traîne depuis dix jours est résumé : ce qui a été décidé, ce qui bloque, et ce qu'on attend de vous.</p>
-          </details>
-        </div>
-        <div class="fx-vis">
-          <div class="fx-phone">
-            <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
-            <div class="fx-bezel">
-              <div class="fx-screen">
-                <div class="fx-ph"><b>Écran 02</b><span>Le résumé d'un long fil</span><i>780 × 1688 px · PNG</i></div>
-                <img src="shots/ec-reponse_247.webp" width="780" height="1688" loading="lazy"
-                     decoding="async" alt="Le résumé d'un long fil">
-              </div>
-            </div>
-            <div class="fx-glare"></div>
-          </div>
-          <button class="fx-open" type="button" aria-label="Voir l'écran en entier">
-            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.78 11.77a8.99 8.99 0 1 0 17.98 0a8.99 8.99 0 1 0 -17.98 0"/><path d="M18.02 18.49L21.54 22"/></svg></span>
-          </button>
-        </div>
-      </article>
-      <article class="fx-card">
-        <div class="fx-txt">
-          <h3>Urgences</h3>
-          <p class="fx-win">
-            <span class="fx-ic" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17v.1"/></svg></span>
-            Ce qui ne peut pas attendre remonte.
-          </p>
-          <details class="fx-info">
-            <summary>
-              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg></span>
-              <span class="fx-lbl-off">Comment ça marche</span>
-              <span class="fx-lbl-on">Réduire</span>
-              <svg class="fx-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>
-            </summary>
-            <p>Un chantier bloqué, une relance de l'assurance, une échéance qui tombe : ces mails-là passent devant, avec le motif de l'alerte.</p>
-          </details>
-        </div>
-        <div class="fx-vis">
-          <div class="fx-phone">
-            <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
-            <div class="fx-bezel">
-              <div class="fx-screen">
-                <div class="fx-ph"><b>Écran 03</b><span>L'alerte remontée en haut de pile</span><i>780 × 1688 px · PNG</i></div>
-                <img src="shots/ec-home.webp" width="780" height="1688" loading="lazy"
-                     decoding="async" alt="L'alerte remontée en haut de pile">
-              </div>
-            </div>
-            <div class="fx-glare"></div>
-          </div>
-          <button class="fx-open" type="button" aria-label="Voir l'écran en entier">
-            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.78 11.77a8.99 8.99 0 1 0 17.98 0a8.99 8.99 0 1 0 -17.98 0"/><path d="M18.02 18.49L21.54 22"/></svg></span>
-          </button>
-        </div>
-      </article>
-      <article class="fx-card">
-        <div class="fx-txt">
-          <h3>Classement</h3>
-          <p class="fx-win">
-            <span class="fx-ic" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></span>
-            Chaque pièce à son chantier.
-          </p>
-          <details class="fx-info">
-            <summary>
-              <span class="fx-i" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg></span>
-              <span class="fx-lbl-off">Comment ça marche</span>
-              <span class="fx-lbl-on">Réduire</span>
-              <svg class="fx-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>
-            </summary>
-            <p>Facture fournisseur, PV de réception, attestation : le document est détaché, nommé et rangé dans le dossier du bon chantier.</p>
-          </details>
-        </div>
-        <div class="fx-vis">
-          <div class="fx-phone">
-            <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
-            <div class="fx-bezel">
-              <div class="fx-screen">
-                <div class="fx-ph"><b>Écran 04</b><span>La pièce classée au bon dossier</span><i>780 × 1688 px · PNG</i></div>
-                <img src="shots/ec-suivi_chantier.webp" width="780" height="1688" loading="lazy"
-                     decoding="async" alt="La pièce classée au bon dossier">
-              </div>
-            </div>
-            <div class="fx-glare"></div>
-          </div>
-          <button class="fx-open" type="button" aria-label="Voir l'écran en entier">
-            <span class="fx-mag" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.78 11.77a8.99 8.99 0 1 0 17.98 0a8.99 8.99 0 1 0 -17.98 0"/><path d="M18.02 18.49L21.54 22"/></svg></span>
-          </button>
-        </div>
-      </article>
-
-        <a class="fx-card act2 fx-more" href="offres.html">
-          <div class="fx-txt">
-            <span class="fx-next">Et ce n'est pas tout</span>
-            <b>Découvrir<br>les autres assistants.</b>
-            <span>Chaque assistant a ses missions. Voir toute l'équipe Talos.</span>
-            <span class="fx-ico" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
-          </div>
-        </a>
+      <div class="ac-duo-txt">
+        <span class="ac-card-role">Assistante client</span>
+        <h3>Elle trie, l'autre répond.</h3>
+        <p>Une demande client repérée dans le tri de la nuit n'attend pas votre réveil : l'Assistante Client y répond dans la minute, la qualifie et cale le rendez-vous. Votre boîte se vide toute seule, par les deux bouts.</p>
       </div>
 
-      <div class="fx-nav">
-        <button class="fx-arrow" id="fxPrev" type="button" aria-label="Étape précédente" aria-controls="fxRail"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5l-7 7 7 7"/></svg></button>
-        <div class="fx-dots" id="fxDots" role="tablist" aria-label="Navigation des étapes"></div>
-        <button class="fx-arrow" id="fxNext" type="button" aria-label="Étape suivante" aria-controls="fxRail"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5l7 7-7 7"/></svg></button>
+      <div class="ac-duo-act">
+        <a class="btn btn-1" href="assistant-client.html">Ajouter à mon équipe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+        <a class="ac-duo-all" href="offres.html">Voir toute l'équipe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
 
-    <dialog class="fx-zoom" id="fxZoom" aria-label="Aperçu de l'écran en entier">
-      <button class="fx-zoom-x" id="fxZoomClose" type="button" aria-label="Fermer l'aperçu"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
-      <figure>
-        <div class="fx-phone">
-          <span class="fx-k act"></span><span class="fx-k vu"></span><span class="fx-k vd"></span><span class="fx-k pw"></span>
-          <div class="fx-bezel"><div class="fx-screen"><img id="fxZoomImg" alt=""></div></div>
-        </div>
-      </figure>
-    </dialog>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ BLOC 3 · LA DOULEUR QUI DISPARAÎT + LE DÉTAIL ═══════════════════ -->
-  <section class="t-asst">
-    <div class="b3" id="missions">
-      <div class="shell">
 
-        <div class="b3-top">
-          <div>
-            <p class="b3-tag">Talos, votre assistante administrative 24/7</p>
-            <h2>Passer vos soirées dans votre boîte mail n'est plus votre problème.</h2>
-            <div class="actions">
-              <a class="btn btn-1" href="reserver.html">Je veux mon assistant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
-              <a class="btn btn-2" href="reserver.html">Réserver une démo</a>
-            </div>
-          </div>
+<!-- ═══ 7 · AVANT / AVEC TALOS ════════════════════════════════════════════ -->
+<section class="t-asst ac-ba">
+  <div class="shell">
 
-          <div class="synth">
-            <div class="synth-h">
-              <b>Ce qu'il prend en charge</b>
-              <span>2 missions · 11 fonctionnalités</span>
-            </div>
-            <ol>
-          <li><b>Tri de la boîte mail</b><i>6</i></li>
-          <li><b>Classement &amp; suivi</b><i>5</i></li>
-            </ol>
-            <p class="synth-f"><b>Les plus demandées :</b> le tri automatique dès la réception, le résumé des fils qui s'éternisent, et le classement des factures fournisseurs au bon chantier.</p>
-          </div>
-        </div>
-
-        <div class="b3-grid">
-      <div>
-        <p class="mh">Tri de la boîte mail <span class="mh-n">· 6</span></p>
-        <details class="f">
-          <summary>Tri en six catégories<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Demande client, facture fournisseur, administratif, chantier, publicité, sans suite. Chaque mail est rangé dès son arrivée.</p>
-        </details>
-        <details class="f">
-          <summary>Résumé des longs échanges<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Un fil de vingt messages tient en trois lignes : ce qui a été décidé, ce qui bloque, ce qu'on attend de vous.</p>
-        </details>
-        <details class="f">
-          <summary>Extraction des informations<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Adresse, dates, montants, références : sorties du corps du mail et posées à côté du dossier.</p>
-        </details>
-        <details class="f">
-          <summary>Détection des urgences<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Un chantier bloqué ou une échéance qui tombe remonte en haut de la pile, avec le motif.</p>
-        </details>
-        <details class="f">
-          <summary>Accusé de réception<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Le client sait que son message est arrivé, même quand vous êtes sur un toit.</p>
-        </details>
-        <details class="f">
-          <summary>Mise à l'écart des publicités<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Les newsletters et démarchages sortent de la boîte principale sans être supprimés.</p>
-        </details>
-      </div>
-      <div>
-        <p class="mh">Classement &amp; suivi <span class="mh-n">· 5</span></p>
-        <details class="f">
-          <summary>Classement au bon chantier<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Chaque mail et chaque pièce jointe rejoint le dossier du chantier concerné.</p>
-        </details>
-        <details class="f">
-          <summary>Factures fournisseurs<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Détachées, nommées, rangées, et prêtes pour le comptable en fin de mois.</p>
-        </details>
-        <details class="f">
-          <summary>Pièces du dossier<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Devis, PV de réception, attestations, plans : rangés au même endroit que le reste du chantier.</p>
-        </details>
-        <details class="f">
-          <summary>Rappel des pièces manquantes<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Une attestation qui manque au dossier vous est signalée avant que ce soit un problème.</p>
-        </details>
-        <details class="f">
-          <summary>Recherche dans l'historique<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>« Le mail où le client parlait de la porte de garage » se retrouve en une question.</p>
-        </details>
-      </div>
-        </div>
-
-      </div>
+    <div class="ac-ba-head">
+      <p class="ac-tag">Le changement</p>
+      <h2 class="ac-h2">Avant, et <em>avec Talos</em>.</h2>
     </div>
-  </section>
 
-  <!-- ═══ BLOC 4 · FAQ ════════════════════════════════════════════════════ -->
-  <section class="t-asst">
-    <div class="b4" id="faq">
-      <div class="shell">
-
-        <div class="b4-head">
-          <p class="b4-tag">F.A.Q</p>
-          <h2>Les questions qu'on nous pose</h2>
-          <p>Celles qui reviennent à chaque rendez-vous. Si la vôtre n'y est pas,
-            posez-la — on répond vite.</p>
-        </div>
-
-        <div class="b4-tabs" role="tablist" aria-label="Catégories de questions">
-          <button class="tab" type="button" role="tab" id="faqT1" aria-selected="true" aria-controls="faqP1">Quelles missions ?</button>
-          <button class="tab" type="button" role="tab" id="faqT2" aria-selected="false" aria-controls="faqP2">Fonctionnement</button>
-        </div>
-
-        <div class="b4-list" id="faqP1" role="tabpanel" aria-labelledby="faqT1">
-        <details class="f">
-          <summary>Est-ce qu'elle répond à mes mails à ma place ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Elle prépare, vous relisez, vous envoyez. Seul l'accusé de réception part automatiquement, et vous en fixez le texte.</p>
-        </details>
-        <details class="f">
-          <summary>Est-ce qu'elle peut supprimer un mail important par erreur ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Elle ne supprime rien. Il range — et tout reste consultable, y compris la catégorie « sans suite ».</p>
-        </details>
-        <details class="f">
-          <summary>Comment sait-elle à quel chantier rattacher un mail ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Par le client, l'adresse, la référence du devis ou le nom du fichier. En cas de doute, elle vous demande plutôt que de deviner.</p>
-        </details>
-        <details class="f">
-          <summary>Est-ce qu'elle lit toute ma boîte mail ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Elle traite la boîte que vous lui confiez. Vous pouvez en exclure des expéditeurs ou des dossiers entiers.</p>
-        </details>
-        <details class="f">
-          <summary>Et mes mails personnels ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Ils n'ont rien à faire là : on branche votre adresse professionnelle, pas votre boîte privée.</p>
-        </details>
-        <details class="f">
-          <summary>Est-ce qu'elle prend aussi mes rendez-vous ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Non, elle trie et classe. Les réponses aux clients et l'agenda sont le travail de l'assistante client.</p>
-        </details>
-        </div>
-
-        <div class="b4-list" id="faqP2" role="tabpanel" aria-labelledby="faqT2" hidden>
-        <details class="f">
-          <summary>Est-ce que je peux corriger un classement ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Oui, et elle le retient. Un dossier déplacé une fois ne se retrouve pas au mauvais endroit la fois suivante.</p>
-        </details>
-        <details class="f">
-          <summary>Combien de temps pour le mettre en place ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Comptez une semaine. On récupère vos documents et vos règles, on branche votre boîte mail, et il commence à travailler. La mise en place est incluse — vous n'avez rien à paramétrer.</p>
-        </details>
-        <details class="f">
-          <summary>Est-ce que je dois changer de logiciel ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Non. Il se branche sur ce que vous utilisez déjà : votre messagerie, votre agenda, votre logiciel de gestion s'il y en a un.</p>
-        </details>
-        <details class="f">
-          <summary>Qu'est-ce que je vois, concrètement, tous les matins ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Une pile : ce qu'il a préparé pendant la nuit, avec le montant en jeu et le temps que ça vous prendra de tout valider. En général deux minutes.</p>
-        </details>
-        <details class="f">
-          <summary>Où sont hébergées mes données ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>En France. Votre banque est consultée en lecture seule, et chaque action est horodatée dans un journal que vous pouvez relire.</p>
-        </details>
-        <details class="f">
-          <summary>Et si je veux arrêter ?<svg class="f-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-          <p>Vous partez avec vos données : clients, documents, historique, tout est exportable. Sans engagement et sans frais de sortie.</p>
-        </details>
-        </div>
-
-        <div class="b4-foot">
-          <div>
-            <b>Il vous reste une question ?</b>
-            <span>Quinze minutes au téléphone, sans engagement. On répond, même si
-              vous ne travaillez pas avec nous.</span>
-          </div>
-          <a class="btn btn-1" href="reserver.html">Réserver une démo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
-        </div>
-
-      </div>
+    <div class="ac-ba-svg" aria-hidden="true">
+      <svg viewBox="0 0 1040 464" xmlns="http://www.w3.org/2000/svg"
+           font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+        <rect x=".5" y=".5" width="1039" height="462" rx="24"
+              fill="var(--ink-2)" stroke="var(--line-2)"/>
+        <g fill="currentColor" color="var(--parch)" opacity=".035"><rect x="1" y="134" width="1038" height="66"/><rect x="1" y="266" width="1038" height="66"/><rect x="1" y="398" width="1038" height="66"/></g>
+        <g stroke="var(--line)" stroke-width="1"><path d="M1 68.5h1038"/><path d="M1 134.5h1038"/><path d="M1 200.5h1038"/><path d="M1 266.5h1038"/><path d="M1 332.5h1038"/><path d="M1 398.5h1038"/><path d="M520.5 1v464"/></g>
+        <text x="40" y="42" font-size="13" font-weight="700" letter-spacing="2.4"
+              fill="var(--lin)">AVANT</text>
+        <text x="560" y="42" font-size="13" font-weight="700" letter-spacing="2.4"
+              fill="var(--bronze)">AVEC TALOS</text>
+        <g font-size="16.5" fill="var(--lin)"><text x="92" y="107">Vous triez vos mails le soir</text><text x="92" y="173">Vous relisez vingt messages d'affilée</text><text x="92" y="239">Une urgence se perd dans la masse</text><text x="92" y="305">Vous cherchez une facture fournisseur</text><text x="92" y="371">Le client attend un signe de vie</text><text x="92" y="437">Il manque une pièce au dossier</text></g>
+        <g font-size="16.5" font-weight="600" fill="var(--parch)"><text x="612" y="107">C'est fait avant votre réveil</text><text x="612" y="173">Le fil tient en trois lignes</text><text x="612" y="239">Elle passe en haut de la pile</text><text x="612" y="305">Elle est au dossier du chantier</text><text x="612" y="371">L'accusé de réception est parti</text><text x="612" y="437">Le manque vous est signalé</text></g>
+        <g fill="currentColor" color="var(--lin)">
+          <g opacity=".14"><circle cx="62" cy="101" r="13"/><circle cx="62" cy="167" r="13"/><circle cx="62" cy="233" r="13"/><circle cx="62" cy="299" r="13"/><circle cx="62" cy="365" r="13"/><circle cx="62" cy="431" r="13"/></g>
+          <g stroke="var(--lin)" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M57.5 96.5l9 9M66.5 96.5l-9 9"/><path d="M57.5 162.5l9 9M66.5 162.5l-9 9"/><path d="M57.5 228.5l9 9M66.5 228.5l-9 9"/><path d="M57.5 294.5l9 9M66.5 294.5l-9 9"/><path d="M57.5 360.5l9 9M66.5 360.5l-9 9"/><path d="M57.5 426.5l9 9M66.5 426.5l-9 9"/></g>
+        </g>
+        <g>
+          <g fill="var(--bronze)" opacity=".16"><circle cx="582" cy="101" r="13"/><circle cx="582" cy="167" r="13"/><circle cx="582" cy="233" r="13"/><circle cx="582" cy="299" r="13"/><circle cx="582" cy="365" r="13"/><circle cx="582" cy="431" r="13"/></g>
+          <g stroke="var(--bronze)" stroke-width="2.1" stroke-linecap="round"
+             stroke-linejoin="round" fill="none"><path d="M577 101.5l3.4 3.6 6.8-7.2"/><path d="M577 167.5l3.4 3.6 6.8-7.2"/><path d="M577 233.5l3.4 3.6 6.8-7.2"/><path d="M577 299.5l3.4 3.6 6.8-7.2"/><path d="M577 365.5l3.4 3.6 6.8-7.2"/><path d="M577 431.5l3.4 3.6 6.8-7.2"/></g>
+        </g>
+      </svg>
     </div>
-  </section>
+
+    <table class="ac-ba-table">
+      <thead>
+        <tr><th scope="col">Avant</th><th scope="col">Avec Talos</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="av">Vous triez vos mails le soir</td><td class="ap">C'est fait avant votre réveil</td></tr>
+        <tr><td class="av">Vous relisez vingt messages d'affilée</td><td class="ap">Le fil tient en trois lignes</td></tr>
+        <tr><td class="av">Une urgence se perd dans la masse</td><td class="ap">Elle passe en haut de la pile</td></tr>
+        <tr><td class="av">Vous cherchez une facture fournisseur</td><td class="ap">Elle est au dossier du chantier</td></tr>
+        <tr><td class="av">Le client attend un signe de vie</td><td class="ap">L'accusé de réception est parti</td></tr>
+        <tr><td class="av">Il manque une pièce au dossier</td><td class="ap">Le manque vous est signalé</td></tr>
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+
+<!-- ═══ 8 · L'APPEL FINAL ═════════════════════════════════════════════════ -->
+<section class="t-asst ac-cta">
+  <div class="shell ac-cta-in">
+    <img class="ac-cta-av" src="perso/avatar-administratif.webp" width="84" height="84" alt="" loading="lazy" decoding="async">
+    <h2>Vous avez besoin d'une <em>boîte mail tenue</em> ?</h2>
+    <p>Elle trie la nuit et vous remet trois décisions le matin. Le reste est rangé, résumé, classé — et toujours consultable.</p>
+    <div class="actions">
+      <a class="btn btn-1" href="reserver.html">Je veux mon assistante <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-2" href="reserver.html">Voir une démonstration</a>
+    </div>
+    <ul class="ac-reassure">
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Mise en place personnalisée</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Aucune suppression</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Données hébergées en France</li>
+    </ul>
+  </div>
+</section>
 
 
 <footer class="t-ft" id="reserver">
@@ -1620,174 +1709,89 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   if (yr) yr.textContent = new Date().getFullYear();
 })();
 
-/* section fonctionnalités — carrousel swipé : pastilles + flèches (souris) */
+/* ═══ 2 · LES MISSIONS — trois onglets, un seul écran ═══════════════════ */
 (function(){
-  var rail = document.getElementById('fxRail');
-  var dots = document.getElementById('fxDots');
-  var prev = document.getElementById('fxPrev');
-  var next = document.getElementById('fxNext');
-  if (!rail || !dots) return;
+  var list = document.querySelector('.ac-miss-list');
+  var screen = document.getElementById('acScreen');
+  if (!list || !screen) return;
 
-  var cards = Array.prototype.slice.call(rail.children);
-  var stops = [], buttons = [];
+  var tabs = [].slice.call(list.querySelectorAll('.ac-mission'));
+  var shots = [].slice.call(screen.querySelectorAll('img'));
 
-  function maxScroll(){ return Math.max(0, rail.scrollWidth - rail.clientWidth); }
-
-  /* Les cartes sont calées en scroll-snap-align:start : le repère est leur bord
-     gauche, décalé du padding du rail. En fin de rail plusieurs cartes tombent
-     sur la même position (le rail ne peut plus avancer) : on dédoublonne, sinon
-     on afficherait des pastilles qu'aucun swipe ne peut atteindre. */
-  function buildStops(){
-    var max = Math.round(maxScroll());
-    var pad = parseFloat(getComputedStyle(rail).paddingLeft) || 0;
-    var out = [];
-    cards.forEach(function(card){
-      var x = Math.min(Math.round(card.offsetLeft - rail.offsetLeft - pad), max);
-      if (!out.length || x - out[out.length - 1] > 8) out.push(x);
-    });
-    return out.length ? out : [0];
+  function show(tab){
+    for (var i = 0; i < tabs.length; i++){
+      var on = tabs[i] === tab;
+      tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabs[i].tabIndex = on ? 0 : -1;
+    }
+    for (var j = 0; j < shots.length; j++){
+      shots[j].classList.toggle('on', shots[j].getAttribute('data-m') === tab.getAttribute('data-m'));
+    }
+    screen.setAttribute('aria-labelledby', tab.id);
   }
 
-  function buildDots(){
-    stops = buildStops();
-    dots.textContent = '';
-    buttons = stops.map(function(x, i){
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.setAttribute('role', 'tab');
-      b.setAttribute('aria-label', 'Vue ' + (i + 1) + ' sur ' + stops.length);
-      // scrollIntoView recadrerait aussi la page en vertical : on ne bouge que le rail
-      b.addEventListener('click', function(){ rail.scrollTo({left: x, behavior: 'smooth'}); });
-      dots.appendChild(b);
-      return b;
+  for (var k = 0; k < tabs.length; k++){
+    tabs[k].tabIndex = tabs[k].getAttribute('aria-selected') === 'true' ? 0 : -1;
+    tabs[k].addEventListener('click', function(){ show(this); });
+    /* survol : on ne change l'écran que si l'appareil a un vrai pointeur,
+       sinon le premier effleurement tactile déclencherait le changement */
+    tabs[k].addEventListener('mouseenter', function(){
+      if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) show(this);
     });
-    sync();
   }
 
-  /* recalculé à la demande depuis scrollLeft : ne dépend pas d'un état mis à jour
-     par requestAnimationFrame, qui peut être gelé dans un onglet en arrière-plan */
-  function currentIndex(){
-    var x = rail.scrollLeft, best = 0, bestD = Infinity;
-    stops.forEach(function(s, i){
-      var d = Math.abs(s - x);
-      if (d < bestD){ bestD = d; best = i; }
-    });
-    return best;
-  }
+  /* flèches : déplacement clavier attendu dans un groupe d'onglets */
+  list.addEventListener('keydown', function(e){
+    var i = tabs.indexOf(document.activeElement);
+    if (i < 0) return;
+    var n = null;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+    if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  n = tabs[(i - 1 + tabs.length) % tabs.length];
+    if (e.key === 'Home') n = tabs[0];
+    if (e.key === 'End')  n = tabs[tabs.length - 1];
+    if (!n) return;
+    e.preventDefault();
+    show(n);
+    n.focus();
+  });
+})();
 
+
+/* ═══ 3 · LE SCÉNARIO — quel onglet est au-dessus de la pile ════════════ */
+(function(){
+  var steps = [].slice.call(document.querySelectorAll('#acSteps .ac-step'));
+  if (!steps.length) return;
+
+  var wide = window.matchMedia('(min-width:961px)');
   var ticking = false;
-  function sync(){
-    ticking = false;
-    var i = currentIndex(), x = rail.scrollLeft, max = maxScroll();
-    buttons.forEach(function(b, k){ b.setAttribute('aria-current', k === i ? 'true' : 'false'); });
-    if (prev) prev.disabled = x <= 2;
-    if (next) next.disabled = x >= max - 2;
+
+  function stickTop(){
+    var v = parseFloat(getComputedStyle(steps[0]).top);
+    return isNaN(v) ? 0 : v;
   }
-  rail.addEventListener('scroll', function(){
+
+  function paint(){
+    ticking = false;
+    var act = -1;
+    if (wide.matches){
+      var line = stickTop() + 1;
+      for (var i = 0; i < steps.length; i++){
+        if (steps[i].getBoundingClientRect().top <= line) act = i;
+      }
+      if (act < 0) act = 0;
+    }
+    for (var j = 0; j < steps.length; j++) steps[j].classList.toggle('is-on', j === act);
+  }
+
+  function onScroll(){
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(sync);
-  }, {passive:true});
-
-  function go(step){
-    var i = Math.min(stops.length - 1, Math.max(0, currentIndex() + step));
-    rail.scrollTo({left: stops[i], behavior: 'smooth'});
-  }
-  if (prev) prev.addEventListener('click', function(){ go(-1); });
-  if (next) next.addEventListener('click', function(){ go(1); });
-
-  var rt;
-  window.addEventListener('resize', function(){
-    clearTimeout(rt);
-    rt = setTimeout(buildDots, 150);
-  }, {passive:true});
-
-  buildDots();
-})();
-
-/* section fonctionnalités — visionneuse : la capture est rognée dans la carte,
-   on l'ouvre en entier dans un <dialog> natif (focus, Échap et top layer offerts) */
-(function(){
-  var dlg = document.getElementById('fxZoom');
-  var img = document.getElementById('fxZoomImg');
-  var ttl = document.getElementById('fxZoomTitle');
-  var lead = document.getElementById('fxZoomLead');
-  var closeBtn = document.getElementById('fxZoomClose');
-  if (!dlg || !img || !dlg.showModal) return;
-
-  var opener = null;
-
-  function open(card){
-    var shot = card.querySelector('.fx-screen img');
-    if (!shot || !shot.getAttribute('src')) return;
-    img.src = shot.getAttribute('src');
-    img.alt = shot.alt || '';
-    var h3 = card.querySelector('h3');
-    var win = card.querySelector('.fx-win');
-    ttl.textContent = h3 ? h3.textContent.trim() : '';
-    lead.textContent = win ? win.textContent.trim() : '';
-    dlg.showModal();
-    document.documentElement.classList.add('fx-locked');
+    requestAnimationFrame(paint);
   }
 
-  function close(){ if (dlg.open) dlg.close(); }
-
-  document.querySelectorAll('.t-feat .fx-open').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      opener = btn;
-      open(btn.closest('.fx-card'));
-    });
-  });
-
-  closeBtn.addEventListener('click', close);
-  // clic hors de la figure : la cible est le <dialog> lui-même, pas son contenu
-  dlg.addEventListener('click', function(e){ if (e.target === dlg) close(); });
-  dlg.addEventListener('close', function(){
-    // l'événement close est asynchrone : si on a déjà rouvert sur une autre carte
-    // entre-temps, ce nettoyage effacerait l'image qui vient d'être posée
-    if (dlg.open) return;
-    document.documentElement.classList.remove('fx-locked');
-    img.removeAttribute('src');
-    if (opener) { opener.focus(); opener = null; }
-  });
-})();
-
-/* FAQ — les deux pastilles basculent entre les listes de questions.
-   Pas de framework : deux panneaux, on masque l'autre. Les flèches gauche et
-   droite passent d'une pastille à l'autre, comme l'attend un lecteur d'écran
-   sur un rôle « tablist ». */
-(function () {
-  var tabs = [].slice.call(document.querySelectorAll('.b4-tabs .tab'));
-  if (!tabs.length) return;
-
-  function montrer(actif) {
-    tabs.forEach(function (t) {
-      var choisi = t === actif;
-      t.setAttribute('aria-selected', choisi ? 'true' : 'false');
-      var panneau = document.getElementById(t.getAttribute('aria-controls'));
-      if (!panneau) return;
-      panneau.hidden = !choisi;
-      /* on referme les questions du panneau qu'on quitte : rouvrir sur une
-         liste déjà dépliée donnait une hauteur incohérente */
-      if (!choisi) {
-        [].forEach.call(panneau.querySelectorAll('details[open]'), function (d) {
-          d.open = false;
-        });
-      }
-    });
-  }
-
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { montrer(t); });
-    t.addEventListener('keydown', function (e) {
-      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-      if (!d) return;
-      e.preventDefault();
-      var suivant = tabs[(i + d + tabs.length) % tabs.length];
-      suivant.focus();
-      montrer(suivant);
-    });
-  });
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  paint();
 })();
 
 </script>
