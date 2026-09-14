@@ -678,9 +678,16 @@ A_VENIR = []   # les cinq assistants ont leur page
 
 
 def hub():
-    """Le corps de la page Offres — l'équipe présentée en carrousel."""
-    tot_m = sum(len(a['missions']) for a in ASSISTANTS) 
-    tot_f = sum(sum(len(f) for _, f in a['missions']) for a in ASSISTANTS) 
+    """Le corps de la page Offres — l'équipe présentée en carrousel.
+
+    Les trois compteurs comptent ce que les fiches annoncent vraiment :
+    ils sont donc lus dans fiches.py (le gabarit v2), pas dans les contenus
+    hérités de ce fichier. Sinon la page Offres promet 67 fonctionnalités
+    quand les cinq fiches en détaillent 99.
+    """
+    import fiches
+    tot_m = sum(len(f['missions']) for f in fiches.FICHES)
+    tot_f = sum(sum(len(c['puces']) for c in f['cartes']) for f in fiches.FICHES)
 
     return u'''<section class="t-asst">
   <div class="of">

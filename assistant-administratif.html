@@ -926,22 +926,36 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-miss-grid{grid-template-columns:1fr;gap:28px}
   .ac-scene{height:clamp(340px,62vw,440px);padding-top:34px}
 
-  /* 3 · scénario : plus d'empilement, une frise verticale classique */
+  /* 3 · scénario : sans la place d'empiler, on fait glisser. Une étape par
+     écran, son onglet posé dessus, et la suivante qui dépasse pour dire
+     qu'il y a une suite. */
   .ac-story{padding:72px 0 84px}
   .ac-story-grid{grid-template-columns:1fr;gap:34px}
   .ac-story-txt{position:static;top:auto}
   .ac-story-txt .ac-h2,.ac-story-txt .ac-sub{max-width:none}
-  .ac-steps{--tabh:0px}
-  .ac-step{position:relative;top:auto;padding-top:0;margin-bottom:14px;padding-left:26px}
-  .ac-step::before{content:"";position:absolute;left:9px;top:12px;bottom:-20px;
-    width:1px;background:var(--line-2)}
-  .ac-step:last-child::before{display:none}
-  .ac-step-tab{position:absolute;left:0;top:14px;width:19px;height:19px;
-    border-radius:50%;border:1px solid var(--line-2);background:var(--ink-3);
-    font-size:0;padding:0;z-index:2}
-  .ac-step-tab::after{content:"";width:6px;height:6px;border-radius:50%;
-    background:var(--bronze)}
-  .ac-step-card{border-radius:20px;padding:22px 22px 24px;min-height:0}
+
+  .ac-steps{--tabh:0px;
+    display:grid;grid-auto-flow:column;grid-auto-columns:var(--sw,78%);
+    gap:14px;align-items:stretch;
+    overflow-x:auto;overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;
+    padding:4px 4px 12px;margin:-4px -4px -12px;
+    scrollbar-width:none}
+  .ac-steps::-webkit-scrollbar{display:none}
+  .ac-steps:focus-visible{outline:3px solid var(--bronze);outline-offset:4px;
+    border-radius:24px}
+
+  .ac-step{position:relative;top:auto;margin:0;padding-top:0;
+    scroll-snap-align:start;
+    display:flex;flex-direction:column;align-items:flex-start}
+  /* l'onglet reprend sa place dans le flux, une étiquette par carte */
+  .ac-step-tab{position:static;left:auto;width:auto;height:30px;
+    padding:0 15px;border-radius:14px 14px 0 0;font-size:11px;
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+    background:var(--ink-3)}
+  .ac-step-tab .d{display:inline}
+  .ac-step-card{flex:1;width:100%;border-radius:0 22px 22px 22px;
+    padding:24px 22px 26px;min-height:0}
 
   /* 4 · fonctionnalités : on glisse, on n'empile pas */
   .ac-feat{padding:72px 0 80px}
@@ -969,6 +983,10 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-ba-svg{display:none}
 }
 
+@media (max-width:700px){
+  .ac-steps{--sw:86%}
+}
+
 @media (max-width:560px){
   .t-asst .shell{padding:0 18px}
   .ac-hero-media{margin:0 -18px}
@@ -984,7 +1002,6 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-ba-table th{padding:13px 12px 11px}
   .ac-card-go{width:100%;justify-content:center}
   .ac-prices{grid-template-columns:1fr}
-  .ac-step-card{padding:24px 22px 26px}
   .ac-step-h{flex-wrap:wrap}
   .ac-step-when{margin-left:0;width:100%;order:3}
   .ac-duo-pair img{width:66px;height:66px;border-radius:20px}
@@ -1225,7 +1242,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       </div>
     </div>
 
-    <ol class="ac-steps" id="acSteps">
+    <ol class="ac-steps" id="acSteps" tabindex="0" role="group"
+        aria-label="Le scénario étape par étape, à faire défiler horizontalement sur téléphone">
 
       <li class="ac-step" style="--i:0">
         <span class="ac-step-tab" aria-hidden="true">23:00</span>
