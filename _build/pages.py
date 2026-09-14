@@ -112,16 +112,6 @@ ASSIST_CSS = (part('asst.css') + u'\n' + part('b2.css') + u'\n'
               + part('b3.css') + u'\n' + part('b4.css'))
 ASSIST_JS = part('b2.js') + u'\n' + part('b4.js')
 
-page('offres.html',
-     u"Offres — Talos | Votre équipe de cinq assistants IA",
-     u"Cinq assistants spécialisés qui gèrent devis, facturation, trésorerie, relation client "
-     u"et administratif pendant que vous êtes sur le chantier. Mise en place incluse.",
-     part('asst.css') + u'\n' + part('offres.css'), assistants.hub(), u'',
-     og_title=u"Votre équipe Talos — cinq assistants qui travaillent pour vous",
-     og_desc=u"Devis, facturation, trésorerie, relation client, administratif : chaque assistant "
-             u"a ses missions. Vous prenez ceux dont vous avez besoin.")
-
-
 #  Les fiches refaites (gabarit v2, huit blocs) sont construites par
 #  offres.py, à partir de fiche.py + fiches.py. Les autres — s'il en reste —
 #  gardent le gabarit à quatre blocs de assistants.py.
@@ -134,6 +124,8 @@ for _a in assistants.ASSISTANTS:
         continue
     page('assistant-%s.html' % _a['slug'], _a['titre'], _a['desc'],
          ASSIST_CSS, assistants.corps(_a), ASSIST_JS)
+
+offres.hub(resync=False)
 
 for _f in fiches.FICHES:
     # nav_sync repasse de toute façon sur toutes les pages en fin de script

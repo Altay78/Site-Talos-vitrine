@@ -261,7 +261,8 @@ def _b3(f):
       </div>
     </div>
 
-    <ol class="ac-steps" id="acSteps">
+    <ol class="ac-steps" id="acSteps" tabindex="0" role="group"
+        aria-label="Le scénario étape par étape, à faire défiler horizontalement sur téléphone">
 
 %(etapes)s
 

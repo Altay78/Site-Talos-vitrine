@@ -18,6 +18,21 @@ CSS = part('fiche.css')
 JS = part('fiche.js')
 
 
+def hub(resync=True):
+    """La page Offres — l'équipe en carrousel, et les trois compteurs."""
+    import assistants
+    page('offres.html',
+         u"Offres — Talos | Votre équipe de cinq assistants IA",
+         u"Cinq assistants spécialisés qui gèrent devis, facturation, trésorerie, relation "
+         u"client et administratif pendant que vous êtes sur le chantier. Mise en place incluse.",
+         part('asst.css') + u'\n' + part('offres.css'), assistants.hub(), u'',
+         og_title=u"Votre équipe Talos — cinq assistants qui travaillent pour vous",
+         og_desc=u"Devis, facturation, trésorerie, relation client, administratif : chaque "
+                 u"assistant a ses missions. Vous prenez ceux dont vous avez besoin.")
+    if resync:
+        print(u'%-28s %s' % nav_sync.sync('offres.html'))
+
+
 def construire(f, resync=True):
     nom = 'assistant-%s.html' % f['slug']
     page(nom, f['titre'], f['desc'], CSS, fiche.corps(f), JS,
@@ -33,3 +48,5 @@ if __name__ == '__main__':
         if voulus and _f['slug'] not in voulus:
             continue
         construire(_f)
+    if not voulus or 'offres' in voulus:
+        hub()
