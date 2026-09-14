@@ -2932,7 +2932,7 @@ html[data-theme="light"] .crew-head h2 em{
 .crew-head p{margin:0 auto;max-width:52ch;font-size:16.5px;line-height:1.6;color:var(--lin)}
 
 /* la scène : les cartes tournent autour de celle du centre */
-.crew-stage{position:relative;height:clamp(540px,52vw,620px);
+.crew-stage{position:relative;height:clamp(500px,48vw,570px);
   perspective:1500px;perspective-origin:50% 45%}
 .crew-track{list-style:none;margin:0;padding:0;position:absolute;inset:0;
   transform-style:preserve-3d}
@@ -2949,7 +2949,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-c[data-act] a,.crew-c[data-act] .crew-x{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
-.crew-vis{position:relative;display:block;height:50%;overflow:hidden;
+.crew-vis{position:relative;display:block;height:57%;overflow:hidden;
   background:radial-gradient(120% 84% at 50% 4%,rgba(var(--bronze-rgb),.20) 0%,transparent 70%)}
 .crew-vis img{position:absolute;left:50%;top:10px;transform:translateX(-50%);
   height:640px;width:auto;max-width:none}
@@ -2968,10 +2968,8 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-txt b{margin:0 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
   font-weight:800;color:var(--parch)}
 /* l'accroche : la phrase qu'on retient, au-dessus de l'explication */
-.crew-h{margin:0;font-size:14.5px;line-height:1.3;font-weight:700;
+.crew-h{flex:1;margin:0;font-size:14.5px;line-height:1.4;font-weight:400;
   letter-spacing:-.2px;color:var(--parch)}
-/* l'explication : ce que l'assistant fait vraiment */
-.crew-p{flex:1;margin:8px 0 0;font-size:12.8px;line-height:1.5;color:var(--lin)}
 /* les trois mots-clés, sur leur propre ligne au-dessus du lien */
 .crew-tags{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);
   font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;
@@ -3007,7 +3005,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .t-crew.nu{padding-top:4px}
 @media (max-width:760px){
   .t-crew{padding:72px 0 84px}
-  .crew-stage{height:clamp(520px,140vw,580px)}
+  .crew-stage{height:clamp(470px,126vw,530px)}
   .crew-nav{width:42px;height:42px;margin-top:-21px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -3036,7 +3034,6 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
           <span class="crew-txt">
             <b>Assistant Client</b>
             <span class="crew-h">Il transforme vos demandes en opportunités.</span>
-            <span class="crew-p">Répond aux demandes entrantes, qualifie vos prospects et prend vos rendez-vous, 24h/24.</span>
             <span class="crew-tags">Demandes entrantes · Qualification · RDV</span>
             <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
@@ -3051,7 +3048,6 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
           <span class="crew-txt">
             <b>Assistant Commercial</b>
             <span class="crew-h">Il prépare et suit vos devis.</span>
-            <span class="crew-p">Crée vos devis à partir d’un email, d’une photo ou d’une note vocale, puis relance vos clients jusqu’à leur réponse.</span>
             <span class="crew-tags">Création · Signature · Relances</span>
             <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
@@ -3066,7 +3062,6 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
           <span class="crew-txt">
             <b>Assistant Facturation</b>
             <span class="crew-h">Il gère vos factures dès qu’un devis est signé.</span>
-            <span class="crew-p">Crée vos factures avec les bonnes mentions, gère les acomptes et situations, puis garde vos documents organisés.</span>
             <span class="crew-tags">Facturation · Acomptes · Archivage</span>
             <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
@@ -3081,7 +3076,6 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
           <span class="crew-txt">
             <b>Assistant Trésorerie</b>
             <span class="crew-h">Il vous aide à récupérer votre argent.</span>
-            <span class="crew-p">Relance vos impayés, prépare les échéances et vous donne une vision de votre trésorerie à venir.</span>
             <span class="crew-tags">Impayés · Encaissements · Prévisions</span>
             <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
@@ -3096,7 +3090,6 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
           <span class="crew-txt">
             <b>Assistant Administratif</b>
             <span class="crew-h">Il met de l’ordre dans votre boîte mail.</span>
-            <span class="crew-p">Trie vos emails, extrait les informations importantes et vous alerte uniquement sur ce qui mérite votre attention.</span>
             <span class="crew-tags">Emails · Documents · Alertes</span>
             <span class="crew-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
@@ -3112,7 +3105,6 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
           <span class="crew-txt">
             <b>Assistant Chef de chantier</b>
             <span class="crew-h">Vos plannings tiennent. Vos comptes rendus s’écrivent seuls.</span>
-            <span class="crew-p">Tient le planning de vos équipes, suit l’avancement de chaque chantier et rédige les comptes rendus de journée.</span>
             <span class="crew-tags">Plannings · Avancement · Comptes rendus</span>
             <span class="crew-go pending">En préparation</span>
           </span>
@@ -3128,7 +3120,6 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
           <span class="crew-txt">
             <b>Assistant Gestion de stock</b>
             <span class="crew-h">Vous savez ce qu’il reste et ce qu’il faut commander.</span>
-            <span class="crew-p">Suit vos stocks de matériel et de matériaux, vous alerte avant la rupture et prépare vos commandes fournisseurs.</span>
             <span class="crew-tags">Stocks · Alertes · Commandes</span>
             <span class="crew-go pending">En préparation</span>
           </span>

@@ -13,32 +13,22 @@ sa feuille et son script : il ne dépend d'aucun style de page.
 EQUIPE = [
     ('client', u'Assistant Client',
      u'Il transforme vos demandes en opportunités.',
-     u'Répond aux demandes entrantes, qualifie vos prospects et prend vos '
-     u'rendez-vous, 24h/24.',
      u'Demandes entrantes · Qualification · RDV',
      'assistant-client.html'),
     ('commercial', u'Assistant Commercial',
      u'Il prépare et suit vos devis.',
-     u'Crée vos devis à partir d’un email, d’une photo ou d’une note vocale, '
-     u'puis relance vos clients jusqu’à leur réponse.',
      u'Création · Signature · Relances',
      'assistant-commercial.html'),
     ('facturation', u'Assistant Facturation',
      u'Il gère vos factures dès qu’un devis est signé.',
-     u'Crée vos factures avec les bonnes mentions, gère les acomptes et situations, '
-     u'puis garde vos documents organisés.',
      u'Facturation · Acomptes · Archivage',
      'assistant-facturation.html'),
     ('tresorerie', u'Assistant Trésorerie',
      u'Il vous aide à récupérer votre argent.',
-     u'Relance vos impayés, prépare les échéances et vous donne une vision de votre '
-     u'trésorerie à venir.',
      u'Impayés · Encaissements · Prévisions',
      'assistant-tresorerie.html'),
     ('administratif', u'Assistant Administratif',
      u'Il met de l’ordre dans votre boîte mail.',
-     u'Trie vos emails, extrait les informations importantes et vous alerte uniquement '
-     u'sur ce qui mérite votre attention.',
      u'Emails · Documents · Alertes',
      'assistant-administratif.html'),
 ]
@@ -49,14 +39,10 @@ EQUIPE = [
 A_VENIR = [
     ('chantier', u'Assistant Chef de chantier',
      u'Vos plannings tiennent. Vos comptes rendus s’écrivent seuls.',
-     u'Tient le planning de vos équipes, suit l’avancement de chaque chantier et '
-     u'rédige les comptes rendus de journée.',
      u'Plannings · Avancement · Comptes rendus',
      None),
     ('stock', u'Assistant Gestion de stock',
      u'Vous savez ce qu’il reste et ce qu’il faut commander.',
-     u'Suit vos stocks de matériel et de matériaux, vous alerte avant la rupture et '
-     u'prépare vos commandes fournisseurs.',
      u'Stocks · Alertes · Commandes',
      None),
 ]
@@ -76,7 +62,6 @@ CARTE = u'''      <li class="crew-c" data-i="%(i)d">
           <span class="crew-txt">
             <b>%(nom)s</b>
             <span class="crew-h">%(accroche)s</span>
-            <span class="crew-p">%(resume)s</span>
             <span class="crew-tags">%(tags)s</span>
             <span class="crew-go%(go_cl)s">%(go)s</span>
           </span>
@@ -84,10 +69,10 @@ CARTE = u'''      <li class="crew-c" data-i="%(i)d">
       </li>'''
 
 cartes = []
-for i, (slug, nom, accroche, resume, tags, href) in enumerate(TOUS):
+for i, (slug, nom, accroche, tags, href) in enumerate(TOUS):
     soon = href is None
     cartes.append(CARTE % dict(
-        i=i, slug=slug, nom=nom, accroche=accroche, resume=resume, tags=tags,
+        i=i, slug=slug, nom=nom, accroche=accroche, tags=tags,
         ouvre=(u'span class="crew-x"' if soon else u'a href="%s"' % href),
         ferme=(u'span' if soon else u'a'),
         pastille=(u'\n            <i class="crew-soon">Bientôt</i>' if soon else u''),
@@ -127,7 +112,7 @@ html[data-theme="light"] .t-crew{--bronze:#C5531C;--bronze-2:#E0631F;--bronze-rg
 .crew-head p{margin:0 auto;max-width:52ch;font-size:16.5px;line-height:1.6;color:var(--lin)}
 
 /* la scène : les cartes tournent autour de celle du centre */
-.crew-stage{position:relative;height:clamp(540px,52vw,620px);
+.crew-stage{position:relative;height:clamp(500px,48vw,570px);
   perspective:1500px;perspective-origin:50% 45%}
 .crew-track{list-style:none;margin:0;padding:0;position:absolute;inset:0;
   transform-style:preserve-3d}
@@ -144,7 +129,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-c[data-act] a,.crew-c[data-act] .crew-x{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
-.crew-vis{position:relative;display:block;height:50%;overflow:hidden;
+.crew-vis{position:relative;display:block;height:57%;overflow:hidden;
   background:radial-gradient(120% 84% at 50% 4%,rgba(var(--bronze-rgb),.20) 0%,transparent 70%)}
 .crew-vis img{position:absolute;left:50%;top:10px;transform:translateX(-50%);
   height:640px;width:auto;max-width:none}
@@ -163,10 +148,8 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-txt b{margin:0 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
   font-weight:800;color:var(--parch)}
 /* l'accroche : la phrase qu'on retient, au-dessus de l'explication */
-.crew-h{margin:0;font-size:14.5px;line-height:1.3;font-weight:700;
+.crew-h{flex:1;margin:0;font-size:14.5px;line-height:1.4;font-weight:400;
   letter-spacing:-.2px;color:var(--parch)}
-/* l'explication : ce que l'assistant fait vraiment */
-.crew-p{flex:1;margin:8px 0 0;font-size:12.8px;line-height:1.5;color:var(--lin)}
 /* les trois mots-clés, sur leur propre ligne au-dessus du lien */
 .crew-tags{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);
   font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;
@@ -202,7 +185,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .t-crew.nu{padding-top:4px}
 @media (max-width:760px){
   .t-crew{padding:72px 0 84px}
-  .crew-stage{height:clamp(520px,140vw,580px)}
+  .crew-stage{height:clamp(470px,126vw,530px)}
   .crew-nav{width:42px;height:42px;margin-top:-21px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -324,7 +307,7 @@ html[data-theme="light"] .crew-head h2 em{
 .crew-head p{margin:0 auto;max-width:52ch;font-size:16.5px;line-height:1.6;color:var(--lin)}
 
 /* la scène : les cartes tournent autour de celle du centre */
-.crew-stage{position:relative;height:clamp(540px,52vw,620px);
+.crew-stage{position:relative;height:clamp(500px,48vw,570px);
   perspective:1500px;perspective-origin:50% 45%}
 .crew-track{list-style:none;margin:0;padding:0;position:absolute;inset:0;
   transform-style:preserve-3d}
@@ -341,7 +324,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-c[data-act] a,.crew-c[data-act] .crew-x{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
-.crew-vis{position:relative;display:block;height:50%;overflow:hidden;
+.crew-vis{position:relative;display:block;height:57%;overflow:hidden;
   background:radial-gradient(120% 84% at 50% 4%,rgba(var(--bronze-rgb),.20) 0%,transparent 70%)}
 .crew-vis img{position:absolute;left:50%;top:10px;transform:translateX(-50%);
   height:640px;width:auto;max-width:none}
@@ -360,10 +343,8 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-txt b{margin:0 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
   font-weight:800;color:var(--parch)}
 /* l'accroche : la phrase qu'on retient, au-dessus de l'explication */
-.crew-h{margin:0;font-size:14.5px;line-height:1.3;font-weight:700;
+.crew-h{flex:1;margin:0;font-size:14.5px;line-height:1.4;font-weight:400;
   letter-spacing:-.2px;color:var(--parch)}
-/* l'explication : ce que l'assistant fait vraiment */
-.crew-p{flex:1;margin:8px 0 0;font-size:12.8px;line-height:1.5;color:var(--lin)}
 /* les trois mots-clés, sur leur propre ligne au-dessus du lien */
 .crew-tags{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);
   font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;
@@ -399,7 +380,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .t-crew.nu{padding-top:4px}
 @media (max-width:760px){
   .t-crew{padding:72px 0 84px}
-  .crew-stage{height:clamp(520px,140vw,580px)}
+  .crew-stage{height:clamp(470px,126vw,530px)}
   .crew-nav{width:42px;height:42px;margin-top:-21px}
 }
 @media (prefers-reduced-motion:reduce){
