@@ -11,46 +11,53 @@ sa feuille et son script : il ne dépend d'aucun style de page.
 """
 
 EQUIPE = [
-    ('commercial', u'Devis &amp; relances', u'Assistant commercial',
-     u'Vos devis partent. Vos clients sont relancés.',
-     u'Rédige vos devis, les envoie à la signature avec l’acompte et les relance '
-     u'jusqu’à la réponse du client.',
-     'assistant-commercial.html'),
-    ('administratif', u'Vos emails &amp; demandes', u'Assistante administrative',
-     u'Plus besoin de passer votre journée dans vos mails.',
-     u'Trie vos emails, extrait les informations importantes et vous alerte uniquement '
-     u'lorsque votre attention est nécessaire.',
-     'assistant-administratif.html'),
-    ('facturation', u'Factures &amp; encaissements', u'Assistant facturation',
-     u'Vos factures sont créées et suivies sans y penser.',
-     u'Génère vos factures après signature, gère vos acomptes et situations et garde '
-     u'votre facturation à jour.',
-     'assistant-facturation.html'),
-    ('tresorerie', u'Trésorerie', u'Assistante trésorerie',
-     u'Vous savez ce qui doit rentrer.',
-     u'Suit vos factures non encaissées, anticipe vos entrées d’argent et vous alerte '
-     u'sur votre trésorerie.',
-     'assistant-tresorerie.html'),
-    ('client', u'Clients &amp; rendez-vous', u'Assistante client',
-     u'Vos clients ont toujours quelqu’un pour leur répondre.',
-     u'Répond aux demandes, prend les rendez-vous et rappelle automatiquement vos '
-     u'clients avant leurs interventions.',
+    ('client', u'Assistant Client',
+     u'Il transforme vos demandes en opportunités.',
+     u'Répond aux demandes entrantes, qualifie vos prospects et prend vos '
+     u'rendez-vous, 24h/24.',
+     u'Demandes entrantes · Qualification · RDV',
      'assistant-client.html'),
+    ('commercial', u'Assistant Commercial',
+     u'Il prépare et suit vos devis.',
+     u'Crée vos devis à partir d’un email, d’une photo ou d’une note vocale, '
+     u'puis relance vos clients jusqu’à leur réponse.',
+     u'Création · Signature · Relances',
+     'assistant-commercial.html'),
+    ('facturation', u'Assistant Facturation',
+     u'Il gère vos factures dès qu’un devis est signé.',
+     u'Crée vos factures avec les bonnes mentions, gère les acomptes et situations, '
+     u'puis garde vos documents organisés.',
+     u'Facturation · Acomptes · Archivage',
+     'assistant-facturation.html'),
+    ('tresorerie', u'Assistant Trésorerie',
+     u'Il vous aide à récupérer votre argent.',
+     u'Relance vos impayés, prépare les échéances et vous donne une vision de votre '
+     u'trésorerie à venir.',
+     u'Impayés · Encaissements · Prévisions',
+     'assistant-tresorerie.html'),
+    ('administratif', u'Assistant Administratif',
+     u'Il met de l’ordre dans votre boîte mail.',
+     u'Trie vos emails, extrait les informations importantes et vous alerte uniquement '
+     u'sur ce qui mérite votre attention.',
+     u'Emails · Documents · Alertes',
+     'assistant-administratif.html'),
 ]
 
 # Pas encore livrés : ils tournent dans le carrousel comme les autres, mais
 # marqués « Bientôt » et sans lien — leur fiche n'existe pas. Le jour où elle
 # existe, il suffit de déplacer la ligne dans EQUIPE avec son href.
 A_VENIR = [
-    ('chantier', u'Chantiers &amp; plannings', u'Assistant chef de chantier',
+    ('chantier', u'Assistant Chef de chantier',
      u'Vos plannings tiennent. Vos comptes rendus s’écrivent seuls.',
      u'Tient le planning de vos équipes, suit l’avancement de chaque chantier et '
      u'rédige les comptes rendus de journée.',
+     u'Plannings · Avancement · Comptes rendus',
      None),
-    ('stock', u'Stocks &amp; commandes', u'Assistant gestion de stock',
+    ('stock', u'Assistant Gestion de stock',
      u'Vous savez ce qu’il reste et ce qu’il faut commander.',
      u'Suit vos stocks de matériel et de matériaux, vous alerte avant la rupture et '
      u'prépare vos commandes fournisseurs.',
+     u'Stocks · Alertes · Commandes',
      None),
 ]
 
@@ -67,19 +74,20 @@ CARTE = u'''      <li class="crew-c" data-i="%(i)d">
                  loading="lazy" decoding="async">%(pastille)s
           </span>
           <span class="crew-txt">
-            <small>%(role)s</small>
             <b>%(nom)s</b>
             <span class="crew-h">%(accroche)s</span>
+            <span class="crew-p">%(resume)s</span>
+            <span class="crew-tags">%(tags)s</span>
             <span class="crew-go%(go_cl)s">%(go)s</span>
           </span>
         </%(ferme)s>
       </li>'''
 
 cartes = []
-for i, (slug, role, nom, accroche, promesse, href) in enumerate(TOUS):
+for i, (slug, nom, accroche, resume, tags, href) in enumerate(TOUS):
     soon = href is None
     cartes.append(CARTE % dict(
-        i=i, slug=slug, role=role, nom=nom, accroche=accroche,
+        i=i, slug=slug, nom=nom, accroche=accroche, resume=resume, tags=tags,
         ouvre=(u'span class="crew-x"' if soon else u'a href="%s"' % href),
         ferme=(u'span' if soon else u'a'),
         pastille=(u'\n            <i class="crew-soon">Bientôt</i>' if soon else u''),
@@ -87,7 +95,7 @@ for i, (slug, role, nom, accroche, promesse, href) in enumerate(TOUS):
         go=(u'En préparation' if soon else u'Découvrir %s' % FLECHE)))
 
 dots = u''.join(u'<button type="button" role="tab" aria-label="%s"%s></button>'
-                % (e[2], u' aria-selected="true"' if i == 0 else u' aria-selected="false"')
+                % (e[1], u' aria-selected="true"' if i == 0 else u' aria-selected="false"')
                 for i, e in enumerate(TOUS))
 
 CHEV = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" '
@@ -119,12 +127,12 @@ html[data-theme="light"] .t-crew{--bronze:#C5531C;--bronze-2:#E0631F;--bronze-rg
 .crew-head p{margin:0 auto;max-width:52ch;font-size:16.5px;line-height:1.6;color:var(--lin)}
 
 /* la scène : les cartes tournent autour de celle du centre */
-.crew-stage{position:relative;height:clamp(470px,46vw,540px);
+.crew-stage{position:relative;height:clamp(540px,52vw,620px);
   perspective:1500px;perspective-origin:50% 45%}
 .crew-track{list-style:none;margin:0;padding:0;position:absolute;inset:0;
   transform-style:preserve-3d}
-.crew-c{position:absolute;top:0;left:50%;width:clamp(230px,24vw,286px);height:100%;
-  margin-left:calc(clamp(230px,24vw,286px) / -2);
+.crew-c{position:absolute;top:0;left:50%;width:clamp(252px,26vw,312px);height:100%;
+  margin-left:calc(clamp(252px,26vw,312px) / -2);
   transition:transform .62s var(--e),opacity .62s var(--e),filter .62s var(--e);
   will-change:transform}
 .crew-c a,.crew-c .crew-x{display:flex;flex-direction:column;height:100%;overflow:hidden;
@@ -136,7 +144,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-c[data-act] a,.crew-c[data-act] .crew-x{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
-.crew-vis{position:relative;display:block;height:60%;overflow:hidden;
+.crew-vis{position:relative;display:block;height:50%;overflow:hidden;
   background:radial-gradient(120% 84% at 50% 4%,rgba(var(--bronze-rgb),.20) 0%,transparent 70%)}
 .crew-vis img{position:absolute;left:50%;top:10px;transform:translateX(-50%);
   height:640px;width:auto;max-width:none}
@@ -152,14 +160,18 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
   background:color-mix(in srgb,var(--ink) 88%,transparent);
   border:1px solid rgba(var(--bronze-rgb),.42)}
 .crew-txt{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
-.crew-txt small{font-family:ui-monospace,"SF Mono",Menlo,monospace;
-  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze)}
-.crew-txt b{margin:7px 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
+.crew-txt b{margin:0 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
   font-weight:800;color:var(--parch)}
 /* l'accroche : la phrase qu'on retient, au-dessus de l'explication */
-.crew-h{flex:1;margin:0;font-size:14.5px;line-height:1.4;font-weight:600;
+.crew-h{margin:0;font-size:14.5px;line-height:1.3;font-weight:700;
   letter-spacing:-.2px;color:var(--parch)}
-.crew-go{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+/* l'explication : ce que l'assistant fait vraiment */
+.crew-p{flex:1;margin:8px 0 0;font-size:12.8px;line-height:1.5;color:var(--lin)}
+/* les trois mots-clés, sur leur propre ligne au-dessus du lien */
+.crew-tags{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;
+  letter-spacing:.04em;line-height:1.5;color:var(--lin)}
+.crew-go{display:inline-flex;align-items:center;gap:7px;margin-top:12px;
   font-size:13.5px;font-weight:700;color:var(--bronze)}
 .crew-go svg{width:14px;height:14px}
 .crew-go.pending{color:var(--lin);font-weight:600}
@@ -177,6 +189,9 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-nav.p{left:max(16px,calc(50% - 640px))}
 .crew-nav.n{right:max(16px,calc(50% - 640px))}
 .crew-nav.n svg{transform:rotate(180deg)}
+.crew-foot{margin:30px auto 0;max-width:46ch;padding:0 24px;text-align:center;
+  font-size:15.5px;line-height:1.6;font-weight:700;color:var(--parch)}
+.crew-foot span{display:block;font-weight:400;color:var(--lin)}
 .crew-dots{display:flex;justify-content:center;gap:9px;margin-top:34px}
 .crew-dots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;cursor:pointer;
   background:var(--line-2);transition:width .3s var(--e),background .3s var(--e)}
@@ -187,7 +202,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .t-crew.nu{padding-top:4px}
 @media (max-width:760px){
   .t-crew{padding:72px 0 84px}
-  .crew-stage{height:clamp(400px,112vw,460px)}
+  .crew-stage{height:clamp(520px,140vw,580px)}
   .crew-nav{width:42px;height:42px;margin-top:-21px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -198,9 +213,10 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 <section class="t-crew" aria-labelledby="crew-t">
   <div class="crew-head">
     <p class="crew-k">L'équipe Talos</p>
-    <h2 id="crew-t">Cinq assistants, <em>une seule équipe</em></h2>
-    <p>Choisissez les assistants dont vous avez besoin. Ils prennent en charge les tâches
-      qui vous prennent du temps, pendant que vous vous concentrez sur vos chantiers.</p>
+    <h2 id="crew-t">Vos Agents IA, <em>à la carte</em>.</h2>
+    <p>Chaque assistant Talos a un rôle précis : attirer et qualifier vos demandes,
+      préparer vos devis, gérer vos factures, suivre votre trésorerie ou organiser vos
+      emails… Choisissez ceux dont vous avez besoin.</p>
   </div>
 
   <div class="crew-stage" id="crew">
@@ -212,6 +228,8 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
   </div>
 
   <div class="crew-dots" role="tablist" aria-label="Choisir un assistant">@@DOTS@@</div>
+
+  <p class="crew-foot">Commencez avec les assistants dont vous avez besoin.<span>Ajoutez-en d’autres au fur et à mesure que votre entreprise grandit.</span></p>
 </section>
 
 <script>
@@ -306,12 +324,12 @@ html[data-theme="light"] .crew-head h2 em{
 .crew-head p{margin:0 auto;max-width:52ch;font-size:16.5px;line-height:1.6;color:var(--lin)}
 
 /* la scène : les cartes tournent autour de celle du centre */
-.crew-stage{position:relative;height:clamp(470px,46vw,540px);
+.crew-stage{position:relative;height:clamp(540px,52vw,620px);
   perspective:1500px;perspective-origin:50% 45%}
 .crew-track{list-style:none;margin:0;padding:0;position:absolute;inset:0;
   transform-style:preserve-3d}
-.crew-c{position:absolute;top:0;left:50%;width:clamp(230px,24vw,286px);height:100%;
-  margin-left:calc(clamp(230px,24vw,286px) / -2);
+.crew-c{position:absolute;top:0;left:50%;width:clamp(252px,26vw,312px);height:100%;
+  margin-left:calc(clamp(252px,26vw,312px) / -2);
   transition:transform .62s var(--e),opacity .62s var(--e),filter .62s var(--e);
   will-change:transform}
 .crew-c a,.crew-c .crew-x{display:flex;flex-direction:column;height:100%;overflow:hidden;
@@ -323,7 +341,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-c[data-act] a,.crew-c[data-act] .crew-x{border-color:rgba(var(--bronze-rgb),.42);
   box-shadow:0 34px 80px -26px rgba(var(--bronze-rgb),.42)}
 
-.crew-vis{position:relative;display:block;height:60%;overflow:hidden;
+.crew-vis{position:relative;display:block;height:50%;overflow:hidden;
   background:radial-gradient(120% 84% at 50% 4%,rgba(var(--bronze-rgb),.20) 0%,transparent 70%)}
 .crew-vis img{position:absolute;left:50%;top:10px;transform:translateX(-50%);
   height:640px;width:auto;max-width:none}
@@ -339,14 +357,18 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
   background:color-mix(in srgb,var(--ink) 88%,transparent);
   border:1px solid rgba(var(--bronze-rgb),.42)}
 .crew-txt{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
-.crew-txt small{font-family:ui-monospace,"SF Mono",Menlo,monospace;
-  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze)}
-.crew-txt b{margin:7px 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
+.crew-txt b{margin:0 0 6px;font-size:18.5px;line-height:1.15;letter-spacing:-.6px;
   font-weight:800;color:var(--parch)}
 /* l'accroche : la phrase qu'on retient, au-dessus de l'explication */
-.crew-h{flex:1;margin:0;font-size:14.5px;line-height:1.4;font-weight:600;
+.crew-h{margin:0;font-size:14.5px;line-height:1.3;font-weight:700;
   letter-spacing:-.2px;color:var(--parch)}
-.crew-go{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+/* l'explication : ce que l'assistant fait vraiment */
+.crew-p{flex:1;margin:8px 0 0;font-size:12.8px;line-height:1.5;color:var(--lin)}
+/* les trois mots-clés, sur leur propre ligne au-dessus du lien */
+.crew-tags{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;
+  letter-spacing:.04em;line-height:1.5;color:var(--lin)}
+.crew-go{display:inline-flex;align-items:center;gap:7px;margin-top:12px;
   font-size:13.5px;font-weight:700;color:var(--bronze)}
 .crew-go svg{width:14px;height:14px}
 .crew-go.pending{color:var(--lin);font-weight:600}
@@ -364,6 +386,9 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .crew-nav.p{left:max(16px,calc(50% - 640px))}
 .crew-nav.n{right:max(16px,calc(50% - 640px))}
 .crew-nav.n svg{transform:rotate(180deg)}
+.crew-foot{margin:30px auto 0;max-width:46ch;padding:0 24px;text-align:center;
+  font-size:15.5px;line-height:1.6;font-weight:700;color:var(--parch)}
+.crew-foot span{display:block;font-weight:400;color:var(--lin)}
 .crew-dots{display:flex;justify-content:center;gap:9px;margin-top:34px}
 .crew-dots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;cursor:pointer;
   background:var(--line-2);transition:width .3s var(--e),background .3s var(--e)}
@@ -374,7 +399,7 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 .t-crew.nu{padding-top:4px}
 @media (max-width:760px){
   .t-crew{padding:72px 0 84px}
-  .crew-stage{height:clamp(400px,112vw,460px)}
+  .crew-stage{height:clamp(520px,140vw,580px)}
   .crew-nav{width:42px;height:42px;margin-top:-21px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -385,9 +410,10 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
 <section class="t-crew" aria-labelledby="crew-t">
   <div class="crew-head">
     <p class="crew-k">L'équipe Talos</p>
-    <h2 id="crew-t">Une équipe <em>sur mesure</em></h2>
-    <p>Choisissez les assistants dont vous avez besoin. Ils prennent en charge les tâches
-      qui vous prennent du temps, pendant que vous vous concentrez sur vos chantiers.</p>
+    <h2 id="crew-t">Vos Agents IA, <em>à la carte</em>.</h2>
+    <p>Chaque assistant Talos a un rôle précis : attirer et qualifier vos demandes,
+      préparer vos devis, gérer vos factures, suivre votre trésorerie ou organiser vos
+      emails… Choisissez ceux dont vous avez besoin.</p>
   </div>
 
   <div class="crew-stage" id="crew">
@@ -399,6 +425,8 @@ html[data-theme="light"] .crew-c .crew-x{box-shadow:0 30px 70px -34px rgba(40,25
   </div>
 
   <div class="crew-dots" role="tablist" aria-label="Choisir un assistant">@@DOTS@@</div>
+
+  <p class="crew-foot">Commencez avec les assistants dont vous avez besoin.<span>Ajoutez-en d’autres au fur et à mesure que votre entreprise grandit.</span></p>
 </section>
 
 <script>
@@ -459,9 +487,13 @@ BLOC = (BLOC.replace('@@CARTES@@', u'\n'.join(cartes))
 
 
 def bloc(avec_titre=True):
+    """Le bloc complet, ou sa version nue pour la page Offres : sans l'en-tête
+    ni la phrase de clôture, que la page porte déjà."""
     b = BLOC
     if not avec_titre:
         i = b.index('<div class="crew-head">')
-        j = b.index('</div>', b.index('vous concentrez sur vos chantiers')) + 6
+        j = b.index('</div>', b.index('Choisissez ceux dont vous avez besoin')) + 6
         b = (b[:i] + b[j:]).replace('<section class="t-crew"', '<section class="t-crew nu"')
+        i = b.index('<p class="crew-foot">')
+        b = b[:i] + b[b.index('</p>', i) + 4:]
     return b
