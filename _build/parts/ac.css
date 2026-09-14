@@ -1,0 +1,579 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE « ASSISTANT COMMERCIAL » — v2
+   Huit blocs, écrits pour cette page seule. Le nommage est préfixé « ac- »
+   pour qu'aucune règle ne fuie vers les autres fiches assistant.
+
+   La racine de chaque bloc garde la classe .t-asst : c'est elle qui porte les
+   tokens Braise posés par shell.css, donc le thème clair/sombre suit sans une
+   seule couleur en dur. Rien ici ne doit écrire un #hex.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.t-asst{position:relative;background:var(--ink);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased}
+.t-asst .shell{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ── boutons (repris du gabarit assistant, inchangés) ─────────────────── */
+.t-asst .actions{display:flex;flex-wrap:wrap;gap:12px}
+.t-asst .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:52px;padding:15px 28px;border-radius:100px;
+  font-size:15.5px;font-weight:700;letter-spacing:-.2px;text-decoration:none;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .25s var(--e),box-shadow .25s var(--e),
+             background .25s var(--e),border-color .25s var(--e)}
+.t-asst .btn svg{width:16px;height:16px;flex:0 0 auto}
+.t-asst .btn-1{color:#fff;
+  background:linear-gradient(100deg,var(--bronze-2),var(--bronze));
+  box-shadow:0 10px 30px -10px rgba(var(--bronze-rgb),.75)}
+.t-asst .btn-1:hover{transform:translateY(-2px);
+  box-shadow:0 16px 38px -10px rgba(var(--bronze-rgb),.85)}
+.t-asst .btn-2{background:var(--ink-3);color:var(--parch);border-color:var(--line-2)}
+.t-asst .btn-2:hover{transform:translateY(-2px);border-color:rgba(var(--bronze-rgb),.5)}
+.t-asst .btn:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+/* ── pièces communes : pastille d'œil-de-bœuf, titre de section ───────── */
+.t-asst .ac-eyebrow{display:inline-flex;align-items:center;gap:9px;
+  margin:0 0 22px;padding:8px 16px 8px 8px;border-radius:100px;
+  background:var(--ink-3);border:1px solid var(--line-2);
+  font-size:13.5px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
+.t-asst .ac-eyebrow img{width:26px;height:26px;border-radius:50%;flex:0 0 auto}
+.t-asst .ac-eyebrow svg{width:15px;height:15px;color:var(--bronze);
+  flex:0 0 auto;margin-left:8px}
+
+.t-asst .ac-tag{display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;
+  padding:8px 16px;border-radius:10px;
+  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.32);
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--bronze)}
+.t-asst .ac-tag svg{width:14px;height:14px}
+
+.t-asst .ac-h2{margin:0 0 18px;font-size:clamp(32px,4.2vw,58px);line-height:1.03;
+  letter-spacing:-2px;font-weight:800;color:var(--parch);text-wrap:balance}
+.t-asst .ac-sub{margin:0;font-size:17px;line-height:1.6;color:var(--lin);max-width:56ch}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   1 · HERO
+   Le personnage sort du bord gauche, le discours occupe la colonne droite.
+   Identique au gabarit précédent côté décor : c'est le contenu qui change.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-hero{overflow:hidden;padding:28px 0 88px}
+.ac-hero::before{content:"";position:absolute;inset:auto auto 0 -16%;
+  width:74%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.20) 0%,transparent 64%);
+  transform:translateY(18%)}
+html[data-theme="light"] .ac-hero::before{
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.12) 0%,transparent 64%)}
+/* le personnage s'efface dans le fond au lieu d'être coupé net */
+.ac-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:44%;
+  pointer-events:none;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--ink),transparent 100%) 0%,
+    color-mix(in srgb,var(--ink),transparent 58%) 34%,
+    color-mix(in srgb,var(--ink),transparent 16%) 64%,
+    var(--ink) 88%)}
+
+.ac-hero-grid{position:relative;display:grid;grid-template-columns:.76fr 1.24fr;
+  gap:48px;align-items:center;min-height:clamp(540px,47vw,660px)}
+.ac-hero-media{grid-column:1;position:relative;align-self:stretch;
+  pointer-events:none;user-select:none}
+.ac-hero-txt{grid-column:2;position:relative;z-index:3}
+.ac-hero .perso{position:absolute;right:-16px;top:30px;
+  width:min(46vw,560px);height:auto;max-width:none;display:block}
+
+.ac-hero h1{margin:0 0 20px;font-size:clamp(36px,4.35vw,60px);line-height:1.03;
+  letter-spacing:-2px;font-weight:800;color:var(--parch);max-width:17ch;
+  text-wrap:balance}
+.ac-hero .ac-lede{margin:0 0 26px;font-size:17.5px;line-height:1.62;
+  color:var(--lin);max-width:46ch}
+
+/* la barre de preuve — le « screen » de la maquette */
+.ac-proof{display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;
+  margin:0 0 26px;padding:10px 18px;border-radius:12px;
+  background:var(--ink-2);border:1px solid var(--line-2);
+  font-size:14.5px;color:var(--lin)}
+.ac-proof b{color:var(--parch);font-weight:700}
+.ac-proof-i{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.ac-proof-i svg{width:16px;height:16px;color:var(--bronze);flex:0 0 auto}
+.ac-proof-sep{width:1px;height:16px;background:var(--line-2)}
+
+/* le petit bloc de réassurance : trois promesses cochées */
+.ac-reassure{list-style:none;margin:0 0 32px;padding:0;
+  display:flex;flex-wrap:wrap;gap:12px 26px}
+.ac-reassure li{display:flex;align-items:center;gap:10px;
+  font-size:15.5px;font-weight:600;line-height:1.35;letter-spacing:-.2px;
+  color:var(--parch)}
+.ac-reassure i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid rgba(var(--bronze-rgb),.42);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze)}
+.ac-reassure svg{width:14px;height:14px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   2 · LES TROIS MISSIONS
+   Titre pleine largeur, puis le téléphone à gauche et les missions à droite.
+   Cliquer une mission change l'écran : un seul visuel, trois états.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-miss{padding:96px 0 104px;border-top:1px solid var(--line)}
+.ac-miss-head{margin:0 0 54px;max-width:680px}
+.ac-miss-head .ac-h2{margin:0}
+.ac-miss-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;
+  align-items:start}
+
+/* ── la scène de gauche : un cadre, une lueur, un téléphone ───────────── */
+.ac-scene{position:relative;border-radius:28px;overflow:hidden;
+  border:1px solid var(--line-2);background:var(--ink-2);
+  height:clamp(430px,45vw,570px);
+  display:flex;align-items:flex-start;justify-content:center;padding-top:42px}
+.ac-scene::before{content:"";position:absolute;inset:-30% -20% auto -20%;height:90%;
+  pointer-events:none;
+  background:radial-gradient(ellipse at 50% 40%,rgba(var(--bronze-rgb),.26) 0%,transparent 66%)}
+html[data-theme="light"] .ac-scene::before{
+  background:radial-gradient(ellipse at 50% 40%,rgba(var(--bronze-rgb),.16) 0%,transparent 66%)}
+/* le bas du téléphone se fond dans la carte */
+.ac-scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26%;
+  pointer-events:none;z-index:4;
+  background:linear-gradient(180deg,transparent 0%,var(--ink-2) 88%)}
+
+/* châssis titane — même objet que les autres mockups du site */
+.ac-phone{position:relative;z-index:2;width:clamp(230px,25vw,300px);flex:0 0 auto;
+  padding:2.5px 2.5px 0;border-radius:40px 40px 0 0;
+  background:linear-gradient(148deg,#9a9089 0%,#4c453f 5%,#2a2624 12%,#766c64 22%,
+    #3b3531 33%,#241f1d 46%,#574f48 58%,#938880 70%,#423b36 80%,#2b2724 88%,#7d736b 100%);
+  box-shadow:0 1px 2px rgba(0,0,0,.5),0 22px 44px -14px rgba(0,0,0,.6),
+    0 54px 100px -30px rgba(0,0,0,.7),inset 0 0 0 .5px rgba(255,255,255,.24)}
+html[data-theme="light"] .ac-phone{box-shadow:0 1px 2px rgba(40,25,16,.2),
+  0 22px 44px -14px rgba(40,25,16,.22),0 54px 100px -30px rgba(40,25,16,.26),
+  inset 0 0 0 .5px rgba(255,255,255,.24)}
+.ac-phone-bezel{position:relative;border-radius:38px 38px 0 0;background:#070605;
+  padding:6px 6px 0;box-shadow:inset 0 0 3px 1px rgba(0,0,0,.95)}
+.ac-phone-glare{position:absolute;inset:2.5px 2.5px 0;z-index:6;pointer-events:none;
+  border-radius:38px 38px 0 0;
+  background:linear-gradient(118deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.05) 14%,
+    rgba(255,255,255,0) 32%,rgba(255,255,255,0) 76%,rgba(255,255,255,.05) 100%)}
+.ac-phone-k{position:absolute;z-index:2;border-radius:1.5px;
+  background:linear-gradient(180deg,#8b817a,#4a433d 26%,#2b2724 72%,#6f665e)}
+.ac-phone-k.act{left:-2px;top:96px;width:2.5px;height:20px}
+.ac-phone-k.vu{left:-2px;top:134px;width:2.5px;height:38px}
+.ac-phone-k.vd{left:-2px;top:180px;width:2.5px;height:38px}
+.ac-phone-k.pw{right:-2px;top:148px;width:2.5px;height:62px}
+
+/* les trois captures se superposent, une seule est visible */
+.ac-screen{position:relative;border-radius:32px 32px 0 0;overflow:hidden;
+  background:var(--ink-3);aspect-ratio:780/1500}
+.ac-screen img{position:absolute;inset:0;width:100%;height:auto;
+  opacity:0;transform:scale(1.015);
+  transition:opacity .45s var(--e),transform .55s var(--e)}
+.ac-screen img.on{opacity:1;transform:none}
+
+/* ── les trois missions ───────────────────────────────────────────────── */
+.ac-miss-list{display:flex;flex-direction:column;gap:14px}
+.ac-mission{position:relative;display:block;width:100%;text-align:left;
+  padding:24px 26px 24px 24px;border-radius:20px;cursor:pointer;
+  background:transparent;border:1px solid transparent;
+  font-family:var(--sans);color:inherit;
+  transition:background .3s var(--e),border-color .3s var(--e)}
+.ac-mission:hover{background:color-mix(in oklab,var(--ink-2) 70%,transparent);
+  border-color:var(--line)}
+.ac-mission[aria-selected="true"]{background:var(--ink-2);border-color:var(--line-2);
+  box-shadow:0 24px 54px -34px rgba(0,0,0,.7)}
+html[data-theme="light"] .ac-mission[aria-selected="true"]{
+  box-shadow:0 24px 54px -34px rgba(40,25,16,.3)}
+.ac-mission:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+.ac-mission-h{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+.ac-mission-ic{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:12px;
+  border:1px solid rgba(var(--bronze-rgb),.32);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze);transition:background .3s var(--e),color .3s var(--e)}
+.ac-mission-ic svg{width:20px;height:20px}
+.ac-mission[aria-selected="true"] .ac-mission-ic{background:var(--bronze);color:#fff;
+  border-color:var(--bronze)}
+.ac-mission-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--bronze)}
+.ac-mission h3{margin:0 0 8px;font-size:clamp(19px,1.65vw,22px);line-height:1.25;
+  letter-spacing:-.6px;font-weight:800;color:var(--parch)}
+.ac-mission p{margin:0;font-size:15px;line-height:1.6;color:var(--lin);max-width:52ch}
+
+/* barre de progression latérale, purement décorative */
+.ac-mission::before{content:"";position:absolute;left:0;top:22px;bottom:22px;width:2px;
+  border-radius:2px;background:var(--bronze);opacity:0;
+  transition:opacity .3s var(--e)}
+.ac-mission[aria-selected="true"]::before{opacity:1}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3 · LE SCÉNARIO
+   À gauche le titre, épinglé. À droite sept fiches qui se recouvrent au
+   défilement : chaque fiche est « sticky » au même endroit, et son onglet est
+   décalé horizontalement — d'où la rangée d'onglets qui se remplit.
+   Aucun parent ne doit porter overflow:hidden, sinon le sticky meurt.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-story{padding:96px 0 110px;border-top:1px solid var(--line)}
+.ac-story-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:60px;
+  align-items:start}
+.ac-story-txt{position:sticky;top:124px}
+.ac-story-txt .ac-h2{max-width:none;font-size:clamp(28px,3.1vw,42px);
+  letter-spacing:-1.4px;line-height:1.06}
+.ac-story-txt .ac-sub{max-width:none;font-size:16px}
+.ac-story-note{margin:26px 0 0;padding:18px 20px;border-radius:16px;
+  background:var(--ink-2);border:1px solid var(--line);
+  font-size:14.5px;line-height:1.55;color:var(--lin)}
+.ac-story-note b{display:block;margin:0 0 4px;color:var(--parch);font-weight:700}
+.ac-story-txt .actions{margin-top:24px}
+
+/* ── la pile de fiches ────────────────────────────────────────────────── */
+.ac-steps{--tabh:34px;--stick:112px;
+  list-style:none;margin:0;padding:0;position:relative}
+/* la fiche colle sous la barre : son cadre inclut la bande d'onglet, donc
+   « top » vise l'onglet et la carte se pose juste en dessous */
+.ac-step{position:sticky;top:var(--stick);
+  margin:0 0 26px;padding-top:var(--tabh)}
+.ac-step:last-child{margin-bottom:0}
+
+/* l'onglet : même hauteur pour tous, décalé d'un cran par fiche */
+.ac-step-tab{position:absolute;top:0;height:var(--tabh);
+  left:calc(var(--i) * (100% / 7));width:calc(100% / 7);
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  padding:0 4px;border-radius:12px 12px 0 0;
+  background:var(--ink-3);border:1px solid var(--line-2);border-bottom:0;
+  font-family:var(--mono);font-size:clamp(9.5px,.95vw,11.5px);letter-spacing:.02em;
+  color:var(--lin);white-space:nowrap;overflow:hidden;
+  transition:background .3s var(--e),color .3s var(--e),border-color .3s var(--e)}
+.ac-step.is-on .ac-step-tab{background:var(--bronze);border-color:var(--bronze);
+  color:#fff}
+.ac-step-tab .d{opacity:.75}
+
+ /* l'angle haut-gauche reste droit : c'est là que se pose le premier onglet,
+    et dans la pile c'est toujours cet angle-là qui affleure sous lui */
+.ac-step-card{position:relative;padding:26px 28px 28px;border-radius:0 20px 20px 20px;
+  background:var(--ink-2);border:1px solid var(--line-2);
+  box-shadow:0 30px 60px -40px rgba(0,0,0,.85)}
+html[data-theme="light"] .ac-step-card{box-shadow:0 30px 60px -40px rgba(40,25,16,.4)}
+/* même hauteur pour toutes : sinon la fiche du dessous dépasse en bas de la
+   pile et laisse traîner un liseré. 308 px couvre la plus haute à 961 px. */
+@media (min-width:961px){.ac-step-card{min-height:300px}}
+
+.ac-step-h{display:flex;align-items:center;gap:12px;margin:0 0 16px}
+.ac-step-ic{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:11px;
+  border:1px solid rgba(var(--bronze-rgb),.3);background:rgba(var(--bronze-rgb),.10);
+  color:var(--bronze)}
+.ac-step-ic svg{width:19px;height:19px}
+.ac-step-h b{font-size:17.5px;font-weight:800;letter-spacing:-.5px;color:var(--parch)}
+.ac-step-h time{margin-left:auto;font-family:var(--mono);font-size:12px;
+  color:var(--lin);white-space:nowrap}
+
+.ac-step-q{margin:0;padding:16px 18px;border-radius:14px;
+  background:var(--ink-3);border:1px solid var(--line);
+  font-size:15px;line-height:1.6;color:var(--parch);font-style:italic}
+.ac-step-p{margin:0;font-size:15px;line-height:1.6;color:var(--lin)}
+
+/* les puces d'une demande qualifiée */
+.ac-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ac-chips li{display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:100px;
+  background:var(--ink-3);border:1px solid var(--line-2);
+  font-size:13.5px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
+.ac-chips li::before{content:"";width:5px;height:5px;border-radius:50%;
+  background:var(--bronze);flex:0 0 auto}
+
+/* les trois variantes de prix */
+.ac-prices{list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(3,1fr);gap:10px}
+.ac-prices li{padding:14px 14px 13px;border-radius:14px;text-align:center;
+  background:var(--ink-3);border:1px solid var(--line-2)}
+.ac-prices small{display:block;margin:0 0 5px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--lin)}
+.ac-prices b{font-size:17px;font-weight:800;letter-spacing:-.6px;color:var(--parch);
+  font-variant-numeric:tabular-nums}
+.ac-prices li.hot{border-color:rgba(var(--bronze-rgb),.5);
+  background:rgba(var(--bronze-rgb),.10)}
+.ac-prices li.hot b{color:var(--bronze)}
+
+/* la ligne de résultat, en fin de scénario */
+.ac-step-win{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:16px 18px;border-radius:14px;
+  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.34)}
+.ac-step-win b{font-size:22px;font-weight:800;letter-spacing:-.8px;color:var(--bronze);
+  font-variant-numeric:tabular-nums}
+.ac-step-win span{font-size:14.5px;color:var(--lin)}
+.ac-step-body{display:grid;gap:14px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   4 · LE DÉTAIL DES FONCTIONNALITÉS
+   Quatre grandes cartes — le gabarit « deux colonnes denses » : une vignette
+   de l'assistant, un titre, une ligne d'accroche, puis la liste complète.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-feat{padding:96px 0 108px;border-top:1px solid var(--line)}
+.ac-feat-head{max-width:720px;margin:0 0 46px}
+.ac-feat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+
+.ac-card{display:flex;flex-direction:column;padding:30px 30px 28px;
+  border-radius:26px;background:var(--ink-2);border:1px solid var(--line-2);
+  transition:border-color .3s var(--e),transform .3s var(--e)}
+html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
+.ac-card:hover{border-color:rgba(var(--bronze-rgb),.4);transform:translateY(-3px)}
+
+.ac-card-top{display:flex;align-items:center;gap:12px;margin:0 0 22px}
+.ac-card-av{width:42px;height:42px;border-radius:13px;flex:0 0 auto;
+  object-fit:cover;background:var(--ink-3);border:1px solid var(--line-2)}
+.ac-card-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--lin)}
+.ac-card-n{margin-left:auto;font-family:var(--mono);font-size:11.5px;
+  letter-spacing:.08em;color:var(--bronze);white-space:nowrap}
+
+.ac-card-lab{margin:0 0 6px;font-size:14px;font-weight:700;letter-spacing:-.2px;
+  color:var(--parch)}
+.ac-card h3{margin:0 0 10px;font-size:clamp(23px,2.2vw,29px);line-height:1.12;
+  letter-spacing:-1.1px;font-weight:800;color:var(--parch);text-wrap:balance}
+.ac-card-acc{margin:0 0 14px;font-size:15px;line-height:1.5;font-weight:700;
+  letter-spacing:-.2px;color:var(--bronze)}
+.ac-card-acc span{color:var(--lin);font-weight:500}
+.ac-card > p{margin:0 0 22px;font-size:15px;line-height:1.62;color:var(--lin)}
+
+.ac-card-sep{margin:0 0 16px;padding:0;border:0;border-top:1px solid var(--line)}
+.ac-card-cap{margin:0 0 14px;font-size:13px;font-weight:600;color:var(--lin)}
+.ac-card ul{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:12px}
+.ac-card li{display:flex;align-items:flex-start;gap:11px;
+  font-size:14.5px;line-height:1.45;letter-spacing:-.1px;color:var(--parch)}
+.ac-card li i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:24px;height:24px;margin-top:-1px;border-radius:8px;
+  background:rgba(var(--bronze-rgb),.10);color:var(--bronze)}
+.ac-card li svg{width:14px;height:14px}
+.ac-card-go{margin-top:auto;display:inline-flex;align-items:center;gap:8px;
+  align-self:flex-start;min-height:46px;padding:12px 22px;border-radius:100px;
+  background:var(--ink-3);border:1px solid var(--line-2);color:var(--parch);
+  font-size:14.5px;font-weight:700;letter-spacing:-.2px;text-decoration:none;
+  transition:background .25s var(--e),border-color .25s var(--e),color .25s var(--e)}
+.ac-card-go svg{width:15px;height:15px}
+.ac-card-go:hover{background:var(--bronze);border-color:var(--bronze);color:#fff}
+.ac-card-go:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5 · LES OUTILS — deux bandeaux qui défilent en sens inverse
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-tools{padding:92px 0 96px;border-top:1px solid var(--line)}
+.ac-tools-head{text-align:center;max-width:640px;margin:0 auto 40px}
+.ac-tools-head .ac-h2{margin:0 0 14px}
+.ac-tools-head .ac-sub{margin:0 auto;max-width:52ch}
+.ac-tools-count{display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+  padding:8px 16px;border-radius:100px;
+  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.3);
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--bronze)}
+
+.ac-belt{position:relative;display:flex;flex-direction:column;gap:14px;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
+.ac-belt-row{overflow:hidden}
+.ac-belt-track{display:flex;align-items:center;gap:14px;width:max-content;
+  animation:acBelt 52s linear infinite}
+.ac-belt-row.rev .ac-belt-track{animation-duration:64s;animation-direction:reverse}
+.ac-belt:hover .ac-belt-track{animation-play-state:paused}
+@keyframes acBelt{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+.ac-chip{display:flex;flex-shrink:0;align-items:center;gap:11px;
+  padding:11px 18px;border-radius:14px;
+  background:var(--ink-2);border:1px solid var(--line-2)}
+html[data-theme="light"] .ac-chip{box-shadow:0 1px 2px rgba(40,25,16,.05)}
+.ac-chip img{width:22px;height:22px;flex:0 0 auto;object-fit:contain}
+.ac-chip span{font-size:14px;font-weight:600;letter-spacing:-.2px;color:var(--lin);
+  white-space:nowrap}
+
+.ac-tools-foot{max-width:760px;margin:38px auto 0;text-align:center;
+  font-size:14.5px;line-height:1.6;color:var(--lin)}
+.ac-tools-foot b{color:var(--parch);font-weight:700}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   6 · LE DUO — l'assistant qui complète celui-ci
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-duo{padding:92px 0 100px;border-top:1px solid var(--line)}
+.ac-duo-head{max-width:820px;margin:0 0 40px}
+.ac-duo-card{position:relative;display:grid;grid-template-columns:auto 1fr auto;
+  gap:40px;align-items:center;padding:38px 40px;border-radius:28px;
+  background:var(--ink-2);border:1px solid var(--line-2);overflow:hidden}
+.ac-duo-card::before{content:"";position:absolute;inset:auto -10% -60% auto;
+  width:44%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.20) 0%,transparent 64%)}
+
+/* width:max-content : empilée, la paire devenait aussi large que la carte et
+   le « + » (calé à 50 %) partait se poser au milieu du vide */
+.ac-duo-pair{position:relative;display:flex;align-items:center;flex:0 0 auto;
+  width:max-content}
+.ac-duo-pair img{width:82px;height:82px;border-radius:24px;object-fit:cover;
+  background:var(--ink-3);border:1px solid var(--line-2)}
+.ac-duo-pair img + img{margin-left:-16px}
+.ac-duo-plus{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  z-index:2;display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;
+  background:var(--bronze);color:#fff;border:3px solid var(--ink-2)}
+.ac-duo-plus svg{width:14px;height:14px}
+
+.ac-duo-txt{position:relative;min-width:0}
+.ac-duo-txt .ac-card-role{display:block;margin:0 0 8px}
+.ac-duo-txt h3{margin:0 0 10px;font-size:clamp(22px,2.3vw,30px);line-height:1.12;
+  letter-spacing:-1.1px;font-weight:800;color:var(--parch)}
+.ac-duo-txt p{margin:0;font-size:15.5px;line-height:1.6;color:var(--lin);max-width:56ch}
+.ac-duo-act{position:relative;display:flex;flex-direction:column;gap:10px;
+  align-items:stretch;flex:0 0 auto}
+.ac-duo-all{display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  font-size:14px;font-weight:600;color:var(--lin);text-decoration:none;
+  transition:color .25s var(--e)}
+.ac-duo-all:hover{color:var(--bronze)}
+.ac-duo-all svg{width:13px;height:13px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   7 · AVANT / AVEC TALOS
+   Le tableau est dessiné en SVG sur ordinateur (il suit le thème par
+   currentColor et var()). Sous 760 px il cède la place à la version empilée,
+   qui est aussi la version lue par les lecteurs d'écran.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-ba{padding:92px 0 100px;border-top:1px solid var(--line)}
+.ac-ba-head{max-width:640px;margin:0 0 40px}
+.ac-ba-svg{display:block;width:100%}
+.ac-ba-svg svg{display:block;width:100%;height:auto}
+.ac-ba-cards{list-style:none;margin:0;padding:0;display:none;gap:12px}
+.ac-ba-cards li{padding:18px 20px;border-radius:18px;
+  background:var(--ink-2);border:1px solid var(--line-2)}
+.ac-ba-cards .av,.ac-ba-cards .ap{display:flex;align-items:flex-start;gap:11px;
+  font-size:15px;line-height:1.45}
+.ac-ba-cards .av{color:var(--lin);padding-bottom:13px;margin-bottom:13px;
+  border-bottom:1px solid var(--line)}
+.ac-ba-cards .ap{color:var(--parch);font-weight:600}
+.ac-ba-cards i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:50%;margin-top:-1px}
+.ac-ba-cards .av i{background:color-mix(in oklab,var(--lin) 18%,transparent);
+  color:var(--lin)}
+.ac-ba-cards .ap i{background:rgba(var(--bronze-rgb),.14);color:var(--bronze)}
+.ac-ba-cards svg{width:12px;height:12px}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   8 · L'APPEL FINAL
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-cta{position:relative;overflow:hidden;padding:104px 0 112px;
+  border-top:1px solid var(--line)}
+.ac-cta::before{content:"";position:absolute;inset:auto auto -46% 50%;
+  width:76%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.22) 0%,transparent 62%)}
+html[data-theme="light"] .ac-cta::before{
+  background:radial-gradient(circle,rgba(var(--bronze-rgb),.14) 0%,transparent 62%)}
+.ac-cta-in{position:relative;text-align:center;max-width:760px;margin:0 auto}
+.ac-cta-av{width:84px;height:84px;border-radius:26px;margin:0 auto 26px;
+  object-fit:cover;background:var(--ink-3);border:1px solid var(--line-2);
+  box-shadow:0 26px 54px -26px rgba(0,0,0,.7)}
+html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.3)}
+.ac-cta h2{margin:0 0 18px;font-size:clamp(31px,4vw,52px);line-height:1.05;
+  letter-spacing:-1.8px;font-weight:800;color:var(--parch);text-wrap:balance}
+.ac-cta p{margin:0 auto 32px;font-size:17.5px;line-height:1.6;color:var(--lin);
+  max-width:48ch}
+.ac-cta .actions{justify-content:center}
+.ac-cta .ac-reassure{justify-content:center;margin:34px 0 0}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width:1080px){
+  .ac-step-tab .d{display:none}
+}
+
+@media (max-width:960px){
+  .t-asst .ac-h2{letter-spacing:-1.5px}
+
+  /* 1 · hero : le personnage passe au-dessus, à fond perdu */
+  .ac-hero{padding:0 0 68px}
+  .ac-hero-grid{grid-template-columns:1fr;gap:28px;min-height:0}
+  .ac-hero-media{grid-column:1;order:-1;position:relative;
+    height:clamp(250px,50vw,330px);overflow:hidden;
+    -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent 99%);
+            mask-image:linear-gradient(180deg,#000 74%,transparent 99%)}
+  .ac-hero-txt{grid-column:1}
+  .ac-hero .perso{left:50%;top:14px;right:auto;transform:translateX(-50%);
+    width:min(58vw,300px)}
+  .ac-hero h1{max-width:none;letter-spacing:-1.6px}
+  .ac-hero .ac-lede{max-width:none}
+
+  /* 2 · missions : la scène passe au-dessus */
+  .ac-miss{padding:72px 0 80px}
+  .ac-miss-head{margin-bottom:34px;max-width:none}
+  .ac-miss-grid{grid-template-columns:1fr;gap:28px}
+  .ac-scene{height:clamp(340px,62vw,440px);padding-top:34px}
+
+  /* 3 · scénario : plus d'empilement, une frise verticale classique */
+  .ac-story{padding:72px 0 84px}
+  .ac-story-grid{grid-template-columns:1fr;gap:34px}
+  .ac-story-txt{position:static;top:auto}
+  .ac-story-txt .ac-h2,.ac-story-txt .ac-sub{max-width:none}
+  .ac-steps{--tabh:0px}
+  .ac-step{position:relative;top:auto;padding-top:0;margin-bottom:14px;padding-left:26px}
+  .ac-step::before{content:"";position:absolute;left:9px;top:12px;bottom:-20px;
+    width:1px;background:var(--line-2)}
+  .ac-step:last-child::before{display:none}
+  .ac-step-tab{position:absolute;left:0;top:14px;width:19px;height:19px;
+    border-radius:50%;border:1px solid var(--line-2);background:var(--ink-3);
+    font-size:0;padding:0;z-index:2}
+  .ac-step-tab::after{content:"";width:6px;height:6px;border-radius:50%;
+    background:var(--bronze)}
+  .ac-step-card{border-radius:20px;padding:22px 22px 24px;min-height:0}
+
+  /* 4 · fonctionnalités : une colonne */
+  .ac-feat{padding:72px 0 80px}
+  .ac-feat-grid{grid-template-columns:1fr}
+
+  /* 6 · duo : empilé */
+  .ac-duo{padding:72px 0 80px}
+  .ac-duo-card{grid-template-columns:1fr;gap:24px;padding:30px 26px;text-align:left}
+  .ac-duo-act{align-items:stretch}
+
+  /* 7 · 8 */
+  .ac-ba{padding:72px 0 80px}
+  .ac-tools{padding:72px 0 78px}
+  .ac-cta{padding:76px 0 86px}
+}
+
+@media (max-width:760px){
+  .ac-ba-svg{display:none}
+  .ac-ba-cards{display:grid}
+}
+
+@media (max-width:560px){
+  .t-asst .shell{padding:0 18px}
+  .ac-hero-media{margin:0 -18px}
+  .ac-proof{width:100%;flex-direction:column;align-items:flex-start;gap:8px}
+  .ac-proof-sep{display:none}
+  .ac-reassure{flex-direction:column;gap:12px}
+  .t-asst .actions{flex-direction:column}
+  .t-asst .btn{width:100%}
+  .ac-mission{padding:20px 18px 20px 18px}
+  .ac-card{padding:26px 22px 24px;border-radius:22px}
+  .ac-card-go{width:100%;justify-content:center}
+  .ac-prices{grid-template-columns:1fr}
+  .ac-step-h{flex-wrap:wrap}
+  .ac-step-h time{margin-left:0;width:100%;order:3}
+  .ac-duo-pair img{width:66px;height:66px;border-radius:20px}
+  .ac-cta .ac-reassure{align-items:flex-start}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .t-asst .btn,.ac-card,.ac-mission,.ac-screen img,.ac-step-tab{transition:none}
+  .t-asst .btn-1:hover,.t-asst .btn-2:hover,.ac-card:hover{transform:none}
+  .ac-belt-track{animation:none}
+  .ac-belt{-webkit-mask-image:none;mask-image:none}
+  .ac-belt-row{overflow-x:auto}
+}
