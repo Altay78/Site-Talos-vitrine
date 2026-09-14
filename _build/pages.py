@@ -9,58 +9,11 @@ et ont été extraits une fois d'index.html — la page de référence.
     python3 _build/pages.py
 """
 import os, io, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/'
-P = WEB + '_build/parts/'
-
-
-def part(name):
-    return io.open(P + name, encoding='utf-8').read()
-
-
-SHELL_CSS = part('shell.css')
-NAV = part('nav.html')
-FOOTER = part('footer.html')
-SHELL_JS = part('shell.js')
-
-
-def head(title, desc, og_title=None, og_desc=None, css='', noindex=False):
-    return u"""<!DOCTYPE html>
-<html lang="fr" data-theme="dark">
-<head>
-<meta charset="utf-8">
-<script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>%s</title>
-<meta name="author" content="Talos">
-<meta name="description" content="%s">
-<meta property="og:title" content="%s">
-<meta property="og:description" content="%s">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">%s
-<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png">
-<style>
-%s
-%s
-</style>
-</head>
-""" % (title, desc, og_title or title, og_desc or desc,
-       u'\n<meta name="robots" content="noindex">' if noindex else u'',
-       SHELL_CSS, css)
-
-
-def page(fname, title, desc, css, body, js, og_title=None, og_desc=None,
-         nav=True, footer=True, noindex=False):
-    out = head(title, desc, og_title, og_desc, css, noindex)
-    out += u'<body>\n<main>\n\n'
-    if nav:
-        out += NAV + u'\n\n'
-    out += body
-    if footer:
-        out += u'\n\n' + FOOTER
-    out += u'\n</main>\n\n<script>\n' + SHELL_JS + u'\n' + js + u'\n</script>\n</body>\n</html>\n'
-    io.open(WEB + fname, 'w', encoding='utf-8').write(out)
-    print(u'écrit : %s (%d octets)' % (fname, len(out)))
+# la coquille (head/nav/footer/page) vit dans coquille.py : une page peut
+# ainsi être régénérée seule, sans réécrire les quinze autres.
+from coquille import WEB, P, part, SHELL_CSS, NAV, FOOTER, SHELL_JS, head, page
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -169,9 +122,26 @@ page('offres.html',
              u"a ses missions. Vous prenez ceux dont vous avez besoin.")
 
 
+#  L'assistant commercial a sa propre page, écrite à la main (parts/ac.*) :
+#  huit blocs qui ne rentrent pas dans le gabarit commun. Les quatre autres
+#  restent sur le gabarit tant qu'on ne leur a pas porté le nouveau dessin.
+REFAITS = {'commercial'}
+
 for _a in assistants.ASSISTANTS:
+    if _a['slug'] in REFAITS:
+        continue
     page('assistant-%s.html' % _a['slug'], _a['titre'], _a['desc'],
          ASSIST_CSS, assistants.corps(_a), ASSIST_JS)
+
+page('assistant-commercial.html',
+     u"Assistant commercial — Talos | Il ne laisse passer aucune opportunité",
+     u"L'assistant commercial de Talos capte vos demandes même le soir, prépare vos devis "
+     u"depuis un mail, un vocal ou une photo, les fait signer avec l'acompte, puis relance "
+     u"jusqu'à la réponse du client.",
+     part('ac.css'), part('ac.html'), part('ac.js'),
+     og_title=u"Votre commercial qui ne laisse passer aucune opportunité",
+     og_desc=u"Il capte vos demandes, prépare vos devis et relance vos clients jusqu'à la "
+             u"signature. Même quand vous êtes sur un chantier.")
 
 
 
