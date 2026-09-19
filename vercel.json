@@ -32,6 +32,15 @@
           "value": "public, max-age=604800, must-revalidate"
         }
       ]
+    },
+    {
+      "source": "/(talos-paiement|panier).js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
     }
   ]
 }
