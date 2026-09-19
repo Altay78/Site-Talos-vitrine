@@ -198,59 +198,67 @@ html.pn-ouvert .pn-tiroir{transform:none}
 [data-panier].is-on:hover{transform:none;
   background:color-mix(in oklab,var(--pn-acc) 9%,transparent)}
 
-/* ═══ LA PAGE COMMANDER ═════════════════════════════════════════════════ */
-.cm{position:relative;overflow:hidden;padding:36px 0 96px;
+/* ═══ LA PAGE COMMANDER ═════════════════════════════════════════════════
+   Tout ce bloc est cadré sur [data-panier-page], que seule la section
+   de commander.html porte. Sans ce cadre, ces règles s'appliqueraient
+   aussi à « Comment ça marche » : les deux pages emploient le même
+   préfixe .cm-. Tant que cette feuille n'était chargée que sur
+   Commander, personne ne le voyait. Depuis qu'elle l'est partout, le
+   pas-à-pas de l'autre page se retrouvait écrasé — titres comprimés
+   sur 66 px. Ne retirez pas le cadre, ou renommez d'abord en .pn-cm-.
+   ═══════════════════════════════════════════════════════════════════ */
+.cm[data-panier-page]{position:relative;overflow:hidden;padding:36px 0 96px;
   background:var(--pn-fond);color:var(--pn-txt)}
-.cm::before{content:"";position:absolute;inset:auto auto -40% 50%;
+.cm[data-panier-page]::before{content:"";position:absolute;inset:auto auto -40% 50%;
   width:70%;aspect-ratio:1;border-radius:50%;pointer-events:none;
   transform:translateX(-50%);
   background:radial-gradient(circle,color-mix(in oklab,var(--pn-acc) 20%,transparent) 0%,transparent 62%)}
-.cm-in{position:relative;width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
-.cm-head{max-width:640px;margin:0 0 46px}
-.cm-tag{display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;
+[data-panier-page] .cm-in{position:relative;width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
+[data-panier-page] .cm-head{max-width:640px;margin:0 0 46px}
+[data-panier-page] .cm-tag{display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;
   padding:8px 16px;border-radius:10px;
   background:color-mix(in oklab,var(--pn-acc) 12%,transparent);
   border:1px solid color-mix(in oklab,var(--pn-acc) 32%,transparent);
   font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;
   letter-spacing:.14em;text-transform:uppercase;color:var(--pn-acc)}
-.cm h1{margin:0 0 16px;font-size:clamp(32px,4.2vw,56px);line-height:1.03;
+.cm[data-panier-page] h1{margin:0 0 16px;font-size:clamp(32px,4.2vw,56px);line-height:1.03;
   letter-spacing:-2px;font-weight:800;text-wrap:balance}
-.cm h1 em{font-style:normal;color:var(--pn-acc)}
-.cm-head p{margin:0;font-size:17px;line-height:1.6;color:var(--pn-doux)}
+.cm[data-panier-page] h1 em{font-style:normal;color:var(--pn-acc)}
+[data-panier-page] .cm-head p{margin:0;font-size:17px;line-height:1.6;color:var(--pn-doux)}
 
-.cm-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:start}
-.cm-col h2{margin:0 0 14px;font-size:20px;font-weight:800;letter-spacing:-.6px}
-.cm-col > section{margin:0 0 34px}
-.cm-col .pn-ags{gap:10px}
-.cm-col .pn-ag{padding:13px 15px;border-radius:18px}
-.cm-col .pn-engs{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.cm-col .pn-eng{padding:14px 6px;font-size:13.5px}
-.cm-step{display:flex;align-items:baseline;gap:10px;margin:0 0 14px}
-.cm-step i{font-style:normal;font-family:ui-monospace,"SF Mono",Menlo,monospace;
+[data-panier-page] .cm-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:start}
+[data-panier-page] .cm-col h2{margin:0 0 14px;font-size:20px;font-weight:800;letter-spacing:-.6px}
+[data-panier-page] .cm-col > section{margin:0 0 34px}
+[data-panier-page] .cm-col .pn-ags{gap:10px}
+[data-panier-page] .cm-col .pn-ag{padding:13px 15px;border-radius:18px}
+[data-panier-page] .cm-col .pn-engs{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+[data-panier-page] .cm-col .pn-eng{padding:14px 6px;font-size:13.5px}
+[data-panier-page] .cm-step{display:flex;align-items:baseline;gap:10px;margin:0 0 14px}
+[data-panier-page] .cm-step i{font-style:normal;font-family:ui-monospace,"SF Mono",Menlo,monospace;
   font-size:11.5px;letter-spacing:.1em;color:var(--pn-acc)}
 
-.cm-aside{position:sticky;top:120px;padding:24px 24px 22px;border-radius:24px;
+[data-panier-page] .cm-aside{position:sticky;top:120px;padding:24px 24px 22px;border-radius:24px;
   background:var(--pn-surf);border:1px solid var(--pn-fil);
   box-shadow:0 40px 80px -56px rgba(0,0,0,.9)}
 html[data-theme="light"] .cm-aside{box-shadow:0 40px 80px -56px rgba(40,25,16,.4)}
-.cm-aside .pn-recap{padding:0;background:none;border:0}
-.cm-aside > h2{margin:0 0 16px}
+[data-panier-page] .cm-aside .pn-recap{padding:0;background:none;border:0}
+[data-panier-page] .cm-aside > h2{margin:0 0 16px}
 
-.cm-rass{list-style:none;margin:22px 0 0;padding:18px 0 0;
+[data-panier-page] .cm-rass{list-style:none;margin:22px 0 0;padding:18px 0 0;
   border-top:1px solid var(--pn-fil);display:grid;gap:10px}
-.cm-rass li{display:flex;align-items:flex-start;gap:9px;
+[data-panier-page] .cm-rass li{display:flex;align-items:flex-start;gap:9px;
   font-size:13.5px;line-height:1.45;color:var(--pn-doux)}
-.cm-rass svg{width:15px;height:15px;flex:0 0 auto;margin-top:1px;color:var(--pn-acc)}
+[data-panier-page] .cm-rass svg{width:15px;height:15px;flex:0 0 auto;margin-top:1px;color:var(--pn-acc)}
 
 @media (max-width:960px){
-  .cm{padding:24px 0 72px}
-  .cm-grid{grid-template-columns:1fr;gap:30px}
-  .cm-aside{position:static;top:auto}
-  .cm-head{margin-bottom:34px}
+  .cm[data-panier-page]{padding:24px 0 72px}
+  [data-panier-page] .cm-grid{grid-template-columns:1fr;gap:30px}
+  [data-panier-page] .cm-aside{position:static;top:auto}
+  [data-panier-page] .cm-head{margin-bottom:34px}
 }
 @media (max-width:560px){
-  .cm-in{padding:0 18px}
-  .cm-col .pn-engs,.pn-engs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  [data-panier-page] .cm-in{padding:0 18px}
+  [data-panier-page] .cm-col .pn-engs,.pn-engs{grid-template-columns:repeat(2,minmax(0,1fr))}
   .pn-tiroir{width:100%}
 }
 

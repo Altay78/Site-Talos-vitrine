@@ -35,7 +35,11 @@
     /* CGU, CGV, mentions, confidentialité : un texte juridique se lit
        en entier ou ne vaut rien. Quinze pastilles y seraient quinze
        façons de ne pas lire ce qu'on signe. */
-    '.t-legal'
+    '.t-legal',
+    /* le chapô d'une carte d'article EST déjà un résumé : le replier
+       revient à résumer un résumé, et la pastille se retrouve à côté
+       du badge « Bientôt » — deux invitations pour un seul geste */
+    '.t-blog .big', '.t-blog .post'
   ].join(',');
 
   var CHEV =
