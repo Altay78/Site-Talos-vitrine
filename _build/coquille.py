@@ -21,7 +21,18 @@ FOOTER = part('footer.html')
 SHELL_JS = part('shell.js')
 
 
-def head(title, desc, og_title=None, og_desc=None, css='', noindex=False):
+#  Le site est servi sous cette adresse, avec l'extension .html
+#  (vercel.json garde cleanUrls à false). C'est elle que les moteurs
+#  doivent retenir, et celle que les réseaux sociaux vont chercher.
+SITE = u'https://www.talos-ai.tech/'
+
+#  Aperçu de partage : sans lui, une page envoyée sur WhatsApp ou
+#  LinkedIn s'affiche en carte grise. 1200×630, le format attendu.
+OG_IMAGE = SITE + u'og-talos.jpg'
+
+
+def head(title, desc, og_title=None, og_desc=None, css='', noindex=False,
+         fname=None):
     return u"""<!DOCTYPE html>
 <html lang="fr" data-theme="dark">
 <head>
@@ -34,9 +45,16 @@ def head(title, desc, og_title=None, og_desc=None, css='', noindex=False):
 <meta property="og:title" content="%s">
 <meta property="og:description" content="%s">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">%s
+<meta property="og:site_name" content="Talos">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="%s">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="%s">%s%s
 <link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="panier.css">
+<link rel="stylesheet" href="talos-press.css">
 <style>
 %s
 %s
@@ -46,13 +64,16 @@ def head(title, desc, og_title=None, og_desc=None, css='', noindex=False):
 <link rel="stylesheet" href="talos-more.css">
 </head>
 """ % (title, desc, og_title or title, og_desc or desc,
+       OG_IMAGE, OG_IMAGE,
+       (u'\n<link rel="canonical" href="%s%s">\n<meta property="og:url" content="%s%s">'
+        % (SITE, fname, SITE, fname)) if (fname and not noindex) else u'',
        u'\n<meta name="robots" content="noindex">' if noindex else u'',
        SHELL_CSS, css)
 
 
 def page(fname, title, desc, css, body, js, og_title=None, og_desc=None,
          nav=True, footer=True, noindex=False):
-    out = head(title, desc, og_title, og_desc, css, noindex)
+    out = head(title, desc, og_title, og_desc, css, noindex, fname)
     out += u'<body>\n<main>\n\n'
     if nav:
         out += NAV + u'\n\n'
@@ -68,6 +89,9 @@ def page(fname, title, desc, css, body, js, og_title=None, og_desc=None,
     out += u'<script src="panier.js" defer></script>\n'
     # les paragraphes gris se replient derrière « En savoir plus » sur
     # téléphone : le script se pose tout seul, page par page
-    out += u'<script src="talos-more.js" defer></script>\n</body>\n</html>\n'
+    out += u'<script src="talos-more.js" defer></script>\n'
+    # l'inscription à la lettre : un seul comportement pour les deux
+    # formulaires du site, celui du pied de page et celui du blog
+    out += u'<script src="talos-lettre.js" defer></script>\n</body>\n</html>\n'
     io.open(WEB + fname, 'w', encoding='utf-8').write(out)
     print(u'écrit : %s (%d octets)' % (fname, len(out)))

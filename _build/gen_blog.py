@@ -58,35 +58,85 @@ ARROW = ('<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="cu
          '<path d="M9 6l6 6-6 6"/></svg>')
 
 
+def _taille(chemin):
+    """Dimensions du fichier, lues sur le disque. Sans elles le navigateur
+    ne sait pas quelle place réserver et la page saute au chargement."""
+    import struct
+    plein = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/' + chemin
+    try:
+        with open(plein, 'rb') as f:
+            d = f.read()
+    except IOError:
+        return None
+    if d[:2] == b'\xff\xd8':                      # JPEG
+        i = 2
+        while i < len(d) - 9:
+            if d[i] != 0xFF:
+                i += 1; continue
+            m = d[i + 1]
+            if m in (0xC0, 0xC1, 0xC2, 0xC3):
+                h, w = struct.unpack('>HH', d[i + 5:i + 9])
+                return w, h
+            if m in (0xD8, 0xD9) or 0xD0 <= m <= 0xD7:
+                i += 2; continue
+            i += 2 + struct.unpack('>H', d[i + 2:i + 4])[0]
+        return None
+    if d[:8] == b'\x89PNG\r\n\x1a\n':               # PNG
+        w, h = struct.unpack('>II', d[16:24])
+        return w, h
+    return None
+
+
 def cover(a, rub):
     """Photo si elle existe, sinon dégradé de rubrique avec l'initiale."""
     img = a[6]
     if img:
-        return (u'<span class="cov"><img src="%s" alt="%s" loading="lazy" '
-                u'decoding="async"></span>' % (img, a[7]))
+        t = _taille(img)
+        dim = (u' width="%d" height="%d"' % t) if t else u''
+        return (u'<span class="cov"><img src="%s" alt="%s"%s loading="lazy" '
+                u'decoding="async"></span>' % (img, a[7], dim))
     return u'<span class="cov" data-c="%s" data-mono="%s" aria-hidden="true"></span>' % (
         rub[2], rub[3])
 
 
+def _ecrit(a):
+    """L'article est-il en ligne ? Tant que son adresse est '#', la carte
+    ne se clique pas : un lien qui ne mène nulle part coûte plus cher que
+    l'article qu'on n'a pas encore écrit."""
+    return a[8] not in (None, '', '#')
+
+
 def big_card(a, rub):
-    return u"""      <a class="big" href="%s" data-cat="%s">
+    pret = _ecrit(a)
+    return u"""      <%s class="big%s"%s data-cat="%s">
 %s
         <span class="meta"><span class="tag">%s</span><span class="dot">·</span><span>%s</span><span class="dot">·</span><span>%s</span></span>
         <h3>%s</h3>
         <p>%s</p>
-        <span class="go">Lire l'article %s</span>
-      </a>""" % (a[8], a[0], '        ' + cover(a, rub), a[0], a[4], a[5],
-                 a[1], a[2], ARROW)
+        <span class="go">%s</span>
+      </%s>""" % (
+        'a' if pret else 'article',
+        '' if pret else ' is-soon',
+        (u' href="%s"' % a[8]) if pret else u'',
+        a[0], '        ' + cover(a, rub), a[0], a[4], a[5], a[1], a[2],
+        (u"Lire l'article " + ARROW) if pret else u'Bientôt',
+        'a' if pret else 'article')
 
 
 def breve(a, rub):
-    return u"""        <a class="post" href="%s" data-cat="%s">
+    pret = _ecrit(a)
+    return u"""        <%s class="post%s"%s data-cat="%s">
 %s
           <span class="bd">
             <span class="meta"><span>%s</span><span class="dot">·</span><span>%s</span><span class="dot">·</span><span>%s</span></span>
             <h3>%s</h3>
           </span>
-        </a>""" % (a[8], a[0], '          ' + cover(a, rub), a[3], a[4], a[5], a[1])
+        </%s>""" % (
+        'a' if pret else 'article',
+        '' if pret else ' is-soon',
+        (u' href="%s"' % a[8]) if pret else u'',
+        a[0], '          ' + cover(a, rub), a[3], a[4], a[5], a[1],
+        'a' if pret else 'article')
 
 
 def rub_of(name):

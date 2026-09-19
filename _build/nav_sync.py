@@ -37,7 +37,12 @@ PAGES = ['index.html', 'offres.html', 'comment-ca-marche.html',
          # elles gardaient un menu « Offres » d'une version en retard
          'assistant-commercial.html', 'assistant-tresorerie.html',
          'assistant-client.html', 'assistant-facturation.html',
-         'assistant-administratif.html']
+         'assistant-administratif.html',
+         # commander et merci manquaient : régénérées par offres.py et
+         # merci.py, elles repartaient sans le menu « Offres » et sans
+         # le pied de page réaligné. Deux pages du tunnel d'achat, donc
+         # les dernières qu'on peut se permettre de laisser de côté.
+         'commander.html', 'merci.html']
 
 LOGO_SVG = ('<svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true">'
             '<mask id="navsync-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550">'
@@ -260,7 +265,7 @@ def sync(page):
         notes.append('menu')
 
     # 3 · colonne « Navigation » du pied de page
-    s, n = re.subn(r'(<h4>Navigation</h4>\s*<ul>).*?(</ul>)',
+    s, n = re.subn(r'(<h2>Navigation</h2>\s*<ul>).*?(</ul>)',
                    lambda m: m.group(1) + '\n' + footer_html(page) + '\n        ' + m.group(2),
                    s, flags=re.S)
     if n:

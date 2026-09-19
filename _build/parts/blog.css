@@ -84,6 +84,16 @@ html[data-theme="light"] .t-blog .hero .halo{opacity:.1}
 /* ── GRANDES CARTES (rubrique de moins de trois articles) ── */
 .t-blog .bigs{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .t-blog .big{display:block;text-decoration:none;color:inherit}
+/* ── article annoncé mais pas encore écrit ──────────────────────────
+   La carte garde son allure, perd son lien et le dit. Mieux vaut
+   « Bientôt » qu'un « Lire l'article » qui ne mène nulle part. */
+.t-blog .is-soon{cursor:default}
+.t-blog .is-soon .cov{filter:grayscale(.35) brightness(.82)}
+.t-blog .is-soon .go{
+  padding:5px 12px;border-radius:100px;font-size:12px;letter-spacing:.4px;
+  text-transform:uppercase;font-family:var(--mono);
+  color:var(--lin);border:1px solid var(--line-2)}
+.t-blog .is-soon:hover .cov{transform:none}
 .t-blog .big .cov{display:block;width:100%;aspect-ratio:16/9;border-radius:16px;
   transition:transform .4s var(--e)}
 .t-blog .big:hover .cov{transform:translateY(-3px)}

@@ -1,0 +1,11 @@
+# Talos — site vitrine
+User-agent: *
+Allow: /
+
+# pages sans intérêt pour un moteur : confirmation de commande,
+# page d'erreur, et l'espace client qui part vers l'application
+Disallow: /merci.html
+Disallow: /404.html
+Disallow: /espace-client.html
+
+Sitemap: https://www.talos-ai.tech/sitemap.xml

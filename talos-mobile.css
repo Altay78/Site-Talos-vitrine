@@ -68,12 +68,33 @@ html:has(.t-roi.sheets-open) { overflow: hidden; }
 
   /* ── les cases à cocher du simulateur ────────────────────────────
      18 px de côté au bout d'une ligne de 42 : on vise mal. Les
-     lignes sont espacées de 148 px, la zone de 44 ne mord sur rien. */
-  .t-roi .chk::after {
+     lignes sont espacées de 148 px, la zone de 44 ne mord sur rien.
+     .t-gains autant que .t-roi : les deux panneaux ont les mêmes
+     cases, et n'en viser qu'un laissait l'autre intact. */
+  .t-roi .chk::after,
+  .t-gains .chk::after {
     content: '';
     position: absolute;
     inset: -13px;
   }
+  .t-roi .chk, .t-gains .chk { position: relative; }
+
+  /* ── les liens juridiques sous la grille tarifaire ───────────── */
+  .t-price .legal a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  /* ── les onglets des pages juridiques ────────────────────────────
+     legal.css les fixe à 38 px avec une spécificité plus haute que
+     la nôtre : on passe par :root pour reprendre la main. */
+  :root .t-legal .lg-tabs a { min-height: 44px; }
+
+  /* ── l'espace client a son propre en-tête, sans classe sur <body> :
+        on vise la barre par son rôle plutôt que par une classe ───── */
+  nav[aria-label="Navigation principale"]:not(.tnav) > a,
+  .login-first a { display: inline-flex; align-items: center; min-height: 40px; }
 
   /* ── les curseurs du simulateur ──────────────────────────────────
      4 px de piste, 18 px de pastille : on rate la prise une fois sur

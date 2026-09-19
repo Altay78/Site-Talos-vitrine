@@ -95,6 +95,18 @@ html[data-theme="light"] .t-book em,html[data-theme="light"] .t-price h1 em{
 @keyframes daGradFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @media (prefers-reduced-motion:reduce){.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em{animation:none}}
 
+/* ═══ LETTRE D'INFORMATION — ce que le formulaire répond ═══════════
+   Posé par talos-lettre.js, sous le champ, dans les deux formulaires
+   du site. Tant qu'aucun outil d'envoi n'est branché, il donne le
+   chemin qui marche plutôt qu'une fausse confirmation. */
+.lettre-dit{margin-top:10px;font-size:13px;line-height:1.5;
+  color:var(--ink-soft,#AB9F95)}
+.lettre-dit a{color:var(--indigo,#E0631F);text-decoration:underline;
+  text-underline-offset:3px}
+.lettre-dit.est-ok{color:var(--indigo,#E0631F);font-weight:600}
+.t-ft .lettre-dit{color:rgba(246,238,231,.72)}
+.t-ft .lettre-dit a{color:#F4823E}
+
 /* ═══ BARRE DE NAVIGATION — pilule flottante ═══ */
 /* le wrapper garde la hauteur dans le flux : la barre est fixed, sans lui
    le contenu du hero remonterait sous la barre */
@@ -230,7 +242,7 @@ main > section,main > footer{scroll-margin-top:110px}
 .t-ft .brand svg{height:46px;flex:0 0 auto}
 .t-ft .brand .word{font-size:clamp(20px,2vw,26px);font-weight:800;letter-spacing:.5px;
   text-transform:uppercase;line-height:1.12}
-.t-ft .col h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+.t-ft .col h2{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
   color:rgba(246,238,231,.55);font-weight:700;margin-bottom:18px}
 .t-ft .col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
 .t-ft .col a{color:#F6EEE7;text-decoration:none;font-size:18px;font-weight:500;letter-spacing:-.2px;
@@ -244,7 +256,7 @@ main > section,main > footer{scroll-margin-top:110px}
   transition:border-color .25s ease,background .25s ease,transform .25s var(--e)}
 .t-ft .socials a:hover{border-color:var(--bronze-2);background:rgba(224,99,31,.14);transform:translateY(-2px)}
 .t-ft .updates{margin-top:64px}
-.t-ft .updates h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+.t-ft .updates h2{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;
   color:rgba(246,238,231,.55);font-weight:700;margin-bottom:16px}
 /* la mention de finalité sous le formulaire : consentement éclairé, RGPD */
 .t-ft .nform-rgpd{max-width:640px;margin:10px 0 0;font-size:12.5px;line-height:1.5;
@@ -309,8 +321,8 @@ html[data-theme="light"] .t-ft::after{
 html[data-theme="light"] .t-ft .col a,
 html[data-theme="light"] .t-ft .col.tagline p,
 html[data-theme="light"] .t-ft .brand .word{color:var(--parch)}
-html[data-theme="light"] .t-ft .col h4,
-html[data-theme="light"] .t-ft .updates h4{color:rgba(var(--parch-rgb),.55)}
+html[data-theme="light"] .t-ft .col h2,
+html[data-theme="light"] .t-ft .updates h2{color:rgba(var(--parch-rgb),.55)}
 html[data-theme="light"] .t-ft .socials a{border-color:rgba(var(--parch-rgb),.28);color:var(--parch)}
 html[data-theme="light"] .t-ft .nform{border-color:rgba(var(--parch-rgb),.28);background:rgba(255,255,255,.55)}
 html[data-theme="light"] .t-ft .nform input{color:var(--parch)}

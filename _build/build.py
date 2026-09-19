@@ -1,7 +1,33 @@
 # -*- coding: utf-8 -*-
-"""Compose la page principale Talos  partir du hero de rfrence + 6 sections."""
+# -*- coding: utf-8 -*-
+"""Compose index.html à partir du hero de référence + 6 sections.
+
+⚠️  GÉNÉRATION DÉSACTIVÉE PAR DÉFAUT — lire avant de réactiver.
+
+    index.html a divergé de ce script. La page en ligne fait plus d'un
+    mégaoctet ; ce script en produit environ 512 Ko. Tout ce qui a été
+    ajouté à la main depuis — le carrousel d'équipe, la section
+    fonctionnalités, l'échelle typographique du téléphone, le panier,
+    les liens de paiement, les métadonnées de partage — vit dans
+    index.html et nulle part ici. Le relancer efface tout cela d'un coup.
+
+    Il dépend en outre d'un fichier hors dépôt :
+        ~/Desktop/talos-site/v2-reference/Hero Section.html
+    que personne d'autre n'a.
+
+    Pour le relancer en connaissance de cause :
+        REBUILD_INDEX=1 python3 _build/build.py
+
+    Même garde-fou que pour simulateur.html dans pages.py, et pour la
+    même raison : une régénération avait déjà effacé la page le 02/09.
+"""
 import re, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+if not os.environ.get('REBUILD_INDEX'):
+    sys.exit("build.py : génération désactivée (index.html a divergé).\n"
+             "            Lire l'en-tête du fichier ; REBUILD_INDEX=1 pour forcer.")
+
 from scoper import scope_css, extract, strip_rules
 import da
 
