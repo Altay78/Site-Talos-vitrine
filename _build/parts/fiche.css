@@ -349,12 +349,14 @@ html[data-theme="light"] .ac-step-card{
 .ac-feat-head{max-width:720px;margin:0 0 46px}
 
 /* On fait glisser au lieu d'empiler : une carte à la fois, calée sur son
-   bord. Les neuf rangées sont déclarées ici et reprises par chaque carte
+   bord. Les huit rangées sont déclarées ici et reprises par chaque carte
    en subgrid — vignette, titre, accroche, liste et bouton tombent donc au
-   même niveau d'une carte à l'autre, quelle que soit la longueur du texte. */
+   même niveau d'une carte à l'autre, quelle que soit la longueur du texte.
+   Huit, comme les huit enfants de .ac-card : en déclarer une de plus
+   laisserait une rangée vide, donc une gouttière de 22 px en bas. */
 .ac-feat-rail{display:grid;grid-auto-flow:column;
   grid-auto-columns:var(--w,46%);
-  grid-template-rows:repeat(9,auto);
+  grid-template-rows:repeat(8,auto);
   gap:22px;align-items:stretch;
   overflow-x:auto;overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;
@@ -691,3 +693,11 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
       to{opacity:1;transform:none}}
   }
 }
+
+/* ── le raccourci vers la commande en ligne, sous l'appel final ──────── */
+.ac-direct{margin:22px 0 0;font-size:14.5px;line-height:1.5;color:var(--lin)}
+.ac-direct a{display:inline-flex;align-items:center;gap:7px;color:var(--bronze);
+  font-weight:700;text-decoration:none;border-bottom:1px solid transparent;
+  transition:border-color .25s var(--e)}
+.ac-direct a:hover{border-bottom-color:currentColor}
+.ac-direct svg{width:14px;height:14px}

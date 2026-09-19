@@ -1,0 +1,224 @@
+/* ══════════════════════════════════════════════════════════════════
+   TALOS · TÉLÉPHONE
+   Deux choses, dans cet ordre :
+     1. les correctifs d'affichage et de défilement, à toutes tailles ;
+     2. l'échelle typographique du téléphone — les titres y étaient
+        réglés au minimum de leur clamp(), donc trop petits.
+
+   Cette feuille est chargée EN DERNIER dans le <head> : à spécificité
+   égale elle l'emporte. Le préfixe :root là où la page d'origine
+   descend plus profond que nous.
+   ══════════════════════════════════════════════════════════════════ */
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   1 · AFFICHAGE & DÉFILEMENT
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── la barre débordait de 7 px sur « Pourquoi Talos » ─────────────
+   cette page ne pose box-sizing:border-box que sur .t-why, donc la
+   barre y additionnait width:calc(100% - 20px) + ses 25 px de
+   remplissage + ses bordures. Le reste du site est en border-box :
+   on aligne, on ne change rien ailleurs. */
+.tnav-wrap, .tnav-wrap *,
+.tnav-menu, .tnav-menu *,
+.t-ft, .t-ft * { box-sizing: border-box; }
+
+/* ── le défilement ne fuit plus vers la page ───────────────────────
+   un panneau qui arrive au bout de sa course passait la main au
+   document derrière lui : on relâchait le doigt, la page avait
+   bougé. overscroll-behavior arrête la chaîne. */
+.t-roi .sheet,
+.dd-pan,
+.tnav-menu,
+.crew-track,
+.fx-track { overscroll-behavior: contain; }
+
+/* ── la page reste immobile sous la feuille du simulateur ──────────
+   roi.js pose overflow:hidden sur <body>, ce qui ne verrouille rien
+   sur iOS quand c'est <html> qui défile. On verrouille les deux. */
+html:has(.t-roi.sheets-open) { overflow: hidden; }
+
+/* ── les ancres ne se cadrent plus sous la barre ───────────────────
+   110 px correspond à la barre du bureau ; sur téléphone elle n'en
+   occupe que 68, l'écart se voyait. */
+@media (max-width: 600px) {
+  main > section, main > footer { scroll-margin-top: 92px; }
+}
+
+/* ── hauteur d'écran : dvh plutôt que vh ───────────────────────────
+   100vh compte la barre d'adresse mobile même quand elle est
+   rétractée : la page dépassait d'une soixantaine de pixels. */
+@supports (height: 100dvh) {
+  @media (max-width: 860px) {
+    body.espace-client, .login-page, .min-h-screen { min-height: 100dvh; }
+  }
+}
+
+@media (max-width: 860px) {
+
+  /* ── plus de zoom automatique à la saisie ────────────────────────
+     Safari iOS agrandit la page dès qu'un champ descend sous 16 px,
+     et ne la remet jamais droite. Les champs du site étaient à 15.
+     Le :is() aligne les trois sélecteurs sur la spécificité du plus
+     précis d'entre eux — sans lui, la zone de texte de la page
+     « Réserver » restait à 15 px. */
+  :root :is(input:not([type="checkbox"]):not([type="radio"]),
+            select, textarea) { font-size: 16px; }
+
+  /* ── les cases à cocher du simulateur ────────────────────────────
+     18 px de côté au bout d'une ligne de 42 : on vise mal. Les
+     lignes sont espacées de 148 px, la zone de 44 ne mord sur rien. */
+  .t-roi .chk::after {
+    content: '';
+    position: absolute;
+    inset: -13px;
+  }
+
+  /* ── les curseurs du simulateur ──────────────────────────────────
+     4 px de piste, 18 px de pastille : on rate la prise une fois sur
+     deux. La boîte monte à 44 px, la piste reste peinte sur ses 4 px
+     grâce à background-clip — rien ne change à l'œil. */
+  .t-roi input[type=range] {
+    box-sizing: border-box;
+    height: 44px;
+    padding-block: 20px;
+    background-clip: content-box;
+  }
+
+  /* ── cibles tactiles du pied de page ─────────────────────────────
+     28 px et 19 px de haut : sous le minimum de 44, et collées. */
+  .t-ft .col a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .t-ft .ft-bottom .legal { gap: 4px 14px; }
+  .t-ft .ft-bottom a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  /* ── pastilles de carrousel ──────────────────────────────────────
+     7 px de haut. On garde le point tel quel et on lui donne une
+     zone tactile de 44 px de haut, sans toucher à l'espacement
+     (l'élargir davantage ferait se chevaucher les voisines). */
+  .crew-dots button, .fx-dots button, .price-in .dots button { position: relative; }
+  .crew-dots button::after, .fx-dots button::after,
+  .price-in .dots button::after {
+    content: '';
+    position: absolute;
+    inset: -18px -7px;
+  }
+
+  /* ── sommaires dépliants et logos d'en-tête ──────────────────────
+     36 px et 30 px de haut. L'espace client et la page 404 ont leur
+     propre en-tête, d'où les deux sélecteurs en plus. */
+  summary { min-height: 44px; }
+  /* min-height ne s'applique pas à une boîte en ligne : d'où le
+     passage en inline-flex avant de poser la hauteur */
+  a.brand, a.logo, .tnav-logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* ── les onglets des pages juridiques ───────────────────────── */
+  .lg-tabs a { min-height: 44px; }
+
+  /* ── le lien de fin de duo, sur les fiches ───────────────────── */
+  .ac-duo-all {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* ── un titre long ne pousse plus la page de côté ────────────────
+     filet de sécurité pour l'échelle ci-dessous : « entreprises »,
+     « facturation »… sur 375 px. */
+  h1, h2, h3 { overflow-wrap: break-word; }
+}
+
+
+/* ── les petits téléphones (320 px) ─────────────────────────────────
+   La barre y débordait de 5 px : logo + « Réserver une démo » +
+   hamburger ne tiennent pas dans les 300 px que lui laisse sa marge.
+   On resserre plutôt que de masquer — le bouton reste le chemin le
+   plus court vers la démo. */
+@media (max-width: 380px) {
+  .tnav { gap: 8px; padding-left: 13px; }
+  .tnav-logo span { font-size: 15.5px; }
+  .tnav-cta { padding: 0 12px; font-size: 12.5px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   2 · ÉCHELLE TYPOGRAPHIQUE DU TÉLÉPHONE
+   Les titres du site sont réglés en clamp(min, vw, max). Sur 375 px
+   le terme en vw ne pèse rien : tout tombait sur le minimum, et les
+   minima avaient été choisis pour ne pas casser, pas pour se lire.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+
+  /* ── titres de page ─────────────────────────────────────────── */
+  /* .hero-h1 n'est pas ici : sa règle vit dans @layer utilities avec
+     un !important, et une couche l'emporte sur du non-calqué pour les
+     déclarations importantes. Le minimum de son clamp() a donc été
+     relevé sur place, dans index.html (2.35rem → 2.6rem). */
+  :root .t-404 h1             { font-size: 44px; }
+  :root .cm-hero h1           { font-size: 40px; }
+  :root .ac-hero h1           { font-size: 40px; }
+  :root .t-asst .b1 h1        { font-size: 40px; }
+  :root .t-asst .of h1        { font-size: 40px; }
+  :root .t-blog .hero h1      { font-size: 40px; }
+  :root .t-simhero h1         { font-size: 40px; }
+  :root .t-book h1            { font-size: 38px; }
+  :root .t-price .price-head h1 { font-size: 36px; }
+  :root .t-legal h1           { font-size: 34px; }
+  :root .t-why .open h1       { font-size: 32px; }
+
+  /* ── titres de section ──────────────────────────────────────── */
+  :root .crew-head h2,
+  :root .t-feat .fx-head h2,
+  :root .t-how .how-head h2,
+  :root .t-cat .cat-head h2,
+  :root .t-faq .faq-left h2,
+  :root .t-price .price-head h2,
+  :root .cm-steps-head h2,
+  :root .t-gains .g-head h2,
+  :root .t-asst .b3 h2,
+  :root .t-asst .b4 h2,
+  :root .t-asst .ac-h2,
+  :root .ac-cta h2            { font-size: 34px; line-height: 1.06; }
+
+  :root .t-story .lede h2,
+  :root .t-cmp .lede h2,
+  :root .cm-cta h2,
+  :root .t-simcta h2,
+  :root .ac-story-txt .ac-h2  { font-size: 32px; line-height: 1.08; }
+
+  :root .t-blog .rub-hd h2    { font-size: 30px; }
+  :root .t-blog .letter h2,
+  :root .hw-title,
+  :root .t-why .work h2       { font-size: 28px; line-height: 1.12; }
+
+  :root .t-why .end h2        { font-size: 40px; }
+
+  /* ── titres de carte et d'encart ────────────────────────────── */
+  :root .t-legal .lg-doc h2   { font-size: 24px; }
+  :root .t-asst .of-c h2,
+  :root .t-roi .params h2     { font-size: 22px; }
+
+  :root .t-story .st h3,
+  :root .hw-card h3,
+  :root .t-cat .cell h3,
+  :root .t-how .card h3       { font-size: 20px; line-height: 1.25; }
+
+  :root .t-roi .audit .hd h3  { font-size: 19px; }
+
+  /* ── espace client ──────────────────────────────────────────── */
+  :root .espace-client .hero h1,
+  :root body.espace-client .hero h1 { font-size: 32px; }
+  :root .login-card h1              { font-size: 36px; }
+}

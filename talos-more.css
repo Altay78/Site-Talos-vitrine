@@ -1,0 +1,109 @@
+/* ══════════════════════════════════════════════════════════════════
+   TALOS · « EN SAVOIR PLUS »
+   Sur un téléphone, le paragraphe gris d'une section prend dix lignes
+   avant qu'on ait vu quoi que ce soit. Il en prend deux — trois pour
+   le chapeau d'une page —, avec un fondu en bas de coupe, et une
+   pastille déplie le reste.
+
+   La pastille change de largeur en même temps que son texte :
+   « En savoir plus » → « Réduire ». C'est le seul mouvement de la
+   bascule, et il dit exactement ce qui vient de se passer.
+
+   Posée par talos-more.js. Sans JS, rien ne se déclenche : le texte
+   reste entier, comme aujourd'hui.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* le point d'arrêt du fondu est animable : déclaré, il s'interpole
+   comme un nombre au lieu de sauter d'une valeur à l'autre */
+@property --tx-fade {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 58%;
+}
+
+/* ── le paragraphe rogné ─────────────────────────────────────────── */
+/* max-height est posé en pixels par le JS : lui seul connaît la
+   hauteur de deux lignes dans le contexte typographique de la page */
+.tx-txt {
+  overflow: hidden;
+  /* la valeur de repli couvre les navigateurs sans @property : le
+     fondu y est fixe au lieu d'être animé, rien n'est cassé */
+  -webkit-mask-image: linear-gradient(to bottom, #000 var(--tx-fade, 58%), transparent);
+          mask-image: linear-gradient(to bottom, #000 var(--tx-fade, 58%), transparent);
+  transition: max-height .44s cubic-bezier(.22, 1, .36, 1),
+              --tx-fade  .40s cubic-bezier(.22, 1, .36, 1);
+}
+/* au-delà de 100 %, le dégradé sort du cadre : plus aucun fondu */
+.tx-txt.is-open { --tx-fade: 140%; }
+
+/* ── la pastille ─────────────────────────────────────────────────── */
+.tx-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 0 15px;
+  /* dans une carte en colonne flex, un bouton s'étire sur toute la
+     largeur et se met à ressembler à l'action principale. Une largeur
+     explicite suffit à l'en empêcher — et, contrairement à un
+     align-self, elle laisse la carte décider de son alignement :
+     la pastille reste centrée sous un texte centré. */
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 38px;
+  border: 1px solid color-mix(in oklab, var(--bronze, var(--indigo, #E0631F)) 30%, transparent);
+  border-radius: 100px;
+  background: color-mix(in oklab, var(--bronze, var(--indigo, #E0631F)) 11%, transparent);
+  color: var(--bronze, var(--indigo, #E0631F));
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+          appearance: none;
+  transition: background-color .25s ease, border-color .25s ease,
+              transform .16s ease;
+}
+/* display:inline-flex l'emporterait sur le display:none de l'attribut
+   hidden dans la feuille du navigateur : on le redit explicitement */
+.tx-pill[hidden] { display: none; }
+
+/* la cible tactile fait 48 px sans que la pastille grossisse */
+.tx-pill::after {
+  content: '';
+  position: absolute;
+  inset: -5px -8px;
+}
+.tx-pill:hover {
+  background: color-mix(in oklab, var(--bronze, var(--indigo, #E0631F)) 18%, transparent);
+  border-color: color-mix(in oklab, var(--bronze, var(--indigo, #E0631F)) 46%, transparent);
+}
+.tx-pill:active { transform: scale(.96); }
+.tx-pill:focus-visible {
+  outline: 2px solid var(--bronze, var(--indigo, #E0631F));
+  outline-offset: 3px;
+}
+
+/* le libellé se laisse rogner pendant que la pastille change de
+   largeur — sans min-width:0 il tiendrait la pastille écartée */
+.tx-pill .tx-lbl {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+}
+.tx-pill .tx-chev {
+  flex: 0 0 auto;
+  transition: transform .38s cubic-bezier(.22, 1, .36, 1);
+}
+.tx-pill[aria-expanded="true"] .tx-chev { transform: rotate(180deg); }
+
+/* ── mouvement réduit : on bascule, on n'anime pas ───────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .tx-txt, .tx-pill, .tx-pill .tx-chev { transition: none; }
+}

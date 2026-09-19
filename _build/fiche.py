@@ -78,6 +78,15 @@ def svg(cle, trait='1.7', classe=None):
 
 
 CHEV = svg('chev', '2.4')
+
+
+def ajouter(slug, texte=u"Ajouter à mon équipe"):
+    """Le bouton d'ajout au panier. panier.js s'occupe du reste — libellé,
+    icône et état suivent le contenu du panier."""
+    return (u'<button type="button" data-panier="%s" data-panier-texte="%s">'
+            u'<span data-panier-label>%s</span>'
+            u'<span data-panier-ico aria-hidden="true"></span></button>'
+            % (slug, texte, texte))
 FLECHE = svg('fleche', '2.4')
 TICK = svg('tick', '2.4')
 
@@ -124,14 +133,14 @@ def _b1(f):
       </ul>
 
       <div class="actions">
-        <a class="btn btn-1" href="reserver.html">Je veux mon assistant%(e)s %(fleche)s</a>
+        %(ajout)s
         <a class="btn btn-2" href="reserver.html">Voir une démonstration</a>
       </div>
     </div>
 
   </div>
 </section>
-''' % dict(f, atouts=atouts, fleche=CHEV,
+''' % dict(f, atouts=atouts, fleche=CHEV, ajout=ajouter(f['slug']),
            bouclier=svg('shield', '1.9'), coche=svg('tick', '2'))
 
 
@@ -291,7 +300,6 @@ def _b4(f):
         <p class="ac-card-lab">%(lab)s</p>
         <h3>%(titre)s</h3>
         <p class="ac-card-acc">%(acc)s <span>· %(acc2)s</span></p>
-        <p>%(para)s</p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'%(pronom)s fait :</p>
         <ul>
@@ -407,14 +415,15 @@ def _b6(f):
       </div>
 
       <div class="ac-duo-act">
-        <a class="btn btn-1" href="assistant-%(duo_slug)s.html">Ajouter à mon équipe %(chev)s</a>
-        <a class="ac-duo-all" href="offres.html">Voir toute l'équipe %(fleche)s</a>
+        %(ajout_duo)s
+        <a class="ac-duo-all" href="assistant-%(duo_slug)s.html">Voir sa fiche %(fleche)s</a>
       </div>
     </div>
 
   </div>
 </section>
-''' % dict(f, plus=svg('plus', '3'), chev=CHEV, fleche=FLECHE)
+''' % dict(f, plus=svg('plus', '3'), chev=CHEV, fleche=FLECHE,
+           ajout_duo=ajouter(f['duo_slug']))
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -526,15 +535,23 @@ def _b8(f):
     <h2>%(b8_h2)s</h2>
     <p>%(b8_sub)s</p>
     <div class="actions">
-      <a class="btn btn-1" href="reserver.html">Je veux mon assistant%(e)s %(chev)s</a>
+      %(ajout)s
       <a class="btn btn-2" href="reserver.html">Voir une démonstration</a>
     </div>
+    <!-- deux formulations pour la même porte : talos-paiement.js montre la
+         première le jour où la caisse est ouverte, la seconde d'ici là.
+         On ne promet « commander » que quand on sait encaisser. -->
+    <p class="ac-direct" data-achat hidden>Vous savez déjà ce qu'il vous faut ?
+      <a href="commander.html">Commander en ligne, sans rendez-vous %(fleche)s</a></p>
+    <p class="ac-direct" data-achat-sinon>Vous savez déjà ce qu'il vous faut ?
+      <a href="commander.html">Composer mon équipe %(fleche)s</a></p>
     <ul class="ac-reassure">
 %(reassure)s
     </ul>
   </div>
 </section>
-''' % dict(f, reassure=reassure, chev=CHEV)
+''' % dict(f, reassure=reassure, chev=CHEV, fleche=FLECHE,
+           ajout=ajouter(f['slug']))
 
 
 def corps(f):

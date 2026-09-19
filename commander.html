@@ -4,14 +4,15 @@
 <meta charset="utf-8">
 <script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mentions légales — Talos</title>
+<title>Commander — Talos | Composez votre équipe et démarrez</title>
 <meta name="author" content="Talos">
-<meta name="description" content="Éditeur, hébergeur, propriété intellectuelle et contact du site Talos.">
-<meta property="og:title" content="Mentions légales — Talos">
-<meta property="og:description" content="Éditeur, hébergeur, propriété intellectuelle et contact du site Talos.">
+<meta name="description" content="Choisissez vos assistants et votre engagement, voyez le prix, et commandez en ligne. Sans rendez-vous, sans devis à attendre. Mise en place offerte à partir de six mois.">
+<meta property="og:title" content="Composez votre équipe Talos et commandez en ligne">
+<meta property="og:description" content="Vos assistants, votre engagement, le prix affiché avant de cliquer. Sans passer par une démo.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="panier.css">
 <style>
 /* ══════════════════════════════════════════════════════════════
    RÉINITIALISATION — les pages composées n'embarquent pas l'export
@@ -67,7 +68,7 @@ html[data-theme="light"]{
 
 /* 2 · tokens v2.css pour les sections (mêmes noms qu'en production) */
 .t-story,.t-how,.t-how2,.t-roi,.t-cat,.t-price,.t-faq,.t-ft,.t-feat,
-.t-simhero,.t-gains,.t-simcta,.t-blog,.t-404,.t-asst,.t-legal,.t-book{
+.t-simhero,.t-gains,.t-simcta,.t-blog,.t-404,.t-asst,.t-legal,.t-book,.t-merci{
   --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
   --antique:#A8451A; --antique-rgb:168,69,26;
   --olivier:#D69A66; --olivier-rgb:214,154,102;
@@ -83,7 +84,7 @@ html[data-theme="light"]{
 }
 html[data-theme="light"] .t-story,html[data-theme="light"] .t-how,html[data-theme="light"] .t-how2,html[data-theme="light"] .t-roi,html[data-theme="light"] .t-cat,html[data-theme="light"] .t-price,html[data-theme="light"] .t-faq,html[data-theme="light"] .t-ft,html[data-theme="light"] .t-feat,
 html[data-theme="light"] .t-simhero,html[data-theme="light"] .t-gains,html[data-theme="light"] .t-simcta,html[data-theme="light"] .t-blog,html[data-theme="light"] .t-404,html[data-theme="light"] .t-asst,
-html[data-theme="light"] .t-legal,html[data-theme="light"] .t-book{
+html[data-theme="light"] .t-legal,html[data-theme="light"] .t-book,html[data-theme="light"] .t-merci{
   --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
   --antique:#9A3F12; --antique-rgb:154,63,18;
   --olivier:#9A6A38; --olivier-rgb:154,106,56;
@@ -96,7 +97,7 @@ html[data-theme="light"] .t-legal,html[data-theme="light"] .t-book{
 
 /* 3 · mot d'impact — signature obligatoire du brand book.
    Helvetica, jamais de serif italique (DA v2). */
-.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em,.t-asst em,.t-book em{
+.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em,.t-asst em,.t-book em,.t-merci em{
   font-family:var(--sans);font-style:normal;font-weight:inherit;
   background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 48%,var(--bronze) 100%);
   background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
@@ -338,109 +339,13 @@ html[data-theme="light"] .t-ft .ft-bottom a{color:rgba(var(--parch-rgb),.7)}
 html[data-theme="light"] .t-ft .ft-bottom a:hover{color:var(--parch)}
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   PAGES JURIDIQUES — mentions légales, CGU, CGV, confidentialité.
-
-   Un document se lit, il ne se parcourt pas : colonne unique, mesure courte,
-   interlignage large. Les tokens viennent de shell.css comme partout ailleurs,
-   donc les pages suivent le thème clair/sombre sans une valeur en dur.
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.t-legal{background:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;
-  padding:40px 0 96px}
-.t-legal .lg-shell{width:100%;max-width:820px;margin:0 auto;padding:0 24px}
-
-/* ── les quatre documents, en onglets ─────────────────────────────────────── */
-.t-legal .lg-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px}
-.t-legal .lg-tabs a{display:inline-flex;align-items:center;min-height:38px;
-  padding:0 15px;border-radius:100px;text-decoration:none;
-  font-size:13.5px;font-weight:600;letter-spacing:-.2px;color:var(--lin);
-  background:var(--ink-2);border:1px solid var(--line);
-  transition:color .2s var(--e),border-color .2s var(--e),background .2s var(--e)}
-.t-legal .lg-tabs a:hover{color:var(--parch);border-color:var(--line-2)}
-.t-legal .lg-tabs a[aria-current="page"]{color:var(--bronze);
-  background:rgba(var(--bronze-rgb),.10);border-color:rgba(var(--bronze-rgb),.34)}
-.t-legal .lg-tabs a:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
-
-.t-legal h1{margin:0 0 28px;font-size:clamp(30px,3.4vw,44px);line-height:1.06;
-  letter-spacing:-1.6px;font-weight:800;color:var(--parch)}
-
-/* ── le corps du document ─────────────────────────────────────────────────── */
-.t-legal .lg-doc{font-size:16px;line-height:1.72;color:var(--lin)}
-.t-legal .lg-doc h2{margin:44px 0 14px;font-size:22px;line-height:1.2;
-  letter-spacing:-.7px;font-weight:800;color:var(--parch);
-  padding-top:22px;border-top:1px solid var(--line)}
-.t-legal .lg-doc h2:first-child{margin-top:0;padding-top:0;border-top:0}
-.t-legal .lg-doc h3{margin:30px 0 10px;font-size:17px;line-height:1.25;
-  letter-spacing:-.3px;font-weight:700;color:var(--parch)}
-.t-legal .lg-doc h4{margin:22px 0 8px;font-size:15px;font-weight:700;color:var(--parch)}
-.t-legal .lg-doc p{margin:0 0 16px}
-.t-legal .lg-doc strong{color:var(--parch);font-weight:700}
-.t-legal .lg-doc a{color:var(--bronze);text-decoration:underline;
-  text-underline-offset:3px;text-decoration-thickness:1px}
-.t-legal .lg-doc a:hover{color:var(--bronze-2)}
-.t-legal .lg-doc code{font-family:var(--mono);font-size:13.5px;
-  padding:2px 6px;border-radius:7px;color:var(--parch);
-  background:var(--ink-3);border:1px solid var(--line)}
-.t-legal .lg-doc hr{margin:38px 0;border:0;border-top:1px solid var(--line)}
-
-.t-legal .lg-doc ul{margin:0 0 18px;padding:0;list-style:none}
-.t-legal .lg-doc li{position:relative;padding-left:22px;margin:0 0 9px}
-.t-legal .lg-doc li::before{content:"";position:absolute;left:4px;top:12px;
-  width:6px;height:6px;border-radius:50%;background:rgba(var(--bronze-rgb),.62)}
-
-/* la date de mise à jour, juste sous le titre */
-.t-legal .lg-maj{display:inline-flex;align-items:center;margin:0 0 30px;
-  padding:7px 15px;border-radius:100px;
-  font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--lin);
-  background:var(--ink-2);border:1px solid var(--line)}
-.t-legal .lg-maj em{font-style:normal}
-
-/* ce qui reste à compléter ne doit pas passer inaperçu */
-.t-legal .lg-todo{padding:1px 8px;border-radius:6px;font-weight:700;font-size:13px;
-  color:#fff;background:#C0432A}
-
-/* ── les tableaux (durées de conservation, sous-traitants) ────────────────── */
-.t-legal .lg-tw{overflow-x:auto;margin:0 0 22px;
-  border:1px solid var(--line);border-radius:16px;background:var(--ink-2)}
-.t-legal .lg-doc table{width:100%;border-collapse:collapse;font-size:14.5px}
-.t-legal .lg-doc th{text-align:left;padding:13px 16px;white-space:nowrap;
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--bronze);border-bottom:1px solid var(--line-2)}
-.t-legal .lg-doc td{padding:13px 16px;vertical-align:top;line-height:1.55;
-  border-bottom:1px solid var(--line)}
-.t-legal .lg-doc tr:last-child td{border-bottom:0}
-
-/* ── l'encart de contact ──────────────────────────────────────────────────── */
-.t-legal .lg-aide{display:flex;flex-direction:column;align-items:flex-start;gap:8px;
-  margin:52px 0 0;padding:26px;border-radius:22px;
-  background:var(--ink-2);border:1px solid var(--line-2)}
-.t-legal .lg-aide b{font-size:18px;letter-spacing:-.5px;color:var(--parch)}
-.t-legal .lg-aide span{font-size:15px;line-height:1.6;color:var(--lin)}
-.t-legal .lg-aide a{color:var(--bronze)}
-.t-legal .lg-cta{display:inline-flex;align-items:center;gap:9px;margin-top:10px;
-  min-height:48px;padding:13px 24px;border-radius:100px;text-decoration:none;
-  font-size:15px;font-weight:700;letter-spacing:-.2px;color:#fff;
-  background:linear-gradient(100deg,var(--bronze-2),var(--bronze));
-  box-shadow:0 10px 30px -12px rgba(var(--bronze-rgb),.75);
-  transition:transform .25s var(--e),box-shadow .25s var(--e)}
-.t-legal .lg-cta:hover{transform:translateY(-2px);
-  box-shadow:0 16px 38px -12px rgba(var(--bronze-rgb),.85)}
-.t-legal .lg-cta svg{width:15px;height:15px}
-.t-legal .lg-cta:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
-
-@media (max-width:560px){
-  .t-legal{padding:24px 0 72px}
-  .t-legal .lg-shell{padding:0 18px}
-  .t-legal .lg-doc{font-size:15.5px}
-  .t-legal .lg-aide{padding:22px}
-}
-@media (prefers-reduced-motion:reduce){
-  .t-legal .lg-cta,.t-legal .lg-tabs a{transition:none}
-  .t-legal .lg-cta:hover{transform:none}
-}
+/* La page Commander n'a pas de feuille propre : sa mise en forme vit dans
+   panier.css, chargée sur toutes les pages par la coquille. */
 
 </style>
+<!-- chargées en dernier : à spécificité égale, ce sont elles qui gagnent -->
+<link rel="stylesheet" href="talos-mobile.css">
+<link rel="stylesheet" href="talos-more.css">
 <style id="joints-css">
 /* ── Les raccords entre sections ─────────────────────────────────────────
    Les sections partagent le même fond : le filet d'1 px qui les séparait
@@ -516,76 +421,66 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 .tnav-pan-all:hover{background:color-mix(in oklab,var(--indigo) 14%,transparent);color:var(--indigo)}
 @media (max-width:1060px){.tnav-pan{display:none}}
 @media (prefers-reduced-motion:reduce){.tnav-pan,.tnav-chev{transition:none}}
-</style><link rel="stylesheet" href="talos-mobile.css">
-<link rel="stylesheet" href="talos-more.css">
-<link rel="stylesheet" href="panier.css">
-</head>
+</style></head>
 <body>
 <main>
 
-<header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true"><mask id="tnav-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#tnav-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg><span>Talos</span></a><div class="tnav-links"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="assistant-facturation.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="assistant-administratif.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante administrative</b><small>Tri des mails et classement</small></a><span class="tnav-ag is-soon"><img src="perso/avatar-chantier.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant chef de chantier <i class="tnav-soon">Bientôt</i></b><small>Planning, suivi, rapports</small></span><span class="tnav-ag is-soon"><img src="perso/avatar-stock.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant gestion de stock <i class="tnav-soon">Bientôt</i></b><small>Stocks, commandes, alertes</small></span><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 18.36 5.64L 17.39 6.61M 6.61 17.39L 5.64 18.36M 18.36 18.36L 17.39 17.39M 6.61 6.61L 5.64 5.64"/><path d="M 12 7.8C 14.32 7.8 16.2 9.68 16.2 12C 16.2 14.32 14.32 16.2 12 16.2C 9.68 16.2 7.8 14.32 7.8 12C 7.8 9.68 9.68 7.8 12 7.8Z"/><path d="M 12 4.35V 4.37M 12 19.63V 19.65M 19.66 12H 19.63M 4.37 12H 4.34"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 15.35C 8.12 15.35 4.81 15.93 4.81 18.27C 4.81 20.61 8.1 21.22 11.98 21.22C 15.85 21.22 19.15 20.63 19.15 18.29C 19.15 15.95 15.87 15.35 11.98 15.35Z"/><path d="M 11.98 12.01C 14.52 12.01 16.58 9.95 16.58 7.41C 16.58 4.87 14.52 2.81 11.98 2.81C 9.45 2.81 7.39 4.87 7.39 7.41C 7.38 9.94 9.42 12 11.95 12.01L 11.98 12.01Z"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="assistant-facturation.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="assistant-administratif.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante administrative</b><small>Tri des mails et classement</small></a><span class="tnav-ag is-soon"><img src="perso/avatar-chantier.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant chef de chantier <i class="tnav-soon">Bientôt</i></b><small>Planning, suivi, rapports</small></span><span class="tnav-ag is-soon"><img src="perso/avatar-stock.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant gestion de stock <i class="tnav-soon">Bientôt</i></b><small>Stocks, commandes, alertes</small></span><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 18.36 5.64L 17.39 6.61M 6.61 17.39L 5.64 18.36M 18.36 18.36L 17.39 17.39M 6.61 6.61L 5.64 5.64"/><path d="M 12 7.8C 14.32 7.8 16.2 9.68 16.2 12C 16.2 14.32 14.32 16.2 12 16.2C 9.68 16.2 7.8 14.32 7.8 12C 7.8 9.68 9.68 7.8 12 7.8Z"/><path d="M 12 4.35V 4.37M 12 19.63V 19.65M 19.66 12H 19.63M 4.37 12H 4.34"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
+<header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true"><mask id="tnav-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#tnav-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg><span>Talos</span></a><div class="tnav-links"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="assistant-facturation.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="assistant-administratif.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante administrative</b><small>Tri des mails et classement</small></a><span class="tnav-ag is-soon"><img src="perso/avatar-chantier.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant chef de chantier <i class="tnav-soon">Bientôt</i></b><small>Planning, suivi, rapports</small></span><span class="tnav-ag is-soon"><img src="perso/avatar-stock.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant gestion de stock <i class="tnav-soon">Bientôt</i></b><small>Stocks, commandes, alertes</small></span><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 18.36 5.64L 17.39 6.61M 6.61 17.39L 5.64 18.36M 18.36 18.36L 17.39 17.39M 6.61 6.61L 5.64 5.64"/><path d="M 12 7.8C 14.32 7.8 16.2 9.68 16.2 12C 16.2 14.32 14.32 16.2 12 16.2C 9.68 16.2 7.8 14.32 7.8 12C 7.8 9.68 9.68 7.8 12 7.8Z"/><path d="M 12 4.35V 4.37M 12 19.63V 19.65M 19.66 12H 19.63M 4.37 12H 4.34"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 15.35C 8.12 15.35 4.81 15.93 4.81 18.27C 4.81 20.61 8.1 21.22 11.98 21.22C 15.85 21.22 19.15 20.63 19.15 18.29C 19.15 15.95 15.87 15.35 11.98 15.35Z"/><path d="M 11.98 12.01C 14.52 12.01 16.58 9.95 16.58 7.41C 16.58 4.87 14.52 2.81 11.98 2.81C 9.45 2.81 7.39 4.87 7.39 7.41C 7.38 9.94 9.42 12 11.95 12.01L 11.98 12.01Z"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et prévision</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="assistant-facturation.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures conformes 2026</small></a><a class="tnav-ag" href="assistant-administratif.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante administrative</b><small>Tri des mails et classement</small></a><span class="tnav-ag is-soon"><img src="perso/avatar-chantier.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant chef de chantier <i class="tnav-soon">Bientôt</i></b><small>Planning, suivi, rapports</small></span><span class="tnav-ag is-soon"><img src="perso/avatar-stock.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant gestion de stock <i class="tnav-soon">Bientôt</i></b><small>Stocks, commandes, alertes</small></span><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
 
-<section class="t-legal">
-  <div class="lg-shell">
+<section class="cm" data-panier-page>
+  <div class="cm-in">
 
-    <nav class="lg-tabs" aria-label="Documents juridiques"><a href="mentions-legales.html" aria-current="page">Mentions légales</a><a href="cgu.html">CGU</a><a href="cgv.html">CGV</a><a href="confidentialite.html">Politique de confidentialité</a></nav>
+    <div class="cm-head">
+      <p class="cm-tag">Commande en ligne</p>
+      <h1>Composez votre équipe, et <em>commandez</em>.</h1>
+      <p>Choisissez vos assistants, votre engagement, et c'est parti. Pas de rendez-vous
+        à caler, pas de devis à attendre — vous verrez le prix avant de cliquer.</p>
+    </div>
 
-    <h1>Mentions légales</h1>
+    <div class="cm-grid">
 
-    <article class="lg-doc">
-<p class="lg-maj"><em>Dernière mise à jour : 27 août 2026</em></p>
-<h2>1. Éditeur du site et du service</h2>
-<p>Le site <code>https://www.talos-ai.tech/</code> et l'espace client Talos (ci-après « le Site » et « le Service ») sont édités par :</p>
-<p><strong>Altay Sakalli</strong>, entrepreneur individuel exerçant sous le nom commercial <strong>Talos</strong></p>
-<ul>
-<li>SIREN : 920 171 774</li>
-<li>Immatriculé au Registre du commerce et des sociétés de Versailles sous le numéro 920 171 774 R.C.S. Versailles</li>
-<li>Immatriculé au Registre National des Entreprises (RNE) le 9 juillet 2026</li>
-<li>Code APE : 62.01Z — Programmation informatique</li>
-<li>TVA : non applicable, article 293 B du code général des impôts (franchise en base)</li>
-<li>Téléphone : 06 10 79 72 52</li>
-<li>E-mail : contact@talos-ai.tech</li>
-</ul>
-<p><strong>Directeur de la publication</strong> : Altay Sakalli.</p>
-<h2>2. Hébergement</h2>
-<p>L'application et le site sont hébergés par :</p>
-<ul>
-<li><strong>Vercel Inc.</strong> (application et site) — 440 N Barranca Ave PMB 4133, Covina, CA 91723-1722, États-Unis — <code>vercel.com</code></li>
-<li><strong>Supabase, Inc.</strong> (base de données, authentification, stockage) — entité contractante Supabase PTE. LTD., 65 Chulia Street #38-02/03, OCBC Centre, Singapour 049513 — <code>supabase.com</code>. <strong>Les données sont hébergées dans l'Union européenne, région Francfort (Allemagne).</strong></li>
-</ul>
-<p>Le moteur d'automatisation (n8n) est <strong>auto-hébergé par l'éditeur sur un serveur situé en France</strong>.</p>
-<p>Les traitements réalisés par ces hébergeurs, ainsi que les autres sous-traitants techniques de Talos, sont décrits dans la <a href="confidentialite.html">Politique de confidentialité</a>.</p>
-<h2>3. Nature du service</h2>
-<p>Talos est un service en ligne (SaaS) d'automatisation destiné aux professionnels indépendants et aux très petites entreprises : tri de la boîte mail, préparation de devis et de factures, relances, suivi de trésorerie, prise de rendez-vous et réponse aux demandes entrantes.</p>
-<p>Le Service est réservé aux clients professionnels agissant dans le cadre de leur activité. Il n'est pas destiné aux consommateurs.</p>
-<h2>4. Propriété intellectuelle</h2>
-<p>L'ensemble des éléments composant le Site et le Service — code, interfaces, textes, illustrations, logos, marques, bases de données, documentation — est protégé par le droit de la propriété intellectuelle et demeure la propriété exclusive de l'Éditeur ou de ses partenaires.</p>
-<p>Toute reproduction, représentation, adaptation, extraction ou réutilisation, en tout ou partie, sans autorisation écrite préalable de l'Éditeur, est interdite. L'absence de réaction de l'Éditeur face à un usage non autorisé ne vaut ni acceptation ni renonciation à poursuivre.</p>
-<p>Les contenus que le Client crée ou importe dans le Service (documents, données, messages, fichiers clients) restent sa propriété pleine et entière. Les conditions d'utilisation de ces contenus par Talos sont décrites à l'article « Propriété des données » des <a href="cgv.html">Conditions générales de vente</a>.</p>
-<h2>5. Liens hypertextes</h2>
-<p>La mise en place d'un lien vers le Site est libre. Tout lien devra être retiré sur simple demande de l'Éditeur.</p>
-<p>L'Éditeur n'exerce aucun contrôle sur les sites vers lesquels le Site renvoie et décline toute responsabilité quant à leur contenu.</p>
-<h2>6. Signalement de contenu illicite</h2>
-<p>Conformément à l'article 6 de la loi n° 2004-575 du 21 juin 2004 (LCEN), tout contenu manifestement illicite accessible via le Service peut être signalé à <code>contact@talos-ai.tech</code>, en précisant la date du constat, la description des faits litigieux et leur localisation précise.</p>
-<h2>7. Données personnelles et cookies</h2>
-<p>Les traitements de données personnelles réalisés dans le cadre du Site et du Service sont décrits dans la <a href="confidentialite.html">Politique de confidentialité</a>.</p>
-<p>Pour toute question ou pour exercer vos droits : <code>contact@talos-ai.tech</code>. Vous pouvez également introduire une réclamation auprès de la CNIL (<code>cnil.fr</code>), après nous avoir contactés — nous cherchons d'abord à régler le problème directement.</p>
-<h2>8. Droit applicable</h2>
-<p>Les présentes mentions légales sont soumises au droit français. À défaut de résolution amiable, tout litige relève de la compétence exclusive des tribunaux du ressort du siège de l'Éditeur, y compris en cas de pluralité de défendeurs ou d'appel en garantie.</p>
-<hr>
-<h2>Note — adresse de l'éditeur</h2>
-<p>L'article 6-III de la LCEN impose à tout éditeur professionnel d'indiquer l'adresse de son siège. Elle est volontairement absente de ces mentions, à la demande de l'éditeur, qui exerce depuis son domicile personnel.</p>
-<p>Le numéro d'immatriculation (RCS Versailles 920 171 774) est en revanche publié, ce qui permet à toute personne — client, autorité, tiers lésé — d'identifier l'entreprise et d'obtenir ses coordonnées auprès du registre.</p>
-<p>Pour régulariser sans exposer une adresse personnelle : une <strong>société de domiciliation</strong> (env. 15–40 €/mois) fournit une adresse commerciale à déclarer au guichet unique puis à afficher ici.</p>
-    </article>
+      <div class="cm-col">
 
-    <aside class="lg-aide">
-      <b>Une question sur vos données ?</b>
-      <span>Écrivez à <a href="mailto:contact@talos-ai.tech">contact@talos-ai.tech</a> :
-        on répond sous 30 jours, et bien plus vite en pratique.</span>
-      <a class="lg-cta" href="reserver.html">Parler à quelqu'un <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </aside>
+        <section>
+          <p class="cm-step"><i>01</i></p>
+          <h2>Quels assistants vous faut-il ?</h2>
+          <p class="pn-note" style="margin:0 0 16px">Le tarif suit le nombre d'assistants,
+            pas leur nature : un seul, trois, ou l'équipe au complet.</p>
+          <ul class="pn-ags" data-pn-choix></ul>
+        </section>
 
+        <section>
+          <p class="cm-step"><i>02</i></p>
+          <h2>Pour combien de temps ?</h2>
+          <p class="pn-note" style="margin:0 0 16px">À partir de six mois, la mise en place
+            personnalisée est offerte.</p>
+          <div class="pn-engs" data-pn-eng></div>
+        </section>
+
+        <section>
+          <p class="cm-step"><i>03</i></p>
+          <h2>Et si je ne suis pas sûr ?</h2>
+          <p class="pn-note" style="margin:0">Vous pouvez démarrer au mois, sans engagement,
+            et passer sur une durée plus longue quand vous serez fixé. Vous partez avec vos
+            données le jour où vous voulez : clients, documents, historique, tout est
+            exportable, sans frais de sortie.</p>
+        </section>
+
+      </div>
+
+      <aside class="cm-aside">
+        <h2>Votre commande</h2>
+        <div class="pn-recap" data-pn-total></div>
+        <div class="pn-actions" data-pn-act></div>
+        <ul class="cm-rass">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Mise en place personnalisée, on récupère vos documents et vos règles</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Votre assistant travaille une semaine après la commande</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Données hébergées en France, banque en lecture seule</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Tarifs HT. Au-delà de cinq assistants ou pour du multi-agences, <a href="reserver.html">on chiffre après un audit</a></li>
+        </ul>
+      </aside>
+
+    </div>
   </div>
 </section>
 
@@ -708,8 +603,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
 
 </script>
-<script src="talos-more.js" defer></script>
 <script src="talos-paiement.js" defer></script>
 <script src="panier.js" defer></script>
+<script src="talos-more.js" defer></script>
 </body>
 </html>

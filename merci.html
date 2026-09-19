@@ -4,15 +4,16 @@
 <meta charset="utf-8">
 <script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page introuvable — Talos</title>
+<title>Merci — votre commande Talos est enregistrée</title>
 <meta name="author" content="Talos">
-<meta name="description" content="Cette page n'existe pas (encore). Retour à l'accueil Talos.">
-<meta property="og:title" content="Page introuvable — Talos">
-<meta property="og:description" content="Cette page n'existe pas (encore). Retour à l'accueil Talos.">
+<meta name="description" content="Votre paiement est bien reçu. On vous appelle sous 24 h ouvrées pour paramétrer vos assistants, et vos accès arrivent sous 72 h.">
+<meta property="og:title" content="Merci — votre commande Talos est enregistrée">
+<meta property="og:description" content="Votre paiement est bien reçu. On vous appelle sous 24 h ouvrées pour paramétrer vos assistants, et vos accès arrivent sous 72 h.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="panier.css">
 <style>
 /* ══════════════════════════════════════════════════════════════
    RÉINITIALISATION — les pages composées n'embarquent pas l'export
@@ -68,7 +69,7 @@ html[data-theme="light"]{
 
 /* 2 · tokens v2.css pour les sections (mêmes noms qu'en production) */
 .t-story,.t-how,.t-how2,.t-roi,.t-cat,.t-price,.t-faq,.t-ft,.t-feat,
-.t-simhero,.t-gains,.t-simcta,.t-blog,.t-404,.t-asst,.t-legal,.t-book{
+.t-simhero,.t-gains,.t-simcta,.t-blog,.t-404,.t-asst,.t-legal,.t-book,.t-merci{
   --bronze:#E0631F; --bronze-2:#F4823E; --bronze-rgb:224,99,31;
   --antique:#A8451A; --antique-rgb:168,69,26;
   --olivier:#D69A66; --olivier-rgb:214,154,102;
@@ -84,7 +85,7 @@ html[data-theme="light"]{
 }
 html[data-theme="light"] .t-story,html[data-theme="light"] .t-how,html[data-theme="light"] .t-how2,html[data-theme="light"] .t-roi,html[data-theme="light"] .t-cat,html[data-theme="light"] .t-price,html[data-theme="light"] .t-faq,html[data-theme="light"] .t-ft,html[data-theme="light"] .t-feat,
 html[data-theme="light"] .t-simhero,html[data-theme="light"] .t-gains,html[data-theme="light"] .t-simcta,html[data-theme="light"] .t-blog,html[data-theme="light"] .t-404,html[data-theme="light"] .t-asst,
-html[data-theme="light"] .t-legal,html[data-theme="light"] .t-book{
+html[data-theme="light"] .t-legal,html[data-theme="light"] .t-book,html[data-theme="light"] .t-merci{
   --bronze:#C5531C; --bronze-2:#E0631F; --bronze-rgb:197,83,28;
   --antique:#9A3F12; --antique-rgb:154,63,18;
   --olivier:#9A6A38; --olivier-rgb:154,106,56;
@@ -97,7 +98,7 @@ html[data-theme="light"] .t-legal,html[data-theme="light"] .t-book{
 
 /* 3 · mot d'impact — signature obligatoire du brand book.
    Helvetica, jamais de serif italique (DA v2). */
-.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em,.t-asst em,.t-book em{
+.t-story em,.t-how em,.t-how2 em,.t-roi em,.t-cat em,.t-price em,.t-faq em,.t-ft em,.t-feat em,.t-asst em,.t-book em,.t-merci em{
   font-family:var(--sans);font-style:normal;font-weight:inherit;
   background:linear-gradient(100deg,#FFE7D4 0%,var(--bronze-2) 48%,var(--bronze) 100%);
   background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
@@ -340,168 +341,213 @@ html[data-theme="light"] .t-ft .ft-bottom a:hover{color:var(--parch)}
 
 
 /* ═══════════════════════════════════════════════════════════════
-   404 — « notre chantier n'est pas encore là »
-   Plein cadre : la vue drone d'un chantier tourne en fond, le message
-   tient en trois lignes au centre. Pas de barre de navigation : la page
-   n'a qu'une sortie, le retour à l'accueil.
+   MERCI — la page où Stripe renvoie après un paiement réussi.
+   Elle ne vend plus rien. Elle répond à la seule question que se
+   pose quelqu'un qui vient de donner sa carte : et maintenant ?
    ═══════════════════════════════════════════════════════════════ */
-html,body{height:100%}
-/* la page reste sombre quel que soit le thème mémorisé : le fond est une
-   vidéo, un fond crème apparaîtrait sous elle au dépassement mobile */
-body{overflow:hidden;background:#140F0C}
+.t-merci{position:relative;font-family:var(--sans);color:var(--parch);
+  background:var(--ink);padding:64px 24px 96px;overflow:hidden}
+.t-merci::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 55% at 50% -10%,
+    rgba(var(--bronze-rgb),.22) 0%,transparent 65%)}
+.t-merci .mr-in{position:relative;z-index:2;max-width:640px;margin:0 auto}
 
-.t-404{position:relative;min-height:100svh;display:grid;
-  grid-template-rows:auto 1fr auto;
-  font-family:var(--sans);color:#F6EEE7;background:#140F0C;isolation:isolate}
+/* ── la coche ── */
+.t-merci .mr-ok{width:66px;height:66px;margin:0 auto 26px;border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(var(--bronze-rgb),.14);
+  border:1px solid rgba(var(--bronze-rgb),.34);color:var(--bronze-2)}
+.t-merci .mr-ok svg{width:30px;height:30px}
 
-/* ── fond vidéo ── */
-.t-404 .bg{position:absolute;inset:0;z-index:-2;overflow:hidden;background:#140F0C}
-.t-404 .bg video,.t-404 .bg img{width:100%;height:100%;object-fit:cover;
-  /* la rushe est froide (béton, herbe verte) : on la ramène dans la Braise */
-  filter:grayscale(.55) sepia(.32) saturate(1.25) contrast(1.02) brightness(.72) hue-rotate(-8deg)}
-/* voile : le texte doit rester lisible sur les zones claires (le sable) */
-.t-404 .veil{position:absolute;inset:0;z-index:-1;
-  background:
-    radial-gradient(120% 90% at 50% 45%,rgba(20,15,12,.34) 0%,rgba(20,15,12,.82) 62%,rgba(20,15,12,.95) 100%),
-    linear-gradient(180deg,rgba(20,15,12,.7) 0%,transparent 26%,transparent 66%,rgba(20,15,12,.86) 100%)}
-/* trame de plan de chantier, très discrète */
-.t-404 .veil::after{content:'';position:absolute;inset:0;opacity:.16;
-  background-image:linear-gradient(rgba(246,238,231,.5) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(246,238,231,.5) 1px,transparent 1px);
-  background-size:96px 96px;
-  -webkit-mask-image:radial-gradient(75% 60% at 50% 50%,#000,transparent 78%);
-          mask-image:radial-gradient(75% 60% at 50% 50%,#000,transparent 78%)}
+/* ── le titre ── */
+.t-merci h1{font-size:clamp(32px,4.2vw,50px);line-height:1.06;
+  letter-spacing:-.035em;text-align:center;margin-bottom:16px}
+.t-merci .mr-lede{text-align:center;font-size:17px;line-height:1.6;
+  color:var(--lin);margin-bottom:38px}
 
-/* ── en-tête minimal ── */
-.t-404 .top{display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:26px 32px}
-.t-404 .logo{display:inline-flex;align-items:center;gap:9px;color:#F6EEE7;
-  text-decoration:none}
-.t-404 .logo span{font-size:19px;font-weight:700;letter-spacing:-.5px}
-.t-404 .top .demo{display:inline-flex;align-items:center;gap:8px;min-height:40px;
-  padding:0 20px;border-radius:100px;text-decoration:none;
-  border:1px solid rgba(246,238,231,.22);color:#F6EEE7;
-  font-size:13.5px;font-weight:600;letter-spacing:-.2px;
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  transition:border-color .25s ease,background .25s ease}
-.t-404 .top .demo:hover{border-color:#E0631F;background:rgba(224,99,31,.16)}
+/* ── le récapitulatif de la commande ── */
+.t-merci .mr-recap{border:1px solid var(--line);border-radius:var(--r);
+  background:var(--ink-2);padding:22px 24px;margin-bottom:34px}
+.t-merci .mr-recap h2{font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  font-family:var(--mono);color:var(--lin);margin-bottom:16px}
+.t-merci .mr-recap ul{display:grid;gap:10px}
+.t-merci .mr-recap li{display:flex;align-items:center;gap:11px;font-size:15px}
+.t-merci .mr-recap li svg{width:16px;height:16px;flex:0 0 auto;color:var(--bronze-2)}
+.t-merci .mr-recap .mr-eng{margin-top:16px;padding-top:15px;
+  border-top:1px solid var(--line);font-size:13.5px;color:var(--lin)}
 
-/* ── message ── */
-.t-404 .mid{display:grid;place-items:center;padding:20px 24px;text-align:center}
-.t-404 .code{display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:3px;
-  text-transform:uppercase;color:rgba(246,238,231,.6)}
-.t-404 .code i{width:7px;height:7px;border-radius:50%;background:#E0631F;
-  box-shadow:0 0 0 5px rgba(224,99,31,.2);animation:x4_pulse 2.6s ease-in-out infinite}
-@keyframes x4_pulse{0%,100%{box-shadow:0 0 0 5px rgba(224,99,31,.2)}
-                    50%{box-shadow:0 0 0 11px rgba(224,99,31,0)}}
+/* ── la suite, en trois temps ── */
+.t-merci .mr-suite{display:grid;gap:2px;margin-bottom:34px;
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.t-merci .mr-etape{display:flex;gap:16px;padding:20px 22px;background:var(--ink-2)}
+.t-merci .mr-etape .mr-n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;font-family:var(--mono);font-size:12px;
+  font-weight:700;background:rgba(var(--bronze-rgb),.16);color:var(--bronze-2)}
+.t-merci .mr-etape b{display:block;font-size:15.5px;margin-bottom:4px}
+.t-merci .mr-etape p{font-size:14px;line-height:1.55;color:var(--lin)}
 
-.t-404 h1{margin:26px 0 0;max-width:15ch;font-size:clamp(38px,7.4vw,92px);
-  font-weight:800;letter-spacing:-3px;line-height:1}
-.t-404 h1 em{font-style:normal;
-  background:linear-gradient(100deg,#E0631F 0%,#F4823E 55%,#D69A66 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.t-404 p{margin:24px auto 0;max-width:46ch;font-size:clamp(14.5px,1.5vw,17px);
-  line-height:1.6;color:rgba(246,238,231,.68)}
+/* ── les sorties ── */
+.t-merci .mr-acts{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.t-merci .mr-b1,.t-merci .mr-b2{display:inline-flex;align-items:center;gap:9px;
+  min-height:50px;padding:0 24px;border-radius:100px;
+  font-size:15px;font-weight:700;letter-spacing:-.2px;text-decoration:none}
+.t-merci .mr-b1{background:linear-gradient(100deg,var(--bronze-2),var(--bronze));
+  color:#fff;box-shadow:0 10px 30px -10px rgba(var(--bronze-rgb),.75);
+  transition:transform .25s var(--e)}
+.t-merci .mr-b1:hover{transform:translateY(-2px)}
+.t-merci .mr-b2{border:1px solid var(--line-2);color:var(--parch);
+  transition:border-color .25s var(--e)}
+.t-merci .mr-b2:hover{border-color:rgba(var(--bronze-rgb),.5)}
+.t-merci .mr-b1 svg,.t-merci .mr-b2 svg{width:16px;height:16px}
 
-.t-404 .acts{margin-top:38px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.t-404 .b1,.t-404 .b2{display:inline-flex;align-items:center;gap:9px;min-height:52px;
-  padding:0 28px;border-radius:100px;text-decoration:none;
-  font-size:15px;font-weight:700;letter-spacing:-.2px;
-  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,background .3s ease,border-color .25s ease}
-.t-404 .b1{background:#E0631F;color:#fff}
-.t-404 .b1:hover{background:#F4823E;transform:translateY(-2px);
-  box-shadow:0 16px 34px rgba(224,99,31,.42)}
-.t-404 .b1 svg{transition:transform .3s cubic-bezier(.16,1,.3,1)}
-.t-404 .b1:hover svg{transform:translateX(4px)}
-.t-404 .b2{border:1px solid rgba(246,238,231,.24);color:#F6EEE7;
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.t-404 .b2:hover{border-color:#F4823E;color:#F4823E}
+/* ── le pied de page : facture et résiliation ── */
+.t-merci .mr-fine{margin-top:34px;text-align:center;
+  font-size:13px;line-height:1.6;color:var(--lin)}
+.t-merci .mr-fine a{color:var(--bronze-2);text-decoration:underline;
+  text-underline-offset:3px}
 
-/* ── raccourcis de bas de page ── */
-.t-404 .bottom{padding:0 32px 30px}
-.t-404 .links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px;
-  padding-top:22px;border-top:1px solid rgba(246,238,231,.12)}
-.t-404 .links a{padding:9px 16px;border-radius:100px;text-decoration:none;
-  border:1px solid rgba(246,238,231,.14);color:rgba(246,238,231,.72);
-  font-size:13px;font-weight:600;letter-spacing:-.1px;
-  transition:border-color .25s ease,color .25s ease,background .25s ease}
-.t-404 .links a:hover{border-color:#E0631F;color:#F6EEE7;background:rgba(224,99,31,.14)}
-
-/* ── responsive ── */
 @media (max-width:600px){
-  .t-404 .top{padding:20px}
-  .t-404 .top .demo{display:none}
-  .t-404 h1{letter-spacing:-1.6px}
-  .t-404 .acts{margin-top:28px}
-  .t-404 .b1,.t-404 .b2{width:100%;justify-content:center}
-  .t-404 .bottom{padding:0 20px 24px}
-  /* la page dépasse une hauteur d'écran sur mobile : on rend la main */
-  body{overflow:auto}
+  .t-merci{padding:40px 20px 72px}
+  .t-merci .mr-acts .mr-b1,.t-merci .mr-acts .mr-b2{width:100%;justify-content:center}
 }
-/* mouvement réduit demandé : la vidéo est mise en pause par le script,
-   le poster reste affiché */
 @media (prefers-reduced-motion:reduce){
-  .t-404 .code i{animation:none}
+  .t-merci .mr-b1,.t-merci .mr-b2{transition:none}
+  .t-merci .mr-b1:hover{transform:none}
 }
 
 </style>
+<!-- chargées en dernier : à spécificité égale, ce sont elles qui gagnent -->
 <link rel="stylesheet" href="talos-mobile.css">
 <link rel="stylesheet" href="talos-more.css">
 </head>
 <body>
 <main>
 
-<section class="t-404">
+<header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true"><mask id="tnav-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#tnav-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg><span>Talos</span></a><div class="tnav-links"><a href="offres.html">Offres</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 18.36 5.64L 17.39 6.61M 6.61 17.39L 5.64 18.36M 18.36 18.36L 17.39 17.39M 6.61 6.61L 5.64 5.64"/><path d="M 12 7.8C 14.32 7.8 16.2 9.68 16.2 12C 16.2 14.32 14.32 16.2 12 16.2C 9.68 16.2 7.8 14.32 7.8 12C 7.8 9.68 9.68 7.8 12 7.8Z"/><path d="M 12 4.35V 4.37M 12 19.63V 19.65M 19.66 12H 19.63M 4.37 12H 4.34"/></svg></button><a class="tnav-esp" href="espace-client.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 15.35C 8.12 15.35 4.81 15.93 4.81 18.27C 4.81 20.61 8.1 21.22 11.98 21.22C 15.85 21.22 19.15 20.63 19.15 18.29C 19.15 15.95 15.87 15.35 11.98 15.35Z"/><path d="M 11.98 12.01C 14.52 12.01 16.58 9.95 16.58 7.41C 16.58 4.87 14.52 2.81 11.98 2.81C 9.45 2.81 7.39 4.87 7.39 7.41C 7.38 9.94 9.42 12 11.95 12.01L 11.98 12.01Z"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><a href="offres.html">Offres</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="espace-client.html">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 18.36 5.64L 17.39 6.61M 6.61 17.39L 5.64 18.36M 18.36 18.36L 17.39 17.39M 6.61 6.61L 5.64 5.64"/><path d="M 12 7.8C 14.32 7.8 16.2 9.68 16.2 12C 16.2 14.32 14.32 16.2 12 16.2C 9.68 16.2 7.8 14.32 7.8 12C 7.8 9.68 9.68 7.8 12 7.8Z"/><path d="M 12 4.35V 4.37M 12 19.63V 19.65M 19.66 12H 19.63M 4.37 12H 4.34"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
 
-  <div class="bg">
-    <video id="x4-video" autoplay muted loop playsinline preload="metadata"
-           poster="video/chantier-drone-poster.jpg" aria-hidden="true">
-      <source src="video/chantier-drone.mp4" type="video/mp4">
-    </video>
+<section class="t-merci">
+  <div class="mr-in">
+
+    <div class="mr-ok" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+
+    <h1>C'est noté, <em>votre équipe arrive</em>.</h1>
+    <p class="mr-lede">
+      Votre paiement est enregistré. Vous recevez la facture par e-mail
+      d'ici quelques minutes — vérifiez vos indésirables si elle tarde.
+    </p>
+
+    <!-- rempli par merci.js à partir du panier ; masqué si on arrive ici
+         sans être passé par la composition d'une équipe -->
+    <div class="mr-recap" id="mrRecap" hidden>
+      <h2>Votre commande</h2>
+      <ul id="mrListe"></ul>
+      <p class="mr-eng" id="mrEng"></p>
+    </div>
+
+    <!-- data-tx-skip : ces trois phrases sont déjà courtes, les replier
+         derrière « En savoir plus » ajouterait trois clics pour rien -->
+    <div class="mr-suite" data-tx-skip>
+      <div class="mr-etape">
+        <span class="mr-n">1</span>
+        <div>
+          <b>On vous appelle sous 24 h ouvrées</b>
+          <p>Un court échange pour récupérer ce dont vos assistants ont besoin :
+             vos modèles de devis, votre façon de chiffrer, vos tarifs.</p>
+        </div>
+      </div>
+      <div class="mr-etape">
+        <span class="mr-n">2</span>
+        <div>
+          <b>On paramètre vos assistants</b>
+          <p>Ils apprennent votre métier et vos documents. Vous n'avez rien
+             à installer, rien à configurer.</p>
+        </div>
+      </div>
+      <div class="mr-etape">
+        <span class="mr-n">3</span>
+        <div>
+          <b>Vous recevez vos accès</b>
+          <p>Votre espace client s'ouvre, vos assistants travaillent.
+             En général sous 72 h.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mr-acts">
+      <a class="mr-b1" href="espace-client.html">Aller à mon espace client
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="mr-b2" href="index.html">Retour à l'accueil</a>
+    </div>
+
+    <p class="mr-fine">
+      Une question sur votre commande&nbsp;? Écrivez à
+      <a href="mailto:contact@talos-ai.tech">contact@talos-ai.tech</a>.<br>
+      Vos factures et la gestion de votre abonnement sont dans votre espace client.
+    </p>
+
   </div>
-  <div class="veil"></div>
+</section>
 
-  <div class="top">
-    <a class="logo" href="index.html" aria-label="Talos — accueil">
-      <svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true"><mask id="err404-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#err404-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg>
-      <span>Talos</span>
-    </a>
-    <a class="demo" href="reserver.html">Réserver une démo</a>
-  </div>
 
-  <div class="mid">
-    <div>
-      <span class="code"><i></i>Erreur 404</span>
-      <h1>Ce chantier <em>n'est pas encore là</em>.</h1>
-      <p>
-        La page que vous cherchez a été déplacée, renommée, ou n'a jamais été coulée.
-        Rien de grave&nbsp;: le reste du site tient debout.
-      </p>
-      <div class="acts">
-        <a class="b1" href="index.html">
-          Retour à l'accueil
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a class="b2" href="reserver.html">Parler à quelqu'un</a>
+<footer class="t-ft" id="reserver">
+  <div class="ft-in">
+    <div class="ft-top">
+      <div class="brand">
+        <svg viewBox="0 0 380 120"><g transform="translate(0,18) scale(0.15636) translate(-253,-302)"><mask id="ftr-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#ftr-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></g><text x="84" y="100" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="100" fill="currentColor" font-weight="600" letter-spacing="-4">ALOS</text></svg>
+      </div>
+
+      <div class="col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html#top">Accueil</a></li>
+          <li><a href="offres.html">Offres</a></li>
+          <li><a href="comment-ca-marche.html">Comment ça marche</a></li>
+          <li><a href="tarifs.html">Tarifs</a></li>
+          <li><a href="simulateur.html">Simulateur</a></li>
+          <li><a href="pourquoi-talos.html">Pourquoi Talos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h4>Accès</h4>
+        <ul>
+          <li><a href="espace-client.html">Mon espace</a></li>
+          <li><a href="reserver.html">Réserver une démo</a></li>
+        </ul>
+      </div>
+
+      <div class="col tagline">
+        <p>Le temps est le plus beau chantier que nous pouvions vous rendre.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/talos.ai.tech/" target="_blank" rel="noopener" aria-label="Instagram — @talos.ai.tech">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="updates">
+      <h4>Restez informé</h4>
+      <form class="nform" onsubmit="return false">
+        <input type="email" placeholder="Adresse e-mail" required>
+        <button type="submit">S'inscrire</button>
+      </form>
+      <p class="nform-rgpd">Votre adresse sert uniquement à vous envoyer nos actualités.
+        Désinscription en un clic — <a href="confidentialite.html">politique de confidentialité</a>.</p>
+    </div>
+
+    <div class="ft-bottom">
+      <div>© <span id="yr">2026</span> · Talos — Altay Sakalli, entrepreneur individuel · SIREN 920 171 774</div>
+      <div class="legal">
+        <a href="mentions-legales.html">Mentions légales</a><span class="dot">·</span><a href="cgu.html">CGU</a><span class="dot">·</span><a href="cgv.html">CGV</a><span class="dot">·</span><a href="confidentialite.html">Politique de confidentialité</a>
       </div>
     </div>
   </div>
-
-  <div class="bottom">
-    <nav class="links" aria-label="Pages principales">
-      <a href="offres.html">Offres</a>
-      <a href="comment-ca-marche.html">Comment ça marche</a>
-      <a href="tarifs.html">Tarifs</a>
-      <a href="simulateur.html">Simulateur</a>
-      <a href="blog.html">Blog</a>
-      <a href="pourquoi-talos.html">Pourquoi Talos</a>
-      <a href="espace-client.html">Espace client</a>
-    </nav>
-  </div>
-
-</section>
-
+</footer>
 </main>
 
 <script>
@@ -564,27 +610,58 @@ body{overflow:hidden;background:#140F0C}
   if (yr) yr.textContent = new Date().getFullYear();
 })();
 
-/* ═══ 404 ═══ */
-(function(){
-  var v = document.getElementById('x4-video');
-  if (!v) return;
+/* ═══════════════════════════════════════════════════════════════
+   MERCI — on relit le panier une dernière fois pour montrer au
+   client ce qu'il vient de commander, puis on le vide : revenir
+   sur le site ne doit pas laisser croire qu'une commande traîne.
+   Si le panier est vide (lien partagé, page rouverte plus tard),
+   le récapitulatif reste masqué et le reste de la page suffit.
+   ═══════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
 
-  /* mouvement réduit : on garde le poster, fixe */
-  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  function sync(){
-    if (mq.matches) { v.pause(); v.removeAttribute('autoplay'); }
-    else { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
-  }
-  (mq.addEventListener ? mq.addEventListener('change', sync) : mq.addListener(sync));
-  sync();
+  var NOMS = {
+    commercial:    'Assistant commercial',
+    tresorerie:    'Assistante trésorerie',
+    client:        'Assistante client',
+    facturation:   'Assistant facturation',
+    administratif: 'Assistante administrative'
+  };
+  var ENG = {
+    1:  'Sans engagement, résiliable à tout moment.',
+    3:  'Engagement 3 mois · −10 % sur l’abonnement.',
+    6:  'Engagement 6 mois · −20 % et mise en place offerte.',
+    12: 'Engagement 12 mois · −30 % et mise en place offerte.'
+  };
+  var MOIS = { m: 1, q: 3, n: 6, y: 12 };
 
-  /* certains navigateurs mobiles refusent la lecture auto malgré `muted` :
-     le poster reste alors affiché, ce qui est un repli acceptable */
-  v.addEventListener('error', function(){ v.style.display = 'none'; });
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+    'stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" ' +
+    'aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+
+  try {
+    var brut = JSON.parse(localStorage.getItem('talos-panier') || 'null');
+    if (!brut || !Array.isArray(brut.agents) || !brut.agents.length) return;
+
+    var liste = document.getElementById('mrListe');
+    var eng = document.getElementById('mrEng');
+    var bloc = document.getElementById('mrRecap');
+    if (!liste || !bloc) return;
+
+    liste.innerHTML = brut.agents.map(function (id) {
+      return '<li>' + CHECK + (NOMS[id] || id) + '</li>';
+    }).join('');
+    if (eng) eng.textContent = ENG[MOIS[brut.eng]] || '';
+    bloc.hidden = false;
+
+    /* la commande est passée : le panier n'a plus lieu d'être */
+    localStorage.removeItem('talos-panier');
+  } catch (e) { /* stockage refusé : la page reste juste sans récapitulatif */ }
 })();
 
 </script>
-<script src="talos-more.js" defer></script>
 <script src="talos-paiement.js" defer></script>
+<script src="panier.js" defer></script>
+<script src="talos-more.js" defer></script>
 </body>
 </html>

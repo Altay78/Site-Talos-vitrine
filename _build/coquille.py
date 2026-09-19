@@ -36,10 +36,14 @@ def head(title, desc, og_title=None, og_desc=None, css='', noindex=False):
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">%s
 <link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="panier.css">
 <style>
 %s
 %s
 </style>
+<!-- chargées en dernier : à spécificité égale, ce sont elles qui gagnent -->
+<link rel="stylesheet" href="talos-mobile.css">
+<link rel="stylesheet" href="talos-more.css">
 </head>
 """ % (title, desc, og_title or title, og_desc or desc,
        u'\n<meta name="robots" content="noindex">' if noindex else u'',
@@ -55,6 +59,15 @@ def page(fname, title, desc, css, body, js, og_title=None, og_desc=None,
     out += body
     if footer:
         out += u'\n\n' + FOOTER
-    out += u'\n</main>\n\n<script>\n' + SHELL_JS + u'\n' + js + u'\n</script>\n</body>\n</html>\n'
+    out += u'\n</main>\n\n<script>\n' + SHELL_JS + u'\n' + js + u'\n</script>\n'
+    # le panier s'installe tout seul : bouton de barre, tiroir, boutons
+    # « ajouter ». Chargé en dernier, il ne retarde rien.
+    # talos-paiement.js doit passer AVANT panier.js : c'est lui qui dit
+    # si l'achat en ligne est ouvert. defer conserve l'ordre de déclaration.
+    out += u'<script src="talos-paiement.js" defer></script>\n'
+    out += u'<script src="panier.js" defer></script>\n'
+    # les paragraphes gris se replient derrière « En savoir plus » sur
+    # téléphone : le script se pose tout seul, page par page
+    out += u'<script src="talos-more.js" defer></script>\n</body>\n</html>\n'
     io.open(WEB + fname, 'w', encoding='utf-8').write(out)
     print(u'écrit : %s (%d octets)' % (fname, len(out)))

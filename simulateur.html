@@ -1175,7 +1175,7 @@ html[data-theme="light"] .t-roi .orb{opacity:.09}
 
 
 </style>
-<link rel="stylesheet" href="talos-fold.css"><link rel="stylesheet" href="talos-press.css">
+<link rel="stylesheet" href="talos-press.css">
 <style id="joints-css">
 /* ── Les raccords entre sections ─────────────────────────────────────────
    Les sections partagent le même fond : le filet d'1 px qui les séparait
@@ -1251,7 +1251,10 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 .tnav-pan-all:hover{background:color-mix(in oklab,var(--indigo) 14%,transparent);color:var(--indigo)}
 @media (max-width:1060px){.tnav-pan{display:none}}
 @media (prefers-reduced-motion:reduce){.tnav-pan,.tnav-chev{transition:none}}
-</style></head>
+</style><link rel="stylesheet" href="talos-mobile.css">
+<link rel="stylesheet" href="talos-more.css">
+<link rel="stylesheet" href="panier.css">
+</head>
 <body>
 <main>
 
@@ -1857,6 +1860,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="b2" href="tarifs.html">Voir les tarifs</a>
+      <a class="b2" href="commander.html" data-achat hidden>Commander en ligne</a>
     </div>
   </div>
 </div>
@@ -2499,6 +2503,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 })();
 
 </script>
-<script src="talos-fold.js" defer></script>
+<script src="talos-more.js" defer></script>
+<script src="talos-paiement.js" defer></script>
+<script src="panier.js" defer></script>
 </body>
 </html>

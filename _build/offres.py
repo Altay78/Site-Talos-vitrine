@@ -33,6 +33,25 @@ def hub(resync=True):
         print(u'%-28s %s' % nav_sync.sync('offres.html'))
 
 
+def commander(resync=True):
+    """La page Commander — composer son équipe et passer commande seul.
+
+    Elle n'embarque aucun prix : tout est peint par panier.js, qui porte la
+    grille. Deux barèmes qui divergent, c'est un client mécontent.
+    """
+    page('commander.html',
+         u"Commander — Talos | Composez votre équipe et démarrez",
+         u"Choisissez vos assistants et votre engagement, voyez le prix, et commandez en "
+         u"ligne. Sans rendez-vous, sans devis à attendre. Mise en place offerte à partir "
+         u"de six mois.",
+         part('commander.css'), part('commander.html'), u'',
+         og_title=u"Composez votre équipe Talos et commandez en ligne",
+         og_desc=u"Vos assistants, votre engagement, le prix affiché avant de cliquer. "
+                 u"Sans passer par une démo.")
+    if resync:
+        print(u'%-28s %s' % nav_sync.sync('commander.html'))
+
+
 def construire(f, resync=True):
     nom = 'assistant-%s.html' % f['slug']
     page(nom, f['titre'], f['desc'], CSS, fiche.corps(f), JS,
@@ -50,3 +69,5 @@ if __name__ == '__main__':
         construire(_f)
     if not voulus or 'offres' in voulus:
         hub()
+    if not voulus or 'commander' in voulus:
+        commander()

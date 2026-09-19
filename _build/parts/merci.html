@@ -1,0 +1,65 @@
+<section class="t-merci">
+  <div class="mr-in">
+
+    <div class="mr-ok" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+
+    <h1>C'est noté, <em>votre équipe arrive</em>.</h1>
+    <p class="mr-lede">
+      Votre paiement est enregistré. Vous recevez la facture par e-mail
+      d'ici quelques minutes — vérifiez vos indésirables si elle tarde.
+    </p>
+
+    <!-- rempli par merci.js à partir du panier ; masqué si on arrive ici
+         sans être passé par la composition d'une équipe -->
+    <div class="mr-recap" id="mrRecap" hidden>
+      <h2>Votre commande</h2>
+      <ul id="mrListe"></ul>
+      <p class="mr-eng" id="mrEng"></p>
+    </div>
+
+    <!-- data-tx-skip : ces trois phrases sont déjà courtes, les replier
+         derrière « En savoir plus » ajouterait trois clics pour rien -->
+    <div class="mr-suite" data-tx-skip>
+      <div class="mr-etape">
+        <span class="mr-n">1</span>
+        <div>
+          <b>On vous appelle sous 24 h ouvrées</b>
+          <p>Un court échange pour récupérer ce dont vos assistants ont besoin :
+             vos modèles de devis, votre façon de chiffrer, vos tarifs.</p>
+        </div>
+      </div>
+      <div class="mr-etape">
+        <span class="mr-n">2</span>
+        <div>
+          <b>On paramètre vos assistants</b>
+          <p>Ils apprennent votre métier et vos documents. Vous n'avez rien
+             à installer, rien à configurer.</p>
+        </div>
+      </div>
+      <div class="mr-etape">
+        <span class="mr-n">3</span>
+        <div>
+          <b>Vous recevez vos accès</b>
+          <p>Votre espace client s'ouvre, vos assistants travaillent.
+             En général sous 72 h.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mr-acts">
+      <a class="mr-b1" href="espace-client.html">Aller à mon espace client
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="mr-b2" href="index.html">Retour à l'accueil</a>
+    </div>
+
+    <p class="mr-fine">
+      Une question sur votre commande&nbsp;? Écrivez à
+      <a href="mailto:contact@talos-ai.tech">contact@talos-ai.tech</a>.<br>
+      Vos factures et la gestion de votre abonnement sont dans votre espace client.
+    </p>
+
+  </div>
+</section>

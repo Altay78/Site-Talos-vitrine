@@ -1,0 +1,74 @@
+/* ═══════════════════════════════════════════════════════════════
+   MERCI — la page où Stripe renvoie après un paiement réussi.
+   Elle ne vend plus rien. Elle répond à la seule question que se
+   pose quelqu'un qui vient de donner sa carte : et maintenant ?
+   ═══════════════════════════════════════════════════════════════ */
+.t-merci{position:relative;font-family:var(--sans);color:var(--parch);
+  background:var(--ink);padding:64px 24px 96px;overflow:hidden}
+.t-merci::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 55% at 50% -10%,
+    rgba(var(--bronze-rgb),.22) 0%,transparent 65%)}
+.t-merci .mr-in{position:relative;z-index:2;max-width:640px;margin:0 auto}
+
+/* ── la coche ── */
+.t-merci .mr-ok{width:66px;height:66px;margin:0 auto 26px;border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(var(--bronze-rgb),.14);
+  border:1px solid rgba(var(--bronze-rgb),.34);color:var(--bronze-2)}
+.t-merci .mr-ok svg{width:30px;height:30px}
+
+/* ── le titre ── */
+.t-merci h1{font-size:clamp(32px,4.2vw,50px);line-height:1.06;
+  letter-spacing:-.035em;text-align:center;margin-bottom:16px}
+.t-merci .mr-lede{text-align:center;font-size:17px;line-height:1.6;
+  color:var(--lin);margin-bottom:38px}
+
+/* ── le récapitulatif de la commande ── */
+.t-merci .mr-recap{border:1px solid var(--line);border-radius:var(--r);
+  background:var(--ink-2);padding:22px 24px;margin-bottom:34px}
+.t-merci .mr-recap h2{font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  font-family:var(--mono);color:var(--lin);margin-bottom:16px}
+.t-merci .mr-recap ul{display:grid;gap:10px}
+.t-merci .mr-recap li{display:flex;align-items:center;gap:11px;font-size:15px}
+.t-merci .mr-recap li svg{width:16px;height:16px;flex:0 0 auto;color:var(--bronze-2)}
+.t-merci .mr-recap .mr-eng{margin-top:16px;padding-top:15px;
+  border-top:1px solid var(--line);font-size:13.5px;color:var(--lin)}
+
+/* ── la suite, en trois temps ── */
+.t-merci .mr-suite{display:grid;gap:2px;margin-bottom:34px;
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.t-merci .mr-etape{display:flex;gap:16px;padding:20px 22px;background:var(--ink-2)}
+.t-merci .mr-etape .mr-n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;font-family:var(--mono);font-size:12px;
+  font-weight:700;background:rgba(var(--bronze-rgb),.16);color:var(--bronze-2)}
+.t-merci .mr-etape b{display:block;font-size:15.5px;margin-bottom:4px}
+.t-merci .mr-etape p{font-size:14px;line-height:1.55;color:var(--lin)}
+
+/* ── les sorties ── */
+.t-merci .mr-acts{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.t-merci .mr-b1,.t-merci .mr-b2{display:inline-flex;align-items:center;gap:9px;
+  min-height:50px;padding:0 24px;border-radius:100px;
+  font-size:15px;font-weight:700;letter-spacing:-.2px;text-decoration:none}
+.t-merci .mr-b1{background:linear-gradient(100deg,var(--bronze-2),var(--bronze));
+  color:#fff;box-shadow:0 10px 30px -10px rgba(var(--bronze-rgb),.75);
+  transition:transform .25s var(--e)}
+.t-merci .mr-b1:hover{transform:translateY(-2px)}
+.t-merci .mr-b2{border:1px solid var(--line-2);color:var(--parch);
+  transition:border-color .25s var(--e)}
+.t-merci .mr-b2:hover{border-color:rgba(var(--bronze-rgb),.5)}
+.t-merci .mr-b1 svg,.t-merci .mr-b2 svg{width:16px;height:16px}
+
+/* ── le pied de page : facture et résiliation ── */
+.t-merci .mr-fine{margin-top:34px;text-align:center;
+  font-size:13px;line-height:1.6;color:var(--lin)}
+.t-merci .mr-fine a{color:var(--bronze-2);text-decoration:underline;
+  text-underline-offset:3px}
+
+@media (max-width:600px){
+  .t-merci{padding:40px 20px 72px}
+  .t-merci .mr-acts .mr-b1,.t-merci .mr-acts .mr-b2{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .t-merci .mr-b1,.t-merci .mr-b2{transition:none}
+  .t-merci .mr-b1:hover{transform:none}
+}

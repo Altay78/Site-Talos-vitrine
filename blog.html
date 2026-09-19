@@ -561,7 +561,10 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 .tnav-pan-all:hover{background:color-mix(in oklab,var(--indigo) 14%,transparent);color:var(--indigo)}
 @media (max-width:1060px){.tnav-pan{display:none}}
 @media (prefers-reduced-motion:reduce){.tnav-pan,.tnav-chev{transition:none}}
-</style></head>
+</style><link rel="stylesheet" href="talos-mobile.css">
+<link rel="stylesheet" href="talos-more.css">
+<link rel="stylesheet" href="panier.css">
+</head>
 <body>
 <main>
 
@@ -774,5 +777,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 })();
 
 </script>
+<script src="talos-more.js" defer></script>
+<script src="talos-paiement.js" defer></script>
+<script src="panier.js" defer></script>
 </body>
 </html>
