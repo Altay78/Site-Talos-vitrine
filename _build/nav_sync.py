@@ -289,7 +289,29 @@ def sync(page):
             s = s[:j + 7] + '\n      ' + RGPD_NOTE + s[j + 7:]
 
     # 5 · la feuille du menu déroulant, une fois par page
+    #
+    #  ⚠️  Ces deux blocs sont REMPLACÉS, pas complétés. Tout ce qu'on y
+    #  écrit à la main disparaît au prochain passage. C'est arrivé le
+    #  19/09 : le CSS des deux appareils du hero (.hd-mac, .hd-iph) avait
+    #  été ajouté dans tnav-drop-css ; les maquettes se sont dépliées sur
+    #  toute la page d'accueil, et rien ne l'a signalé.
+    #  Le garde-fou ci-dessous relit l'ancien bloc et refuse d'effacer une
+    #  règle qui n'est pas dans le nouveau.
     if '<div class="tnav-links">' in before:
+        for bloc, neuf in (('tnav-drop-css', PANEL_CSS), ('joints-css', JOINTS_CSS)):
+            m = re.search(r'<style id="%s">([\s\S]*?)</style>' % bloc, s)
+            if not m:
+                continue
+            connus = set(re.findall(r'\.([a-zA-Z][\w-]+)', neuf))
+            trouves = set(re.findall(r'\.([a-zA-Z][\w-]+)', m.group(1)))
+            etrangers = sorted(trouves - connus)
+            if etrangers:
+                raise SystemExit(
+                    "nav_sync : %s contient des règles qui ne sont pas à lui —\n"
+                    "           %s\n"
+                    "           Les réécrire les effacerait. Déplacez-les dans\n"
+                    "           leur propre <style>, puis relancez."
+                    % (page, ', '.join('.' + e for e in etrangers[:8])))
         s = re.sub(r'<style id="tnav-drop-css">.*?</style>', '', s, flags=re.S)
         s = re.sub(r'<style id="joints-css">.*?</style>', '', s, flags=re.S)
         s = s.replace('</head>', JOINTS_CSS + PANEL_CSS + '</head>', 1)
