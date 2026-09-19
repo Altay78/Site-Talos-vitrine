@@ -31,7 +31,7 @@
     'nav', 'header', 'footer', 'form', 'button', 'a', 'label', 'table',
     'details', 'summary', 'li', 'figcaption',
     '.tnav-wrap', '.tnav-menu', '.t-ft', '.sheet', '.crew-c', '.fx-card',
-    '.tf-panel', '[data-tx-skip]',
+    '[data-tx-skip]',
     /* CGU, CGV, mentions, confidentialité : un texte juridique se lit
        en entier ou ne vaut rien. Quinze pastilles y seraient quinze
        façons de ne pas lire ce qu'on signe. */
