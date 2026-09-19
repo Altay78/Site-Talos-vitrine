@@ -42,7 +42,12 @@ PAGES = ['index.html', 'offres.html', 'comment-ca-marche.html',
          # merci.py, elles repartaient sans le menu « Offres » et sans
          # le pied de page réaligné. Deux pages du tunnel d'achat, donc
          # les dernières qu'on peut se permettre de laisser de côté.
-         'commander.html', 'merci.html']
+         'commander.html', 'merci.html',
+         # les pages juridiques ont la barre elles aussi : absentes d'ici,
+         # elles gardaient les six liens à plat pendant que le reste du
+         # site passait aux menus
+         'cgu.html', 'cgv.html', 'mentions-legales.html',
+         'confidentialite.html']
 
 LOGO_SVG = ('<svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true">'
             '<mask id="navsync-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550">'
@@ -92,6 +97,68 @@ CHEV = (u'<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill
 FLECHE = (u'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
           u'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
           u'<path d="M5 12h14M13 6l6 6-6 6"/></svg>')
+
+
+# ── Deux menus de plus : « Tarifs » et « Pourquoi Talos » ────────────────
+# Six libellés dans la barre, c'était deux de trop : « Simulateur » passe
+# sous « Tarifs » (on simule un prix), « Blog » sous « Pourquoi Talos »
+# (on y raconte la même chose, en plus long). Même carte que le menu
+# « Offres », en une colonne : deux entrées ne méritent pas deux colonnes.
+#
+# Un regroupement ne doit jamais éloigner une page : les six liens restent
+# à plat dans le menu du téléphone et dans le pied de page.
+IC_TARIF = (u'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+            u'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+            u'<path d="M20.6 13.3l-7.3 7.3a1.9 1.9 0 0 1-2.7 0l-7.2-7.2a1.9 1.9 0 0 1-.5-1.3V4.6'
+            u'a1.6 1.6 0 0 1 1.6-1.6h7.5c.5 0 1 .2 1.3.5l7.3 7.3a1.9 1.9 0 0 1 0 2.5z"/>'
+            u'<circle cx="8.1" cy="8.1" r="1.3"/></svg>')
+IC_SIM = (u'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+          u'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+          u'<rect x="4.5" y="2.5" width="15" height="19" rx="2.4"/><path d="M8.2 6.6h7.6"/>'
+          u'<path d="M8.4 11.2h.02M12 11.2h.02M15.6 11.2h.02M8.4 14.6h.02M12 14.6h.02'
+          u'M15.6 14.6h.02M8.4 18h.02M12 18h.02M15.6 18h.02"/></svg>')
+IC_HIST = (u'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+           u'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+           u'<path d="M12 2.8c.6 3.1 2.4 4.6 4 6.2 1.6 1.6 2.6 3.3 2.6 5.5a6.6 6.6 0 0 1-13.2 0'
+           u'c0-2.5 1.2-4 2.6-5.3"/><path d="M12 21a3.2 3.2 0 0 1-3.2-3.2c0-1.8 1.4-2.7 2.1-4'
+           u'.4.8 1.7 2.1 2.6 2.1 4.4A3.2 3.2 0 0 1 12 21z"/></svg>')
+IC_BLOG = (u'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+           u'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+           u'<path d="M19.5 4.8v13.4a2.3 2.3 0 0 1-2.3 2.3H5.6a2.1 2.1 0 0 1-2.1-2.1V6.9'
+           u'a2.1 2.1 0 0 1 2.1-2.1h11.6a2.3 2.3 0 0 1 2.3 0z"/><path d="M7.4 8.7h8.2M7.4 12.3h8.2'
+           u'M7.4 15.9h5"/></svg>')
+
+MENUS = {
+    'tarifs.html': [
+        (IC_TARIF, u'Formules et tarifs', u'Solo, Pro, Business',       'tarifs.html'),
+        (IC_SIM,   u'Simulateur',         u'Votre gain en 30 secondes', 'simulateur.html'),
+    ],
+    'pourquoi-talos.html': [
+        (IC_HIST, u'Notre histoire', u'D\u2019o\xf9 vient Talos',        'pourquoi-talos.html'),
+        (IC_BLOG, u'Blog',           u'Guides et cas de chantier',   'blog.html'),
+    ],
+}
+# Les libell\xe9s qui restent dans la barre. Les autres vivent dans un menu.
+BAR = ['offres.html', 'comment-ca-marche.html', 'tarifs.html', 'pourquoi-talos.html']
+
+
+def drop_t(label, href, page):
+    """Le libell\xe9 d'un menu. Quand la page ouverte est une de ses filles,
+    il porte le trait : sinon, sur simulateur.html ou sur le blog, plus rien
+    n'indique o\xf9 l'on se trouve."""
+    filles = [h for _, _, _, h in MENUS.get(href, [])]
+    ici = u' is-here' if (page in filles and page != href) else u''
+    return (u'<a class="tnav-drop-t%s" href="%s"%s>%s%s</a>'
+            % (ici, href, cur(href, page), label, CHEV))
+
+
+def mini_html(label, href, page):
+    items = []
+    for ic, nom, mission, h in MENUS[href]:
+        items.append(u'<a class="tnav-ag" href="%s"%s><span class="tnav-ic">%s</span>'
+                     u'<b>%s</b><small>%s</small></a>' % (h, cur(h, page), ic, nom, mission))
+    return (u'<span class="tnav-drop">%s<span class="tnav-pan is-mini">%s</span></span>'
+            % (drop_t(label, href, page), u''.join(items)))
 
 
 def offres_html(page):
@@ -192,6 +259,18 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   font-size:13.5px;font-weight:600;color:var(--ink)}
 .tnav-pan-all::after{display:none}
 .tnav-pan-all:hover{background:color-mix(in oklab,var(--indigo) 14%,transparent);color:var(--indigo)}
+/* \u2500\u2500 les deux menus courts \u2500\u2500
+   M\xeame carte, m\xeame trame, m\xeame survol : une colonne au lieu de deux, et
+   une pastille d'ic\xf4ne \xe0 la place du visage \u2014 « Tarifs » et « Blog » n'ont
+   pas de portrait, et un rond vide serait pire qu'une ic\xf4ne. */
+.tnav-pan.is-mini{grid-template-columns:minmax(0,1fr);width:min(322px,88vw);left:-16px}
+.tnav-ic{grid-row:1/3;display:grid;place-items:center;width:36px;height:36px;
+  border-radius:50%;color:var(--indigo);
+  background:color-mix(in oklab,var(--indigo) 13%,transparent)}
+.tnav-ag[aria-current="page"] b{color:var(--indigo)}
+/* la page ouverte est une fille du menu : c'est le parent qui porte le trait */
+.tnav-links .tnav-drop-t.is-here{color:var(--indigo)}
+.tnav-links .tnav-drop-t.is-here::after{transform:scaleX(1)}
 @media (max-width:1060px){.tnav-pan{display:none}}
 @media (prefers-reduced-motion:reduce){.tnav-pan,.tnav-chev{transition:none}}
 </style>"""
@@ -215,19 +294,31 @@ def cur(href, page):
 
 
 def links_html(page):
+    """La barre : quatre libell\xe9s, dont trois ouvrent un menu."""
     out = []
     for t, h in LINKS:
+        if h not in BAR:
+            continue
         if h == 'offres.html':
             out.append(offres_html(page))
+        elif h in MENUS:
+            out.append(mini_html(t, h, page))
         else:
             out.append(u'<a href="%s"%s>%s</a>' % (h, cur(h, page), t))
     return u''.join(out)
 
 
+def flat_links_html(page):
+    """Le menu du t\xe9l\xe9phone : les six liens \xe0 plat. Les panneaux d\xe9roulants
+    sont masqu\xe9s sous 1060 px \u2014 les y reprendre tels quels ferait dispara\xeetre
+    « Simulateur » et « Blog » du t\xe9l\xe9phone."""
+    return u''.join(u'<a href="%s"%s>%s</a>' % (h, cur(h, page), t) for t, h in LINKS)
+
+
 def menu_html(page):
     esp = u' aria-current="page"' if page == 'espace-client.html' else u''
     res = u' aria-current="page"' if page == 'reserver.html' else u''
-    return (links_html(page)
+    return (flat_links_html(page)
             + u'<a class="m-esp" href="espace-client.html"%s>Espace client</a>' % esp
             + M_THEME
             + u'<a class="m-cta" href="reserver.html"%s>Réserver une démo</a>' % res)

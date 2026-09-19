@@ -107,3 +107,32 @@
 @media (prefers-reduced-motion: reduce) {
   .tx-txt, .tx-pill, .tx-pill .tx-chev { transition: none; }
 }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   BASCULE CLAIR / SOMBRE SUR TÉLÉPHONE
+   Sous 600 px, la pastille de la barre était masquée : le seul chemin
+   vers le mode clair passait par le menu hamburger. Trois gestes pour
+   un réglage qui en vaut un. Elle revient dans la barre, en 36 px.
+
+   Ces règles vivent ici et pas dans shell.css parce que chaque page
+   embarque sa propre copie compilée de shell.css : seule une feuille
+   chargée après (celle-ci) atteint les pages déjà construites.
+   À spécificité égale, la dernière chargée gagne.
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .tnav .theme-toggle { display: grid; width: 36px; height: 36px; }
+  .tnav .theme-toggle svg { width: 16px; height: 16px; }
+  /* la barre se resserre d'autant : rien ne doit déborder à 375 px */
+  .tnav { gap: 10px; padding: 9px 9px 9px 15px; }
+  .tnav-act { gap: 7px; }
+  /* deux bascules pour un même réglage sèmeraient le doute : celle du
+     menu s'efface tant que celle de la barre est là */
+  .tnav-menu .m-theme { display: none; }
+}
+/* sous 360 px il n'y a plus la place : la pastille repasse dans le menu,
+   où elle n'a jamais cessé d'exister */
+@media (max-width: 360px) {
+  .tnav .theme-toggle { display: none; }
+  .tnav-menu .m-theme { display: flex; }
+}

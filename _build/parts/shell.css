@@ -188,8 +188,8 @@ html[data-theme="light"] .tnav-menu{background:#fff;
 .tnav-menu .m-cta{margin-top:8px;text-align:center;background:var(--indigo);color:#fff;
   border-radius:100px;padding:15px 16px;font-weight:700}
 .tnav-menu .m-cta:hover{background:var(--indigo-light)}
-/* bascule de thème du menu mobile : sous 600px la pastille de la barre n'a
-   plus la place de s'afficher, le réglage ne vivait alors nulle part */
+/* bascule de thème du menu mobile : filet de sécurité des très petits
+   écrans (≤ 360 px), où la pastille de la barre n'a plus la place */
 .tnav-menu .m-theme{display:none;align-items:center;gap:10px;width:100%;
   padding:14px 16px;border:0;border-radius:14px;background:none;color:var(--ink);
   font-family:inherit;font-size:16px;font-weight:600;letter-spacing:-.2px;
@@ -215,9 +215,17 @@ main > section,main > footer{scroll-margin-top:110px}
   .tnav{top:10px;width:calc(100% - 20px);padding:9px 9px 9px 16px}
   .tnav-logo span{font-size:17px}
   .tnav-cta{min-height:40px;padding:0 16px;font-size:13.5px}
+  /* la pastille de thème reste dans la barre : elle était masquée ici, et
+     changer de mode obligeait à ouvrir le menu pour un réglage d'un clic */
+  .tnav .theme-toggle{display:grid;width:36px;height:36px}
+  .tnav .theme-toggle svg{width:16px;height:16px}
+  .tnav-menu{top:74px;width:calc(100% - 20px)}
+}
+/* sous 360 px, logo + pastille + bouton + hamburger ne tiennent plus :
+   la pastille repasse dans le menu, seul endroit qui a encore de la place */
+@media (max-width:360px){
   .tnav .theme-toggle{display:none}
   .tnav-menu .m-theme{display:flex}
-  .tnav-menu{top:74px;width:calc(100% - 20px)}
 }
 @media (prefers-reduced-motion:reduce){
   .tnav,.tnav-cta,.tnav-links a::after,.tnav-burger i,.tnav-menu{transition:none}
