@@ -1356,6 +1356,59 @@ html[data-theme="light"] .t-total{--bronze:#C5531C; --bronze-rgb:197,83,28;
 .t-roi .results .duo .glass.stat{border-color:var(--line);
   background:rgba(var(--parch-rgb),.025)}
 .t-roi .results .duo .glass.stat .v{font-weight:700;letter-spacing:-.8px}
+
+/* ══════════════════════════════════════════════════════════════════
+   LA COMPARAISON : TROIS TONS, PAS UN SEUL
+
+   Les deux côtés portaient chacun leur accent — rouille à gauche, braise
+   à droite. Sur un fond sombre, une brique et une braise se ressemblent :
+   les deux cartes brillaient pareil, et l'œil ne savait pas laquelle était
+   la bonne nouvelle.
+
+   On éteint le statu quo. Ce que le visiteur subit déjà n'a pas à briller :
+   il passe en neutre. L'accent revient à ce que Talos apporte, et le plus
+   fort au seul chiffre qu'on veut retenir — l'économie. Trois degrés au
+   lieu d'un aplat.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── le coût subi : neutre ───────────────────────────────────────── */
+.t-gains .vs .bad{border-color:var(--line);
+  background:rgba(var(--parch-rgb),.025)}
+.t-gains .vs .bad .k{color:var(--lin)}
+.t-gains .vs .bad .v{color:var(--parch)}
+.t-gains .vs .bad .s{color:var(--lin)}
+.t-gains .vs .bad .mtr i{background:rgba(var(--parch-rgb),.3)}
+
+/* ── ce que Talos apporte : l'accent, mais retenu ────────────────── */
+.t-gains .vs .good{border-color:rgba(var(--bronze-rgb),.32);
+  background:rgba(var(--bronze-rgb),.06)}
+.t-gains .vs .good .v{color:var(--bronze-2)}
+
+/* ── l'économie : le seul bloc qui monte le ton ──────────────────── */
+.t-gains .save{margin-top:18px;padding:22px 24px;border-radius:20px;
+  border-color:rgba(var(--bronze-rgb),.34);
+  background:linear-gradient(150deg,rgba(var(--bronze-rgb),.2),rgba(var(--bronze-rgb),.04))}
+.t-gains .save .v{font-size:clamp(26px,3vw,34px);letter-spacing:-1.4px}
+.t-gains .save .pct{padding:12px 16px;border-radius:14px}
+
+/* ── de l'air ────────────────────────────────────────────────────
+   Les blocs se touchaient : le coût, sa bande de détail, la comparaison
+   et l'économie s'enchaînaient sans respiration. */
+.t-gains .cost-hero{margin-bottom:10px}
+.t-gains .vs{gap:14px;margin-top:6px}
+.t-gains .vs .side{padding:18px 18px 16px}
+.t-gains .lgd{margin-top:46px}
+
+@media (max-width:820px){
+  /* côte à côte à 375 px, « Formule Évolution, 8 tâches prises en
+     charge » tombait sur trois lignes dans une colonne de 140 px. On
+     empile, et le « VS » devient un séparateur horizontal. */
+  .t-gains .vs{grid-template-columns:1fr;gap:10px}
+  .t-gains .vs .mid{padding:2px 0}
+  .t-gains .save{flex-wrap:wrap;gap:14px;padding:20px}
+  .t-gains .save .pct{margin-left:0}
+  .t-gains .lgd{margin-top:38px}
+}
 </style>
 <link rel="stylesheet" href="talos-press.css?v=8ebf90eb">
 <link rel="stylesheet" href="talos-mobile.css?v=5290ac1c">
