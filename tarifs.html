@@ -2160,6 +2160,12 @@ html[data-theme="light"] .t-price .seg{background:#fff;box-shadow:0 1px 2px rgba
   transition:color .3s var(--e),border-color .3s var(--e),background .3s var(--e)}
 .t-price .seg button:hover:not(.on) .off{border-color:rgba(var(--bronze-rgb),.6)}
 .t-price .seg button.on .off{background:rgba(255,255,255,.18);border-color:transparent;color:#fff}
+/*  « offre de lancement » sous le prix : on la distingue sans crier — la
+    gratuité est déjà annoncée juste avant, cette mention dit seulement
+    qu'elle ne durera pas.  */
+.t-price .plan .setup .lancement{display:block;margin-top:2px;font-family:var(--mono);
+  font-size:9.5px;font-style:normal;letter-spacing:.6px;text-transform:uppercase;
+  color:var(--bronze)}
 @media (prefers-reduced-motion:reduce){.t-price .seg .thumb{transition:none}}
 .t-price .engage-note{text-align:center;font-size:13.5px;color:var(--lin);margin-bottom:44px;min-height:20px}
 .t-price .engage-note b{color:var(--parch);font-weight:600}
@@ -3035,7 +3041,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     <div class="engage">
       <div class="seg" id="seg" role="radiogroup" aria-label="Durée d'engagement">
         <span class="thumb" id="segThumb" aria-hidden="true"></span>
-        <button type="button" role="radio" aria-checked="true" class="on" data-k="m">Mensuel</button>
+        <button type="button" role="radio" aria-checked="true" class="on" data-k="m">Mensuel <span class="off">Lancement</span></button>
         <button type="button" role="radio" aria-checked="false" data-k="n">6 mois <span class="off">−10 %</span></button>
         <button type="button" role="radio" aria-checked="false" data-k="y">12 mois <span class="off">2 mois offerts</span></button>
       </div>
@@ -3484,8 +3490,12 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
      Les prix engagés sont écrits en dur : ce sont ceux du barème,
      pas un pourcentage recalculé qui produirait des 89,10 €.        */
   var ENGAGE = [
+    /*  La personnalisation est offerte sur le mensuel le temps du
+        lancement seulement : sur cette durée, rien ne garantit qu'on la
+        rentabilise. On l'annonce pour ce qu'elle est, une offre de
+        départ, plutôt que de la reprendre un jour sans prévenir.  */
     {k:'m', lab:'Mensuel',  mois:1,  off:0,  setup:false,
-     note:'Sans engagement, résiliable à tout moment, et <b>personnalisation de votre assistant offerte</b>.'},
+     note:'Sans engagement, résiliable à tout moment. <b>Offre de lancement :</b> personnalisation de votre assistant <b>offerte</b> pour les 30 premiers clients.'},
     {k:'n', lab:'6 mois',   mois:6,  off:10, setup:false,
      note:'<b>−10 %</b> sur l\'abonnement et <b>personnalisation de votre assistant offerte</b>. Engagement ferme de six mois.'},
     {k:'y', lab:'12 mois',  mois:12, off:17, setup:false,
@@ -3630,7 +3640,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       + '<div class="setup' + (cur.setup ? '' : ' free') + '"><span>'
       +   (cur.setup
             ? 'Personnalisation de votre assistant <b>' + num(p.setup) + ' €</b>, une seule fois'
-            : 'Personnalisation de votre assistant <b>offerte</b> <s>' + num(p.setup) + ' €</s>')
+            : 'Personnalisation de votre assistant <b>offerte</b> <s>' + num(p.setup) + ' €</s>'
+              + (cur.k === 'm' ? ' <em class="lancement">offre de lancement</em>' : ''))
       + '</span></div>'
       /* Le lien de paiement existe pour cette formule et cette durée : on
          vend. Sinon on garde le chemin d'aujourd'hui — jamais de bouton
