@@ -30,7 +30,7 @@
      Starter        99 € + 89 €    89 € + 89 €    79 €      69 €
      Business      299 € + 149 €  269 € + 149 €  239 €     209 €
      Évolution     449 € + 200 €  399 € + 200 €  359 €     309 €
-     (tous les montants sont HT)
+     (TVA non applicable, article 293 B du CGI)
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';

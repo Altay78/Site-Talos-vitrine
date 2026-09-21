@@ -127,7 +127,7 @@ html[data-theme="light"] .plan.best{background:
 .was s{text-decoration-color:rgba(var(--parch-rgb),.4)}
 .was .off{font-family:var(--mono);font-size:11px;font-weight:700;padding:3px 8px;border-radius:100px;
   background:rgba(var(--bronze-rgb),.14);color:var(--bronze)}
-/* même réserve de deux lignes : « 1 079 € HT » passe à la ligne, « 239 € HT » non */
+/* même réserve de deux lignes : « 1 079 € » passe à la ligne, « 239 € » non */
 .setup{display:flex;align-items:center;min-height:56px;
   margin-top:12px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);
   font-size:12.5px;line-height:1.4;color:var(--lin)}
@@ -331,12 +331,12 @@ html[data-theme="light"] .quote{background:#fff;box-shadow:0 1px 2px rgba(40,25,
       + '<h3>' + p.name + '</h3>'
       + '<p class="for">' + p.for + '</p>'
       + '<div class="amount"><span class="v">' + num(price) + ' €</span>'
-      +   '<span class="u">HT / mois</span></div>'
+      +   '<span class="u">par mois</span></div>'
       + '<div class="was">'
       +   (cur.off
             ? '<span class="row"><s>' + num(p.p.m) + ' €</s>'
               + '<span class="off">−' + cur.off + ' %</span></span>'
-              + '<span>soit ' + num(saved) + ' € HT sur l\'année</span>'
+              + '<span>soit ' + num(saved) + ' € sur l\'année</span>'
             : '<span class="row">Engagement libre</span>'
               + '<span>Résiliable à tout moment</span>')
       + '</div>'
@@ -344,8 +344,8 @@ html[data-theme="light"] .quote{background:#fff;box-shadow:0 1px 2px rgba(40,25,
       // <b> et <s> deviennent des items et les espaces autour disparaissent
       + '<div class="setup' + (cur.setup ? '' : ' free') + '"><span>'
       +   (cur.setup
-            ? 'Mise en route <b>' + num(p.setup) + ' € HT</b>, une seule fois'
-            : 'Mise en route <b>offerte</b> <s>' + num(p.setup) + ' € HT</s>')
+            ? 'Mise en route <b>' + num(p.setup) + ' €</b>, une seule fois'
+            : 'Mise en route <b>offerte</b> <s>' + num(p.setup) + ' €</s>')
       + '</span></div>'
       + '<a class="pcta' + (p.best ? ' solid' : '') + '" href="#reserver">'
       +   'Choisir ' + p.name + ARROW + '</a>'

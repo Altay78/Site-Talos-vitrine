@@ -3618,12 +3618,12 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       + '<h2>' + p.name + '</h2>'
       + '<p class="for">' + p.for + '</p>'
       + '<div class="amount"><span class="v">' + num(price) + ' €</span>'
-      +   '<span class="u">HT / mois</span></div>'
+      +   '<span class="u">par mois</span></div>'
       + '<div class="was">'
       +   (cur.off
             ? '<span class="row"><s>' + num(p.p.m) + ' €</s>'
               + '<span class="off">−' + cur.off + ' %</span></span>'
-              + '<span>soit ' + num(saved) + ' € HT sur l\'année</span>'
+              + '<span>soit ' + num(saved) + ' € sur l\'année</span>'
             : '<span class="row">Engagement libre</span>'
               + '<span>Résiliable à tout moment</span>')
       + '</div>'
@@ -3631,8 +3631,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       // <b> et <s> deviennent des items et les espaces autour disparaissent
       + '<div class="setup' + (cur.setup ? '' : ' free') + '"><span>'
       +   (cur.setup
-            ? 'Personnalisation de votre assistant <b>' + num(p.setup) + ' € HT</b>, une seule fois'
-            : 'Personnalisation de votre assistant <b>offerte</b> <s>' + num(p.setup) + ' € HT</s>')
+            ? 'Personnalisation de votre assistant <b>' + num(p.setup) + ' €</b>, une seule fois'
+            : 'Personnalisation de votre assistant <b>offerte</b> <s>' + num(p.setup) + ' €</s>')
       + '</span></div>'
       /* Le lien de paiement existe pour cette formule et cette durée : on
          vend. Sinon on garde le chemin d'aujourd'hui — jamais de bouton

@@ -309,11 +309,11 @@
           (c.restants > 0 ? ' · ' + c.restants + ' de plus sans surcoût' : '') + '</small>' +
       '</div>' +
       '<dl class="pn-lignes">' +
-        '<div><dt>Abonnement</dt><dd>' + eur(c.mensuel) + ' <span>HT / mois</span></dd></div>' +
+        '<div><dt>Abonnement</dt><dd>' + eur(c.mensuel) + ' <span>par mois</span></dd></div>' +
         '<div><dt>Mise en place</dt><dd>' +
           (offerte ? '<s>' + eur(c.palier.setup) + '</s> <em>offerte</em>' : eur(c.install)) +
         '</dd></div>' +
-        '<div class="pn-fort"><dt>À régler le premier mois</dt><dd>' + eur(c.premier) + ' <span>HT</span></dd></div>' +
+        '<div class="pn-fort"><dt>À régler le premier mois</dt><dd>' + eur(c.premier) + '</dd></div>' +
       '</dl>' +
       (c.economie > 0
         ? '<p class="pn-eco">' + I.check + 'Vous économisez <b>' + eur(c.economie) +
