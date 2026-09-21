@@ -2160,12 +2160,26 @@ html[data-theme="light"] .t-price .seg{background:#fff;box-shadow:0 1px 2px rgba
   transition:color .3s var(--e),border-color .3s var(--e),background .3s var(--e)}
 .t-price .seg button:hover:not(.on) .off{border-color:rgba(var(--bronze-rgb),.6)}
 .t-price .seg button.on .off{background:rgba(255,255,255,.18);border-color:transparent;color:#fff}
-/*  « offre de lancement » sous le prix : on la distingue sans crier — la
-    gratuité est déjà annoncée juste avant, cette mention dit seulement
-    qu'elle ne durera pas.  */
-.t-price .plan .setup .lancement{display:block;margin-top:2px;font-family:var(--mono);
-  font-size:9.5px;font-style:normal;letter-spacing:.6px;text-transform:uppercase;
-  color:var(--bronze)}
+/*  « Offre de lancement » : même grammaire que la pastille « Le plus
+    choisi » en haut de carte — fond braise, texte blanc, halo. Une
+    mention grise sous le prix passait inaperçue ; or c'est justement ce
+    qu'on veut faire remarquer, et ce qui justifiera de la retirer un
+    jour. L'étoile marque l'exception, pas la décoration.  */
+.t-price .plan .setup{flex-wrap:wrap;gap:8px}
+.t-price .plan .setup .lancement{display:inline-flex;align-items:center;gap:6px;
+  padding:5px 11px 5px 9px;border-radius:100px;
+  background:var(--bronze);color:#fff;-webkit-text-fill-color:currentColor;
+  font-family:var(--sans);font-size:11px;font-style:normal;font-weight:800;
+  letter-spacing:.2px;text-transform:uppercase;white-space:nowrap;
+  box-shadow:0 5px 16px rgba(var(--bronze-rgb),.38)}
+.t-price .plan .setup .lancement svg{width:12px;height:12px;flex:0 0 12px}
+
+/*  la pastille du segmenté : remplie plutôt que cernée, pour qu'on la
+    lise comme une exception et non comme un simple pourcentage  */
+.t-price .seg button[data-k="m"] .off{background:var(--bronze);border-color:transparent;
+  color:#fff;font-family:var(--sans);font-weight:800;letter-spacing:.1px;font-size:10px;
+  text-transform:uppercase}
+.t-price .seg button[data-k="m"].on .off{background:rgba(255,255,255,.22)}
 @media (prefers-reduced-motion:reduce){.t-price .seg .thumb{transition:none}}
 .t-price .engage-note{text-align:center;font-size:13.5px;color:var(--lin);margin-bottom:44px;min-height:20px}
 .t-price .engage-note b{color:var(--parch);font-weight:600}
@@ -3598,6 +3612,9 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   var CHECK = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var ARROW = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg>';
   var STAR  = '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M 13.1 4.18L 14.93 7.83C 15.11 8.19 15.46 8.43 15.86 8.49L 19.95 9.08C 20.96 9.23 21.36 10.45 20.63 11.15L 17.67 13.99C 17.38 14.27 17.25 14.67 17.32 15.07L 18.01 19.08C 18.19 20.07 17.13 20.83 16.23 20.36L 12.57 18.46C 12.22 18.28 11.79 18.28 11.43 18.46L 7.77 20.36C 6.87 20.83 5.81 20.07 5.99 19.08L 6.68 15.07C 6.75 14.67 6.62 14.27 6.33 13.99L 3.37 11.15C 2.64 10.45 3.04 9.23 4.05 9.08L 8.14 8.49C 8.54 8.43 8.89 8.19 9.07 7.83L 10.9 4.18C 11.35 3.27 12.65 3.27 13.1 4.18Z"/></svg>';
+  /* la même étoile que « Le plus choisi » : deux badges de la même
+     famille doivent porter le même signe */
+  var STAR_LANCEMENT = STAR;
 
   var seg = document.getElementById('seg'),
       segThumb = document.getElementById('segThumb'),
@@ -3641,7 +3658,12 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       +   (cur.setup
             ? 'Personnalisation de votre assistant <b>' + num(p.setup) + ' €</b>, une seule fois'
             : 'Personnalisation de votre assistant <b>offerte</b> <s>' + num(p.setup) + ' €</s>'
-              + (cur.k === 'm' ? ' <em class="lancement">offre de lancement</em>' : ''))
+              + (cur.k === 'm'
+                   /*  un <span>, pas un <em> : « .t-price em » applique un
+                       dégradé de texte — remplissage transparent, lettres
+                       invisibles sur un fond plein  */
+                   ? ' <span class="lancement">' + STAR_LANCEMENT + 'Offre de lancement</span>'
+                   : ''))
       + '</span></div>'
       /* Le lien de paiement existe pour cette formule et cette durée : on
          vend. Sinon on garde le chemin d'aujourd'hui — jamais de bouton
