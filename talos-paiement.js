@@ -13,14 +13,14 @@
 
    ── Comment lire une clé ──────────────────────────────────────────
      'business-n'  =  formule Business, engagement 6 mois
-        starter   1 assistant        m  mensuel   · mise en place à régler
+        starter   1 assistant        m  mensuel   · mise en place OFFERTE
         business  2 ou 3 assistants  n  6 mois    · mise en place OFFERTE
         evolution 4 ou 5 assistants  y  12 mois   · mise en place OFFERTE
 
    ── Ce que chaque lien Stripe doit contenir ──────────────────────────
      • l'abonnement mensuel de la formule, au tarif de la durée choisie ;
-     • pour m seulement, les frais de mise en place en ligne séparée
-       (produit à paiement unique) — sur n et y ils sont offerts, donc rien ;
+     • aucune ligne de mise en place : elle est offerte sur les trois durées
+       pendant le lancement, donc chaque lien ne porte que l'abonnement ;
      • aucune taxe à ajouter : laissez Stripe Tax éteint. Talos relève de la
        franchise en base, le prix affiché sur le site est le prix encaissé ;
      • dans les réglages du lien : « Ne pas afficher » la quantité, et
@@ -28,9 +28,9 @@
 
    ── Le barème, pour vérification ──────────────────────────────────
                     mensuel         6 mois          12 mois
-     Starter        99 € + 149 €   89 €            82 €
-     Business      299 € + 449 €  269 €           249 €
-     Évolution     449 € + 690 €  399 €           369 €
+     Starter        99 €            89 €            82 €
+     Business      299 €           269 €           249 €
+     Évolution     449 €           399 €           369 €
      (TVA non applicable, article 293 B du CGI)
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
