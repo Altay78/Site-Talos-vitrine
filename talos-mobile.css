@@ -243,3 +243,84 @@ html:has(.t-roi.sheets-open) { overflow: hidden; }
   :root body.espace-client .hero h1 { font-size: 32px; }
   :root .login-card h1              { font-size: 36px; }
 }
+
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   3 · CIBLES TACTILES
+   Un doigt fait dans les 9 mm ; Apple et Google demandent 44 pt. Les
+   éléments ci-dessous descendaient sous cette barre — certains très
+   nettement : les pastilles de carrousel mesuraient 8 px de côté.
+
+   Aucun ne change de taille à l'œil. On élargit la zone SENSIBLE, pas
+   le dessin : le remplissage transparent, la pseudo-bordure ::after
+   pour les pastilles, et min-height là où seule la hauteur manquait.
+   ═══════════════════════════════════════════════════════════════════ */
+@media (hover: none), (max-width: 820px) {
+
+  /* ── la bascule de thème : 36 px partout ───────────────────────── */
+  :root .theme-toggle { min-width: 44px; min-height: 44px; }
+
+  /* ── pastilles de carrousel : 8 px, impossibles à viser ─────────
+     Le point garde son diamètre ; c'est un carré invisible centré
+     dessus qui reçoit le doigt. On réduit l'écart entre pastilles en
+     conséquence, sinon les zones se chevaucheraient. */
+  :root .crew-dots button,
+  :root .fx-dots button,
+  :root .t-price .dots button { position: relative; }
+
+  :root .crew-dots button::after,
+  :root .fx-dots button::after,
+  :root .t-price .dots button::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 44px; height: 44px;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ── boutons et liens trop plats ───────────────────────────────── */
+  :root .tx-pill,
+  :root .tpick-clear,
+  :root .hero-achat,
+  :root .mr-b1, :root .mr-b2 { min-height: 44px; }
+
+  :root .tx-pill,
+  :root .tpick-clear { display: inline-flex; align-items: center; }
+
+  /* ── icônes sociales du pied de page ───────────────────────────── */
+  :root .t-ft a[aria-label] { min-width: 44px; min-height: 44px; }
+
+  /* ── curseurs du simulateur ────────────────────────────────────
+     La poignée d'un input range ne se redimensionne pas par le haut :
+     c'est la piste qu'on épaissit, ce qui agrandit la zone de prise
+     sans changer l'apparence de la poignée. */
+  :root input[type="range"] { min-height: 44px; }
+
+  /* ── cases à cocher ───────────────────────────────────────────
+     18 px de côté, et le label qui les enveloppe fait exactement la
+     même taille : il n'agrandit donc rien. Même remède que pour les
+     pastilles — une zone sensible de 44 px centrée sur la case, que
+     l'on ne voit pas. Le dessin de la case ne bouge pas. */
+  :root label:has(> input[type="checkbox"]) { position: relative; }
+  :root label:has(> input[type="checkbox"])::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 44px; height: 44px;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ── derniers écarts : 38 à 40 px au lieu de 44 ───────────────
+     Ceux-là n'étaient pas loin du compte. On les complète par le
+     remplissage, ce qui ne déplace rien autour d'eux.
+
+     Les liens juridiques du pied de page gardent leur largeur : « CGU »
+     fait trois lettres, l'étirer à 44 px casserait l'alignement de la
+     ligne pour un gain nul — ce qui manquait, c'était la hauteur. */
+  :root .sheet-ok,
+  :root .pcta-alt,
+  :root .t-ft .ft-legal a,
+  :root .t-ft .mr-fine a { min-height: 44px; display: inline-flex;
+                           align-items: center; }
+}
