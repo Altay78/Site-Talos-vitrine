@@ -1284,6 +1284,78 @@ html[data-theme="light"] .sim-fil{--bronze:#C5531C; --bronze-rgb:197,83,28;
   .sim-fil a .lg{display:none}
   .sim-fil a .sm{display:inline}
 }
+
+/* ── le total ─────────────────────────────────────────────────────── */
+.t-total{--bronze:#E0631F; --bronze-rgb:224,99,31; --parch:#F6EEE7;
+  --parch-rgb:246,238,231; --lin:#AB9F95; --ink-2:#1C1611;
+  --line:rgba(246,238,231,.08); --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  position:relative;z-index:2;padding:96px 24px 104px;color:var(--parch)}
+html[data-theme="light"] .t-total{--bronze:#C5531C; --bronze-rgb:197,83,28;
+  --parch:#1C1310; --parch-rgb:28,19,16; --lin:#6E6058; --ink-2:#FFFFFF;
+  --line:rgba(40,25,16,.12)}
+.t-total .wrap{max-width:720px;margin:0 auto}
+.t-total .eyebrow{display:block;text-align:center;font:700 9.5px/1 var(--mono);
+  letter-spacing:1.9px;text-transform:uppercase;color:var(--bronze)}
+.t-total h2{margin:16px 0 0;text-align:center;font-size:clamp(28px,3.4vw,42px);
+  font-weight:800;letter-spacing:-1.4px;line-height:1.1}
+.t-total .intro{margin:16px auto 40px;max-width:560px;text-align:center;
+  font-size:15px;line-height:1.65;color:var(--lin)}
+.t-total .ligne{display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:18px 4px;border-bottom:1px solid var(--line)}
+.t-total .ligne:first-of-type{border-top:1px solid var(--line)}
+.t-total .lbl b{display:block;font-size:15.5px;font-weight:700}
+.t-total .lbl em{display:block;margin-top:3px;font-style:normal;font-size:13px;color:var(--lin)}
+.t-total .val{font-size:clamp(19px,2vw,24px);font-weight:800;letter-spacing:-.8px;
+  white-space:nowrap;font-variant-numeric:tabular-nums}
+.t-total .ligne.moins .val{color:var(--lin)}
+.t-total .net{margin-top:28px;padding:32px 28px 30px;border-radius:22px;text-align:center;
+  border:1px solid rgba(var(--bronze-rgb),.3);
+  background:linear-gradient(150deg,rgba(var(--bronze-rgb),.17),rgba(var(--bronze-rgb),.03))}
+.t-total .net .k{display:block;font:700 10px/1 var(--mono);letter-spacing:1.8px;
+  text-transform:uppercase;color:var(--bronze)}
+.t-total .net .v{display:block;margin-top:12px;line-height:1;
+  font-size:clamp(44px,5.6vw,70px);font-weight:800;letter-spacing:-3.4px;
+  font-variant-numeric:tabular-nums}
+.t-total .net .s{display:block;margin-top:12px;font-size:14.5px;color:var(--lin)}
+.t-total .fine{margin:26px auto 0;max-width:600px;text-align:center;
+  font-size:12.5px;line-height:1.6;color:var(--lin);opacity:.85}
+@media (max-width:820px){
+  .t-total{padding:72px 20px 80px}
+  .t-total .ligne{flex-direction:column;align-items:flex-start;gap:6px;padding:16px 2px}
+  .t-total .net{padding:26px 20px 24px}
+}
+
+/* ── le tableau ramené à trois colonnes ──────────────────────────── */
+.t-gains td.tim.sous{display:block;padding:0;border:0;
+  margin-top:2px;font-size:12px;font-weight:600;color:var(--lin);
+  text-align:right;font-variant-numeric:tabular-nums}
+.t-gains td.cst{vertical-align:middle}
+.t-gains .tk em{display:block;font-size:12.5px;color:var(--lin)}
+
+/* les icônes du total : même famille Iconly que le reste du site, posées
+   contre le texte plutôt qu'en vignette — elles nomment la ligne, elles
+   ne la décorent pas */
+.t-total .lbl b{display:flex;align-items:center;gap:9px}
+.t-total .lbl b .ico{flex:0 0 17px;color:var(--bronze);opacity:.9}
+.t-total .net .k{display:inline-flex;align-items:center;gap:7px}
+.t-total .net .k .ico{flex:0 0 12px;fill:currentColor;stroke:none}
+
+/* ── le second résultat rime avec le premier ─────────────────────
+   Les deux calculs rendaient leur verdict dans deux langages : bande
+   braise pleine d'un côté, cartes vitrées de l'autre. On les aligne —
+   même carte accentuée pour le chiffre qui répond, même retrait pour
+   ceux qui détaillent. */
+.t-roi .results .glass.hero{padding:30px 28px 28px;border-radius:22px;
+  border:1px solid rgba(var(--bronze-rgb),.3);
+  background:linear-gradient(150deg,rgba(var(--bronze-rgb),.17),rgba(var(--bronze-rgb),.03))}
+.t-roi .results .glass.hero .lab{font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:1.8px;text-transform:uppercase;color:var(--bronze-2)}
+.t-roi .results .glass.hero .big{margin-top:12px;line-height:1;
+  font-size:clamp(40px,4.8vw,60px);font-weight:800;letter-spacing:-2.8px}
+.t-roi .results .glass.hero .sub{margin-top:12px;font-size:14.5px}
+.t-roi .results .duo .glass.stat{border-color:var(--line);
+  background:rgba(var(--parch-rgb),.025)}
+.t-roi .results .duo .glass.stat .v{font-weight:700;letter-spacing:-.8px}
 </style>
 <link rel="stylesheet" href="talos-press.css?v=8ebf90eb">
 <link rel="stylesheet" href="talos-mobile.css?v=5290ac1c">
@@ -1683,10 +1755,23 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       </div>
     </div>
 
+    <!--  Ce verdict convertissait les heures libérées en chantiers puis en
+          chiffre d'affaires, à raison de 5 000 € pour 28 h — soit 178 € de
+          l'heure, alors que le visiteur venait d'écrire que son heure vaut
+          60 €. Deux valeurs pour la même heure dans le même écran.
+
+          Et le second calcul annonçait déjà des chantiers récupérés, par un
+          tout autre chemin : la page donnait donc deux réponses différentes
+          à la même question.
+
+          Ici on s'en tient à ce que le tableau sait : des heures, et ce
+          qu'elles valent au taux que le visiteur a lui-même saisi. Les
+          chantiers récupérés restent la réponse du second calcul, et d'aucun
+          autre.  -->
     <p class="verdict">
-      Avec votre activité actuelle, vous pourriez récupérer jusqu'à
-      <b id="gJobs">—</b> chantiers&nbsp;/&nbsp;mois, soit <b id="gCa">—</b>,
-      tout en regagnant <b id="gHours">—</b> de votre temps&nbsp;!
+      Avec votre activité actuelle, vous récupéreriez
+      <b id="gHours">—</b> de votre temps, soit <b id="gCa">—</b>
+      à votre propre taux horaire.
     </p>
 
     <a class="cta" href="reserver.html">
@@ -1977,6 +2062,53 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 </div>
 </section>
 <!-- ═══ BANDEAU FINAL ═══ -->
+
+<!-- ═══ 3 · LE TOTAL ══════════════════════════════════════════════════
+     La page posait deux calculs et rendait deux gros chiffres, obtenus
+     par deux chemins différents. Le visiteur repartait sans savoir
+     lequel était le sien.
+
+     Ce bloc les additionne une fois, et une seule. Il ne recompte pas
+     les heures en chantiers : le temps rendu est valorisé au taux saisi
+     plus haut, les chantiers récupérés viennent du calcul sur les devis,
+     et l'abonnement est retiré. Le reste est l'impact net.
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="t-total" id="total">
+  <div class="wrap">
+    <span class="eyebrow">Votre total</span>
+    <h2>Ce que Talos change, au bout du mois.</h2>
+    <p class="intro">Les deux calculs ci-dessus, additionnés une seule fois. Le temps rendu
+      compte à votre taux horaire, les chantiers récupérés comptent en chiffre d'affaires,
+      et l'abonnement est déduit.</p>
+
+    <div class="ligne">
+      <div class="lbl"><b><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path> <polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline> </g></svg>Administratif que vous ne payez plus</b><em>votre temps, à votre taux horaire</em></div>
+      <div class="val" id="tTemps">—</div>
+    </div>
+    <div class="ligne">
+      <div class="lbl"><b><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(2.000000, 1.500000)" stroke-width="1.5"> <polyline points="5.24485128 13.2814646 8.23798631 9.39130439 11.652174 12.0732266 14.5812358 8.29290622"></polyline> <circle cx="17.9954234" cy="2.70022885" r="1.92219681"></circle> <path d="M12.9244852,1.62013731 L5.6567506,1.62013731 C2.64530894,1.62013731 0.778032041,3.75286043 0.778032041,6.76430209 L0.778032041,14.846682 C0.778032041,17.8581237 2.60869567,19.9816935 5.6567506,19.9816935 L14.2608696,19.9816935 C17.2723113,19.9816935 19.1395882,17.8581237 19.1395882,14.846682 L19.1395882,7.80778036"></path> </g></svg>Chantiers récupérés</b><em>devis signés grâce à la relance</em></div>
+      <div class="val" id="tCa">—</div>
+    </div>
+    <div class="ligne moins">
+      <div class="lbl"><b><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(2.000000, 2.000000)"> <path d="M2.7949,5.056 C2.7949,3.807 3.8069,2.795 5.0559,2.794 L6.0849,2.794 C6.6819,2.794 7.2539,2.557 7.6779,2.137 L8.3969,1.417 C9.2779,0.531 10.7099,0.527 11.5959,1.408 L11.5969,1.409 L11.6059,1.417 L12.3259,2.137 C12.7499,2.558 13.3219,2.794 13.9189,2.794 L14.9469,2.794 C16.1959,2.794 17.2089,3.806 17.2089,5.056 L17.2089,6.083 C17.2089,6.68 17.4449,7.253 17.8659,7.677 L18.5859,8.397 C19.4719,9.278 19.4769,10.71 18.5959,11.596 C18.5959,11.596 18.5949,11.597 18.5949,11.597 L18.5859,11.606 L17.8659,12.326 C17.4449,12.749 17.2089,13.321 17.2089,13.918 L17.2089,14.947 C17.2089,16.196 16.1969,17.208 14.9479,17.208 L14.9469,17.208 L13.9169,17.208 C13.3199,17.208 12.7469,17.445 12.3239,17.866 L11.6039,18.585 C10.7239,19.471 9.2929,19.476 8.4069,18.597 C8.4059,18.596 8.4049,18.595 8.4039,18.594 L8.3949,18.585 L7.6759,17.866 C7.2529,17.445 6.6799,17.209 6.0829,17.208 L5.0559,17.208 C3.8069,17.208 2.7949,16.196 2.7949,14.947 L2.7949,13.916 C2.7949,13.319 2.5579,12.747 2.1369,12.324 L1.4179,11.604 C0.5319,10.724 0.5269,9.293 1.4069,8.407 C1.4069,8.406 1.4079,8.405 1.4089,8.404 L1.4179,8.395 L2.1369,7.675 C2.5579,7.251 2.7949,6.679 2.7949,6.081 L2.7949,5.056" stroke-width="1.5"></path> <line x1="7.4316" y1="12.5717" x2="12.5716" y2="7.4317" stroke-width="1.5"></line> <line x1="12.4955" y1="12.5" x2="12.5045" y2="12.5" stroke-width="2"></line> <line x1="7.4955" y1="7.5" x2="7.5045" y2="7.5" stroke-width="2"></line> </g></svg>Abonnement Talos</b><em id="tPlanNom">—</em></div>
+      <div class="val" id="tPlan">—</div>
+    </div>
+
+    <div class="net">
+      <span class="k"><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(3.000000, 3.500000)" stroke-width="1.5"> <path d="M10.1042564,0.67700614 L11.9316681,4.32775597 C12.1107648,4.68615589 12.4564632,4.93467388 12.8573484,4.99218218 L16.9453359,5.58061527 C17.9553583,5.72643988 18.3572847,6.95054503 17.6263201,7.65194084 L14.6701824,10.4924399 C14.3796708,10.7717659 14.2474307,11.173297 14.3161539,11.5676396 L15.0137982,15.5778163 C15.1856062,16.5698344 14.1297683,17.3266846 13.2269958,16.8573759 L9.57321374,14.9626829 C9.21502023,14.7768079 8.78602103,14.7768079 8.42678626,14.9626829 L4.77300425,16.8573759 C3.87023166,17.3266846 2.81439382,16.5698344 2.98724301,15.5778163 L3.68384608,11.5676396 C3.75256926,11.173297 3.62032921,10.7717659 3.32981762,10.4924399 L0.373679928,7.65194084 C-0.357284727,6.95054503 0.0446417073,5.72643988 1.05466409,5.58061527 L5.14265161,4.99218218 C5.54353679,4.93467388 5.89027643,4.68615589 6.06937319,4.32775597 L7.89574356,0.67700614 C8.34765049,-0.225668713 9.65234951,-0.225668713 10.1042564,0.67700614 Z"></path> </g></svg>Impact sur votre mois</span>
+      <b class="v" id="tNet">—</b>
+      <span class="s">soit <span id="tAn">—</span> sur douze mois, à activité constante.</span>
+    </div>
+
+    <p class="fine">Les deux lignes ne se recouvrent pas : les heures libérées sont
+      comptées en temps, jamais reconverties en chantiers. Elles ne sont pas de même
+      nature pour autant — la première est une dépense que vous cessez de subir, la
+      seconde du <b>chiffre d'affaires</b>, dont il reste à déduire vos matériaux et votre
+      main-d'œuvre. Tout se calcule dans votre navigateur, à partir des chiffres que vous
+      venez de saisir.</p>
+  </div>
+</section>
+
 <section class="t-simcta">
 <div class="wrap">
   <div class="box">
@@ -2142,9 +2274,6 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     for (var i = 0; i < PALIERS.length; i++) if (n <= PALIERS[i].max) return PALIERS[i];
     return PALIERS[PALIERS.length - 1];
   }
-  /* ordre de grandeur d'un chantier chez les artisans accompagnés : il sert
-     uniquement à traduire des heures libérées en opportunités concrètes */
-  var JOB_H = 28, JOB_EUR = 5000;
 
   var eurFmt = new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0});
   /* Intl produit une espace fine insécable (U+202F), avalée par
@@ -2164,7 +2293,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   var rows = [].slice.call(table.querySelectorAll('tbody tr'));
   var out  = {};
   ['gHw','gHm','gHy','gDy','gCw','gCm','gCq','gCy2','gCd','gNoTalos','gSave','gPct',
-   'gJobs','gCa','gHours','gTotT','gTotC','gMtr','gTalos','gTalosSub'].forEach(function(id){
+   'gCa','gHours','gTotT','gTotC','gMtr','gTalos','gTalosSub'].forEach(function(id){
     out[id] = document.getElementById(id);
   });
 
@@ -2204,6 +2333,44 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   /* ── enrichissement des lignes ───────────────────────────────────
      Fait en JS et non dans le HTML : ces commandes n'ont aucun sens
      sans le script, autant qu'elles n'existent pas quand il ne tourne pas. */
+  /* ── de cinq colonnes à trois ──────────────────────────────────
+     Le tableau posait côte à côte la durée moyenne, la quantité, le temps
+     obtenu et le coût obtenu. Deux colonnes de résultat pour une seule
+     question, plus une constante qui ne se règle pas : on lisait un
+     tableur avant de lire une réponse.
+
+     La durée moyenne rejoint le nom de la tâche, dont elle est une
+     précision. Le temps rejoint le coût, sous lui, en second. Rien n'est
+     perdu — les mêmes nœuds sont déplacés, pas recréés, donc le calcul
+     continue de les trouver. */
+  (function simplifier(){
+    var thead = table.querySelector('thead tr');
+    rows.forEach(function(tr){
+      var dur = tr.querySelector('td.dur');
+      var tim = tr.querySelector('td.tim');
+      var cst = tr.querySelector('td.cst');
+      var em  = tr.querySelector('.tk em');
+      if (dur && em) {
+        em.textContent = em.textContent + ' \u00b7 ' + dur.textContent.trim();
+        dur.remove();
+      }
+      if (tim && cst) {
+        /* le nœud garde son data-role : update() le retrouve dans la ligne */
+        tim.classList.add('sous');
+        cst.appendChild(tim);
+        tim.style.display = 'block';
+      }
+    });
+    if (thead) {
+      var th = thead.querySelectorAll('th');
+      if (th[1]) th[1].remove();
+      if (th[3]) th[3].remove();
+      var reste = thead.querySelectorAll('th');
+      if (reste[1]) reste[1].textContent = 'Par semaine';
+      if (reste[2]) reste[2].textContent = 'Co\u00fbt hebdomadaire';
+    }
+  })();
+
   rows.forEach(function(tr){
     /* part de la tâche dans la semaine : le tableau donne des montants,
        la barre donne le classement — « c'est ça qui mange ma semaine » */
@@ -2332,16 +2499,22 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     var box = out.gSave.closest('.save');
     if (box) box.classList.toggle('nil', save <= 0);
 
-    /* on garde la demi-décimale : arrondir « 4,5 chantiers » à 4 efface
-       près d'un chantier de marge, et à 5 promet ce qu'on ne tient pas */
-    var jobs = Math.round(hMonth / JOB_H * 2) / 2;
-    out.gJobs.textContent  = jobs.toLocaleString('fr-FR');
-    setNum(out.gCa, jobs * JOB_EUR, eur);
+    /* le temps rendu, valorisé au taux que le visiteur a saisi — et à
+       aucun autre */
+    setNum(out.gCa, cMonth, eur);
     out.gHours.textContent = hm(hMonth) + ' / mois';
+
+    /* le récapitulatif de fin de page écoute les deux calculs */
+    document.dispatchEvent(new CustomEvent('talos:sim', { detail: {
+      source: 'temps', heuresMois: hMonth, coutMois: cMonth,
+      plan: pal.nom, planPrix: pal.prix, taches: nOn
+    }}));
 
     syncPresets(r);
   }
 
+  /* le récapitulatif de fin de page se branche après nous : il redemande */
+  document.addEventListener('talos:sim-ask', update);
   table.addEventListener('input',  update);
   table.addEventListener('change', update);
   rate.addEventListener('input',   update);
@@ -2496,6 +2669,11 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     $('caMois').textContent = (r.caMois > 0 ? '+' : '') + eur.format(r.caMois);
     $('caAn').textContent   = eur.format(r.caAn);
 
+    /* le récapitulatif de fin de page écoute les deux calculs */
+    document.dispatchEvent(new CustomEvent('talos:sim', { detail: {
+      source: 'devis', chantiers: r.chantiers, caMois: r.caMois, caAn: r.caAn
+    }}));
+
     // 3. les heures rendues. 4. la part qui vous mange vos soirées.
     $('heures').textContent = dec1.format(r.heures) + ' h / mois';
     $('heuresSub').textContent = 'Soit ' + dec1.format(r.heures / 8)
@@ -2534,6 +2712,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   [elV, elS, elM].forEach(function(el){
     el.addEventListener('input', render);
   });
+  document.addEventListener('talos:sim-ask', render);
 
   /* boutons − / + : un appui = un pas de l'input, bornes comprises.
      on repasse par render() pour que tout le reste suive (max de S, CTA, courbe) */
@@ -2718,6 +2897,58 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   }, { passive: true });
   addEventListener('resize', placer, { passive: true });
   placer();
+})();
+</script>
+
+<script>
+/*  Le total : il n'a pas de moteur, il écoute les deux autres.
+
+    Chacun publie ses chiffres bruts au fil des réglages ; on additionne
+    ce qui est additionnable et on retire l'abonnement. Aucun calcul n'est
+    refait ici — deux implantations du même calcul finiraient par diverger. */
+(function () {
+  'use strict';
+  var bloc = document.getElementById('total');
+  if (!bloc) return;
+
+  var eur = new Intl.NumberFormat('fr-FR',
+    { style:'currency', currency:'EUR', maximumFractionDigits:0 });
+  function e(v){ return eur.format(v).replace(/\u202f/g, '\u00a0'); }
+  function $(id){ return document.getElementById(id); }
+
+  var etat = { coutMois:0, caMois:0, planPrix:0, planNom:'\u2014' };
+
+  document.addEventListener('talos:sim', function (ev) {
+    var d = ev.detail || {};
+    if (d.source === 'temps') {
+      etat.coutMois = d.coutMois || 0;
+      etat.planPrix = d.planPrix || 0;
+      etat.planNom  = d.plan || '\u2014';
+    } else if (d.source === 'devis') {
+      etat.caMois = d.caMois || 0;
+    }
+    rendre();
+  });
+
+  function rendre(){
+    $('tTemps').textContent = e(etat.coutMois);
+    $('tCa').textContent    = (etat.caMois > 0 ? '+' : '') + e(etat.caMois);
+    $('tPlan').textContent  = '\u2212 ' + e(etat.planPrix);
+    $('tPlanNom').textContent = 'formule ' + etat.planNom
+      + ', d\u00e9duite du gain';
+
+    /* un impact négatif reste affiché tel quel : si l'abonnement coûte plus
+       que ce qu'il rapporte, le dire vaut mieux que de plafonner à zéro */
+    var net = etat.coutMois + etat.caMois - etat.planPrix;
+    $('tNet').textContent = (net > 0 ? '+' : '') + e(net);
+    $('tAn').textContent  = e(net * 12);
+    bloc.classList.toggle('nil', net <= 0);
+  }
+
+  /* les deux moteurs ont déjà tourné quand ce script s'exécute : leurs
+     premiers événements sont passés sans personne pour les entendre. On
+     leur demande de rejouer une fois. */
+  document.dispatchEvent(new CustomEvent('talos:sim-ask'));
 })();
 </script>
 </body>
