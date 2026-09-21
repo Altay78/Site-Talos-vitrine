@@ -3030,9 +3030,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <div class="seg" id="seg" role="radiogroup" aria-label="Durée d'engagement">
         <span class="thumb" id="segThumb" aria-hidden="true"></span>
         <button type="button" role="radio" aria-checked="true" class="on" data-k="m">Mensuel</button>
-        <button type="button" role="radio" aria-checked="false" data-k="q">3 mois <span class="off">−10 %</span></button>
-        <button type="button" role="radio" aria-checked="false" data-k="n">6 mois <span class="off">−20 %</span></button>
-        <button type="button" role="radio" aria-checked="false" data-k="y">12 mois <span class="off">−30 %</span></button>
+        <button type="button" role="radio" aria-checked="false" data-k="n">6 mois <span class="off">−10 %</span></button>
+        <button type="button" role="radio" aria-checked="false" data-k="y">12 mois <span class="off">2 mois offerts</span></button>
       </div>
     </div>
     <div class="engage-note" id="note"></div>
@@ -3481,14 +3480,12 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
      Les prix engagés sont écrits en dur : ce sont ceux du barème,
      pas un pourcentage recalculé qui produirait des 89,10 €.        */
   var ENGAGE = [
-    {k:'m', lab:'Mensuel',  off:0,  setup:true,
+    {k:'m', lab:'Mensuel',  mois:1,  off:0,  setup:true,
      note:'Sans engagement, résiliable à tout moment. Personnalisation de votre assistant facturée une fois.'},
-    {k:'q', lab:'3 mois',   off:10, setup:true,
-     note:'<b>−10 %</b> sur l\'abonnement pendant 3 mois. Personnalisation de votre assistant facturée une fois.'},
-    {k:'n', lab:'6 mois',   off:20, setup:false,
-     note:'<b>−20 %</b> sur l\'abonnement et <b>personnalisation de votre assistant offerte</b>.'},
-    {k:'y', lab:'12 mois',  off:30, setup:false,
-     note:'<b>−30 %</b> sur l\'abonnement et <b>personnalisation de votre assistant offerte</b> — la formule la plus rentable.'}
+    {k:'n', lab:'6 mois',   mois:6,  off:10, setup:true,
+     note:'<b>−10 %</b> sur l\'abonnement pendant 6 mois. Personnalisation de votre assistant facturée une fois.'},
+    {k:'y', lab:'12 mois',  mois:12, off:17, setup:false,
+     note:'<b>Deux mois offerts</b> et <b>personnalisation de votre assistant offerte</b> — la formule la plus rentable.'}
   ];
 
   /* jeu d'icônes ligne, tracé 2px arrondi — même grammaire que le reste du site */
@@ -3542,7 +3539,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       shotAlt:'Un artisan seul dans son atelier',
       for:'Pour arrêter de faire son administratif le soir.',
       promise:'Votre premier assistant IA.',
-      setup:89, p:{m:99, q:89, n:79, y:69},
+      setup:149, p:{m:99, n:89, y:82},
       feat:[
         {i:'mission', t:'<b>1</b> agent'},
         {i:'user',    t:'<b>1</b> utilisateur'},
@@ -3555,7 +3552,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       shotAlt:'Trois artisans penchés sur des plans de chantier',
       for:'Pour automatiser l\'essentiel de son administratif.',
       promise:'Votre administratif tourne pendant que vous êtes sur le chantier.',
-      setup:149, p:{m:299, q:269, n:239, y:209},
+      setup:449, p:{m:299, n:269, y:249},
       feat:[
         {i:'mission', t:'Jusqu\'à <b>3</b> agents'},
         {i:'users',   t:'Jusqu\'à <b>3</b> utilisateurs'},
@@ -3568,7 +3565,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       shotAlt:'Un chantier et sa grue en silhouette au coucher du soleil',
       for:'Pour structurer une entreprise qui grandit.',
       promise:'L\'équipe au complet, et le poste de commande avec.',
-      setup:200, p:{m:449, q:399, n:359, y:309},
+      setup:690, p:{m:449, n:399, y:369},
       feat:[
         {i:'mission', t:'Les <b>5</b> agents'},
         {i:'users',   t:'Jusqu\'à <b>10</b> utilisateurs'},
@@ -3600,7 +3597,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
   function card(p){
     var price = p.p[cur.k];
-    var saved = (p.p.m - price) * 12;
+    /* l'économie court sur la durée engagée, pas sur douze mois par défaut */
+    var saved = (p.p.m - price) * cur.mois;
 
     var feats = p.feat.map(function(f){
       return '<li class="' + (f.gift ? 'gift' : '') + '"><span class="ck">' + ico(f.i) + '</span>'
@@ -3623,7 +3621,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       +   (cur.off
             ? '<span class="row"><s>' + num(p.p.m) + ' €</s>'
               + '<span class="off">−' + cur.off + ' %</span></span>'
-              + '<span>soit ' + num(saved) + ' € sur l\'année</span>'
+              + '<span>soit ' + num(saved) + ' € sur ' + cur.lab.toLowerCase() + '</span>'
             : '<span class="row">Engagement libre</span>'
               + '<span>Résiliable à tout moment</span>')
       + '</div>'

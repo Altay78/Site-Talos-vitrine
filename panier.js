@@ -31,20 +31,18 @@
      Les prix engagés sont écrits en dur : ce sont ceux du barème, pas un
      pourcentage recalculé qui produirait des 89,10 €. */
   var PALIERS = [
-    { id: 'starter',   nom: 'Starter',   max: 1, setup: 89,  p: { m: 99,  q: 89,  n: 79,  y: 69  } },
-    { id: 'business',  nom: 'Business',  max: 3, setup: 149, p: { m: 299, q: 269, n: 239, y: 209 } },
-    { id: 'evolution', nom: 'Évolution', max: 5, setup: 200, p: { m: 449, q: 399, n: 359, y: 309 } }
+    { id: 'starter',   nom: 'Starter',   max: 1, setup: 149, p: { m: 99,  n: 89,  y: 82  } },
+    { id: 'business',  nom: 'Business',  max: 3, setup: 449, p: { m: 299, n: 269, y: 249 } },
+    { id: 'evolution', nom: 'Évolution', max: 5, setup: 690, p: { m: 449, n: 399, y: 369 } }
   ];
 
   var ENGAGEMENTS = [
     { k: 'm', lab: 'Mensuel', mois: 1,  off: 0,  setup: true,
       note: 'Sans engagement, résiliable à tout moment.' },
-    { k: 'q', lab: '3 mois',  mois: 3,  off: 10, setup: true,
-      note: '−10 % sur l\'abonnement pendant 3 mois.' },
-    { k: 'n', lab: '6 mois',  mois: 6,  off: 20, setup: false,
-      note: '−20 % sur l\'abonnement, et la mise en place offerte.' },
-    { k: 'y', lab: '12 mois', mois: 12, off: 30, setup: false,
-      note: '−30 % sur l\'abonnement, la mise en place offerte — la formule la plus rentable.' }
+    { k: 'n', lab: '6 mois',  mois: 6,  off: 10, setup: true,
+      note: '−10 % sur l\'abonnement pendant 6 mois.' },
+    { k: 'y', lab: '12 mois', mois: 12, off: 17, setup: false,
+      note: 'Deux mois offerts, la mise en place offerte — la formule la plus rentable.' }
   ];
 
   var AGENTS = [

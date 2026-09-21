@@ -3,7 +3,7 @@
 
    ►►► C'EST LE SEUL FICHIER À REMPLIR. ◄◄◄
 
-   Collez vos douze liens de paiement Stripe dans le tableau LIENS ci-dessous,
+   Collez vos neuf liens de paiement Stripe dans le tableau LIENS ci-dessous,
    enregistrez, et l'achat en ligne s'allume tout seul sur tout le site :
    les boutons « Commander » apparaissent, le panier envoie vers Stripe.
 
@@ -11,25 +11,26 @@
    proposer la démo, comme aujourd'hui. On ne montre jamais un bouton
    d'achat qui ne mène nulle part.
 
-   ── Comment lire une clé ──────────────────────────────────────────────────
+   ── Comment lire une clé ──────────────────────────────────────────
      'business-n'  =  formule Business, engagement 6 mois
         starter   1 assistant        m  mensuel   · mise en place à régler
-        business  2 ou 3 assistants  q  3 mois    · mise en place à régler
-        evolution 4 ou 5 assistants  n  6 mois    · mise en place OFFERTE
-                                     y  12 mois   · mise en place OFFERTE
+        business  2 ou 3 assistants  n  6 mois    · mise en place à régler
+        evolution 4 ou 5 assistants  y  12 mois   · mise en place OFFERTE
 
-   ── Ce que chaque lien Stripe doit contenir ───────────────────────────────
+   ── Ce que chaque lien Stripe doit contenir ──────────────────────────
      • l'abonnement mensuel de la formule, au tarif de la durée choisie ;
-     • pour m et q seulement, les frais de mise en place en ligne séparée
-       (produit à paiement unique) — sur n et y ils sont offerts, donc rien ;
+     • pour m et n seulement, les frais de mise en place en ligne séparée
+       (produit à paiement unique) — sur y ils sont offerts, donc rien ;
+     • aucune taxe à ajouter : laissez Stripe Tax éteint. Talos relève de la
+       franchise en base, le prix affiché sur le site est le prix encaissé ;
      • dans les réglages du lien : « Ne pas afficher » la quantité, et
        page de confirmation → « Rediriger vers » l'adresse de MERCI ci-dessous.
 
-   ── Le barème, pour vérification ──────────────────────────────────────────
-                    mensuel        3 mois         6 mois    12 mois
-     Starter        99 € + 89 €    89 € + 89 €    79 €      69 €
-     Business      299 € + 149 €  269 € + 149 €  239 €     209 €
-     Évolution     449 € + 200 €  399 € + 200 €  359 €     309 €
+   ── Le barème, pour vérification ──────────────────────────────────
+                    mensuel         6 mois          12 mois
+     Starter        99 € + 149 €   89 € + 149 €    82 €
+     Business      299 € + 449 €  269 € + 449 €   249 €
+     Évolution     449 € + 690 €  399 € + 690 €   369 €
      (TVA non applicable, article 293 B du CGI)
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
@@ -39,24 +40,21 @@
      Collez l'adresse complète, du style https://buy.stripe.com/xxxxxxxx   */
   var LIENS = {
     'starter-m':   '',
-    'starter-q':   '',
     'starter-n':   '',
     'starter-y':   '',
 
     'business-m':  '',
-    'business-q':  '',
     'business-n':  '',
     'business-y':  '',
 
     'evolution-m': '',
-    'evolution-q': '',
     'evolution-n': '',
     'evolution-y': ''
   };
 
   /* ── 2 · LA PAGE DE REMERCIEMENT ────────────────────────────────────────
      Celle vers laquelle Stripe renvoie après un paiement réussi. À reporter
-     à l'identique dans chacun des douze liens, côté Stripe.               */
+     à l'identique dans chacun des neuf liens, côté Stripe.               */
   var MERCI = 'merci.html';
 
   /* ── 3 · RIEN À TOUCHER EN DESSOUS ──────────────────────────────────────
@@ -118,7 +116,7 @@
     lien: lien,
     merci: MERCI,
     /* pratique en console pour savoir ce qu'il reste à coller :
-       TalosPaiement.manquants()  →  ['starter-m', 'business-q', …]        */
+       TalosPaiement.manquants()  →  ['starter-m', 'business-n', …]        */
     manquants: function () {
       var out = [];
       for (var k in LIENS) {
