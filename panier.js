@@ -40,9 +40,9 @@
     { k: 'm', lab: 'Mensuel', mois: 1,  off: 0,  setup: true,
       note: 'Sans engagement, résiliable à tout moment.' },
     { k: 'n', lab: '6 mois',  mois: 6,  off: 10, setup: false,
-      note: '−10 % sur l\'abonnement, et la mise en place offerte.' },
+      note: '−10 % sur l\'abonnement, et la mise en place offerte. Engagement ferme de six mois.' },
     { k: 'y', lab: '12 mois', mois: 12, off: 17, setup: false,
-      note: 'Deux mois offerts, la mise en place offerte — la formule la plus rentable.' }
+      note: 'Deux mois offerts, la mise en place offerte. Engagement ferme de douze mois — la formule la plus rentable.' }
   ];
 
   var AGENTS = [
