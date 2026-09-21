@@ -75,16 +75,29 @@
     return true;
   }
 
+  /* ── 2 bis · OÙ MÈNE LE BOUTON « COMMANDER » ───────────────────────────
+     Plus directement chez Stripe : vers l'espace client, qui crée le compte
+     s'il n'existe pas, puis rouvre le même lien Stripe avec l'identifiant
+     du compte accroché.
+
+     Sans ce détour, Stripe encaisse une carte et une adresse e-mail, et
+     personne ne sait à quel compte ouvrir les assistants. C'est la seule
+     étape qui garantit qu'un paiement aboutit toujours à un accès.
+
+     Les liens ci-dessus restent la source : l'espace client lit la même
+     grille, et un lien vide ici éteint le bouton comme avant.           */
+  var SAS = 'https://app.talos-ai.tech/souscrire';
+
   /* le lien d'une combinaison précise, ou '' s'il manque
-     ref : la sélection d'assistants, qu'on fait voyager avec le paiement
-           pour la retrouver dans Stripe en face de la commande */
+     ref : la sélection d'assistants, qu'on fait voyager avec la commande
+           pour la retrouver en face du paiement */
   function lien(formule, eng, ref) {
-    var url = propre(LIENS[formule + '-' + eng]);
-    if (!url) return '';
+    if (!propre(LIENS[formule + '-' + eng])) return '';
+    var url = SAS + '?f=' + encodeURIComponent(formule) + '&e=' + encodeURIComponent(eng);
     if (ref) {
-      /* Stripe n'accepte que lettres, chiffres, tiret et souligné */
+      /* même jeu de caractères que Stripe : la référence finira chez lui */
       ref = String(ref).replace(/[^A-Za-z0-9_-]+/g, '-').slice(0, 190);
-      url += (url.indexOf('?') >= 0 ? '&' : '?') + 'client_reference_id=' + ref;
+      url += '&ref=' + ref;
     }
     return url;
   }
