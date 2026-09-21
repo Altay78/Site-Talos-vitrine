@@ -43,13 +43,13 @@
     'starter-n':   'https://buy.stripe.com/5kQ8wQg6zbgU5uTeRBeAg05',
     'starter-y':   'https://buy.stripe.com/9B6bJ2cUndp27D15h1eAg06',
 
-    'business-m':  '',
-    'business-n':  '',
-    'business-y':  '',
+    'business-m':  'https://buy.stripe.com/dRm6oI8E7ckYbThcJteAg01',
+    'business-n':  'https://buy.stripe.com/cNi14og6z1Gk7D110LeAg0a',
+    'business-y':  'https://buy.stripe.com/eVqcN6aMfacQcXl10LeAg0b',
 
-    'evolution-m': '',
-    'evolution-n': '',
-    'evolution-y': ''
+    'evolution-m': 'https://buy.stripe.com/dRm9AUbQj98MaPdcJteAg07',
+    'evolution-n': 'https://buy.stripe.com/cNidRaaMffxabTh9xheAg09',
+    'evolution-y': 'https://buy.stripe.com/14A3cw9Ib0Cge1pdNxeAg08'
   };
 
   /* ── 2 · LA PAGE DE REMERCIEMENT ────────────────────────────────────────
