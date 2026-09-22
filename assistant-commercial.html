@@ -604,127 +604,162 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
   transition:opacity .3s var(--e)}
 .ac-mission[aria-selected="true"]::before{opacity:1}
 
+/* les points ne servent que là où l'on balaie */
+.ac-miss-dots{display:none;justify-content:center;gap:8px;margin:16px 0 0}
+.ac-miss-dots button{width:30px;height:30px;display:grid;place-items:center;
+  border-radius:50%;background:none}
+.ac-miss-dots button::before{content:"";width:7px;height:7px;border-radius:50%;
+  background:var(--line-2);transition:background-color .25s var(--e),
+  transform .25s var(--e)}
+.ac-miss-dots button[aria-current="true"]::before{background:var(--bronze);
+  transform:scale(1.35)}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   3 · LE SCÉNARIO
-   À gauche le titre, épinglé. À droite sept fiches qui se recouvrent au
-   défilement : chaque fiche est « sticky » au même endroit, et son onglet est
-   décalé horizontalement — d'où la rangée d'onglets qui se remplit.
+   3 · LES DEUX PROMESSES — une pile de cartes
+   Au-dessus de 900 px, chaque carte colle sous la barre et vient recouvrir la
+   précédente, dont l'en-tête continue de dépasser : on voit d'où l'on vient.
+   En dessous, plus rien ne colle et plus rien ne s'anime — les cartes se
+   suivent, c'est la seule chose qui tienne dans un écran de téléphone.
    Aucun parent ne doit porter overflow:hidden, sinon le sticky meurt.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.ac-story{padding:96px 0 110px;border-top:1px solid var(--line)}
-.ac-story-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:60px;
-  align-items:start}
-.ac-story-txt{position:sticky;top:124px}
-.ac-story-txt .ac-h2{max-width:none;font-size:clamp(30px,3.3vw,46px);
-  letter-spacing:-1.6px;line-height:1.04}
-.ac-story-txt .ac-sub{max-width:none;font-size:16px}
-.ac-story-note{margin:26px 0 0;padding:18px 20px;border-radius:16px;
-  background:var(--ink-2);border:1px solid var(--line);
-  font-size:14.5px;line-height:1.55;color:var(--lin)}
-.ac-story-note b{display:block;margin:0 0 4px;color:var(--parch);font-weight:700}
-.ac-story-txt .actions{margin-top:24px}
+.ac-pile{padding:96px 0 44px;border-top:1px solid var(--line)}
+.ac-pile-stack{--stick:112px;display:flex;flex-direction:column;gap:20px;
+  padding-bottom:clamp(90px,14vh,150px)}
 
-/* ── la pile de fiches ────────────────────────────────────────────────── */
-.ac-steps{--tabh:34px;--stick:112px;
-  list-style:none;margin:0;padding:0;position:relative}
-/* la fiche colle sous la barre : son cadre inclut la bande d'onglet, donc
-   « top » vise l'onglet et la carte se pose juste en dessous */
-.ac-step{position:sticky;top:var(--stick);
-  margin:0 0 26px;padding-top:var(--tabh)}
-.ac-step:last-child{margin-bottom:0}
+.ac-pile-card{position:sticky;top:calc(var(--stick) + var(--i) * 72px);
+  border:1px solid var(--line);border-radius:28px;background:var(--ink-2);
+  padding:26px 30px 32px;
+  transition:transform .55s var(--e),opacity .55s var(--e)}
+.ac-pile-card.is-back{transform:scale(.962);opacity:.5}
 
-/* l'onglet : même hauteur pour tous, décalé d'un cran par fiche */
-/* l'onglet est la seule pièce translucide de la pile : il flotte au-dessus
-   de la fiche précédente, c'est là que le flou a un sens */
-.ac-step-tab{position:absolute;top:0;height:var(--tabh);
-  left:calc(var(--i) * (100% / 7));width:calc(100% / 7);
-  display:flex;align-items:center;justify-content:center;gap:5px;
-  padding:0 4px;border-radius:14px 14px 0 0;
-  background:color-mix(in oklab,var(--ink-3) 80%,transparent);
-  backdrop-filter:blur(18px) saturate(150%);
-  -webkit-backdrop-filter:blur(18px) saturate(150%);
-  border:1px solid color-mix(in oklab,var(--parch) 9%,transparent);border-bottom:0;
-  font-family:var(--mono);font-size:clamp(9.5px,.95vw,11.5px);letter-spacing:.02em;
-  color:var(--lin);white-space:nowrap;overflow:hidden;
-  transition:background .3s var(--e),color .3s var(--e),border-color .3s var(--e)}
-.ac-step.is-on .ac-step-tab{background:var(--bronze);border-color:var(--bronze);
-  color:#fff}
-.ac-step-tab .d{opacity:.75}
+.ac-pile-k{display:flex;align-items:center;gap:11px;margin:0 0 28px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--lin)}
+.ac-pile-k i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;color:var(--bronze);
+  border:1px solid rgba(var(--bronze-rgb),.32);background:rgba(var(--bronze-rgb),.10)}
+.ac-pile-k i svg{width:18px;height:18px}
+.ac-pile-k em{font-style:normal;color:var(--parch)}
+.ac-pile-k s{text-decoration:none;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
 
- /* l'angle haut-gauche reste droit : c'est là que se pose le premier onglet,
-    et dans la pile c'est toujours cet angle-là qui affleure sous lui.
-    La fiche reste opaque — elle doit masquer celle du dessous.
-    Ombre en deux couches : un contact court, une ambiante très étalée. */
-.ac-step-card{position:relative;padding:32px 34px 34px;border-radius:0 26px 26px 26px;
-  background:var(--ink-2);
-  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),
-             0 2px 6px rgba(0,0,0,.2),
-             0 44px 90px -56px rgba(0,0,0,.95)}
-html[data-theme="light"] .ac-step-card{
-  border-color:rgba(40,25,16,.09);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),
-             0 2px 6px rgba(40,25,16,.05),
-             0 44px 90px -56px rgba(40,25,16,.42)}
-/* même hauteur pour toutes : sinon la fiche du dessous dépasse en bas de la
-   pile et laisse traîner un liseré. 308 px couvre la plus haute à 961 px. */
-@media (min-width:961px){.ac-step-card{min-height:300px}}
-/* les fiches ont la même hauteur mais pas le même contenu : le corps se
-   centre dans la place qui reste, sinon les plus courtes sonnent creux */
-.ac-step-card{display:flex;flex-direction:column}
-.ac-step-body{flex:1;align-content:center}
+.ac-pile-grid{display:grid;grid-template-columns:.94fr 1.06fr;gap:46px;align-items:center}
 
-.ac-step-h{display:flex;align-items:center;gap:12px;margin:0 0 16px}
-.ac-step-ic{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
-  width:36px;height:36px;border-radius:11px;
-  border:1px solid rgba(var(--bronze-rgb),.3);background:rgba(var(--bronze-rgb),.10);
-  color:var(--bronze)}
-.ac-step-ic svg{width:19px;height:19px}
-.ac-step-h b{font-size:19px;font-weight:800;letter-spacing:-.55px;color:var(--parch)}
-.ac-step-when{margin-left:auto;font-family:var(--mono);font-size:12px;
-  color:var(--lin);white-space:nowrap}
+.ac-pile-h{font-size:clamp(27px,3vw,42px);line-height:1.06;letter-spacing:-.035em;
+  color:var(--parch);text-wrap:balance;max-width:20ch}
+.ac-pile-txt p{margin:16px 0 0;max-width:44ch;font-size:16px;line-height:1.62;color:var(--lin)}
+.ac-pile-pts{margin:26px 0 0}
+.ac-pile-pts li{display:flex;align-items:center;gap:14px;padding:10px 0;
+  font-size:16px;font-weight:600;line-height:1.35;color:var(--parch)}
+.ac-pile-pts i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;color:var(--bronze);
+  border:1px solid rgba(var(--bronze-rgb),.32);background:rgba(var(--bronze-rgb),.10)}
+.ac-pile-pts svg{width:17px;height:17px}
+/* une puce peut porter son explication : le texte passe alors sous le libellé */
+.ac-pile-pts li.dit{align-items:flex-start;padding:13px 0}
+.ac-pile-pts li.dit i{margin-top:1px}
+.ac-pile-pts .d{display:flex;flex-direction:column;gap:3px;min-width:0}
+.ac-pile-pts .d em{font-style:normal;font-size:15px;font-weight:400;line-height:1.5;
+  letter-spacing:0;color:var(--lin)}
 
-.ac-step-q{margin:0;padding:18px 20px;border-radius:18px;border:0;
-  background:color-mix(in oklab,var(--parch) 5%,transparent);
-  font-size:15.5px;line-height:1.62;letter-spacing:-.1px;
-  color:var(--parch);font-style:italic}
-.ac-step-p{margin:0;font-size:15px;line-height:1.62;color:var(--lin)}
+/* ─── le visuel : une interface composée, pas une capture ─────────────── */
+.ac-pile-vis{position:relative;display:flex;flex-direction:column;gap:14px;
+  padding:22px;border:1px solid var(--line);border-radius:22px;background:var(--ink)}
+.ac-pile-vis::before{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(58% 52% at 68% 0%,rgba(var(--bronze-rgb),.15),transparent 72%);
+  pointer-events:none}
+.ac-pile-vis > *{position:relative}
 
-/* les puces d'une demande qualifiée */
-.ac-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.ac-chips li{display:inline-flex;align-items:center;gap:7px;
-  padding:9px 15px;border-radius:100px;
-  background:color-mix(in oklab,var(--parch) 5%,transparent);
-  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent);
-  font-size:13.5px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
-.ac-chips li::before{content:"";width:5px;height:5px;border-radius:50%;
-  background:var(--bronze);flex:0 0 auto}
-
-/* les trois variantes de prix */
-.ac-prices{list-style:none;margin:0;padding:0;display:grid;
-  grid-template-columns:repeat(3,1fr);gap:10px}
-.ac-prices li{padding:16px 14px 15px;border-radius:18px;text-align:center;
-  background:color-mix(in oklab,var(--parch) 5%,transparent);
-  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent)}
-.ac-prices small{display:block;margin:0 0 5px;font-family:var(--mono);font-size:11px;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--lin)}
-.ac-prices b{font-size:17px;font-weight:800;letter-spacing:-.6px;color:var(--parch);
-  font-variant-numeric:tabular-nums}
-.ac-prices li.hot{border-color:rgba(var(--bronze-rgb),.5);
+.acv-chips{display:flex;flex-wrap:wrap;gap:8px}
+.acv-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;
+  border-radius:100px;border:1px solid var(--line-2);background:var(--ink-2);
+  font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--lin)}
+.acv-chip i{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:currentColor}
+.acv-chip.on{color:var(--bronze);border-color:rgba(var(--bronze-rgb),.42);
   background:rgba(var(--bronze-rgb),.10)}
-.ac-prices li.hot b{color:var(--bronze)}
 
-/* la ligne de résultat, en fin de scénario */
-.ac-step-win{display:flex;flex-direction:column;align-items:flex-start;gap:5px;
-  padding:18px 20px;border-radius:18px;
-  background:rgba(var(--bronze-rgb),.12);
-  border:1px solid rgba(var(--bronze-rgb),.26)}
-.ac-step-win b{font-size:25px;font-weight:800;letter-spacing:-1px;color:var(--bronze);
-  font-variant-numeric:tabular-nums}
-.ac-step-win span{font-size:14.5px;line-height:1.5;color:var(--lin)}
-.ac-step-body{display:grid;gap:14px}
+.acv-card{border:1px solid var(--line);border-radius:16px;background:var(--ink-2);
+  overflow:hidden}
+.acv-k{padding:11px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--lin)}
+.acv-row{display:flex;align-items:center;gap:12px;padding:12px 16px;
+  border-bottom:1px solid var(--line);font-size:14.5px;color:var(--parch)}
+.acv-row:last-child{border-bottom:0}
+.acv-row .lab{flex:1 1 auto;min-width:0;color:var(--lin);font-size:13.5px}
+.acv-row .val{flex:0 0 auto;font-weight:600;text-align:right}
+.acv-row .meta{flex:0 0 auto;margin-left:auto;font-family:var(--mono);font-size:11.5px;
+  color:var(--lin);font-variant-numeric:tabular-nums}
+.acv-row .slot{flex:1 1 auto;font-weight:600;font-variant-numeric:tabular-nums}
+.acv-row.pick{background:rgba(var(--bronze-rgb),.12)}
+.acv-row.pick .slot{color:var(--bronze)}
+.acv-row .tick{flex:0 0 auto;display:flex;color:var(--bronze)}
+.acv-row .tick svg{width:17px;height:17px}
+.acv-row.out{color:var(--lin)}
+.acv-row.out .slot{font-weight:500;text-decoration:line-through;
+  text-decoration-color:rgba(var(--bronze-rgb),.55)}
+.acv-row .x{flex:0 0 auto;font-family:var(--mono);font-size:13px;color:var(--rouille)}
+
+.acv-foot{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--lin)}
+.acv-dots{display:inline-flex;gap:4px;flex:0 0 auto}
+.acv-dots span{width:5px;height:5px;border-radius:50%;background:var(--bronze);opacity:.3}
+
+/* l'animation n'existe qu'au-dessus de 900 px, et jamais en mouvement réduit.
+   Sur téléphone, la carte s'affiche d'un coup : une chorégraphie de deux
+   secondes sur un écran qu'on balaie au pouce coûte plus qu'elle ne montre. */
+@media (min-width:900px) and (prefers-reduced-motion:no-preference){
+  .acv-dots span{animation:acv-dot 1.5s ease-in-out infinite}
+  .acv-dots span:nth-child(2){animation-delay:.18s}
+  .acv-dots span:nth-child(3){animation-delay:.36s}
+  @keyframes acv-dot{0%,100%{opacity:.25}45%{opacity:1}}
+
+  .ac-pile-card [data-rise]{opacity:0;transform:translateY(16px);
+    transition:opacity .62s var(--e),transform .62s var(--e);transition-delay:var(--d,0ms)}
+  .ac-pile-card.is-in [data-rise]{opacity:1;transform:none}
+
+  /* ─── la carte de droite joue la scène ─────────────────────────────────
+     Les pastilles s'allument, les lignes tombent l'une après l'autre, le
+     créneau retenu se remplit puis se coche, la ligne hors zone se barre.
+     L'ordre est celui du travail réel : on regarde, on trie, on décide. */
+  .ac-pile-vis .acv-chip,
+  .ac-pile-vis .acv-row,
+  .ac-pile-vis .acv-k,
+  .ac-pile-vis .acv-foot{opacity:0}
+
+  .is-in .acv-chip{animation:acv-pop .5s var(--e) calc(var(--n) * 110ms + 300ms) both}
+  .is-in .acv-k{animation:acv-pop .45s var(--e) 600ms both}
+  .is-in .acv-row{animation:acv-drop .55s var(--e) calc(var(--n) * 130ms + 720ms) both}
+  .is-in .acv-foot{animation:acv-pop .5s var(--e) 1.9s both}
+
+  @keyframes acv-pop{from{opacity:0;transform:translateY(7px) scale(.94)}
+                     to{opacity:1;transform:none}}
+  @keyframes acv-drop{from{opacity:0;transform:translateX(22px)}
+                      to{opacity:1;transform:none}}
+
+  /* le créneau retenu : le fond se remplit après coup, la coche se pose
+     avec un léger dépassement — c'est le moment où la décision est prise */
+  .acv-row.pick{background:transparent}
+  .is-in .acv-row.pick{animation:acv-drop .55s var(--e) calc(var(--n) * 130ms + 720ms) both,
+                                 acv-fill .55s var(--e) 1.5s forwards}
+  @keyframes acv-fill{to{background:rgba(var(--bronze-rgb),.12)}}
+
+  .acv-row .tick svg{opacity:0}
+  .is-in .acv-row .tick svg{animation:acv-tick .5s cubic-bezier(.34,1.56,.64,1) 1.75s both}
+  @keyframes acv-tick{from{opacity:0;transform:scale(.3) rotate(-14deg)}
+                      to{opacity:1;transform:none}}
+
+  /* la ligne hors zone : le trait se tire, il ne surgit pas */
+  .acv-row.out .slot{text-decoration:none;position:relative}
+  .acv-row.out .slot::after{content:"";position:absolute;left:0;right:0;top:52%;
+    height:1.5px;background:rgba(var(--bronze-rgb),.75);
+    transform:scaleX(0);transform-origin:left center}
+  .is-in .acv-row.out .slot::after{animation:acv-barre .45s var(--e) 1.8s both}
+  @keyframes acv-barre{to{transform:scaleX(1)}}
+
+  .acv-row.out .x{opacity:0}
+  .is-in .acv-row.out .x{animation:acv-tick .4s cubic-bezier(.34,1.56,.64,1) 2.1s both}
+}
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -733,19 +768,21 @@ html[data-theme="light"] .ac-step-card{
    de l'assistant, un titre, une ligne d'accroche, puis la liste complète.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.ac-feat{padding:96px 0 108px;border-top:1px solid var(--line)}
-.ac-feat-head{max-width:720px;margin:0 0 46px}
+.ac-feat{padding:80px 0 88px;border-top:1px solid var(--line)}
+.ac-feat-head{max-width:720px;margin:0 0 34px}
 
 /* On fait glisser au lieu d'empiler : une carte à la fois, calée sur son
    bord. Les huit rangées sont déclarées ici et reprises par chaque carte
    en subgrid — vignette, titre, accroche, liste et bouton tombent donc au
    même niveau d'une carte à l'autre, quelle que soit la longueur du texte.
-   Huit, comme les huit enfants de .ac-card : en déclarer une de plus
-   laisserait une rangée vide, donc une gouttière de 22 px en bas. */
+   Sept, comme les sept enfants de .ac-card : en déclarer une de plus
+   laisserait une rangée vide, donc une gouttière en bas de chaque carte. */
 .ac-feat-rail{display:grid;grid-auto-flow:column;
   grid-auto-columns:var(--w,46%);
-  grid-template-rows:repeat(8,auto);
-  gap:22px;align-items:stretch;
+  grid-template-rows:repeat(7,auto);
+  /* rangées collées : la gouttière ne sert qu'entre les cartes. Appliquée
+     aussi aux rangées, elle ajoutait 18 px sous chacun des sept blocs. */
+  gap:0 18px;align-items:stretch;
   overflow-x:auto;overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;
   padding:4px 4px 10px;margin:-4px -4px -10px;
@@ -756,7 +793,7 @@ html[data-theme="light"] .ac-step-card{
 
 .ac-card{grid-row:1 / -1;display:grid;grid-template-rows:subgrid;
   scroll-snap-align:start;
-  padding:30px 30px 28px;
+  padding:26px 26px 24px;
   border-radius:26px;background:var(--ink-2);border:1px solid var(--line-2);
   transition:border-color .3s var(--e),transform .3s var(--e)}
 /* sans subgrid la carte reste lisible, seules les rangées ne s'alignent plus */
@@ -767,7 +804,7 @@ html[data-theme="light"] .ac-step-card{
 html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 .ac-card:hover{border-color:rgba(var(--bronze-rgb),.4);transform:translateY(-3px)}
 
-.ac-card-top{display:flex;align-items:center;gap:12px;margin:0 0 22px}
+.ac-card-top{display:flex;align-items:center;gap:12px;margin:0 0 20px}
 .ac-card-av{width:42px;height:42px;border-radius:13px;flex:0 0 auto;
   object-fit:cover;background:var(--ink-3);border:1px solid var(--line-2)}
 .ac-card-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
@@ -775,18 +812,16 @@ html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 .ac-card-n{margin-left:auto;font-family:var(--mono);font-size:11.5px;
   letter-spacing:.08em;color:var(--bronze);white-space:nowrap}
 
-.ac-card-lab{margin:0 0 6px;font-size:14px;font-weight:700;letter-spacing:-.2px;
-  color:var(--parch)}
-.ac-card h3{margin:0 0 10px;font-size:clamp(23px,2.2vw,29px);line-height:1.12;
+.ac-card h3{margin:0 0 8px;font-size:clamp(23px,2.2vw,29px);line-height:1.12;
   letter-spacing:-1.1px;font-weight:800;color:var(--parch);text-wrap:balance}
-.ac-card-acc{margin:0 0 14px;font-size:15px;line-height:1.5;font-weight:700;
+.ac-card-acc{margin:0 0 18px;font-size:15px;line-height:1.5;font-weight:700;
   letter-spacing:-.2px;color:var(--bronze)}
 .ac-card-acc span{color:var(--lin);font-weight:500}
 .ac-card > p{margin:0 0 22px;font-size:15px;line-height:1.62;color:var(--lin)}
 
 .ac-card-sep{margin:0 0 16px;padding:0;border:0;border-top:1px solid var(--line)}
-.ac-card-cap{margin:0 0 14px;font-size:13px;font-weight:600;color:var(--lin)}
-.ac-card ul{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:12px}
+.ac-card-cap{margin:0 0 10px;font-size:13px;font-weight:600;color:var(--lin)}
+.ac-card ul{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:11px}
 .ac-card li{display:flex;align-items:flex-start;gap:11px;
   font-size:14.5px;line-height:1.45;letter-spacing:-.1px;color:var(--parch)}
 .ac-card li i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
@@ -950,9 +985,6 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
 @media (max-width:700px){ .ac-feat-rail{--w:80%} }
 @media (max-width:560px){ .ac-feat-rail{--w:88%} }
 
-@media (max-width:1080px){
-  .ac-step-tab .d{display:none}
-}
 
 @media (max-width:960px){
   .t-asst .ac-h2{letter-spacing:-1.5px}
@@ -976,36 +1008,36 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-miss-grid{grid-template-columns:1fr;gap:28px}
   .ac-scene{height:clamp(340px,62vw,440px);padding-top:34px}
 
-  /* 3 · scénario : sans la place d'empiler, on fait glisser. Une étape par
-     écran, son onglet posé dessus, et la suivante qui dépasse pour dire
-     qu'il y a une suite. */
-  .ac-story{padding:72px 0 84px}
-  .ac-story-grid{grid-template-columns:1fr;gap:34px}
-  .ac-story-txt{position:static;top:auto}
-  .ac-story-txt .ac-h2,.ac-story-txt .ac-sub{max-width:none}
-
-  .ac-steps{--tabh:0px;
-    display:grid;grid-auto-flow:column;grid-auto-columns:var(--sw,78%);
-    gap:14px;align-items:stretch;
-    overflow-x:auto;overscroll-behavior-x:contain;
-    scroll-snap-type:x mandatory;
-    padding:4px 4px 12px;margin:-4px -4px -12px;
-    scrollbar-width:none}
-  .ac-steps::-webkit-scrollbar{display:none}
-  .ac-steps:focus-visible{outline:3px solid var(--bronze);outline-offset:4px;
+  /* 2 · les missions : sur téléphone on balaie, on ne déroule pas. Une carte
+     par écran, la voisine qui dépasse pour dire qu'il y en a d'autres, et
+     l'écran du téléphone au-dessus qui suit le doigt. */
+  .ac-miss-list{display:grid;grid-auto-flow:column;grid-auto-columns:var(--mw,84%);
+    gap:12px;align-items:stretch;
+    overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+    padding:4px;margin:-4px;scrollbar-width:none;
+    -webkit-overflow-scrolling:touch}
+  .ac-miss-list::-webkit-scrollbar{display:none}
+  .ac-miss-list:focus-visible{outline:3px solid var(--bronze);outline-offset:4px;
     border-radius:24px}
+  .ac-mission{scroll-snap-align:center;height:100%}
+  .ac-mission p{max-width:none}
+  .ac-miss-dots{display:flex}
+  .ac-scene{height:clamp(340px,62vw,440px);padding-top:34px}
 
-  .ac-step{position:relative;top:auto;margin:0;padding-top:0;
-    scroll-snap-align:start;
-    display:flex;flex-direction:column;align-items:flex-start}
-  /* l'onglet reprend sa place dans le flux, une étiquette par carte */
-  .ac-step-tab{position:static;left:auto;width:auto;height:30px;
-    padding:0 15px;border-radius:14px 14px 0 0;font-size:11px;
-    backdrop-filter:none;-webkit-backdrop-filter:none;
-    background:var(--ink-3)}
-  .ac-step-tab .d{display:inline}
-  .ac-step-card{flex:1;width:100%;border-radius:0 22px 22px 22px;
-    padding:24px 22px 26px;min-height:0}
+  /* 3 · les promesses : sous 900 px on n'empile plus et on n'anime plus.
+     Les cartes se suivent, le visuel passe sous le texte, rien ne colle. */
+  .ac-pile{padding:66px 0 74px}
+  .ac-pile-stack{gap:16px;padding-bottom:0}
+  .ac-pile-card{position:static;top:auto;transform:none;opacity:1;
+    padding:22px 20px 26px;border-radius:22px}
+  .ac-pile-card.is-back{transform:none;opacity:1}
+  .ac-pile-card [data-rise]{opacity:1;transform:none}
+  .ac-pile-k{margin-bottom:18px;font-size:10.5px;letter-spacing:.1em}
+  /* la queue descriptive ne tient pas sur 375 px : le numéro et le nom suffisent */
+  .ac-pile-k s{display:none}
+  .ac-pile-grid{grid-template-columns:1fr;gap:26px}
+  .ac-pile-h,.ac-pile-txt p{max-width:none}
+  .ac-pile-vis{padding:16px;border-radius:18px;gap:12px}
 
   /* 4 · fonctionnalités : on glisse, on n'empile pas */
   .ac-feat{padding:72px 0 80px}
@@ -1033,8 +1065,18 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-ba-svg{display:none}
 }
 
-@media (max-width:700px){
-  .ac-steps{--sw:86%}
+@media (max-width:620px){
+  .ac-miss-list{--mw:88%}
+  .ac-pile-k i{width:30px;height:30px;border-radius:9px}
+  .ac-pile-k i svg{width:16px;height:16px}
+  .ac-pile-pts li{font-size:15px;gap:12px}
+  .ac-pile-pts i{width:30px;height:30px;border-radius:9px}
+  .ac-pile-pts svg{width:15px;height:15px}
+  .acv-row{flex-wrap:wrap;gap:6px 10px;padding:11px 14px;font-size:14px}
+  .acv-row .meta{margin-left:0}
+  .acv-row .val{margin-left:auto}
+  .acv-k{padding:10px 14px}
+  .acv-chip{font-size:10.5px;padding:6px 11px}
 }
 
 @media (max-width:560px){
@@ -1047,19 +1089,17 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .t-asst .actions{flex-direction:column}
   .t-asst .btn{width:100%}
   .ac-mission{padding:20px 18px 20px 18px}
-  .ac-card{padding:26px 22px 24px;border-radius:22px}
+  .ac-card{padding:22px 20px 22px;border-radius:22px}
   .ac-ba-table td{padding:13px 12px;font-size:13px}
   .ac-ba-table th{padding:13px 12px 11px}
   .ac-card-go{width:100%;justify-content:center}
   .ac-prices{grid-template-columns:1fr}
-  .ac-step-h{flex-wrap:wrap}
-  .ac-step-when{margin-left:0;width:100%;order:3}
   .ac-duo-pair img{width:66px;height:66px;border-radius:20px}
   .ac-cta .ac-reassure{align-items:flex-start}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .t-asst .btn,.ac-card,.ac-mission,.ac-screen img,.ac-step-tab{transition:none}
+  .t-asst .btn,.ac-card,.ac-mission,.ac-screen img{transition:none}
   .t-asst .btn-1:hover,.t-asst .btn-2:hover,.ac-card:hover{transform:none}
   .ac-belt-track{animation:none}
   .ac-belt{-webkit-mask-image:none;mask-image:none}
@@ -1067,20 +1107,6 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   LA FICHE QUI ARRIVE — l'animation suit le défilement, elle n'est pas jouée
-   sur une durée : l'utilisateur la pilote, peut l'arrêter et la reprendre.
-   Ignorée là où les timelines de défilement n'existent pas encore.
-   ═══════════════════════════════════════════════════════════════════════════ */
-@supports (animation-timeline:view()){
-  @media (min-width:961px) and (prefers-reduced-motion:no-preference){
-    .ac-step-card{animation:acMonte linear both;
-      animation-timeline:view();animation-range:entry 4% entry 46%}
-    @keyframes acMonte{
-      from{opacity:0;transform:translate3d(0,26px,0) scale(.975)}
-      to{opacity:1;transform:none}}
-  }
-}
 
 /* ── le raccourci vers la commande en ligne, sous l'appel final ──────── */
 .ac-direct{margin:22px 0 0;font-size:14.5px;line-height:1.5;color:var(--lin)}
@@ -1212,22 +1238,22 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         </a>
       </div>
 
-      <h1>Votre commercial qui ne laisse passer <em>aucune opportunité</em>.</h1>
+      <h1>Vendez pendant que vous êtes <em>sur le chantier</em>.</h1>
 
       <p class="ac-proof">
-        <span class="ac-proof-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg><b>+75 intégrations</b> comprises</span>
+        <span class="ac-proof-i"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path> <polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline> </g> </g></svg><b>+75 intégrations</b> comprises</span>
         <span class="ac-proof-sep" aria-hidden="true"></span>
-        <span class="ac-proof-i"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Mise en place <b>personnalisée</b></span>
+        <span class="ac-proof-i"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 1.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M18.3066362,6.12356982 L17.6842106,5.04347829 C17.1576365,4.12955711 15.9906873,3.8142761 15.0755149,4.33867279 L15.0755149,4.33867279 C14.6398815,4.59529992 14.1200613,4.66810845 13.6306859,4.54104256 C13.1413105,4.41397667 12.7225749,4.09747295 12.4668193,3.66132725 C12.3022855,3.38410472 12.2138742,3.06835005 12.2105264,2.74599544 L12.2105264,2.74599544 C12.2253694,2.22917739 12.030389,1.72835784 11.6700024,1.3576252 C11.3096158,0.986892553 10.814514,0.777818938 10.2974829,0.778031878 L9.04347831,0.778031878 C8.53694532,0.778031878 8.05129106,0.97987004 7.69397811,1.33890085 C7.33666515,1.69793166 7.13715288,2.18454839 7.13958814,2.69107553 L7.13958814,2.69107553 C7.12457503,3.73688099 6.27245786,4.57676682 5.22654465,4.57665906 C4.90419003,4.57331126 4.58843537,4.48489995 4.31121284,4.32036615 L4.31121284,4.32036615 C3.39604054,3.79596946 2.22909131,4.11125048 1.70251717,5.02517165 L1.03432495,6.12356982 C0.508388616,7.03634945 0.819378585,8.20256183 1.72997713,8.73226549 L1.72997713,8.73226549 C2.32188101,9.07399614 2.68650982,9.70554694 2.68650982,10.3890161 C2.68650982,11.0724852 2.32188101,11.704036 1.72997713,12.0457667 L1.72997713,12.0457667 C0.820534984,12.5718952 0.509205679,13.7352837 1.03432495,14.645309 L1.03432495,14.645309 L1.6659039,15.7345539 C1.9126252,16.1797378 2.3265816,16.5082503 2.81617164,16.6473969 C3.30576167,16.7865435 3.83061824,16.7248517 4.27459956,16.4759726 L4.27459956,16.4759726 C4.71105863,16.2212969 5.23116727,16.1515203 5.71931837,16.2821523 C6.20746948,16.4127843 6.62321383,16.7330005 6.87414191,17.1716248 C7.03867571,17.4488473 7.12708702,17.764602 7.13043482,18.0869566 L7.13043482,18.0869566 C7.13043482,19.1435014 7.98693356,20.0000001 9.04347831,20.0000001 L10.2974829,20.0000001 C11.3504633,20.0000001 12.2054882,19.1490783 12.2105264,18.0961099 L12.2105264,18.0961099 C12.2080776,17.5879925 12.4088433,17.0999783 12.7681408,16.7406809 C13.1274382,16.3813834 13.6154524,16.1806176 14.1235699,16.1830664 C14.4451523,16.1916732 14.7596081,16.2797208 15.0389017,16.4393593 L15.0389017,16.4393593 C15.9516813,16.9652957 17.1178937,16.6543057 17.6475973,15.7437072 L17.6475973,15.7437072 L18.3066362,14.645309 C18.5617324,14.2074528 18.6317479,13.6859659 18.5011783,13.1963297 C18.3706086,12.7066935 18.0502282,12.2893121 17.6109841,12.0366133 L17.6109841,12.0366133 C17.17174,11.7839145 16.8513595,11.3665332 16.7207899,10.876897 C16.5902202,10.3872608 16.6602358,9.86577384 16.9153319,9.42791767 C17.0812195,9.13829096 17.3213574,8.89815312 17.6109841,8.73226549 L17.6109841,8.73226549 C18.5161253,8.20284891 18.8263873,7.04344892 18.3066362,6.13272314 L18.3066362,6.13272314 L18.3066362,6.12356982 Z"></path> <circle cx="9.67505726" cy="10.3890161" r="2.63615562"></circle> </g> </g></svg> Mise en place <b>personnalisée</b></span>
       </p>
 
-      <p class="ac-lede">Il capte vos demandes, prépare vos devis et relance vos clients jusqu'à la signature. Même quand vous êtes sur un chantier ou que votre journée est terminée.</p>
+      <p class="ac-lede">Votre Assistant Commercial prend en charge vos prospects, prépare vos propositions, suit vos opportunités et relance vos clients pour vous aider à signer davantage de chantiers.</p>
 
       <ul class="ac-atouts">
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Capte les demandes jour et nuit</li>
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Rédige vos devis en minutes</li>
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 8.72V 8.72"/><path d="M 14.45 5.05H 16.21C 18.85 5.05 21 7.2 21 9.86V 15.93C 21 18.58 18.85 20.74 16.21 20.74H 7.8C 5.15 20.74 3 18.58 3 15.93V 9.86C 3 7.2 5.15 5.05 7.8 5.05H 9.53"/><path d="M 14.46 5.17V 9.42C 14.46 10.47 13.61 11.32 12.56 11.32H 11.44C 10.39 11.32 9.54 10.47 9.54 9.42V 5.17C 9.54 4.12 10.39 3.27 11.44 3.27H 12.56C 13.61 3.27 14.46 4.12 14.46 5.17Z"/></svg></i>Chiffre sur votre grille tarifaire</li>
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.75 20.44L21 20.44"/><path d="M 12.78 3.79C 13.56 2.87 14.95 2.73 15.9 3.49C 15.95 3.53 17.63 4.84 17.63 4.84C 18.67 5.47 18.99 6.8 18.35 7.82C 18.32 7.88 8.81 19.76 8.81 19.76C 8.5 20.16 8.02 20.39 7.5 20.4L 3.86 20.44L 3.04 16.97C 2.93 16.48 3.04 15.97 3.36 15.58L 12.78 3.79Z"/><path d="M11.02 6L16.47 10.19"/></svg></i>Fait signer et encaisse l'acompte</li>
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></i>Relance à J+3, J+7 et J+14</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i>Prépare vos devis et propositions commerciales</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="14.8395556" y1="17.1642222" x2="14.8395556" y2="3.54644444"></line> <polyline points="18.9172222 13.0681111 14.8394444 17.1647778 10.7616667 13.0681111"></polyline> <line x1="4.91111111" y1="0.832888889" x2="4.91111111" y2="14.4506667"></line> <polyline points="0.833444444 4.929 4.91122222 0.832333333 8.989 4.929"></polyline> </g> </g></svg></i>Relance automatiquement vos prospects et devis</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="5.37142857" y1="8.20171265" x2="5.37142857" y2="15.0618459"></line> <line x1="10.0380952" y1="4.91912464" x2="10.0380952" y2="15.0618459"></line> <line x1="14.6285714" y1="11.8268316" x2="14.6285714" y2="15.0618459"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg></i>Suit chaque opportunité jusqu'à la signature</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="10.7473996" y1="17.4429051" x2="18" y2="17.4429051"></line> <path d="M9.7800071,0.794792587 C10.5556498,-0.132213323 11.949987,-0.268144478 12.8962256,0.491732963 C12.9485416,0.532957985 14.6294799,1.83878843 14.6294799,1.83878843 C15.6689776,2.46719147 15.9919725,3.80310504 15.3493946,4.8225887 C15.3152754,4.877184 5.81194644,16.7644749 5.81194644,16.7644749 C5.49577537,17.1588981 5.01583223,17.3917638 4.50290722,17.3973347 L0.863527997,17.4430165 L0.0435303654,13.9723153 C-0.0713375414,13.4843002 0.0435303654,12.9717729 0.359701436,12.5773497 L9.7800071,0.794792587 Z"></path> <line x1="8.02082217" y1="3.00088838" x2="13.4730672" y2="7.18801364"></line> </g> </g></svg></i>Envoie les devis pour signature électronique</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor"> <path d="M17.0713569,17.0698633 C14.0152073,20.1263497 9.48977439,20.7866955 5.78641655,19.0740178 C5.23970647,18.8539025 4.7914846,18.6760012 4.36537232,18.6760012 C3.17848885,18.6830368 1.70116564,19.8338678 0.933359565,19.0669822 C0.165553489,18.2990915 1.3172626,16.8206004 1.3172626,15.6265504 C1.3172626,15.2003912 1.1464157,14.7601607 0.926324692,14.2123853 C-0.787169233,10.5096244 -0.125891225,5.98268764 2.93025835,2.92720636 C6.8315976,-0.975567922 13.1700176,-0.975567922 17.0713569,2.92620127 C20.979731,6.83500611 20.9726961,13.1680941 17.0713569,17.0698633 Z" stroke-width="1.5"></path> <line x1="13.9394" y1="10.413" x2="13.9484" y2="10.413" stroke-width="2"></line> <line x1="9.9304" y1="10.413" x2="9.9394" y2="10.413" stroke-width="2"></line> <line x1="5.9214" y1="10.413" x2="5.9304" y2="10.413" stroke-width="2"></line> </g> </g></svg></i>Centralise les échanges avec vos prospects</li>
       </ul>
 
       <div class="actions">
@@ -1245,7 +1271,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   <div class="shell">
 
     <div class="ac-miss-head">
-      <h2 class="ac-h2">Transformez chaque demande en <em>opportunité</em>.</h2>
+      <h2 class="ac-h2">Vendez <em>plus</em>.</h2>
     </div>
 
     <div class="ac-miss-grid">
@@ -1270,146 +1296,81 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <button class="ac-mission" type="button" role="tab" id="acT1" data-m="m1"
                 aria-selected="true" aria-controls="acScreen">
           <span class="ac-mission-h">
-            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M15.9026143,5.8511436 L11.4593272,9.46418164 C10.6198313,10.1301843 9.4387043,10.1301843 8.59920842,9.46418164 L4.11842516,5.8511436"></path> <path d="M14.9088637,17.9999789 C17.9502135,18.0083748 20,15.5095497 20,12.4383622 L20,5.57001263 C20,2.49882508 17.9502135,5.32907052e-15 14.9088637,5.32907052e-15 L5.09113634,5.32907052e-15 C2.04978648,5.32907052e-15 1.77635684e-15,2.49882508 1.77635684e-15,5.57001263 L1.77635684e-15,12.4383622 C1.77635684e-15,15.5095497 2.04978648,18.0083748 5.09113634,17.9999789 L14.9088637,17.9999789 Z"></path> </g> </g></svg></span>
             <span class="ac-mission-n">01 — Capter</span>
           </span>
           <h3>Aucune demande ne reste sans réponse</h3>
-          <p>Votre assistant répond aux demandes, même le soir et le week-end, et récupère les informations nécessaires pour comprendre le projet.</p>
+          <p>Le soir, le week-end, depuis le mail, le formulaire ou WhatsApp : il répond, récupère ce qui manque et vous remonte la demande complète.</p>
         </button>
 
         <button class="ac-mission" type="button" role="tab" id="acT2" data-m="m2"
                 aria-selected="false" aria-controls="acScreen">
           <span class="ac-mission-h">
-            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></span>
-            <span class="ac-mission-n">02 — Préparer les devis</span>
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg></span>
+            <span class="ac-mission-n">02 — Convertir</span>
           </span>
-          <h3>Vos devis commencent à se préparer tout seuls</h3>
-          <p>À partir d'un email, d'une photo ou d'une note vocale, Talos transforme la demande en devis selon votre manière de chiffrer.</p>
+          <h3>Le devis part pendant que vous roulez</h3>
+          <p>Depuis une note vocale, une photo ou un e-mail, il chiffre sur votre grille tarifaire, envoie la proposition et récupère la signature en ligne.</p>
         </button>
 
         <button class="ac-mission" type="button" role="tab" id="acT3" data-m="m3"
                 aria-selected="false" aria-controls="acScreen">
           <span class="ac-mission-h">
-            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></span>
-            <span class="ac-mission-n">03 — Convertir</span>
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.5,15.8476424 C14.13923,15.8476424 16.7480515,15.1242108 17,12.220506 C17,9.31879687 15.1811526,9.50539234 15.1811526,5.94511102 C15.1811526,3.16414015 12.5452291,-1.86517468e-14 8.5,-1.86517468e-14 C4.4547709,-1.86517468e-14 1.81884743,3.16414015 1.81884743,5.94511102 C1.81884743,9.50539234 0,9.31879687 0,12.220506 C0.252952291,15.135187 2.86177374,15.8476424 8.5,15.8476424 Z"></path> <path d="M10.8887931,18.8572176 C9.52465753,20.3719337 7.3966462,20.3898948 6.0194615,18.8572176"></path> </g> </g></svg></span>
+            <span class="ac-mission-n">03 — Relancer</span>
           </span>
-          <h3>Vos devis sont suivis jusqu'à la réponse</h3>
-          <p>Un devis envoyé n'est pas un devis oublié. Talos suit automatiquement chaque dossier et adapte les relances à la réaction du client.</p>
+          <h3>Un devis envoyé n'est pas un devis oublié</h3>
+          <p>Il relance à J+3, J+7 et J+14, adapte le ton à chaque étape, et s'arrête net dès que le client répond ou signe.</p>
         </button>
 
       </div>
+
+      <div class="ac-miss-dots" id="acMissDots" aria-hidden="true"></div>
     </div>
   </div>
 </section>
 
 
-<!-- ═══ 3 · LE SCÉNARIO ═══════════════════════════════════════════════════ -->
-<section class="t-asst ac-story" id="scenario">
-  <div class="shell ac-story-grid">
+<!-- ═══ 3 · LA PROMESSE ═══════════════════════════════════════════════════ -->
+<section class="t-asst ac-pile" id="promesses">
+  <div class="shell">
+    <div class="ac-pile-stack" id="acPile">
 
-    <div class="ac-story-txt">
-      <p class="ac-tag">Cas pratique</p>
-      <h2 class="ac-h2">La demande du vendredi soir devient un <em>devis signé</em>.</h2>
-      <p class="ac-sub">Un chantier de salle de bain à Paris, de la première question du client jusqu'à l'acompte encaissé. Vous n'intervenez qu'une fois : pour valider.</p>
+      <article class="ac-pile-card" id="ventes" style="--i:0">
+        <p class="ac-pile-k"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path> <polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline> </g> </g></svg></i><em>Transformer les demandes en ventes</em></p>
 
-      <div class="ac-story-note">
-        <b>Votre part du travail : deux minutes.</b>
-        Relire le devis préparé pendant la nuit, puis appuyer sur envoyer. Le reste est déjà fait quand vous ouvrez Talos le matin.
-      </div>
+        <div class="ac-pile-grid">
+          <div class="ac-pile-txt">
+            <h2 class="ac-pile-h" data-rise>Plus besoin de laisser vos devis attendre au fond de votre boîte mail.</h2>
+            <p data-tx-skip data-rise style="--d:70ms">Il prépare vos propositions commerciales, les adapte au besoin
+              du client et les envoie rapidement. Vous pouvez vous concentrer sur le chantier, il s'occupe de faire
+              avancer la vente.</p>
+            <ul class="ac-pile-pts" data-rise style="--d:140ms">
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i><span class="d">Préparation des devis<em>Il transforme les informations du client en proposition commerciale prête à envoyer.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M10.1042564,0.67700614 L11.9316681,4.32775597 C12.1107648,4.68615589 12.4564632,4.93467388 12.8573484,4.99218218 L16.9453359,5.58061527 C17.9553583,5.72643988 18.3572847,6.95054503 17.6263201,7.65194084 L14.6701824,10.4924399 C14.3796708,10.7717659 14.2474307,11.173297 14.3161539,11.5676396 L15.0137982,15.5778163 C15.1856062,16.5698344 14.1297683,17.3266846 13.2269958,16.8573759 L9.57321374,14.9626829 C9.21502023,14.7768079 8.78602103,14.7768079 8.42678626,14.9626829 L4.77300425,16.8573759 C3.87023166,17.3266846 2.81439382,16.5698344 2.98724301,15.5778163 L3.68384608,11.5676396 C3.75256926,11.173297 3.62032921,10.7717659 3.32981762,10.4924399 L0.373679928,7.65194084 C-0.357284727,6.95054503 0.0446417073,5.72643988 1.05466409,5.58061527 L5.14265161,4.99218218 C5.54353679,4.93467388 5.89027643,4.68615589 6.06937319,4.32775597 L7.89574356,0.67700614 C8.34765049,-0.225668713 9.65234951,-0.225668713 10.1042564,0.67700614 Z"></path> </g> </g></svg></i><span class="d">Offres adaptées<em>Il peut préparer différentes propositions — Éco, Standard, Premium — pour donner au client le choix.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="10.7473996" y1="17.4429051" x2="18" y2="17.4429051"></line> <path d="M9.7800071,0.794792587 C10.5556498,-0.132213323 11.949987,-0.268144478 12.8962256,0.491732963 C12.9485416,0.532957985 14.6294799,1.83878843 14.6294799,1.83878843 C15.6689776,2.46719147 15.9919725,3.80310504 15.3493946,4.8225887 C15.3152754,4.877184 5.81194644,16.7644749 5.81194644,16.7644749 C5.49577537,17.1588981 5.01583223,17.3917638 4.50290722,17.3973347 L0.863527997,17.4430165 L0.0435303654,13.9723153 C-0.0713375414,13.4843002 0.0435303654,12.9717729 0.359701436,12.5773497 L9.7800071,0.794792587 Z"></path> <line x1="8.02082217" y1="3.00088838" x2="13.4730672" y2="7.18801364"></line> </g> </g></svg></i><span class="d">Envoi &amp; signature<em>Il envoie le devis au client et récupère sa signature directement en ligne.</em></span></li>
+            </ul>
+          </div>
 
-      <div class="actions">
-        <a class="btn btn-1" href="reserver.html">Je veux mon assistant <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
-      </div>
+          <div class="ac-pile-vis" data-rise style="--d:210ms">
+            <div class="acv-chips">
+              <span style="--n:0" class="acv-chip on"><i aria-hidden="true"></i>Devis n° 2026-0312</span>
+              <span style="--n:1" class="acv-chip">Mme Roussel · toiture 40 m²</span>
+            </div>
+            <div class="acv-card">
+              <p class="acv-k">Trois propositions, un seul chiffrage</p>
+              <div style="--n:0" class="acv-row"><span class="slot">Éco</span><span class="meta">tuiles reprises</span><span class="val">7 450 €</span></div>
+              <div style="--n:1" class="acv-row pick"><span class="slot">Standard</span><span class="meta">tuiles neuves</span><span class="val">9 890 €</span>
+                <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg></span></div>
+              <div style="--n:2" class="acv-row"><span class="slot">Premium</span><span class="meta">+ isolation</span><span class="val">13 200 €</span></div>
+            </div>
+            <p class="acv-foot"><span class="acv-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              Signé en ligne il y a 4 min · acompte de 30 % encaissé</p>
+          </div>
+        </div>
+      </article>
+
     </div>
-
-    <ol class="ac-steps" id="acSteps" tabindex="0" role="group"
-        aria-label="Le scénario étape par étape, à faire défiler horizontalement sur téléphone">
-
-      <li class="ac-step" style="--i:0">
-        <span class="ac-step-tab" aria-hidden="true"><span class="d">Ven.</span>19:42</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></span>
-            <b>Nouveau message</b>
-            <span class="ac-step-when">Vendredi · 19:42</span>
-          </div>
-          <div class="ac-step-body"><p class="ac-step-q">« Bonjour, je voudrais refaire ma salle de bain… »</p><p class="ac-step-p">Vous êtes encore sur un chantier. Personne ne décroche — et pourtant la demande est déjà prise en charge.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:1">
-        <span class="ac-step-tab" aria-hidden="true"><span class="d">Ven.</span>19:43</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
-            <b>Talos répond</b>
-            <span class="ac-step-when">Vendredi · 19:43</span>
-          </div>
-          <div class="ac-step-body"><p class="ac-step-q">« Bonsoir, merci pour votre demande. Pour vous orienter au mieux, pouvez-vous me préciser la surface, l'état actuel de la pièce et la date de démarrage souhaitée ? »</p><p class="ac-step-p">Une minute après. Ton posé, questions utiles, votre signature en bas du message.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:2">
-        <span class="ac-step-tab" aria-hidden="true"><span class="d">Ven.</span>19:45</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg></span>
-            <b>Demande qualifiée</b>
-            <span class="ac-step-when">Vendredi · 19:45</span>
-          </div>
-          <div class="ac-step-body"><ul class="ac-chips"><li>Salle de bain</li><li>12 m²</li><li>Paris</li><li>Rénovation complète</li><li>Démarrage souhaité : octobre</li></ul><p class="ac-step-p">La fiche est complète avant même que vous rentriez.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:3">
-        <span class="ac-step-tab" aria-hidden="true"><span class="d">Sam.</span>09:12</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.75 20.44L21 20.44"/><path d="M 12.78 3.79C 13.56 2.87 14.95 2.73 15.9 3.49C 15.95 3.53 17.63 4.84 17.63 4.84C 18.67 5.47 18.99 6.8 18.35 7.82C 18.32 7.88 8.81 19.76 8.81 19.76C 8.5 20.16 8.02 20.39 7.5 20.4L 3.86 20.44L 3.04 16.97C 2.93 16.48 3.04 15.97 3.36 15.58L 12.78 3.79Z"/><path d="M11.02 6L16.47 10.19"/></svg></span>
-            <b>Devis préparé</b>
-            <span class="ac-step-when">Samedi · 09:12</span>
-          </div>
-          <div class="ac-step-body"><ul class="ac-prices"><li><small>Éco</small><b>8 450 €</b></li><li class="hot"><small>Standard</small><b>10 900 €</b></li><li><small>Premium</small><b>13 200 €</b></li></ul><p class="ac-step-p">Chiffré sur votre grille tarifaire, avec vos prestations et vos marges. Vous relisez, vous corrigez si besoin.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:4">
-        <span class="ac-step-tab" aria-hidden="true"><span class="d">Sam.</span>09:15</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></span>
-            <b>Devis envoyé</b>
-            <span class="ac-step-when">Samedi · 09:15</span>
-          </div>
-          <div class="ac-step-body"><ul class="ac-chips"><li>Signature électronique</li><li>Acompte 30 %</li><li>Valable 30 jours</li></ul><p class="ac-step-p">Le client signe depuis son téléphone, sans imprimer ni scanner. L'acompte est demandé au moment de la signature.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:5">
-        <span class="ac-step-tab" aria-hidden="true"><span class="d">Mar.</span>10:00</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></span>
-            <b>Relance automatique</b>
-            <span class="ac-step-when">Mardi · 10:00</span>
-          </div>
-          <div class="ac-step-body"><p class="ac-step-q">« Bonjour M. Dupont, avez-vous eu le temps de consulter votre devis ? Je reste disponible si vous souhaitez en discuter. »</p><p class="ac-step-p">Celle que personne ne pense à faire. Elle s'arrête net dès que le client répond.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:6">
-        <span class="ac-step-tab" aria-hidden="true"><span class="d">Mar.</span>14:32</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></span>
-            <b>Devis signé</b>
-            <span class="ac-step-when">Mardi · 14:32</span>
-          </div>
-          <div class="ac-step-body"><div class="ac-step-win"><b>3 270 €</b><span>d'acompte encaissé — le chantier démarre avec de la trésorerie.</span></div><p class="ac-step-p">Quatre jours entre la demande et la signature. Zéro appel passé le soir.</p></div>
-        </div>
-      </li>
-
-    </ol>
   </div>
 </section>
 
@@ -1420,7 +1381,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
     <div class="ac-feat-head">
       <p class="ac-tag">Ce qu'il prend en charge</p>
-      <h2 class="ac-h2">Quatre étapes, <em>zéro oubli</em>.</h2>
+      <h2 class="ac-h2">4 missions, <em>22 fonctionnalités</em>.</h2>
       <p class="ac-sub">De la demande reçue à 22 h jusqu'à l'acompte encaissé, voici exactement ce que votre assistant commercial fait à votre place.</p>
     </div>
 
@@ -1430,87 +1391,83 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-commercial.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Réception</span>
+          <span class="ac-card-role">Captation 24 h/24</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Capter la demande</p>
         <h3>Rien ne se perd, même à 22 h</h3>
         <p class="ac-card-acc">Réponse immédiate <span>· sur tous vos canaux</span></p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 21.25 12C 21.25 17.11 17.11 21.25 12 21.25C 6.89 21.25 2.75 17.11 2.75 12C 2.75 6.89 6.89 2.75 12 2.75C 17.11 2.75 21.25 6.89 21.25 12Z"/><path d="M15.43 14.94L11.66 12.69L11.66 7.85"/></svg></i>Répond le soir et le week-end</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Pose les questions manquantes</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 14.5 10.5C 14.5 9.12 13.38 8 12 8C 10.62 8 9.5 9.12 9.5 10.5C 9.5 11.88 10.62 13 12 13C 13.38 13 14.5 11.88 14.5 10.5Z"/><path d="M 12 21C 10.8 21 4.5 15.9 4.5 10.56C 4.5 6.39 7.86 3 12 3C 16.14 3 19.5 6.39 19.5 10.56C 19.5 15.9 13.2 21 12 21Z"/></svg></i>Chantier, adresse, délai, budget</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></i>Mail, formulaire et WhatsApp réunis</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 17.85C 17.64 17.85 20.25 17.12 20.5 14.22C 20.5 11.32 18.68 11.51 18.68 7.95C 18.68 5.16 16.05 2 12 2C 7.95 2 5.32 5.16 5.32 7.95C 5.32 11.51 3.5 11.32 3.5 14.22C 3.75 17.14 6.36 17.85 12 17.85Z"/><path d="M 14.39 20.86C 13.02 22.37 10.9 22.39 9.52 20.86"/></svg></i>Vous alerte sur les demandes chaudes</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path> <polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline> </g> </g></svg></i>Répond le soir et le week-end</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor"> <path d="M17.0713569,17.0698633 C14.0152073,20.1263497 9.48977439,20.7866955 5.78641655,19.0740178 C5.23970647,18.8539025 4.7914846,18.6760012 4.36537232,18.6760012 C3.17848885,18.6830368 1.70116564,19.8338678 0.933359565,19.0669822 C0.165553489,18.2990915 1.3172626,16.8206004 1.3172626,15.6265504 C1.3172626,15.2003912 1.1464157,14.7601607 0.926324692,14.2123853 C-0.787169233,10.5096244 -0.125891225,5.98268764 2.93025835,2.92720636 C6.8315976,-0.975567922 13.1700176,-0.975567922 17.0713569,2.92620127 C20.979731,6.83500611 20.9726961,13.1680941 17.0713569,17.0698633 Z" stroke-width="1.5"></path> <line x1="13.9394" y1="10.413" x2="13.9484" y2="10.413" stroke-width="2"></line> <line x1="9.9304" y1="10.413" x2="9.9394" y2="10.413" stroke-width="2"></line> <line x1="5.9214" y1="10.413" x2="5.9304" y2="10.413" stroke-width="2"></line> </g> </g></svg></i>Pose les questions manquantes</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i>Chantier, adresse, délai, budget</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M15.9026143,5.8511436 L11.4593272,9.46418164 C10.6198313,10.1301843 9.4387043,10.1301843 8.59920842,9.46418164 L4.11842516,5.8511436"></path> <path d="M14.9088637,17.9999789 C17.9502135,18.0083748 20,15.5095497 20,12.4383622 L20,5.57001263 C20,2.49882508 17.9502135,5.32907052e-15 14.9088637,5.32907052e-15 L5.09113634,5.32907052e-15 C2.04978648,5.32907052e-15 1.77635684e-15,2.49882508 1.77635684e-15,5.57001263 L1.77635684e-15,12.4383622 C1.77635684e-15,15.5095497 2.04978648,18.0083748 5.09113634,17.9999789 L14.9088637,17.9999789 Z"></path> </g> </g></svg></i>Mail, formulaire et WhatsApp réunis</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.5,15.8476424 C14.13923,15.8476424 16.7480515,15.1242108 17,12.220506 C17,9.31879687 15.1811526,9.50539234 15.1811526,5.94511102 C15.1811526,3.16414015 12.5452291,-1.86517468e-14 8.5,-1.86517468e-14 C4.4547709,-1.86517468e-14 1.81884743,3.16414015 1.81884743,5.94511102 C1.81884743,9.50539234 0,9.31879687 0,12.220506 C0.252952291,15.135187 2.86177374,15.8476424 8.5,15.8476424 Z"></path> <path d="M10.8887931,18.8572176 C9.52465753,20.3719337 7.3966462,20.3898948 6.0194615,18.8572176"></path> </g> </g></svg></i>Vous alerte sur les demandes chaudes</li>
         </ul>
-        <a class="ac-card-go" href="#scenario">Voir le scénario complet <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
+        <a class="ac-card-go" href="#ventes">Voir comment le devis part <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
       </article>
 
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-commercial.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Chiffrage</span>
+          <span class="ac-card-role">Chiffrage en minutes</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Préparer le devis</p>
         <h3>Le devis s'écrit pendant que vous roulez</h3>
         <p class="ac-card-acc">Cinq façons de le lancer <span>· une seule grille tarifaire</span></p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></i>Depuis un e-mail client</li>
-          <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(4.000000, 2.000000)" stroke-width="1.5"> <line x1="7.99979045" y1="20" x2="7.99979045" y2="16.8390306"></line> <path d="M7.99979045,12.8480829 L7.99979045,12.8480829 C5.75658438,12.8480829 3.937712,11.0218152 3.937712,8.76819031 L3.937712,4.08094524 C3.937712,1.82732033 5.75658438,-3.55271368e-15 7.99979045,-3.55271368e-15 C10.2440443,-3.55271368e-15 12.0618689,1.82732033 12.0618689,4.08094524 L12.0618689,8.76819031 C12.0618689,11.0218152 10.2440443,12.8480829 7.99979045,12.8480829 Z"></path> <path d="M16,8.80061051 C16,13.2394411 12.4188331,16.8382937 7.99947613,16.8382937 C3.58116692,16.8382937 0,13.2394411 0,8.80061051"></path> </g></svg></i>Depuis une note vocale</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.04 4.05C 16.05 4.45 16.36 5.85 16.77 6.3C 17.19 6.75 17.78 6.91 18.1 6.91C 19.84 6.91 21.25 8.32 21.25 10.05L 21.25 15.85C 21.25 18.18 19.36 20.07 17.03 20.07L 6.97 20.07C 4.64 20.07 2.75 18.18 2.75 15.85L 2.75 10.05C 2.75 8.32 4.16 6.91 5.9 6.91C 6.22 6.91 6.81 6.75 7.23 6.3C 7.64 5.85 7.95 4.45 8.96 4.05C 9.97 3.65 14.03 3.65 15.04 4.05Z"/><path d="M17.5 9.5L17.5 9.5"/><path d="M 15.18 13.13C 15.18 11.37 13.76 9.95 12 9.95C 10.24 9.95 8.82 11.37 8.82 13.13C 8.82 14.88 10.24 16.31 12 16.31C 13.76 16.31 15.18 14.88 15.18 13.13Z"/></svg></i>Depuis une photo ou un plan</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Depuis le formulaire du site</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 8.72V 8.72"/><path d="M 14.45 5.05H 16.21C 18.85 5.05 21 7.2 21 9.86V 15.93C 21 18.58 18.85 20.74 16.21 20.74H 7.8C 5.15 20.74 3 18.58 3 15.93V 9.86C 3 7.2 5.15 5.05 7.8 5.05H 9.53"/><path d="M 14.46 5.17V 9.42C 14.46 10.47 13.61 11.32 12.56 11.32H 11.44C 10.39 11.32 9.54 10.47 9.54 9.42V 5.17C 9.54 4.12 10.39 3.27 11.44 3.27H 12.56C 13.61 3.27 14.46 4.12 14.46 5.17Z"/></svg></i>Sur votre grille et vos marges</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M15.9026143,5.8511436 L11.4593272,9.46418164 C10.6198313,10.1301843 9.4387043,10.1301843 8.59920842,9.46418164 L4.11842516,5.8511436"></path> <path d="M14.9088637,17.9999789 C17.9502135,18.0083748 20,15.5095497 20,12.4383622 L20,5.57001263 C20,2.49882508 17.9502135,5.32907052e-15 14.9088637,5.32907052e-15 L5.09113634,5.32907052e-15 C2.04978648,5.32907052e-15 1.77635684e-15,2.49882508 1.77635684e-15,5.57001263 L1.77635684e-15,12.4383622 C1.77635684e-15,15.5095497 2.04978648,18.0083748 5.09113634,17.9999789 L14.9088637,17.9999789 Z"></path> </g> </g></svg></i>Depuis un e-mail client</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.353,1.95399252e-14 C16.054,0.411 18.978,3.331 19.393,7.032"></path> <path d="M12.353,3.543 C14.124,3.887 15.508,5.272 15.853,7.043"></path> <path d="M9.03152183,9.97238745 C13.0205087,13.9603606 13.9254376,9.34671782 16.46525,11.8848116 C18.9138181,14.3327574 20.322201,14.8232052 17.2188207,17.9247236 C16.8302273,18.2370218 14.3612634,21.9942591 5.68446558,13.3196663 C-2.9934057,4.64400029 0.761566311,2.17244427 1.07394391,1.78394958 C4.18376493,-1.32615434 4.66682308,0.0893829491 7.11539117,2.53732879 C9.65413011,5.07649576 5.04253498,5.9844143 9.03152183,9.97238745 Z"></path> </g> </g></svg></i>Depuis une note vocale</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i>Depuis une photo ou un plan</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="10.7473996" y1="17.4429051" x2="18" y2="17.4429051"></line> <path d="M9.7800071,0.794792587 C10.5556498,-0.132213323 11.949987,-0.268144478 12.8962256,0.491732963 C12.9485416,0.532957985 14.6294799,1.83878843 14.6294799,1.83878843 C15.6689776,2.46719147 15.9919725,3.80310504 15.3493946,4.8225887 C15.3152754,4.877184 5.81194644,16.7644749 5.81194644,16.7644749 C5.49577537,17.1588981 5.01583223,17.3917638 4.50290722,17.3973347 L0.863527997,17.4430165 L0.0435303654,13.9723153 C-0.0713375414,13.4843002 0.0435303654,12.9717729 0.359701436,12.5773497 L9.7800071,0.794792587 Z"></path> <line x1="8.02082217" y1="3.00088838" x2="13.4730672" y2="7.18801364"></line> </g> </g></svg></i>Depuis le formulaire du site</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="5.37142857" y1="8.20171265" x2="5.37142857" y2="15.0618459"></line> <line x1="10.0380952" y1="4.91912464" x2="10.0380952" y2="15.0618459"></line> <line x1="14.6285714" y1="11.8268316" x2="14.6285714" y2="15.0618459"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg></i>Sur votre grille et vos marges</li>
         </ul>
-        <a class="ac-card-go" href="reserver.html">Le voir chiffrer mes devis <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
+        <a class="ac-card-go" href="reserver.html">Le voir chiffrer mes devis <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
       </article>
 
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-commercial.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Signature</span>
+          <span class="ac-card-role">Signature en ligne</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Envoyer &amp; faire signer</p>
         <h3>Il repart signé, avec l'acompte</h3>
         <p class="ac-card-acc">Signature en ligne <span>· acompte encaissé à la commande</span></p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></i>Variantes Éco, Standard, Premium</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.75 20.44L21 20.44"/><path d="M 12.78 3.79C 13.56 2.87 14.95 2.73 15.9 3.49C 15.95 3.53 17.63 4.84 17.63 4.84C 18.67 5.47 18.99 6.8 18.35 7.82C 18.32 7.88 8.81 19.76 8.81 19.76C 8.5 20.16 8.02 20.39 7.5 20.4L 3.86 20.44L 3.04 16.97C 2.93 16.48 3.04 15.97 3.36 15.58L 12.78 3.79Z"/><path d="M11.02 6L16.47 10.19"/></svg></i>Signature depuis son téléphone</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 6.69 11.38C 7.38 10.23 8.12 9.1 8.85 7.97L 6.87 4.28C 6.87 4.28 7.02 4.15 7.4 3.85C 8.53 2.98 9.76 2.76 11.09 3.27C 12.36 3.77 13.65 4.14 15.02 4.06C 15.42 4.04 16.96 3.84 16.96 3.84L 15.16 7.96C 15.88 9.09 16.62 10.23 17.31 11.38C 18.44 13.26 19.53 15.37 18.65 17.56C 17.63 20.11 14.64 20.96 12 21C 9.35 20.96 6.37 20.11 5.35 17.56C 4.47 15.37 5.56 13.26 6.69 11.38Z"/><path d="M 8.85 7.98C 10.95 8.46 13.05 8.46 15.16 7.98"/></svg></i>Acompte de 30 % à la signature</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.09 9.4L20.92 9.4"/><path d="M16.44 13.31L16.45 13.31"/><path d="M12 13.31L12.01 13.31"/><path d="M7.56 13.31L7.57 13.31"/><path d="M16.44 17.2L16.45 17.2"/><path d="M12 17.2L12.01 17.2"/><path d="M7.56 17.2L7.57 17.2"/><path d="M16.04 2L16.04 5.29"/><path d="M7.97 2L7.97 5.29"/><path d="M 16.24 3.58L 7.77 3.58C 4.83 3.58 3 5.22 3 8.22L 3 17.27C 3 20.33 4.83 22 7.77 22L 16.23 22C 19.17 22 21 20.35 21 17.35L 21 8.22C 21.01 5.22 19.18 3.58 16.24 3.58Z"/></svg></i>Date de validité sur chaque devis</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Conditions de paiement posées</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M10.1042564,0.67700614 L11.9316681,4.32775597 C12.1107648,4.68615589 12.4564632,4.93467388 12.8573484,4.99218218 L16.9453359,5.58061527 C17.9553583,5.72643988 18.3572847,6.95054503 17.6263201,7.65194084 L14.6701824,10.4924399 C14.3796708,10.7717659 14.2474307,11.173297 14.3161539,11.5676396 L15.0137982,15.5778163 C15.1856062,16.5698344 14.1297683,17.3266846 13.2269958,16.8573759 L9.57321374,14.9626829 C9.21502023,14.7768079 8.78602103,14.7768079 8.42678626,14.9626829 L4.77300425,16.8573759 C3.87023166,17.3266846 2.81439382,16.5698344 2.98724301,15.5778163 L3.68384608,11.5676396 C3.75256926,11.173297 3.62032921,10.7717659 3.32981762,10.4924399 L0.373679928,7.65194084 C-0.357284727,6.95054503 0.0446417073,5.72643988 1.05466409,5.58061527 L5.14265161,4.99218218 C5.54353679,4.93467388 5.89027643,4.68615589 6.06937319,4.32775597 L7.89574356,0.67700614 C8.34765049,-0.225668713 9.65234951,-0.225668713 10.1042564,0.67700614 Z"></path> </g> </g></svg></i>Variantes Éco, Standard, Premium</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="10.7473996" y1="17.4429051" x2="18" y2="17.4429051"></line> <path d="M9.7800071,0.794792587 C10.5556498,-0.132213323 11.949987,-0.268144478 12.8962256,0.491732963 C12.9485416,0.532957985 14.6294799,1.83878843 14.6294799,1.83878843 C15.6689776,2.46719147 15.9919725,3.80310504 15.3493946,4.8225887 C15.3152754,4.877184 5.81194644,16.7644749 5.81194644,16.7644749 C5.49577537,17.1588981 5.01583223,17.3917638 4.50290722,17.3973347 L0.863527997,17.4430165 L0.0435303654,13.9723153 C-0.0713375414,13.4843002 0.0435303654,12.9717729 0.359701436,12.5773497 L9.7800071,0.794792587 Z"></path> <line x1="8.02082217" y1="3.00088838" x2="13.4730672" y2="7.18801364"></line> </g> </g></svg></i>Signature depuis son téléphone</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.1389383,11.3957621 L15.0906357,11.3957621 C13.6041923,11.3948508 12.399362,10.1909319 12.3984507,8.70448849 C12.3984507,7.21804511 13.6041923,6.01412622 15.0906357,6.01321486 L19.1389383,6.01321486"></path> <line x1="15.5485988" y1="8.64287993" x2="15.2369105" y2="8.64287993"></line> <path d="M5.24766462,1.52259158e-14 L13.8910914,1.52259158e-14 C16.7892458,1.52259158e-14 19.138756,2.34951014 19.138756,5.24766462 L19.138756,12.4246981 C19.138756,15.3228526 16.7892458,17.6723627 13.8910914,17.6723627 L5.24766462,17.6723627 C2.34951014,17.6723627 1.69176842e-15,15.3228526 1.69176842e-15,12.4246981 L1.69176842e-15,5.24766462 C1.69176842e-15,2.34951014 2.34951014,1.52259158e-14 5.24766462,1.52259158e-14 Z"></path> <line x1="4.53561176" y1="4.53816359" x2="9.93456368" y2="4.53816359"></line> </g> </g></svg></i>Acompte de 30 % à la signature</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="0.0926400664" y1="7.40425532" x2="17.9165888" y2="7.40425532"></line> <line x1="13.4420736" y1="11.3096927" x2="13.4513376" y2="11.3096927"></line> <line x1="9.00461445" y1="11.3096927" x2="9.01387846" y2="11.3096927"></line> <line x1="4.55789127" y1="11.3096927" x2="4.56715527" y2="11.3096927"></line> <line x1="13.4420736" y1="15.1962175" x2="13.4513376" y2="15.1962175"></line> <line x1="9.00461445" y1="15.1962175" x2="9.01387846" y2="15.1962175"></line> <line x1="4.55789127" y1="15.1962175" x2="4.56715527" y2="15.1962175"></line> <line x1="13.0437213" y1="-2.26485497e-14" x2="13.0437213" y2="3.29078014"></line> <line x1="4.96550756" y1="-2.26485497e-14" x2="4.96550756" y2="3.29078014"></line> <path d="M13.2382655,1.57919622 L4.77096342,1.57919622 C1.83427331,1.57919622 0,3.21513002 0,6.22222222 L0,15.2718676 C0,18.3262411 1.83427331,20 4.77096342,20 L13.2290015,20 C16.1749556,20 18,18.3546099 18,15.3475177 L18,6.22222222 C18.0092289,3.21513002 16.1842196,1.57919622 13.2382655,1.57919622 Z"></path> </g> </g></svg></i>Date de validité sur chaque devis</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i>Conditions de paiement posées</li>
         </ul>
-        <a class="ac-card-go" href="reserver.html">Faire signer mes devis en ligne <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
+        <a class="ac-card-go" href="reserver.html">Faire signer mes devis en ligne <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
       </article>
 
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-commercial.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Relance</span>
+          <span class="ac-card-role">Relances J+3 · J+7 · J+14</span>
           <span class="ac-card-n">07 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Relancer &amp; suivre</p>
         <h3>Il relance à votre place, et sait s'arrêter</h3>
         <p class="ac-card-acc">J+3, J+7, J+14 <span>· puis plus rien</span></p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></i>Relance à J+3, courte et polie</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></i>Relance à J+7, appel proposé</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.09 9.4L20.92 9.4"/><path d="M16.44 13.31L16.45 13.31"/><path d="M12 13.31L12.01 13.31"/><path d="M7.56 13.31L7.57 13.31"/><path d="M16.44 17.2L16.45 17.2"/><path d="M12 17.2L12.01 17.2"/><path d="M7.56 17.2L7.57 17.2"/><path d="M16.04 2L16.04 5.29"/><path d="M7.97 2L7.97 5.29"/><path d="M 16.24 3.58L 7.77 3.58C 4.83 3.58 3 5.22 3 8.22L 3 17.27C 3 20.33 4.83 22 7.77 22L 16.23 22C 19.17 22 21 20.35 21 17.35L 21 8.22C 21.01 5.22 19.18 3.58 16.24 3.58Z"/></svg></i>Relance à J+14, validité rappelée</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></i>S'arrête dès qu'il répond</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></i>S'arrête à la signature</li>
-          <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <circle cx="9.76659044" cy="9.76659044" r="8.9885584"></circle> <line x1="16.0183067" y1="16.4851259" x2="19.5423342" y2="20.0000001"></line> </g></svg></i>Repère les devis relus</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 13.1 4.18L 14.93 7.83C 15.11 8.19 15.46 8.43 15.86 8.49L 19.95 9.08C 20.96 9.23 21.36 10.45 20.63 11.15L 17.67 13.99C 17.38 14.27 17.25 14.67 17.32 15.07L 18.01 19.08C 18.19 20.07 17.13 20.83 16.23 20.36L 12.57 18.46C 12.22 18.28 11.79 18.28 11.43 18.46L 7.77 20.36C 6.87 20.83 5.81 20.07 5.99 19.08L 6.68 15.07C 6.75 14.67 6.62 14.27 6.33 13.99L 3.37 11.15C 2.64 10.45 3.04 9.23 4.05 9.08L 8.14 8.49C 8.54 8.43 8.89 8.19 9.07 7.83L 10.9 4.18C 11.35 3.27 12.65 3.27 13.1 4.18Z"/></svg></i>Les dossiers chauds en haut de pile</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.5,15.8476424 C14.13923,15.8476424 16.7480515,15.1242108 17,12.220506 C17,9.31879687 15.1811526,9.50539234 15.1811526,5.94511102 C15.1811526,3.16414015 12.5452291,-1.86517468e-14 8.5,-1.86517468e-14 C4.4547709,-1.86517468e-14 1.81884743,3.16414015 1.81884743,5.94511102 C1.81884743,9.50539234 0,9.31879687 0,12.220506 C0.252952291,15.135187 2.86177374,15.8476424 8.5,15.8476424 Z"></path> <path d="M10.8887931,18.8572176 C9.52465753,20.3719337 7.3966462,20.3898948 6.0194615,18.8572176"></path> </g> </g></svg></i>Relance à J+3, courte et polie</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.353,1.95399252e-14 C16.054,0.411 18.978,3.331 19.393,7.032"></path> <path d="M12.353,3.543 C14.124,3.887 15.508,5.272 15.853,7.043"></path> <path d="M9.03152183,9.97238745 C13.0205087,13.9603606 13.9254376,9.34671782 16.46525,11.8848116 C18.9138181,14.3327574 20.322201,14.8232052 17.2188207,17.9247236 C16.8302273,18.2370218 14.3612634,21.9942591 5.68446558,13.3196663 C-2.9934057,4.64400029 0.761566311,2.17244427 1.07394391,1.78394958 C4.18376493,-1.32615434 4.66682308,0.0893829491 7.11539117,2.53732879 C9.65413011,5.07649576 5.04253498,5.9844143 9.03152183,9.97238745 Z"></path> </g> </g></svg></i>Relance à J+7, appel proposé</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path> <polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline> </g> </g></svg></i>Relance à J+14, validité rappelée</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg></i>S'arrête dès qu'il répond</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="10.7473996" y1="17.4429051" x2="18" y2="17.4429051"></line> <path d="M9.7800071,0.794792587 C10.5556498,-0.132213323 11.949987,-0.268144478 12.8962256,0.491732963 C12.9485416,0.532957985 14.6294799,1.83878843 14.6294799,1.83878843 C15.6689776,2.46719147 15.9919725,3.80310504 15.3493946,4.8225887 C15.3152754,4.877184 5.81194644,16.7644749 5.81194644,16.7644749 C5.49577537,17.1588981 5.01583223,17.3917638 4.50290722,17.3973347 L0.863527997,17.4430165 L0.0435303654,13.9723153 C-0.0713375414,13.4843002 0.0435303654,12.9717729 0.359701436,12.5773497 L9.7800071,0.794792587 Z"></path> <line x1="8.02082217" y1="3.00088838" x2="13.4730672" y2="7.18801364"></line> </g> </g></svg></i>S'arrête à la signature</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <circle cx="9.76659044" cy="9.76659044" r="8.9885584"></circle> <line x1="16.0183067" y1="16.4851259" x2="19.5423342" y2="20.0000001"></line> </g> </g></svg></i>Repère les devis relus</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 1.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="5.24485128 13.2814646 8.23798631 9.39130439 11.652174 12.0732266 14.5812358 8.29290622"></polyline> <circle cx="17.9954234" cy="2.70022885" r="1.92219681"></circle> <path d="M12.9244852,1.62013731 L5.6567506,1.62013731 C2.64530894,1.62013731 0.778032041,3.75286043 0.778032041,6.76430209 L0.778032041,14.846682 C0.778032041,17.8581237 2.60869567,19.9816935 5.6567506,19.9816935 L14.2608696,19.9816935 C17.2723113,19.9816935 19.1395882,17.8581237 19.1395882,14.846682 L19.1395882,7.80778036"></path> </g> </g></svg></i>Les dossiers chauds en haut de pile</li>
         </ul>
-        <a class="ac-card-go" href="reserver.html">Ne plus relancer moi-même <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
+        <a class="ac-card-go" href="reserver.html">Ne plus relancer moi-même <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
       </article>
 
     </div>
@@ -1523,7 +1480,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   <div class="shell ac-tools-head">
     <h2 class="ac-h2">Vous gardez vos outils, <em>il travaille avec</em>.</h2>
     <p class="ac-sub">Pas de migration, pas de logiciel à apprendre, pas de données à ressaisir. Il se branche sur votre messagerie, votre agenda et vos outils actuels.</p>
-    <p class="ac-tools-count"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg> +75 intégrations disponibles</p>
+    <p class="ac-tools-count"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg> +75 intégrations disponibles</p>
   </div>
 
   <div class="ac-belt" aria-hidden="true">
@@ -1600,7 +1557,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     <div class="ac-duo-card">
       <div class="ac-duo-pair">
         <img src="perso/avatar-commercial.webp" width="82" height="82" alt="Assistant commercial" loading="lazy" decoding="async">
-        <span class="ac-duo-plus" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></span>
+        <span class="ac-duo-plus" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(4.814286, 2.814476)" stroke="currentColor"> <path d="M7.17047619,12.531714 C3.30285714,12.531714 -4.08562073e-14,13.1164759 -4.08562073e-14,15.4583807 C-4.08562073e-14,17.8002854 3.28190476,18.4059997 7.17047619,18.4059997 C11.0380952,18.4059997 14.34,17.8202854 14.34,15.479333 C14.34,13.1383807 11.0590476,12.531714 7.17047619,12.531714 Z" stroke-width="1.5"></path> <path d="M7.17047634,9.19142857 C9.70857158,9.19142857 11.7657144,7.13333333 11.7657144,4.5952381 C11.7657144,2.05714286 9.70857158,-5.32907052e-15 7.17047634,-5.32907052e-15 C4.6323811,-5.32907052e-15 2.574259,2.05714286 2.574259,4.5952381 C2.56571443,7.1247619 4.60952396,9.18285714 7.13809539,9.19142857 L7.17047634,9.19142857 Z" stroke-width="1.42857143"></path> </g> </g></svg></span>
         <img src="perso/avatar-facturation.webp" width="82" height="82" alt="Assistant facturation" loading="lazy" decoding="async">
       </div>
 
@@ -1612,7 +1569,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
       <div class="ac-duo-act">
         <button type="button" data-panier="facturation" data-panier-texte="Ajouter à mon équipe"><span data-panier-label>Ajouter à mon équipe</span><span data-panier-ico aria-hidden="true"></span></button>
-        <a class="ac-duo-all" href="assistant-facturation.html">Voir sa fiche <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg></a>
+        <a class="ac-duo-all" href="assistant-facturation.html">Voir sa fiche <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g> </g></svg></a>
       </div>
     </div>
 
@@ -1686,13 +1643,13 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
          première le jour où la caisse est ouverte, la seconde d'ici là.
          On ne promet « commander » que quand on sait encaisser. -->
     <p class="ac-direct" data-achat hidden>Vous savez déjà ce qu'il vous faut ?
-      <a href="commander.html">Commander en ligne, sans rendez-vous <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg></a></p>
+      <a href="commander.html">Commander en ligne, sans rendez-vous <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g> </g></svg></a></p>
     <p class="ac-direct" data-achat-sinon>Vous savez déjà ce qu'il vous faut ?
-      <a href="commander.html">Composer mon équipe <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg></a></p>
+      <a href="commander.html">Composer mon équipe <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g> </g></svg></a></p>
     <ul class="ac-reassure">
-      <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Mise en place personnalisée</li>
-      <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Sans engagement</li>
-      <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Données hébergées en France</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 1.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M18.3066362,6.12356982 L17.6842106,5.04347829 C17.1576365,4.12955711 15.9906873,3.8142761 15.0755149,4.33867279 L15.0755149,4.33867279 C14.6398815,4.59529992 14.1200613,4.66810845 13.6306859,4.54104256 C13.1413105,4.41397667 12.7225749,4.09747295 12.4668193,3.66132725 C12.3022855,3.38410472 12.2138742,3.06835005 12.2105264,2.74599544 L12.2105264,2.74599544 C12.2253694,2.22917739 12.030389,1.72835784 11.6700024,1.3576252 C11.3096158,0.986892553 10.814514,0.777818938 10.2974829,0.778031878 L9.04347831,0.778031878 C8.53694532,0.778031878 8.05129106,0.97987004 7.69397811,1.33890085 C7.33666515,1.69793166 7.13715288,2.18454839 7.13958814,2.69107553 L7.13958814,2.69107553 C7.12457503,3.73688099 6.27245786,4.57676682 5.22654465,4.57665906 C4.90419003,4.57331126 4.58843537,4.48489995 4.31121284,4.32036615 L4.31121284,4.32036615 C3.39604054,3.79596946 2.22909131,4.11125048 1.70251717,5.02517165 L1.03432495,6.12356982 C0.508388616,7.03634945 0.819378585,8.20256183 1.72997713,8.73226549 L1.72997713,8.73226549 C2.32188101,9.07399614 2.68650982,9.70554694 2.68650982,10.3890161 C2.68650982,11.0724852 2.32188101,11.704036 1.72997713,12.0457667 L1.72997713,12.0457667 C0.820534984,12.5718952 0.509205679,13.7352837 1.03432495,14.645309 L1.03432495,14.645309 L1.6659039,15.7345539 C1.9126252,16.1797378 2.3265816,16.5082503 2.81617164,16.6473969 C3.30576167,16.7865435 3.83061824,16.7248517 4.27459956,16.4759726 L4.27459956,16.4759726 C4.71105863,16.2212969 5.23116727,16.1515203 5.71931837,16.2821523 C6.20746948,16.4127843 6.62321383,16.7330005 6.87414191,17.1716248 C7.03867571,17.4488473 7.12708702,17.764602 7.13043482,18.0869566 L7.13043482,18.0869566 C7.13043482,19.1435014 7.98693356,20.0000001 9.04347831,20.0000001 L10.2974829,20.0000001 C11.3504633,20.0000001 12.2054882,19.1490783 12.2105264,18.0961099 L12.2105264,18.0961099 C12.2080776,17.5879925 12.4088433,17.0999783 12.7681408,16.7406809 C13.1274382,16.3813834 13.6154524,16.1806176 14.1235699,16.1830664 C14.4451523,16.1916732 14.7596081,16.2797208 15.0389017,16.4393593 L15.0389017,16.4393593 C15.9516813,16.9652957 17.1178937,16.6543057 17.6475973,15.7437072 L17.6475973,15.7437072 L18.3066362,14.645309 C18.5617324,14.2074528 18.6317479,13.6859659 18.5011783,13.1963297 C18.3706086,12.7066935 18.0502282,12.2893121 17.6109841,12.0366133 L17.6109841,12.0366133 C17.17174,11.7839145 16.8513595,11.3665332 16.7207899,10.876897 C16.5902202,10.3872608 16.6602358,9.86577384 16.9153319,9.42791767 C17.0812195,9.13829096 17.3213574,8.89815312 17.6109841,8.73226549 L17.6109841,8.73226549 C18.5161253,8.20284891 18.8263873,7.04344892 18.3066362,6.13272314 L18.3066362,6.13272314 L18.3066362,6.12356982 Z"></path> <circle cx="9.67505726" cy="10.3890161" r="2.63615562"></circle> </g> </g></svg></i>Mise en place personnalisée</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg></i>Sans engagement</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path> <polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline> </g> </g></svg></i>Données hébergées en France</li>
     </ul>
   </div>
 </section>
@@ -1859,44 +1816,135 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     show(n);
     n.focus();
   });
+
+  /* ── sur téléphone, le rail se balaie ────────────────────────────────
+     La carte la plus proche du centre devient la mission active : l'écran
+     du téléphone au-dessus suit le doigt, sans qu'on ait à taper. Les
+     points disent combien il en reste — sans eux, on croit qu'il n'y en a
+     qu'une. */
+  var rail  = list;
+  var dots  = document.getElementById('acMissDots');
+  var etroit = window.matchMedia('(max-width:960px)');
+  var attente = null;
+
+  if (dots){
+    for (var d = 0; d < tabs.length; d++){
+      (function(idx){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Mission ' + (idx + 1) + ' sur ' + tabs.length);
+        b.setAttribute('aria-current', idx === 0 ? 'true' : 'false');
+        b.addEventListener('click', function(){
+          tabs[idx].scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+          show(tabs[idx]);
+        });
+        dots.appendChild(b);
+      })(d);
+    }
+    dots.removeAttribute('aria-hidden');
+  }
+
+  function pointer(i){
+    if (!dots) return;
+    for (var k = 0; k < dots.children.length; k++){
+      dots.children[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+    }
+  }
+
+  /* la carte dont le centre est le plus proche du centre du rail */
+  function centree(){
+    var r = rail.getBoundingClientRect();
+    var axe = r.left + r.width / 2;
+    var best = 0, ecart = Infinity;
+    for (var i = 0; i < tabs.length; i++){
+      var c = tabs[i].getBoundingClientRect();
+      var e = Math.abs(c.left + c.width / 2 - axe);
+      if (e < ecart){ ecart = e; best = i; }
+    }
+    return best;
+  }
+
+  rail.addEventListener('scroll', function(){
+    if (!etroit.matches) return;
+    /* on attend la fin du geste : changer l'écran à chaque pixel donnerait
+       un clignotement pendant le balayage */
+    clearTimeout(attente);
+    attente = setTimeout(function(){
+      var i = centree();
+      pointer(i);
+      if (tabs[i].getAttribute('aria-selected') !== 'true') show(tabs[i]);
+    }, 90);
+  }, {passive:true});
+
+  /* le rail garde sa position quand on change de largeur : on resynchronise */
+  etroit.addEventListener && etroit.addEventListener('change', function(){
+    if (etroit.matches) pointer(centree());
+  });
 })();
 
 
-/* ═══ 3 · LE SCÉNARIO — quel onglet est au-dessus de la pile ════════════ */
+/* ═══ 3 · LES DEUX PROMESSES — pile collante et entrées décalées ═════════
+   Une seule boucle de défilement pilote les deux effets : la carte recouverte
+   recule, la carte qui entre dans l'écran révèle son contenu. Pas d'observer :
+   une carte plus haute que la fenêtre ne franchit jamais son seuil de façon
+   fiable, et son contenu resterait invisible.
+   Sous 900 px rien ne colle et rien ne s'anime — on retire les classes pour
+   qu'une rotation d'écran ne laisse rien de figé. */
 (function(){
-  var steps = [].slice.call(document.querySelectorAll('#acSteps .ac-step'));
-  if (!steps.length) return;
+  var stack = document.getElementById('acPile');
+  if (!stack) return;
 
-  var wide = window.matchMedia('(min-width:961px)');
+  var cards = [].slice.call(stack.querySelectorAll('.ac-pile-card'));
+  if (!cards.length) return;
+
+  var large = window.matchMedia('(min-width:900px)');
+  var calme = window.matchMedia('(prefers-reduced-motion:reduce)');
   var ticking = false;
 
-  function stickTop(){
-    var v = parseFloat(getComputedStyle(steps[0]).top);
-    return isNaN(v) ? 0 : v;
-  }
+  function anime(){ return large.matches && !calme.matches; }
 
-  function paint(){
+  function peindre(){
     ticking = false;
-    var act = -1;
-    if (wide.matches){
-      var line = stickTop() + 1;
-      for (var i = 0; i < steps.length; i++){
-        if (steps[i].getBoundingClientRect().top <= line) act = i;
+    var i, r;
+
+    if (!anime()){
+      for (i = 0; i < cards.length; i++){
+        cards[i].classList.remove('is-back');
+        cards[i].classList.add('is-in');
       }
-      if (act < 0) act = 0;
+      return;
     }
-    for (var j = 0; j < steps.length; j++) steps[j].classList.toggle('is-on', j === act);
+
+    var h = window.innerHeight || document.documentElement.clientHeight;
+    for (i = 0; i < cards.length; i++){
+      r = cards[i].getBoundingClientRect();
+
+      /* entrée : dès que le haut de la carte est monté dans l'écran */
+      if (r.top < h * 0.92) cards[i].classList.add('is-in');
+
+      /* recul : la carte suivante est venue se poser par-dessus */
+      var suiv = cards[i + 1];
+      cards[i].classList.toggle('is-back',
+        !!suiv && suiv.getBoundingClientRect().top <= r.bottom - 8);
+    }
   }
 
-  function onScroll(){
+  function auScroll(){
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(paint);
+    requestAnimationFrame(peindre);
   }
 
-  window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', onScroll);
-  paint();
+  window.addEventListener('scroll', auScroll, {passive:true});
+  window.addEventListener('resize', auScroll);
+  if (large.addEventListener) large.addEventListener('change', auScroll);
+
+  /* arrivée directe sur une ancre, ou position de défilement restaurée par le
+     navigateur après le chargement : aucun événement de défilement n'est émis,
+     et les cartes resteraient masquées. On repasse une fois. */
+  window.addEventListener('load', auScroll);
+  setTimeout(peindre, 300);
+  peindre();
 })();
 
 </script>
