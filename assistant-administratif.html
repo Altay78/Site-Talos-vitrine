@@ -401,6 +401,32 @@ html[data-theme="light"] .t-ft .ft-bottom a:hover{color:var(--parch)}
 .t-asst .ac-eyebrow svg{width:15px;height:15px;color:var(--bronze);
   flex:0 0 auto;margin-left:8px}
 
+/* ── le duo parfait : une suggestion, pas un état ──────────────────────
+   Trait discontinu et fond transparent pour qu'on la lise comme une
+   proposition à côté de la pastille pleine qui, elle, dit où l'on est. */
+.t-asst .ac-eyebrows{display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  margin:0 0 22px}
+.t-asst .ac-eyebrows .ac-eyebrow{margin:0}
+.t-asst .ac-duo-pill{display:inline-flex;align-items:center;gap:10px;
+  padding:5px 13px 5px 5px;border-radius:100px;text-decoration:none;
+  background:transparent;border:1px dashed var(--line-2);
+  transition:border-color .25s var(--e),background .25s var(--e)}
+.t-asst .ac-duo-pill:hover{border-color:rgba(var(--bronze-rgb),.55);
+  background:rgba(var(--bronze-rgb),.07)}
+.t-asst .ac-duo-pill:focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+.t-asst .ac-duo-pill img{width:30px;height:30px;border-radius:50%;flex:0 0 auto}
+.t-asst .ac-duo-pill .k{display:flex;flex-direction:column;gap:1px;min-width:0}
+.t-asst .ac-duo-pill .k b{font-family:var(--mono);font-size:9.5px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+.t-asst .ac-duo-pill .k span{font-size:13.5px;font-weight:600;letter-spacing:-.1px;
+  color:var(--parch);white-space:nowrap}
+.t-asst .ac-duo-pill svg{width:14px;height:14px;flex:0 0 auto;color:var(--lin);
+  transition:color .25s var(--e)}
+.t-asst .ac-duo-pill:hover svg{color:var(--bronze)}
+@media (max-width:520px){
+  .t-asst .ac-duo-pill .k span{white-space:normal}
+}
+
 .t-asst .ac-tag{display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;
   padding:8px 16px;border-radius:10px;
   background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.32);
@@ -1174,10 +1200,17 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     </div>
 
     <div class="ac-hero-txt">
-      <p class="ac-eyebrow">
+      <div class="ac-eyebrows">
+        <p class="ac-eyebrow">
         <img src="perso/avatar-administratif.webp" width="26" height="26" alt="" decoding="async">
         Assistante administrative
-      </p>
+        </p>
+        <a class="ac-duo-pill" href="offres.html">
+          <img src="perso/avatar-client.webp" width="30" height="30" alt="" decoding="async">
+          <span class="k"><b>Transversale</b><span>Elle alimente les quatre autres</span></span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg>
+        </a>
+      </div>
 
       <h1>Votre boîte mail qui ne laisse passer <em>aucune urgence</em>.</h1>
 
