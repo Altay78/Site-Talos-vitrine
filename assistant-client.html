@@ -633,7 +633,12 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
   border:1px solid var(--line);border-radius:28px;background:var(--ink-2);
   padding:26px 30px 32px;
   transition:transform .55s var(--e),opacity .55s var(--e)}
-.ac-pile-card.is-back{transform:scale(.962);opacity:.5}
+/* la carte recouverte recule et s'estompe — mais son fond reste opaque :
+   une opacité posée sur la carte entière laissait voir la carte du dessous
+   à travers, dès qu'il y en avait trois dans la pile. */
+.ac-pile-card > *{transition:opacity .55s var(--e)}
+.ac-pile-card.is-back{transform:scale(.962)}
+.ac-pile-card.is-back > *{opacity:.42}
 
 .ac-pile-k{display:flex;align-items:center;gap:11px;margin:0 0 28px;
   font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;

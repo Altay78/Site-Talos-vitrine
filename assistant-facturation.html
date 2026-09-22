@@ -604,127 +604,208 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
   transition:opacity .3s var(--e)}
 .ac-mission[aria-selected="true"]::before{opacity:1}
 
+/* les points ne servent que là où l'on balaie */
+.ac-miss-dots{display:none;justify-content:center;gap:0;margin:10px 0 0}
+/* le point ne fait que 7 px, mais le doigt a droit à ses 44 */
+.ac-miss-dots button{width:44px;height:44px;display:grid;place-items:center;
+  border-radius:50%;background:none}
+.ac-miss-dots button::before{content:"";width:7px;height:7px;border-radius:50%;
+  background:var(--line-2);transition:background-color .25s var(--e),
+  transform .25s var(--e)}
+.ac-miss-dots button[aria-current="true"]::before{background:var(--bronze);
+  transform:scale(1.35)}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   3 · LE SCÉNARIO
-   À gauche le titre, épinglé. À droite sept fiches qui se recouvrent au
-   défilement : chaque fiche est « sticky » au même endroit, et son onglet est
-   décalé horizontalement — d'où la rangée d'onglets qui se remplit.
+   3 · LES DEUX PROMESSES — une pile de cartes
+   Au-dessus de 900 px, chaque carte colle sous la barre et vient recouvrir la
+   précédente, dont l'en-tête continue de dépasser : on voit d'où l'on vient.
+   En dessous, plus rien ne colle et plus rien ne s'anime — les cartes se
+   suivent, c'est la seule chose qui tienne dans un écran de téléphone.
    Aucun parent ne doit porter overflow:hidden, sinon le sticky meurt.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.ac-story{padding:96px 0 110px;border-top:1px solid var(--line)}
-.ac-story-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:60px;
-  align-items:start}
-.ac-story-txt{position:sticky;top:124px}
-.ac-story-txt .ac-h2{max-width:none;font-size:clamp(30px,3.3vw,46px);
-  letter-spacing:-1.6px;line-height:1.04}
-.ac-story-txt .ac-sub{max-width:none;font-size:16px}
-.ac-story-note{margin:26px 0 0;padding:18px 20px;border-radius:16px;
-  background:var(--ink-2);border:1px solid var(--line);
-  font-size:14.5px;line-height:1.55;color:var(--lin)}
-.ac-story-note b{display:block;margin:0 0 4px;color:var(--parch);font-weight:700}
-.ac-story-txt .actions{margin-top:24px}
+.ac-pile{padding:96px 0 44px;border-top:1px solid var(--line)}
+.ac-pile-stack{--stick:112px;display:flex;flex-direction:column;gap:20px;
+  padding-bottom:clamp(90px,14vh,150px)}
 
-/* ── la pile de fiches ────────────────────────────────────────────────── */
-.ac-steps{--tabh:34px;--stick:112px;
-  list-style:none;margin:0;padding:0;position:relative}
-/* la fiche colle sous la barre : son cadre inclut la bande d'onglet, donc
-   « top » vise l'onglet et la carte se pose juste en dessous */
-.ac-step{position:sticky;top:var(--stick);
-  margin:0 0 26px;padding-top:var(--tabh)}
-.ac-step:last-child{margin-bottom:0}
+.ac-pile-card{position:sticky;top:calc(var(--stick) + var(--i) * 72px);
+  border:1px solid var(--line);border-radius:28px;background:var(--ink-2);
+  padding:26px 30px 32px;
+  transition:transform .55s var(--e),opacity .55s var(--e)}
+/* la carte recouverte recule et s'estompe — mais son fond reste opaque :
+   une opacité posée sur la carte entière laissait voir la carte du dessous
+   à travers, dès qu'il y en avait trois dans la pile. */
+.ac-pile-card > *{transition:opacity .55s var(--e)}
+.ac-pile-card.is-back{transform:scale(.962)}
+.ac-pile-card.is-back > *{opacity:.42}
 
-/* l'onglet : même hauteur pour tous, décalé d'un cran par fiche */
-/* l'onglet est la seule pièce translucide de la pile : il flotte au-dessus
-   de la fiche précédente, c'est là que le flou a un sens */
-.ac-step-tab{position:absolute;top:0;height:var(--tabh);
-  left:calc(var(--i) * (100% / 7));width:calc(100% / 7);
-  display:flex;align-items:center;justify-content:center;gap:5px;
-  padding:0 4px;border-radius:14px 14px 0 0;
-  background:color-mix(in oklab,var(--ink-3) 80%,transparent);
-  backdrop-filter:blur(18px) saturate(150%);
-  -webkit-backdrop-filter:blur(18px) saturate(150%);
-  border:1px solid color-mix(in oklab,var(--parch) 9%,transparent);border-bottom:0;
-  font-family:var(--mono);font-size:clamp(9.5px,.95vw,11.5px);letter-spacing:.02em;
-  color:var(--lin);white-space:nowrap;overflow:hidden;
-  transition:background .3s var(--e),color .3s var(--e),border-color .3s var(--e)}
-.ac-step.is-on .ac-step-tab{background:var(--bronze);border-color:var(--bronze);
-  color:#fff}
-.ac-step-tab .d{opacity:.75}
+.ac-pile-k{display:flex;align-items:center;gap:11px;margin:0 0 28px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--lin)}
+.ac-pile-k i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;color:var(--bronze);
+  border:1px solid rgba(var(--bronze-rgb),.32);background:rgba(var(--bronze-rgb),.10)}
+.ac-pile-k i svg{width:18px;height:18px}
+.ac-pile-k em{font-style:normal;color:var(--parch)}
+.ac-pile-k s{text-decoration:none;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
 
- /* l'angle haut-gauche reste droit : c'est là que se pose le premier onglet,
-    et dans la pile c'est toujours cet angle-là qui affleure sous lui.
-    La fiche reste opaque — elle doit masquer celle du dessous.
-    Ombre en deux couches : un contact court, une ambiante très étalée. */
-.ac-step-card{position:relative;padding:32px 34px 34px;border-radius:0 26px 26px 26px;
-  background:var(--ink-2);
-  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),
-             0 2px 6px rgba(0,0,0,.2),
-             0 44px 90px -56px rgba(0,0,0,.95)}
-html[data-theme="light"] .ac-step-card{
-  border-color:rgba(40,25,16,.09);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),
-             0 2px 6px rgba(40,25,16,.05),
-             0 44px 90px -56px rgba(40,25,16,.42)}
-/* même hauteur pour toutes : sinon la fiche du dessous dépasse en bas de la
-   pile et laisse traîner un liseré. 308 px couvre la plus haute à 961 px. */
-@media (min-width:961px){.ac-step-card{min-height:300px}}
-/* les fiches ont la même hauteur mais pas le même contenu : le corps se
-   centre dans la place qui reste, sinon les plus courtes sonnent creux */
-.ac-step-card{display:flex;flex-direction:column}
-.ac-step-body{flex:1;align-content:center}
+.ac-pile-grid{display:grid;grid-template-columns:.94fr 1.06fr;gap:46px;align-items:center}
 
-.ac-step-h{display:flex;align-items:center;gap:12px;margin:0 0 16px}
-.ac-step-ic{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
-  width:36px;height:36px;border-radius:11px;
-  border:1px solid rgba(var(--bronze-rgb),.3);background:rgba(var(--bronze-rgb),.10);
-  color:var(--bronze)}
-.ac-step-ic svg{width:19px;height:19px}
-.ac-step-h b{font-size:19px;font-weight:800;letter-spacing:-.55px;color:var(--parch)}
-.ac-step-when{margin-left:auto;font-family:var(--mono);font-size:12px;
-  color:var(--lin);white-space:nowrap}
+.ac-pile-h{font-size:clamp(27px,3vw,42px);line-height:1.06;letter-spacing:-.035em;
+  color:var(--parch);text-wrap:balance;max-width:20ch}
+.ac-pile-txt p{margin:16px 0 0;max-width:56ch;font-size:16px;line-height:1.62;color:var(--lin)}
+.ac-pile-pts{margin:26px 0 0}
+.ac-pile-pts li{display:flex;align-items:center;gap:14px;padding:10px 0;
+  font-size:16px;font-weight:600;line-height:1.35;color:var(--parch)}
+.ac-pile-pts i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;color:var(--bronze);
+  border:1px solid rgba(var(--bronze-rgb),.32);background:rgba(var(--bronze-rgb),.10)}
+.ac-pile-pts svg{width:17px;height:17px}
+/* une puce peut porter son explication : le texte passe alors sous le libellé */
+.ac-pile-pts li.dit{align-items:flex-start;padding:13px 0}
+.ac-pile-pts li.dit i{margin-top:1px}
+.ac-pile-pts .d{display:flex;flex-direction:column;gap:3px;min-width:0}
+.ac-pile-pts .d em{font-style:normal;font-size:15px;font-weight:400;line-height:1.5;
+  letter-spacing:0;color:var(--lin)}
 
-.ac-step-q{margin:0;padding:18px 20px;border-radius:18px;border:0;
-  background:color-mix(in oklab,var(--parch) 5%,transparent);
-  font-size:15.5px;line-height:1.62;letter-spacing:-.1px;
-  color:var(--parch);font-style:italic}
-.ac-step-p{margin:0;font-size:15px;line-height:1.62;color:var(--lin)}
+/* ─── ce que ça règle : la douleur, puis ce que l'assistante en fait ───
+   Le panneau de droite ne montre pas une interface ici : il met la phrase
+   du client en face de la réponse. La flèche porte la transformation. */
+.acv-fix{padding:14px 16px;border-bottom:1px solid var(--line)}
+.acv-fix:last-child{border-bottom:0}
+.acv-fix b{display:flex;align-items:flex-start;gap:10px;margin:0 0 6px;
+  font-size:14.5px;font-weight:500;line-height:1.4;color:var(--lin)}
+.acv-fix b svg{width:17px;height:17px;flex:0 0 auto;margin-top:2px}
+.acv-fix span{display:flex;align-items:flex-start;gap:9px;padding-left:27px;
+  font-size:14.5px;font-weight:600;line-height:1.45;color:var(--parch)}
+.acv-fix span::before{content:"→";flex:0 0 auto;color:var(--bronze);font-weight:700}
 
-/* les puces d'une demande qualifiée */
-.ac-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.ac-chips li{display:inline-flex;align-items:center;gap:7px;
-  padding:9px 15px;border-radius:100px;
-  background:color-mix(in oklab,var(--parch) 5%,transparent);
-  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent);
-  font-size:13.5px;font-weight:600;letter-spacing:-.1px;color:var(--parch)}
-.ac-chips li::before{content:"";width:5px;height:5px;border-radius:50%;
-  background:var(--bronze);flex:0 0 auto}
+/* la conclusion de la promesse, au pied du panneau */
+.acv-res{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;
+  border-top:1px solid rgba(var(--bronze-rgb),.28);
+  background:rgba(var(--bronze-rgb),.08);
+  font-size:14.5px;font-weight:600;line-height:1.45;color:var(--parch)}
+.acv-res svg{width:17px;height:17px;flex:0 0 auto;margin-top:1px;color:var(--bronze)}
 
-/* les trois variantes de prix */
-.ac-prices{list-style:none;margin:0;padding:0;display:grid;
-  grid-template-columns:repeat(3,1fr);gap:10px}
-.ac-prices li{padding:16px 14px 15px;border-radius:18px;text-align:center;
-  background:color-mix(in oklab,var(--parch) 5%,transparent);
-  border:1px solid color-mix(in oklab,var(--parch) 8%,transparent)}
-.ac-prices small{display:block;margin:0 0 5px;font-family:var(--mono);font-size:11px;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--lin)}
-.ac-prices b{font-size:17px;font-weight:800;letter-spacing:-.6px;color:var(--parch);
-  font-variant-numeric:tabular-nums}
-.ac-prices li.hot{border-color:rgba(var(--bronze-rgb),.5);
+/* le résultat : une seule phrase, posée après la pile */
+.ac-pile-res{display:flex;align-items:center;gap:15px;margin:22px 0 0;
+  padding:20px 24px;border-radius:20px;
+  border:1px solid rgba(var(--bronze-rgb),.32);background:rgba(var(--bronze-rgb),.08)}
+.ac-pile-res i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:12px;color:var(--bronze);
+  border:1px solid rgba(var(--bronze-rgb),.32);background:rgba(var(--bronze-rgb),.10)}
+.ac-pile-res i svg{width:20px;height:20px}
+.ac-pile-res p{margin:0;font-size:17.5px;font-weight:600;letter-spacing:-.3px;
+  line-height:1.4;color:var(--parch)}
+/* une puce peut porter son explication : le texte passe alors sous le libellé */
+.ac-pile-pts li.dit{align-items:flex-start;padding:13px 0}
+.ac-pile-pts li.dit i{margin-top:1px}
+.ac-pile-pts .d{display:flex;flex-direction:column;gap:3px;min-width:0}
+.ac-pile-pts .d em{font-style:normal;font-size:15px;font-weight:400;line-height:1.5;
+  letter-spacing:0;color:var(--lin)}
+
+/* ─── le visuel : une interface composée, pas une capture ─────────────── */
+.ac-pile-vis{position:relative;display:flex;flex-direction:column;gap:14px;
+  padding:22px;border:1px solid var(--line);border-radius:22px;background:var(--ink)}
+.ac-pile-vis::before{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(58% 52% at 68% 0%,rgba(var(--bronze-rgb),.15),transparent 72%);
+  pointer-events:none}
+.ac-pile-vis > *{position:relative}
+
+.acv-chips{display:flex;flex-wrap:wrap;gap:8px}
+.acv-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;
+  border-radius:100px;border:1px solid var(--line-2);background:var(--ink-2);
+  font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--lin)}
+.acv-chip i{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:currentColor}
+.acv-chip.on{color:var(--bronze);border-color:rgba(var(--bronze-rgb),.42);
   background:rgba(var(--bronze-rgb),.10)}
-.ac-prices li.hot b{color:var(--bronze)}
 
-/* la ligne de résultat, en fin de scénario */
-.ac-step-win{display:flex;flex-direction:column;align-items:flex-start;gap:5px;
-  padding:18px 20px;border-radius:18px;
-  background:rgba(var(--bronze-rgb),.12);
-  border:1px solid rgba(var(--bronze-rgb),.26)}
-.ac-step-win b{font-size:25px;font-weight:800;letter-spacing:-1px;color:var(--bronze);
-  font-variant-numeric:tabular-nums}
-.ac-step-win span{font-size:14.5px;line-height:1.5;color:var(--lin)}
-.ac-step-body{display:grid;gap:14px}
+.acv-card{border:1px solid var(--line);border-radius:16px;background:var(--ink-2);
+  overflow:hidden}
+.acv-k{padding:11px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--lin)}
+.acv-row{display:flex;align-items:center;gap:12px;padding:12px 16px;
+  border-bottom:1px solid var(--line);font-size:14.5px;color:var(--parch)}
+.acv-row:last-child{border-bottom:0}
+.acv-row .lab{flex:1 1 auto;min-width:0;color:var(--lin);font-size:13.5px}
+.acv-row .val{flex:0 0 auto;font-weight:600;text-align:right}
+.acv-row .meta{flex:0 0 auto;margin-left:auto;font-family:var(--mono);font-size:11.5px;
+  color:var(--lin);font-variant-numeric:tabular-nums}
+.acv-row .slot{flex:1 1 auto;font-weight:600;font-variant-numeric:tabular-nums}
+.acv-row.pick{background:rgba(var(--bronze-rgb),.12)}
+.acv-row.pick .slot{color:var(--bronze)}
+.acv-row .tick{flex:0 0 auto;display:flex;color:var(--bronze)}
+.acv-row .tick svg{width:17px;height:17px}
+.acv-row.out{color:var(--lin)}
+.acv-row.out .slot{font-weight:500;text-decoration:line-through;
+  text-decoration-color:rgba(var(--bronze-rgb),.55)}
+.acv-row .x{flex:0 0 auto;font-family:var(--mono);font-size:13px;color:var(--rouille)}
+
+.acv-foot{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--lin)}
+.acv-dots{display:inline-flex;gap:4px;flex:0 0 auto}
+.acv-dots span{width:5px;height:5px;border-radius:50%;background:var(--bronze);opacity:.3}
+
+/* l'animation n'existe qu'au-dessus de 900 px, et jamais en mouvement réduit.
+   Sur téléphone, la carte s'affiche d'un coup : une chorégraphie de deux
+   secondes sur un écran qu'on balaie au pouce coûte plus qu'elle ne montre. */
+@media (min-width:900px) and (prefers-reduced-motion:no-preference){
+  .acv-dots span{animation:acv-dot 1.5s ease-in-out infinite}
+  .acv-dots span:nth-child(2){animation-delay:.18s}
+  .acv-dots span:nth-child(3){animation-delay:.36s}
+  @keyframes acv-dot{0%,100%{opacity:.25}45%{opacity:1}}
+
+  .ac-pile-card [data-rise]{opacity:0;transform:translateY(16px);
+    transition:opacity .62s var(--e),transform .62s var(--e);transition-delay:var(--d,0ms)}
+  .ac-pile-card.is-in [data-rise]{opacity:1;transform:none}
+
+  /* ─── la carte de droite joue la scène ─────────────────────────────────
+     Les pastilles s'allument, les lignes tombent l'une après l'autre, le
+     créneau retenu se remplit puis se coche, la ligne hors zone se barre.
+     L'ordre est celui du travail réel : on regarde, on trie, on décide. */
+  .ac-pile-vis .acv-chip,
+  .ac-pile-vis .acv-row,
+  .ac-pile-vis .acv-fix,
+  .ac-pile-vis .acv-res,
+  .ac-pile-vis .acv-k,
+  .ac-pile-vis .acv-foot{opacity:0}
+
+  .is-in .acv-chip{animation:acv-pop .5s var(--e) calc(var(--n) * 110ms + 300ms) both}
+  .is-in .acv-k{animation:acv-pop .45s var(--e) 600ms both}
+  .is-in .acv-row,
+  .is-in .acv-res,
+  .is-in .acv-fix{animation:acv-drop .55s var(--e) calc(var(--n) * 130ms + 720ms) both}
+  .is-in .acv-foot{animation:acv-pop .5s var(--e) 1.9s both}
+
+  @keyframes acv-pop{from{opacity:0;transform:translateY(7px) scale(.94)}
+                     to{opacity:1;transform:none}}
+  @keyframes acv-drop{from{opacity:0;transform:translateX(22px)}
+                      to{opacity:1;transform:none}}
+
+  /* le créneau retenu : le fond se remplit après coup, la coche se pose
+     avec un léger dépassement — c'est le moment où la décision est prise */
+  .acv-row.pick{background:transparent}
+  .is-in .acv-row.pick{animation:acv-drop .55s var(--e) calc(var(--n) * 130ms + 720ms) both,
+                                 acv-fill .55s var(--e) 1.5s forwards}
+  @keyframes acv-fill{to{background:rgba(var(--bronze-rgb),.12)}}
+
+  .acv-row .tick svg{opacity:0}
+  .is-in .acv-row .tick svg{animation:acv-tick .5s cubic-bezier(.34,1.56,.64,1) 1.75s both}
+  @keyframes acv-tick{from{opacity:0;transform:scale(.3) rotate(-14deg)}
+                      to{opacity:1;transform:none}}
+
+  /* la ligne hors zone : le trait se tire, il ne surgit pas */
+  .acv-row.out .slot{text-decoration:none;position:relative}
+  .acv-row.out .slot::after{content:"";position:absolute;left:0;right:0;top:52%;
+    height:1.5px;background:rgba(var(--bronze-rgb),.75);
+    transform:scaleX(0);transform-origin:left center}
+  .is-in .acv-row.out .slot::after{animation:acv-barre .45s var(--e) 1.8s both}
+  @keyframes acv-barre{to{transform:scaleX(1)}}
+
+  .acv-row.out .x{opacity:0}
+  .is-in .acv-row.out .x{animation:acv-tick .4s cubic-bezier(.34,1.56,.64,1) 2.1s both}
+}
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -733,19 +814,20 @@ html[data-theme="light"] .ac-step-card{
    de l'assistant, un titre, une ligne d'accroche, puis la liste complète.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.ac-feat{padding:96px 0 108px;border-top:1px solid var(--line)}
-.ac-feat-head{max-width:720px;margin:0 0 46px}
+.ac-feat{padding:80px 0 88px;border-top:1px solid var(--line)}
+.ac-feat-head{max-width:720px;margin:0 0 34px}
 
 /* On fait glisser au lieu d'empiler : une carte à la fois, calée sur son
    bord. Les huit rangées sont déclarées ici et reprises par chaque carte
    en subgrid — vignette, titre, accroche, liste et bouton tombent donc au
    même niveau d'une carte à l'autre, quelle que soit la longueur du texte.
-   Huit, comme les huit enfants de .ac-card : en déclarer une de plus
-   laisserait une rangée vide, donc une gouttière de 22 px en bas. */
+   Sept, comme les sept enfants de .ac-card : en déclarer une de plus
+   laisserait une rangée vide, donc une gouttière en bas de chaque carte. */
 .ac-feat-rail{display:grid;grid-auto-flow:column;
   grid-auto-columns:var(--w,46%);
-  grid-template-rows:repeat(8,auto);
-  gap:22px;align-items:stretch;
+  grid-template-rows:repeat(7,auto);
+  /* rangées collées : la gouttière ne sert qu'entre les cartes. */
+  gap:0 18px;align-items:stretch;
   overflow-x:auto;overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;
   padding:4px 4px 10px;margin:-4px -4px -10px;
@@ -756,7 +838,7 @@ html[data-theme="light"] .ac-step-card{
 
 .ac-card{grid-row:1 / -1;display:grid;grid-template-rows:subgrid;
   scroll-snap-align:start;
-  padding:30px 30px 28px;
+  padding:26px 26px 24px;
   border-radius:26px;background:var(--ink-2);border:1px solid var(--line-2);
   transition:border-color .3s var(--e),transform .3s var(--e)}
 /* sans subgrid la carte reste lisible, seules les rangées ne s'alignent plus */
@@ -767,7 +849,7 @@ html[data-theme="light"] .ac-step-card{
 html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 .ac-card:hover{border-color:rgba(var(--bronze-rgb),.4);transform:translateY(-3px)}
 
-.ac-card-top{display:flex;align-items:center;gap:12px;margin:0 0 22px}
+.ac-card-top{display:flex;align-items:center;gap:12px;margin:0 0 20px}
 .ac-card-av{width:42px;height:42px;border-radius:13px;flex:0 0 auto;
   object-fit:cover;background:var(--ink-3);border:1px solid var(--line-2)}
 .ac-card-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
@@ -775,18 +857,16 @@ html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 .ac-card-n{margin-left:auto;font-family:var(--mono);font-size:11.5px;
   letter-spacing:.08em;color:var(--bronze);white-space:nowrap}
 
-.ac-card-lab{margin:0 0 6px;font-size:14px;font-weight:700;letter-spacing:-.2px;
-  color:var(--parch)}
-.ac-card h3{margin:0 0 10px;font-size:clamp(23px,2.2vw,29px);line-height:1.12;
+.ac-card h3{margin:0 0 8px;font-size:clamp(23px,2.2vw,29px);line-height:1.12;
   letter-spacing:-1.1px;font-weight:800;color:var(--parch);text-wrap:balance}
-.ac-card-acc{margin:0 0 14px;font-size:15px;line-height:1.5;font-weight:700;
+.ac-card-acc{margin:0 0 18px;font-size:15px;line-height:1.5;font-weight:700;
   letter-spacing:-.2px;color:var(--bronze)}
 .ac-card-acc span{color:var(--lin);font-weight:500}
 .ac-card > p{margin:0 0 22px;font-size:15px;line-height:1.62;color:var(--lin)}
 
 .ac-card-sep{margin:0 0 16px;padding:0;border:0;border-top:1px solid var(--line)}
-.ac-card-cap{margin:0 0 14px;font-size:13px;font-weight:600;color:var(--lin)}
-.ac-card ul{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:12px}
+.ac-card-cap{margin:0 0 10px;font-size:13px;font-weight:600;color:var(--lin)}
+.ac-card ul{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:11px}
 .ac-card li{display:flex;align-items:flex-start;gap:11px;
   font-size:14.5px;line-height:1.45;letter-spacing:-.1px;color:var(--parch)}
 .ac-card li i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
@@ -950,9 +1030,6 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
 @media (max-width:700px){ .ac-feat-rail{--w:80%} }
 @media (max-width:560px){ .ac-feat-rail{--w:88%} }
 
-@media (max-width:1080px){
-  .ac-step-tab .d{display:none}
-}
 
 @media (max-width:960px){
   .t-asst .ac-h2{letter-spacing:-1.5px}
@@ -976,36 +1053,38 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-miss-grid{grid-template-columns:1fr;gap:28px}
   .ac-scene{height:clamp(340px,62vw,440px);padding-top:34px}
 
-  /* 3 · scénario : sans la place d'empiler, on fait glisser. Une étape par
-     écran, son onglet posé dessus, et la suivante qui dépasse pour dire
-     qu'il y a une suite. */
-  .ac-story{padding:72px 0 84px}
-  .ac-story-grid{grid-template-columns:1fr;gap:34px}
-  .ac-story-txt{position:static;top:auto}
-  .ac-story-txt .ac-h2,.ac-story-txt .ac-sub{max-width:none}
-
-  .ac-steps{--tabh:0px;
-    display:grid;grid-auto-flow:column;grid-auto-columns:var(--sw,78%);
-    gap:14px;align-items:stretch;
-    overflow-x:auto;overscroll-behavior-x:contain;
-    scroll-snap-type:x mandatory;
-    padding:4px 4px 12px;margin:-4px -4px -12px;
-    scrollbar-width:none}
-  .ac-steps::-webkit-scrollbar{display:none}
-  .ac-steps:focus-visible{outline:3px solid var(--bronze);outline-offset:4px;
+  /* 2 · les missions : sur téléphone on balaie, on ne déroule pas. Une carte
+     par écran, la voisine qui dépasse pour dire qu'il y en a d'autres, et
+     l'écran du téléphone au-dessus qui suit le doigt. */
+  .ac-miss-list{display:grid;grid-auto-flow:column;grid-auto-columns:var(--mw,84%);
+    gap:12px;align-items:stretch;
+    overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+    padding:4px;margin:-4px;scrollbar-width:none;
+    -webkit-overflow-scrolling:touch}
+  .ac-miss-list::-webkit-scrollbar{display:none}
+  .ac-miss-list:focus-visible{outline:3px solid var(--bronze);outline-offset:4px;
     border-radius:24px}
+  .ac-mission{scroll-snap-align:center;height:100%}
+  .ac-mission p{max-width:none}
+  .ac-miss-dots{display:flex}
+  .ac-scene{height:clamp(340px,62vw,440px);padding-top:34px}
 
-  .ac-step{position:relative;top:auto;margin:0;padding-top:0;
-    scroll-snap-align:start;
-    display:flex;flex-direction:column;align-items:flex-start}
-  /* l'onglet reprend sa place dans le flux, une étiquette par carte */
-  .ac-step-tab{position:static;left:auto;width:auto;height:30px;
-    padding:0 15px;border-radius:14px 14px 0 0;font-size:11px;
-    backdrop-filter:none;-webkit-backdrop-filter:none;
-    background:var(--ink-3)}
-  .ac-step-tab .d{display:inline}
-  .ac-step-card{flex:1;width:100%;border-radius:0 22px 22px 22px;
-    padding:24px 22px 26px;min-height:0}
+  /* 3 · les promesses : sous 900 px on n'empile plus et on n'anime plus.
+     Les cartes se suivent, le visuel passe sous le texte, rien ne colle. */
+  .ac-pile{padding:66px 0 74px}
+  .ac-pile-stack{gap:16px;padding-bottom:0}
+  .ac-pile-card{position:static;top:auto;transform:none;opacity:1;
+    padding:22px 20px 26px;border-radius:22px}
+  .ac-pile-card.is-back{transform:none;opacity:1}
+  .ac-pile-card [data-rise]{opacity:1;transform:none}
+  .ac-pile-k{margin-bottom:18px;font-size:10.5px;letter-spacing:.1em}
+  /* la queue descriptive ne tient pas sur 375 px : le numéro et le nom suffisent */
+  .ac-pile-k s{display:none}
+  .ac-pile-grid{grid-template-columns:1fr;gap:26px}
+  .ac-pile-h,.ac-pile-txt p{max-width:none}
+  .ac-pile-vis{padding:16px;border-radius:18px;gap:12px}
+  .ac-pile-res{padding:16px 18px;gap:12px;border-radius:16px}
+  .ac-pile-res p{font-size:16px}
 
   /* 4 · fonctionnalités : on glisse, on n'empile pas */
   .ac-feat{padding:72px 0 80px}
@@ -1033,8 +1112,21 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-ba-svg{display:none}
 }
 
-@media (max-width:700px){
-  .ac-steps{--sw:86%}
+@media (max-width:620px){
+  .ac-miss-list{--mw:88%}
+  .ac-pile-k i{width:30px;height:30px;border-radius:9px}
+  .ac-pile-k i svg{width:16px;height:16px}
+  .ac-pile-pts li{font-size:15px;gap:12px}
+  .ac-pile-pts i{width:30px;height:30px;border-radius:9px}
+  .ac-pile-pts svg{width:15px;height:15px}
+  /* le libellé prend sa ligne, la donnée et la coche restent ensemble
+     sur la suivante : sinon la coche tombait seule sous le prix */
+  .acv-row{flex-wrap:wrap;gap:3px 10px;padding:11px 14px;font-size:14.5px}
+  .acv-row .slot{flex:1 1 100%}
+  .acv-row .meta{margin-left:0}
+  .acv-row .val{margin-left:auto}
+  .acv-k{padding:10px 14px;font-size:11.5px}
+  .acv-chip{font-size:11.5px;padding:6px 12px}
 }
 
 @media (max-width:560px){
@@ -1047,19 +1139,17 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .t-asst .actions{flex-direction:column}
   .t-asst .btn{width:100%}
   .ac-mission{padding:20px 18px 20px 18px}
-  .ac-card{padding:26px 22px 24px;border-radius:22px}
+  .ac-card{padding:22px 20px 22px;border-radius:22px}
   .ac-ba-table td{padding:13px 12px;font-size:13px}
   .ac-ba-table th{padding:13px 12px 11px}
   .ac-card-go{width:100%;justify-content:center}
   .ac-prices{grid-template-columns:1fr}
-  .ac-step-h{flex-wrap:wrap}
-  .ac-step-when{margin-left:0;width:100%;order:3}
   .ac-duo-pair img{width:66px;height:66px;border-radius:20px}
   .ac-cta .ac-reassure{align-items:flex-start}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .t-asst .btn,.ac-card,.ac-mission,.ac-screen img,.ac-step-tab{transition:none}
+  .t-asst .btn,.ac-card,.ac-mission,.ac-screen img{transition:none}
   .t-asst .btn-1:hover,.t-asst .btn-2:hover,.ac-card:hover{transform:none}
   .ac-belt-track{animation:none}
   .ac-belt{-webkit-mask-image:none;mask-image:none}
@@ -1067,20 +1157,6 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   LA FICHE QUI ARRIVE — l'animation suit le défilement, elle n'est pas jouée
-   sur une durée : l'utilisateur la pilote, peut l'arrêter et la reprendre.
-   Ignorée là où les timelines de défilement n'existent pas encore.
-   ═══════════════════════════════════════════════════════════════════════════ */
-@supports (animation-timeline:view()){
-  @media (min-width:961px) and (prefers-reduced-motion:no-preference){
-    .ac-step-card{animation:acMonte linear both;
-      animation-timeline:view();animation-range:entry 4% entry 46%}
-    @keyframes acMonte{
-      from{opacity:0;transform:translate3d(0,26px,0) scale(.975)}
-      to{opacity:1;transform:none}}
-  }
-}
 
 /* ── le raccourci vers la commande en ligne, sous l'appel final ──────── */
 .ac-direct{margin:22px 0 0;font-size:14.5px;line-height:1.5;color:var(--lin)}
@@ -1212,22 +1288,22 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         </a>
       </div>
 
-      <h1>Votre facturation qui ne laisse passer <em>aucune ligne</em>.</h1>
+      <h1>Vos factures partent sans que vous ayez à <em>y penser</em>.</h1>
 
       <p class="ac-proof">
-        <span class="ac-proof-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg><b>+75 intégrations</b> comprises</span>
+        <span class="ac-proof-i"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path> <polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline> </g> </g></svg><b>+75 intégrations</b> comprises</span>
         <span class="ac-proof-sep" aria-hidden="true"></span>
-        <span class="ac-proof-i"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Mise en place <b>personnalisée</b></span>
+        <span class="ac-proof-i"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 1.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M18.3066362,6.12356982 L17.6842106,5.04347829 C17.1576365,4.12955711 15.9906873,3.8142761 15.0755149,4.33867279 L15.0755149,4.33867279 C14.6398815,4.59529992 14.1200613,4.66810845 13.6306859,4.54104256 C13.1413105,4.41397667 12.7225749,4.09747295 12.4668193,3.66132725 C12.3022855,3.38410472 12.2138742,3.06835005 12.2105264,2.74599544 L12.2105264,2.74599544 C12.2253694,2.22917739 12.030389,1.72835784 11.6700024,1.3576252 C11.3096158,0.986892553 10.814514,0.777818938 10.2974829,0.778031878 L9.04347831,0.778031878 C8.53694532,0.778031878 8.05129106,0.97987004 7.69397811,1.33890085 C7.33666515,1.69793166 7.13715288,2.18454839 7.13958814,2.69107553 L7.13958814,2.69107553 C7.12457503,3.73688099 6.27245786,4.57676682 5.22654465,4.57665906 C4.90419003,4.57331126 4.58843537,4.48489995 4.31121284,4.32036615 L4.31121284,4.32036615 C3.39604054,3.79596946 2.22909131,4.11125048 1.70251717,5.02517165 L1.03432495,6.12356982 C0.508388616,7.03634945 0.819378585,8.20256183 1.72997713,8.73226549 L1.72997713,8.73226549 C2.32188101,9.07399614 2.68650982,9.70554694 2.68650982,10.3890161 C2.68650982,11.0724852 2.32188101,11.704036 1.72997713,12.0457667 L1.72997713,12.0457667 C0.820534984,12.5718952 0.509205679,13.7352837 1.03432495,14.645309 L1.03432495,14.645309 L1.6659039,15.7345539 C1.9126252,16.1797378 2.3265816,16.5082503 2.81617164,16.6473969 C3.30576167,16.7865435 3.83061824,16.7248517 4.27459956,16.4759726 L4.27459956,16.4759726 C4.71105863,16.2212969 5.23116727,16.1515203 5.71931837,16.2821523 C6.20746948,16.4127843 6.62321383,16.7330005 6.87414191,17.1716248 C7.03867571,17.4488473 7.12708702,17.764602 7.13043482,18.0869566 L7.13043482,18.0869566 C7.13043482,19.1435014 7.98693356,20.0000001 9.04347831,20.0000001 L10.2974829,20.0000001 C11.3504633,20.0000001 12.2054882,19.1490783 12.2105264,18.0961099 L12.2105264,18.0961099 C12.2080776,17.5879925 12.4088433,17.0999783 12.7681408,16.7406809 C13.1274382,16.3813834 13.6154524,16.1806176 14.1235699,16.1830664 C14.4451523,16.1916732 14.7596081,16.2797208 15.0389017,16.4393593 L15.0389017,16.4393593 C15.9516813,16.9652957 17.1178937,16.6543057 17.6475973,15.7437072 L17.6475973,15.7437072 L18.3066362,14.645309 C18.5617324,14.2074528 18.6317479,13.6859659 18.5011783,13.1963297 C18.3706086,12.7066935 18.0502282,12.2893121 17.6109841,12.0366133 L17.6109841,12.0366133 C17.17174,11.7839145 16.8513595,11.3665332 16.7207899,10.876897 C16.5902202,10.3872608 16.6602358,9.86577384 16.9153319,9.42791767 C17.0812195,9.13829096 17.3213574,8.89815312 17.6109841,8.73226549 L17.6109841,8.73226549 C18.5161253,8.20284891 18.8263873,7.04344892 18.3066362,6.13272314 L18.3066362,6.13272314 L18.3066362,6.12356982 Z"></path> <circle cx="9.67505726" cy="10.3890161" r="2.63615562"></circle> </g> </g></svg> Mise en place <b>personnalisée</b></span>
       </p>
 
-      <p class="ac-lede">Dès que le devis est signé, il sort la facture d'acompte, suit les situations de travaux et solde le chantier. Au bon taux de TVA, au format 2026, archivé.</p>
+      <p class="ac-lede">Il transforme vos devis signés en factures, gère vos acomptes et vous aide à facturer chaque chantier au bon moment.</p>
 
       <ul class="ac-atouts">
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Facture dès le devis signé</li>
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 6.69 11.38C 7.38 10.23 8.12 9.1 8.85 7.97L 6.87 4.28C 6.87 4.28 7.02 4.15 7.4 3.85C 8.53 2.98 9.76 2.76 11.09 3.27C 12.36 3.77 13.65 4.14 15.02 4.06C 15.42 4.04 16.96 3.84 16.96 3.84L 15.16 7.96C 15.88 9.09 16.62 10.23 17.31 11.38C 18.44 13.26 19.53 15.37 18.65 17.56C 17.63 20.11 14.64 20.96 12 21C 9.35 20.96 6.37 20.11 5.35 17.56C 4.47 15.37 5.56 13.26 6.69 11.38Z"/><path d="M 8.85 7.98C 10.95 8.46 13.05 8.46 15.16 7.98"/></svg></i>Émet acomptes et situations de travaux</li>
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 8.72V 8.72"/><path d="M 14.45 5.05H 16.21C 18.85 5.05 21 7.2 21 9.86V 15.93C 21 18.58 18.85 20.74 16.21 20.74H 7.8C 5.15 20.74 3 18.58 3 15.93V 9.86C 3 7.2 5.15 5.05 7.8 5.05H 9.53"/><path d="M 14.46 5.17V 9.42C 14.46 10.47 13.61 11.32 12.56 11.32H 11.44C 10.39 11.32 9.54 10.47 9.54 9.42V 5.17C 9.54 4.12 10.39 3.27 11.44 3.27H 12.56C 13.61 3.27 14.46 4.12 14.46 5.17Z"/></svg></i>Pose la TVA et les mentions obligatoires</li>
-        <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></i>Numérote sans trou ni doublon</li>
-        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></i>Archive et exporte pour votre comptable</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i>Génère vos factures automatiquement</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.1389383,11.3957621 L15.0906357,11.3957621 C13.6041923,11.3948508 12.399362,10.1909319 12.3984507,8.70448849 C12.3984507,7.21804511 13.6041923,6.01412622 15.0906357,6.01321486 L19.1389383,6.01321486"></path> <line x1="15.5485988" y1="8.64287993" x2="15.2369105" y2="8.64287993"></line> <path d="M5.24766462,1.52259158e-14 L13.8910914,1.52259158e-14 C16.7892458,1.52259158e-14 19.138756,2.34951014 19.138756,5.24766462 L19.138756,12.4246981 C19.138756,15.3228526 16.7892458,17.6723627 13.8910914,17.6723627 L5.24766462,17.6723627 C2.34951014,17.6723627 1.69176842e-15,15.3228526 1.69176842e-15,12.4246981 L1.69176842e-15,5.24766462 C1.69176842e-15,2.34951014 2.34951014,1.52259158e-14 5.24766462,1.52259158e-14 Z"></path> <line x1="4.53561176" y1="4.53816359" x2="9.93456368" y2="4.53816359"></line> </g> </g></svg></i>Gère acomptes et soldes</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M15.8572,17.4171 C17.7302,17.4171 19.2492,15.8991 19.2501995,14.0261 L19.2501995,14.0241 L19.2501995,11.3241 C18.0132,11.3241 17.0112,10.3221 17.0102,9.0851 C17.0102,7.8491 18.0122,6.8461 19.2492,6.8461 L19.2501995,6.8461 L19.2501995,4.1461 C19.2522,2.2721 17.7352,0.7521 15.8622,0.7501 L15.8562,0.7501 L4.1442,0.7501 C2.2702,0.7501 0.7512,2.2681 0.750199507,4.1421 L0.750199507,4.1431 L0.750199507,6.9331 C1.9442,6.8911 2.9452,7.8251 2.9872,9.0191 C2.9882,9.0411 2.9892,9.0631 2.9892,9.0851 C2.9902,10.3201 1.9912,11.3221 0.7562,11.3241 L0.750199507,11.3241 L0.750199507,14.0241 C0.7492,15.8971 2.2682,17.4171 4.1412,17.4171 L4.1422,17.4171 L15.8572,17.4171 Z"></path> <path d="M10.3713,6.0631 L10.9873,7.3101 C11.0473,7.4321 11.1633,7.5171 11.2983,7.5371 L12.6753,7.7381 C13.0163,7.7881 13.1513,8.2061 12.9053,8.4451 L11.9093,9.4151 C11.8113,9.5101 11.7673,9.6471 11.7893,9.7821 L12.0243,11.1521 C12.0823,11.4911 11.7273,11.7491 11.4233,11.5891 L10.1923,10.9421 C10.0713,10.8781 9.9273,10.8781 9.8063,10.9421 L8.5763,11.5891 C8.2713,11.7491 7.9163,11.4911 7.9743,11.1521 L8.2093,9.7821 C8.2323,9.6471 8.1873,9.5101 8.0893,9.4151 L7.0943,8.4451 C6.8483,8.2061 6.9833,7.7881 7.3233,7.7381 L8.7003,7.5371 C8.8353,7.5171 8.9523,7.4321 9.0123,7.3101 L9.6273,6.0631 C9.7793,5.7551 10.2193,5.7551 10.3713,6.0631 Z"></path> </g> </g></svg></i>Numérote vos factures sans erreur</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path> <polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline> </g> </g></svg></i>Applique la TVA adaptée</li>
+        <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.8324759,5.17463303 L7.10903824,10.9591851 L0.599436312,6.88767232 C-0.333249591,6.30414294 -0.139234755,4.88743509 0.915720913,4.57892564 L16.3712257,0.0527673159 C17.3372579,-0.230371288 18.2325555,0.67283071 17.9455752,1.6419969 L13.3730902,17.0867511 C13.059837,18.1431929 11.6512085,18.331952 11.073206,17.3952605 L7.10600676,10.9602"></path> </g> </g></svg></i>Envoie vos factures aux clients</li>
       </ul>
 
       <div class="actions">
@@ -1245,7 +1321,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   <div class="shell">
 
     <div class="ac-miss-head">
-      <h2 class="ac-h2">Transformez chaque signature en <em>facture conforme</em>.</h2>
+      <h2 class="ac-h2">Facturez <em>sans y penser</em>.</h2>
     </div>
 
     <div class="ac-miss-grid">
@@ -1270,146 +1346,152 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <button class="ac-mission" type="button" role="tab" id="acT1" data-m="m1"
                 aria-selected="true" aria-controls="acScreen">
           <span class="ac-mission-h">
-            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></span>
-            <span class="ac-mission-n">01 — Émettre</span>
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></span>
+            <span class="ac-mission-n">01 — Facturer</span>
           </span>
-          <h3>La facture démarre à la signature</h3>
-          <p>Le devis signé devient facture d'acompte sans ressaisie : mêmes lignes, mêmes prix, même client. Vous n'ouvrez pas un tableur.</p>
+          <h3>Le devis signé devient une facture</h3>
+          <p>Dès la signature, la facture d'acompte est générée avec le bon montant, la bonne TVA et les mentions obligatoires. Rien à ressaisir.</p>
         </button>
 
         <button class="ac-mission" type="button" role="tab" id="acT2" data-m="m2"
                 aria-selected="false" aria-controls="acScreen">
           <span class="ac-mission-h">
-            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.37 10.2L7.37 17.06"/><path d="M12.04 6.92L12.04 17.06"/><path d="M16.63 13.83L16.63 17.06"/><path d="M 16.69 2L 7.31 2C 4.05 2 2 4.31 2 7.59L 2 16.41C 2 19.69 4.04 22 7.31 22L 16.69 22C 19.96 22 22 19.69 22 16.41L 22 7.59C 22 4.31 19.96 2 16.69 2Z"/></svg></span>
-            <span class="ac-mission-n">02 — Suivre</span>
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.8324759,5.17463303 L7.10903824,10.9591851 L0.599436312,6.88767232 C-0.333249591,6.30414294 -0.139234755,4.88743509 0.915720913,4.57892564 L16.3712257,0.0527673159 C17.3372579,-0.230371288 18.2325555,0.67283071 17.9455752,1.6419969 L13.3730902,17.0867511 C13.059837,18.1431929 11.6512085,18.331952 11.073206,17.3952605 L7.10600676,10.9602"></path> </g> </g></svg></span>
+            <span class="ac-mission-n">02 — Envoyer</span>
           </span>
-          <h3>Chaque situation à son moment</h3>
-          <p>Sur les chantiers longs, les situations suivent l'avancement que vous déclarez. Le reste à facturer est toujours juste, le solde tient compte de tout.</p>
+          <h3>Elle part au client, pas dans vos brouillons</h3>
+          <p>La facture est envoyée dès qu'elle est prête, avec l'échéance et les conditions de paiement déjà posées.</p>
         </button>
 
         <button class="ac-mission" type="button" role="tab" id="acT3" data-m="m3"
                 aria-selected="false" aria-controls="acScreen">
           <span class="ac-mission-h">
-            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></span>
-            <span class="ac-mission-n">03 — Classer</span>
+            <span class="ac-mission-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="5.37142857" y1="8.20171265" x2="5.37142857" y2="15.0618459"></line> <line x1="10.0380952" y1="4.91912464" x2="10.0380952" y2="15.0618459"></line> <line x1="14.6285714" y1="11.8268316" x2="14.6285714" y2="15.0618459"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg></span>
+            <span class="ac-mission-n">03 — Suivre</span>
           </span>
-          <h3>Conforme, archivé, exportable</h3>
-          <p>Numérotation continue, TVA au bon taux, mentions obligatoires, format électronique attendu en 2026 — puis l'archivage et l'export que votre comptable attend.</p>
+          <h3>Vous savez qui a payé quoi</h3>
+          <p>Émise, partiellement payée, soldée : chaque facture porte son état, et les échéances à surveiller remontent d'elles-mêmes.</p>
         </button>
 
       </div>
+
+      <div class="ac-miss-dots" id="acMissDots" aria-hidden="true"></div>
     </div>
   </div>
 </section>
 
 
-<!-- ═══ 3 · LE SCÉNARIO ═══════════════════════════════════════════════════ -->
-<section class="t-asst ac-story" id="scenario">
-  <div class="shell ac-story-grid">
+<!-- ═══ 3 · LES TROIS PROMESSES ═══════════════════════════════════════════ -->
+<section class="t-asst ac-pile" id="promesses">
+  <div class="shell">
+    <div class="ac-pile-stack" id="acPile">
 
-    <div class="ac-story-txt">
-      <p class="ac-tag">Cas pratique</p>
-      <h2 class="ac-h2">Le devis signé du lundi devient une <em>facture conforme</em>.</h2>
-      <p class="ac-sub">Un chantier de 46 000 € sur deux mois, de la signature jusqu'à l'export du comptable. Vous déclarez l'avancement, il fait le reste.</p>
+      <article class="ac-pile-card" id="factures" style="--i:0">
+        <p class="ac-pile-k"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i><em>Factures</em><s>— elle ne laisse rien passer</s></p>
 
-      <div class="ac-story-note">
-        <b>Votre part du travail : déclarer l'avancement.</b>
-        Deux clics par situation. Les montants, les mentions, la numérotation et le format électronique sont posés sans vous.
-      </div>
+        <div class="ac-pile-grid">
+          <div class="ac-pile-txt">
+            <h2 class="ac-pile-h" data-rise>Chaque chantier terminé devient une facture.</h2>
+            <p data-tx-skip data-rise style="--d:70ms">Elle récupère les informations de vos devis et prépare vos factures dès qu'elles doivent être émises.</p>
+            <ul class="ac-pile-pts" data-rise style="--d:140ms">
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i><span class="d">Génération automatique<em>Le devis devient une facture en quelques secondes.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.1389383,11.3957621 L15.0906357,11.3957621 C13.6041923,11.3948508 12.399362,10.1909319 12.3984507,8.70448849 C12.3984507,7.21804511 13.6041923,6.01412622 15.0906357,6.01321486 L19.1389383,6.01321486"></path> <line x1="15.5485988" y1="8.64287993" x2="15.2369105" y2="8.64287993"></line> <path d="M5.24766462,1.52259158e-14 L13.8910914,1.52259158e-14 C16.7892458,1.52259158e-14 19.138756,2.34951014 19.138756,5.24766462 L19.138756,12.4246981 C19.138756,15.3228526 16.7892458,17.6723627 13.8910914,17.6723627 L5.24766462,17.6723627 C2.34951014,17.6723627 1.69176842e-15,15.3228526 1.69176842e-15,12.4246981 L1.69176842e-15,5.24766462 C1.69176842e-15,2.34951014 2.34951014,1.52259158e-14 5.24766462,1.52259158e-14 Z"></path> <line x1="4.53561176" y1="4.53816359" x2="9.93456368" y2="4.53816359"></line> </g> </g></svg></i><span class="d">Acomptes &amp; soldes<em>Elle suit ce qui a déjà été payé et ce qu'il reste à facturer.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M15.8572,17.4171 C17.7302,17.4171 19.2492,15.8991 19.2501995,14.0261 L19.2501995,14.0241 L19.2501995,11.3241 C18.0132,11.3241 17.0112,10.3221 17.0102,9.0851 C17.0102,7.8491 18.0122,6.8461 19.2492,6.8461 L19.2501995,6.8461 L19.2501995,4.1461 C19.2522,2.2721 17.7352,0.7521 15.8622,0.7501 L15.8562,0.7501 L4.1442,0.7501 C2.2702,0.7501 0.7512,2.2681 0.750199507,4.1421 L0.750199507,4.1431 L0.750199507,6.9331 C1.9442,6.8911 2.9452,7.8251 2.9872,9.0191 C2.9882,9.0411 2.9892,9.0631 2.9892,9.0851 C2.9902,10.3201 1.9912,11.3221 0.7562,11.3241 L0.750199507,11.3241 L0.750199507,14.0241 C0.7492,15.8971 2.2682,17.4171 4.1412,17.4171 L4.1422,17.4171 L15.8572,17.4171 Z"></path> <path d="M10.3713,6.0631 L10.9873,7.3101 C11.0473,7.4321 11.1633,7.5171 11.2983,7.5371 L12.6753,7.7381 C13.0163,7.7881 13.1513,8.2061 12.9053,8.4451 L11.9093,9.4151 C11.8113,9.5101 11.7673,9.6471 11.7893,9.7821 L12.0243,11.1521 C12.0823,11.4911 11.7273,11.7491 11.4233,11.5891 L10.1923,10.9421 C10.0713,10.8781 9.9273,10.8781 9.8063,10.9421 L8.5763,11.5891 C8.2713,11.7491 7.9163,11.4911 7.9743,11.1521 L8.2093,9.7821 C8.2323,9.6471 8.1873,9.5101 8.0893,9.4151 L7.0943,8.4451 C6.8483,8.2061 6.9833,7.7881 7.3233,7.7381 L8.7003,7.5371 C8.8353,7.5171 8.9523,7.4321 9.0123,7.3101 L9.6273,6.0631 C9.7793,5.7551 10.2193,5.7551 10.3713,6.0631 Z"></path> </g> </g></svg></i><span class="d">Numérotation automatique<em>Vos factures restent organisées et conformes.</em></span></li>
+            </ul>
+          </div>
 
-      <div class="actions">
-        <a class="btn btn-1" href="reserver.html">Je veux mon assistant <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
-      </div>
+          <div class="ac-pile-vis" data-rise style="--d:210ms">
+            <div class="acv-card">
+              <p class="acv-k">Ce que ça règle</p>
+              <div style="--n:0" class="acv-fix">
+                <b><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.1389383,11.3957621 L15.0906357,11.3957621 C13.6041923,11.3948508 12.399362,10.1909319 12.3984507,8.70448849 C12.3984507,7.21804511 13.6041923,6.01412622 15.0906357,6.01321486 L19.1389383,6.01321486"></path> <line x1="15.5485988" y1="8.64287993" x2="15.2369105" y2="8.64287993"></line> <path d="M5.24766462,1.52259158e-14 L13.8910914,1.52259158e-14 C16.7892458,1.52259158e-14 19.138756,2.34951014 19.138756,5.24766462 L19.138756,12.4246981 C19.138756,15.3228526 16.7892458,17.6723627 13.8910914,17.6723627 L5.24766462,17.6723627 C2.34951014,17.6723627 1.69176842e-15,15.3228526 1.69176842e-15,12.4246981 L1.69176842e-15,5.24766462 C1.69176842e-15,2.34951014 2.34951014,1.52259158e-14 5.24766462,1.52259158e-14 Z"></path> <line x1="4.53561176" y1="4.53816359" x2="9.93456368" y2="4.53816359"></line> </g> </g></svg>Vous oubliez parfois de facturer un chantier</b>
+                <span>Déclenchement de la facturation à partir des devis et des étapes prévues.</span>
+              </div>
+              <div style="--n:1" class="acv-fix">
+                <b><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg>Vous refaites les mêmes informations à chaque facture</b>
+                <span>Les données du devis sont reprises automatiquement.</span>
+              </div>
+              <div style="--n:2" class="acv-fix">
+                <b><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path> <polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline> </g> </g></svg>Vous perdez du temps sur la gestion des factures</b>
+                <span>Génération, numérotation et préparation automatisées.</span>
+              </div>
+              <p style="--n:3" class="acv-res"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg>Chaque chantier est facturé au bon moment, sans oubli.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="ac-pile-card" id="envoi" style="--i:1">
+        <p class="ac-pile-k"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.8324759,5.17463303 L7.10903824,10.9591851 L0.599436312,6.88767232 C-0.333249591,6.30414294 -0.139234755,4.88743509 0.915720913,4.57892564 L16.3712257,0.0527673159 C17.3372579,-0.230371288 18.2325555,0.67283071 17.9455752,1.6419969 L13.3730902,17.0867511 C13.059837,18.1431929 11.6512085,18.331952 11.073206,17.3952605 L7.10600676,10.9602"></path> </g> </g></svg></i><em>Envoi</em><s>— elle fait partir vos factures</s></p>
+
+        <div class="ac-pile-grid">
+          <div class="ac-pile-txt">
+            <h2 class="ac-pile-h" data-rise>Une facture créée n'est utile que si elle arrive au client.</h2>
+            <p data-tx-skip data-rise style="--d:70ms">Elle prépare et envoie vos factures directement au client, avec les bonnes informations et les bonnes conditions de paiement.</p>
+            <ul class="ac-pile-pts" data-rise style="--d:140ms">
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.8324759,5.17463303 L7.10903824,10.9591851 L0.599436312,6.88767232 C-0.333249591,6.30414294 -0.139234755,4.88743509 0.915720913,4.57892564 L16.3712257,0.0527673159 C17.3372579,-0.230371288 18.2325555,0.67283071 17.9455752,1.6419969 L13.3730902,17.0867511 C13.059837,18.1431929 11.6512085,18.331952 11.073206,17.3952605 L7.10600676,10.9602"></path> </g> </g></svg></i><span class="d">Envoi automatique<em>La facture part dès qu'elle est prête.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="0.0926400664" y1="7.40425532" x2="17.9165888" y2="7.40425532"></line> <line x1="13.4420736" y1="11.3096927" x2="13.4513376" y2="11.3096927"></line> <line x1="9.00461445" y1="11.3096927" x2="9.01387846" y2="11.3096927"></line> <line x1="4.55789127" y1="11.3096927" x2="4.56715527" y2="11.3096927"></line> <line x1="13.4420736" y1="15.1962175" x2="13.4513376" y2="15.1962175"></line> <line x1="9.00461445" y1="15.1962175" x2="9.01387846" y2="15.1962175"></line> <line x1="4.55789127" y1="15.1962175" x2="4.56715527" y2="15.1962175"></line> <line x1="13.0437213" y1="-2.26485497e-14" x2="13.0437213" y2="3.29078014"></line> <line x1="4.96550756" y1="-2.26485497e-14" x2="4.96550756" y2="3.29078014"></line> <path d="M13.2382655,1.57919622 L4.77096342,1.57919622 C1.83427331,1.57919622 0,3.21513002 0,6.22222222 L0,15.2718676 C0,18.3262411 1.83427331,20 4.77096342,20 L13.2290015,20 C16.1749556,20 18,18.3546099 18,15.3475177 L18,6.22222222 C18.0092289,3.21513002 16.1842196,1.57919622 13.2382655,1.57919622 Z"></path> </g> </g></svg></i><span class="d">Conditions de paiement<em>Acompte, solde et échéance sont clairement indiqués.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="5.37142857" y1="8.20171265" x2="5.37142857" y2="15.0618459"></line> <line x1="10.0380952" y1="4.91912464" x2="10.0380952" y2="15.0618459"></line> <line x1="14.6285714" y1="11.8268316" x2="14.6285714" y2="15.0618459"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg></i><span class="d">Suivi des factures<em>Vous savez ce qui est envoyé, payé ou encore en attente.</em></span></li>
+            </ul>
+          </div>
+
+          <div class="ac-pile-vis" data-rise style="--d:210ms">
+            <div class="acv-card">
+              <p class="acv-k">Ce que ça règle</p>
+              <div style="--n:0" class="acv-fix">
+                <b><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path> <polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline> </g> </g></svg>Vos factures restent parfois dans vos brouillons</b>
+                <span>Envoi automatique dès qu'elles sont prêtes.</span>
+              </div>
+              <div style="--n:1" class="acv-fix">
+                <b><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.1389383,11.3957621 L15.0906357,11.3957621 C13.6041923,11.3948508 12.399362,10.1909319 12.3984507,8.70448849 C12.3984507,7.21804511 13.6041923,6.01412622 15.0906357,6.01321486 L19.1389383,6.01321486"></path> <line x1="15.5485988" y1="8.64287993" x2="15.2369105" y2="8.64287993"></line> <path d="M5.24766462,1.52259158e-14 L13.8910914,1.52259158e-14 C16.7892458,1.52259158e-14 19.138756,2.34951014 19.138756,5.24766462 L19.138756,12.4246981 C19.138756,15.3228526 16.7892458,17.6723627 13.8910914,17.6723627 L5.24766462,17.6723627 C2.34951014,17.6723627 1.69176842e-15,15.3228526 1.69176842e-15,12.4246981 L1.69176842e-15,5.24766462 C1.69176842e-15,2.34951014 2.34951014,1.52259158e-14 5.24766462,1.52259158e-14 Z"></path> <line x1="4.53561176" y1="4.53816359" x2="9.93456368" y2="4.53816359"></line> </g> </g></svg>Vous perdez du temps à vérifier ce qui a été payé</b>
+                <span>Suivi centralisé des factures et des paiements.</span>
+              </div>
+              <div style="--n:2" class="acv-fix">
+                <b><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.353,1.95399252e-14 C16.054,0.411 18.978,3.331 19.393,7.032"></path> <path d="M12.353,3.543 C14.124,3.887 15.508,5.272 15.853,7.043"></path> <path d="M9.03152183,9.97238745 C13.0205087,13.9603606 13.9254376,9.34671782 16.46525,11.8848116 C18.9138181,14.3327574 20.322201,14.8232052 17.2188207,17.9247236 C16.8302273,18.2370218 14.3612634,21.9942591 5.68446558,13.3196663 C-2.9934057,4.64400029 0.761566311,2.17244427 1.07394391,1.78394958 C4.18376493,-1.32615434 4.66682308,0.0893829491 7.11539117,2.53732879 C9.65413011,5.07649576 5.04253498,5.9844143 9.03152183,9.97238745 Z"></path> </g> </g></svg>Vous devez régulièrement rappeler les échéances</b>
+                <span>Les informations de paiement sont intégrées dès l'envoi.</span>
+              </div>
+              <p style="--n:3" class="acv-res"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg>Vos factures partent plus vite et votre argent peut rentrer plus tôt.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="ac-pile-card" id="suivi" style="--i:2">
+        <p class="ac-pile-k"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="5.37142857" y1="8.20171265" x2="5.37142857" y2="15.0618459"></line> <line x1="10.0380952" y1="4.91912464" x2="10.0380952" y2="15.0618459"></line> <line x1="14.6285714" y1="11.8268316" x2="14.6285714" y2="15.0618459"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg></i><em>Suivi</em><s>— vous savez où en est chaque facture</s></p>
+
+        <div class="ac-pile-grid">
+          <div class="ac-pile-txt">
+            <h2 class="ac-pile-h" data-rise>Plus besoin de chercher qui a payé quoi.</h2>
+            <p data-tx-skip data-rise style="--d:70ms">Votre facturation reste organisée : factures émises, acomptes reçus, soldes à encaisser et échéances à venir.</p>
+            <ul class="ac-pile-pts" data-rise style="--d:140ms">
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="5.37142857" y1="8.20171265" x2="5.37142857" y2="15.0618459"></line> <line x1="10.0380952" y1="4.91912464" x2="10.0380952" y2="15.0618459"></line> <line x1="14.6285714" y1="11.8268316" x2="14.6285714" y2="15.0618459"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg></i><span class="d">Vue d'ensemble<em>Toutes vos factures au même endroit.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg></i><span class="d">Suivi des paiements<em>Payé, partiellement payé ou en attente.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.5,15.8476424 C14.13923,15.8476424 16.7480515,15.1242108 17,12.220506 C17,9.31879687 15.1811526,9.50539234 15.1811526,5.94511102 C15.1811526,3.16414015 12.5452291,-1.86517468e-14 8.5,-1.86517468e-14 C4.4547709,-1.86517468e-14 1.81884743,3.16414015 1.81884743,5.94511102 C1.81884743,9.50539234 0,9.31879687 0,12.220506 C0.252952291,15.135187 2.86177374,15.8476424 8.5,15.8476424 Z"></path> <path d="M10.8887931,18.8572176 C9.52465753,20.3719337 7.3966462,20.3898948 6.0194615,18.8572176"></path> </g> </g></svg></i><span class="d">Échéances<em>Les paiements à surveiller remontent automatiquement.</em></span></li>
+            </ul>
+          </div>
+
+          <div class="ac-pile-vis" data-rise style="--d:210ms">
+            <div class="acv-card">
+              <p class="acv-k">Ce que ça règle</p>
+              <div style="--n:0" class="acv-fix">
+                <b><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <circle cx="9.76659044" cy="9.76659044" r="8.9885584"></circle> <line x1="16.0183067" y1="16.4851259" x2="19.5423342" y2="20.0000001"></line> </g> </g></svg>Vous avez du mal à savoir où en sont vos factures</b>
+                <span>Une vision claire de chaque facture.</span>
+              </div>
+              <div style="--n:1" class="acv-fix">
+                <b><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.1389383,11.3957621 L15.0906357,11.3957621 C13.6041923,11.3948508 12.399362,10.1909319 12.3984507,8.70448849 C12.3984507,7.21804511 13.6041923,6.01412622 15.0906357,6.01321486 L19.1389383,6.01321486"></path> <line x1="15.5485988" y1="8.64287993" x2="15.2369105" y2="8.64287993"></line> <path d="M5.24766462,1.52259158e-14 L13.8910914,1.52259158e-14 C16.7892458,1.52259158e-14 19.138756,2.34951014 19.138756,5.24766462 L19.138756,12.4246981 C19.138756,15.3228526 16.7892458,17.6723627 13.8910914,17.6723627 L5.24766462,17.6723627 C2.34951014,17.6723627 1.69176842e-15,15.3228526 1.69176842e-15,12.4246981 L1.69176842e-15,5.24766462 C1.69176842e-15,2.34951014 2.34951014,1.52259158e-14 5.24766462,1.52259158e-14 Z"></path> <line x1="4.53561176" y1="4.53816359" x2="9.93456368" y2="4.53816359"></line> </g> </g></svg>Des soldes passent entre les mailles</b>
+                <span>Suivi des montants restant à encaisser.</span>
+              </div>
+              <div style="--n:2" class="acv-fix">
+                <b><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path> <polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline> </g> </g></svg>Vous perdez du temps à faire vos vérifications</b>
+                <span>Les informations importantes remontent automatiquement.</span>
+              </div>
+              <p style="--n:3" class="acv-res"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg>Une facturation propre, suivie et sans charge mentale.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
     </div>
-
-    <ol class="ac-steps" id="acSteps" tabindex="0" role="group"
-        aria-label="Le scénario étape par étape, à faire défiler horizontalement sur téléphone">
-
-      <li class="ac-step" style="--i:0">
-        <span class="ac-step-tab" aria-hidden="true"><span class="d">Lun.</span>11:40</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.75 20.44L21 20.44"/><path d="M 12.78 3.79C 13.56 2.87 14.95 2.73 15.9 3.49C 15.95 3.53 17.63 4.84 17.63 4.84C 18.67 5.47 18.99 6.8 18.35 7.82C 18.32 7.88 8.81 19.76 8.81 19.76C 8.5 20.16 8.02 20.39 7.5 20.4L 3.86 20.44L 3.04 16.97C 2.93 16.48 3.04 15.97 3.36 15.58L 12.78 3.79Z"/><path d="M11.02 6L16.47 10.19"/></svg></span>
-            <b>Devis signé</b>
-            <span class="ac-step-when">Lundi · 11:40</span>
-          </div>
-          <div class="ac-step-body"><ul class="ac-chips"><li>Groupe Café Central</li><li>46 000 €</li><li>Signé en ligne</li><li>Acompte 30 %</li></ul><p class="ac-step-p">La signature arrive. Vous êtes sur un autre chantier, et ça n'a aucune importance.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:1">
-        <span class="ac-step-tab" aria-hidden="true"><span class="d">Lun.</span>11:41</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></span>
-            <b>Facture d'acompte</b>
-            <span class="ac-step-when">Lundi · 11:41</span>
-          </div>
-          <div class="ac-step-body"><div class="ac-step-win"><b>13 800 €</b><span>facturés à la commande, une minute après la signature.</span></div><p class="ac-step-p">Mêmes lignes que le devis, numéro suivant de votre série, mentions et TVA posées. Vous relisez, vous envoyez.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:2">
-        <span class="ac-step-tab" aria-hidden="true">Sem. 3</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.37 10.2L7.37 17.06"/><path d="M12.04 6.92L12.04 17.06"/><path d="M16.63 13.83L16.63 17.06"/><path d="M 16.69 2L 7.31 2C 4.05 2 2 4.31 2 7.59L 2 16.41C 2 19.69 4.04 22 7.31 22L 16.69 22C 19.96 22 22 19.69 22 16.41L 22 7.59C 22 4.31 19.96 2 16.69 2Z"/></svg></span>
-            <b>Situation n° 1</b>
-            <span class="ac-step-when">Troisième semaine de chantier</span>
-          </div>
-          <div class="ac-step-body"><ul class="ac-chips"><li>Avancement 40 %</li><li>18 400 € facturés</li><li>Reste à facturer 13 800 €</li></ul><p class="ac-step-p">Vous déclarez l'avancement depuis le chantier. La situation se calcule, l'acompte est déduit.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:3">
-        <span class="ac-step-tab" aria-hidden="true">Sem. 6</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.37 10.2L7.37 17.06"/><path d="M12.04 6.92L12.04 17.06"/><path d="M16.63 13.83L16.63 17.06"/><path d="M 16.69 2L 7.31 2C 4.05 2 2 4.31 2 7.59L 2 16.41C 2 19.69 4.04 22 7.31 22L 16.69 22C 19.96 22 22 19.69 22 16.41L 22 7.59C 22 4.31 19.96 2 16.69 2Z"/></svg></span>
-            <b>Situation n° 2</b>
-            <span class="ac-step-when">Sixième semaine de chantier</span>
-          </div>
-          <div class="ac-step-body"><ul class="ac-chips"><li>Avancement 75 %</li><li>16 100 € facturés</li><li>Reste à facturer 11 500 €</li></ul><p class="ac-step-p">Aucun double comptage, aucun oubli. Le cumul est juste à l'euro près.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:4">
-        <span class="ac-step-tab" aria-hidden="true">Réception</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></span>
-            <b>Facture de solde</b>
-            <span class="ac-step-when">À la réception du chantier</span>
-          </div>
-          <div class="ac-step-body"><div class="ac-step-win"><b>11 500 €</b><span>de solde — après déduction de tout ce qui a déjà été facturé.</span></div><p class="ac-step-p">La retenue de garantie et les conditions de paiement du devis sont reprises telles quelles.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:5">
-        <span class="ac-step-tab" aria-hidden="true">J+1</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></span>
-            <b>Transmise au format 2026</b>
-            <span class="ac-step-when">Le lendemain de la réception</span>
-          </div>
-          <div class="ac-step-body"><ul class="ac-chips"><li>Factur-X</li><li>Numérotation continue</li><li>TVA 10 %</li><li>Archivée 10 ans</li></ul><p class="ac-step-p">Le format attendu par la réforme, sans que vous ayez eu à changer quoi que ce soit à vos habitudes.</p></div>
-        </div>
-      </li>
-
-      <li class="ac-step" style="--i:6">
-        <span class="ac-step-tab" aria-hidden="true">Fin mois</span>
-        <div class="ac-step-card">
-          <div class="ac-step-h">
-            <span class="ac-step-ic" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></span>
-            <b>Export comptable</b>
-            <span class="ac-step-when">Le dernier jour du mois</span>
-          </div>
-          <div class="ac-step-body"><div class="ac-step-win"><b>1 fichier</b><span>pour douze factures — dans le format que votre cabinet attend.</span></div><p class="ac-step-p">Fini l'enveloppe de janvier et les trois relances de votre comptable.</p></div>
-        </div>
-      </li>
-
-    </ol>
   </div>
 </section>
 
@@ -1420,7 +1502,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
     <div class="ac-feat-head">
       <p class="ac-tag">Ce qu'il prend en charge</p>
-      <h2 class="ac-h2">Trois temps, <em>zéro ressaisie</em>.</h2>
+      <h2 class="ac-h2">4 missions, <em>20 fonctionnalités</em>.</h2>
       <p class="ac-sub">Du devis signé jusqu'à l'export du comptable, voici exactement ce que votre assistant facturation fait à votre place.</p>
     </div>
 
@@ -1430,85 +1512,81 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-facturation.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Émission</span>
+          <span class="ac-card-role">Émission dès la signature</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Sortir la facture</p>
         <h3>Elle part sans que vous y pensiez</h3>
         <p class="ac-card-acc">Dès la signature <span>· sans une seule ressaisie</span></p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Générée depuis le devis signé</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 6.69 11.38C 7.38 10.23 8.12 9.1 8.85 7.97L 6.87 4.28C 6.87 4.28 7.02 4.15 7.4 3.85C 8.53 2.98 9.76 2.76 11.09 3.27C 12.36 3.77 13.65 4.14 15.02 4.06C 15.42 4.04 16.96 3.84 16.96 3.84L 15.16 7.96C 15.88 9.09 16.62 10.23 17.31 11.38C 18.44 13.26 19.53 15.37 18.65 17.56C 17.63 20.11 14.64 20.96 12 21C 9.35 20.96 6.37 20.11 5.35 17.56C 4.47 15.37 5.56 13.26 6.69 11.38Z"/><path d="M 8.85 7.98C 10.95 8.46 13.05 8.46 15.16 7.98"/></svg></i>Acompte au pourcentage convenu</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></i>Solde, déductions faites</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></i>Avoirs rattachés à l'origine</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 16.42 9.45L 16.42 7.3C 16.42 4.79 14.39 2.75 11.87 2.75C 9.36 2.74 7.31 4.77 7.3 7.28L 7.3 7.3L 7.3 9.45"/><path d="M 15.68 21.25L 8.04 21.25C 5.95 21.25 4.25 19.55 4.25 17.46L 4.25 13.17C 4.25 11.07 5.95 9.38 8.04 9.38L 15.68 9.38C 17.78 9.38 19.48 11.07 19.48 13.17L 19.48 17.46C 19.48 19.55 17.78 21.25 15.68 21.25Z"/><path d="M11.86 14.2L11.86 16.42"/></svg></i>Rien ne part sans vous</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i>Générée depuis le devis signé</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.1389383,11.3957621 L15.0906357,11.3957621 C13.6041923,11.3948508 12.399362,10.1909319 12.3984507,8.70448849 C12.3984507,7.21804511 13.6041923,6.01412622 15.0906357,6.01321486 L19.1389383,6.01321486"></path> <line x1="15.5485988" y1="8.64287993" x2="15.2369105" y2="8.64287993"></line> <path d="M5.24766462,1.52259158e-14 L13.8910914,1.52259158e-14 C16.7892458,1.52259158e-14 19.138756,2.34951014 19.138756,5.24766462 L19.138756,12.4246981 C19.138756,15.3228526 16.7892458,17.6723627 13.8910914,17.6723627 L5.24766462,17.6723627 C2.34951014,17.6723627 1.69176842e-15,15.3228526 1.69176842e-15,12.4246981 L1.69176842e-15,5.24766462 C1.69176842e-15,2.34951014 2.34951014,1.52259158e-14 5.24766462,1.52259158e-14 Z"></path> <line x1="4.53561176" y1="4.53816359" x2="9.93456368" y2="4.53816359"></line> </g> </g></svg></i>Acompte au pourcentage convenu</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg></i>Solde, déductions faites</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M11.2365,0.761863533 L4.5845,0.761863533 C2.5045,0.7529 0.7995,2.4109 0.7505,4.4909 L0.7505,15.3399 C0.7155,17.3899 2.3485,19.0809 4.3995,19.1169 C4.4605,19.1169 4.5225,19.1169 4.5845,19.1149 L12.5725,19.1149 C14.6415,19.0939 16.3055,17.4089 16.3025041,15.3399 L16.3025041,6.0399 L11.2365,0.761863533 Z"></path> <path d="M10.9733,0.7501 L10.9733,3.6591 C10.9733,5.0791 12.1223,6.2301 13.5423,6.2341 L16.2963,6.2341"></path> <line x1="10.7927" y1="11.7472" x2="5.8927" y2="11.7472"></line> </g> </g></svg></i>Avoirs rattachés à l'origine</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.9234,7.4478 L12.9234,5.3008 C12.9234,2.7878 10.8854,0.749755462 8.3724,0.749755462 C5.8594,0.7388 3.8134,2.7668 3.8024,5.2808 L3.8024,5.3008 L3.8024,7.4478"></path> <path d="M12.1832,19.2496 L4.5422,19.2496 C2.4482,19.2496 0.7502,17.5526 0.7502,15.4576 L0.7502,11.1686 C0.7502,9.0736 2.4482,7.3766 4.5422,7.3766 L12.1832,7.3766 C14.2772,7.3766 15.9752,9.0736 15.9752,11.1686 L15.9752,15.4576 C15.9752,17.5526 14.2772,19.2496 12.1832,19.2496 Z"></path> <line x1="8.3629" y1="12.2027" x2="8.3629" y2="14.4237"></line> </g> </g></svg></i>Rien ne part sans vous</li>
         </ul>
-        <a class="ac-card-go" href="#scenario">Voir le scénario complet <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
+        <a class="ac-card-go" href="#document">Voir comment la facture se crée <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
       </article>
 
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-facturation.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Avancement</span>
+          <span class="ac-card-role">Situations de travaux</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Suivre les chantiers longs</p>
         <h3>Chaque situation à son moment</h3>
         <p class="ac-card-acc">Vous déclarez l'avancement <span>· il calcule le reste</span></p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.37 10.2L7.37 17.06"/><path d="M12.04 6.92L12.04 17.06"/><path d="M16.63 13.83L16.63 17.06"/><path d="M 16.69 2L 7.31 2C 4.05 2 2 4.31 2 7.59L 2 16.41C 2 19.69 4.04 22 7.31 22L 16.69 22C 19.96 22 22 19.69 22 16.41L 22 7.59C 22 4.31 19.96 2 16.69 2Z"/></svg></i>Situations selon l'avancement</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 8.72V 8.72"/><path d="M 14.45 5.05H 16.21C 18.85 5.05 21 7.2 21 9.86V 15.93C 21 18.58 18.85 20.74 16.21 20.74H 7.8C 5.15 20.74 3 18.58 3 15.93V 9.86C 3 7.2 5.15 5.05 7.8 5.05H 9.53"/><path d="M 14.46 5.17V 9.42C 14.46 10.47 13.61 11.32 12.56 11.32H 11.44C 10.39 11.32 9.54 10.47 9.54 9.42V 5.17C 9.54 4.12 10.39 3.27 11.44 3.27H 12.56C 13.61 3.27 14.46 4.12 14.46 5.17Z"/></svg></i>Reste à facturer recalculé</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Retenue de garantie reprise</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.09 9.4L20.92 9.4"/><path d="M16.44 13.31L16.45 13.31"/><path d="M12 13.31L12.01 13.31"/><path d="M7.56 13.31L7.57 13.31"/><path d="M16.44 17.2L16.45 17.2"/><path d="M12 17.2L12.01 17.2"/><path d="M7.56 17.2L7.57 17.2"/><path d="M16.04 2L16.04 5.29"/><path d="M7.97 2L7.97 5.29"/><path d="M 16.24 3.58L 7.77 3.58C 4.83 3.58 3 5.22 3 8.22L 3 17.27C 3 20.33 4.83 22 7.77 22L 16.23 22C 19.17 22 21 20.35 21 17.35L 21 8.22C 21.01 5.22 19.18 3.58 16.24 3.58Z"/></svg></i>Échéances et conditions posées</li>
-          <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <circle cx="9.76659044" cy="9.76659044" r="8.9885584"></circle> <line x1="16.0183067" y1="16.4851259" x2="19.5423342" y2="20.0000001"></line> </g></svg></i>Alerte si écart devis / facturé</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="5.37142857" y1="8.20171265" x2="5.37142857" y2="15.0618459"></line> <line x1="10.0380952" y1="4.91912464" x2="10.0380952" y2="15.0618459"></line> <line x1="14.6285714" y1="11.8268316" x2="14.6285714" y2="15.0618459"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg></i>Situations selon l'avancement</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 1.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="5.24485128 13.2814646 8.23798631 9.39130439 11.652174 12.0732266 14.5812358 8.29290622"></polyline> <circle cx="17.9954234" cy="2.70022885" r="1.92219681"></circle> <path d="M12.9244852,1.62013731 L5.6567506,1.62013731 C2.64530894,1.62013731 0.778032041,3.75286043 0.778032041,6.76430209 L0.778032041,14.846682 C0.778032041,17.8581237 2.60869567,19.9816935 5.6567506,19.9816935 L14.2608696,19.9816935 C17.2723113,19.9816935 19.1395882,17.8581237 19.1395882,14.846682 L19.1395882,7.80778036"></path> </g> </g></svg></i>Reste à facturer recalculé</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.9234,7.4478 L12.9234,5.3008 C12.9234,2.7878 10.8854,0.749755462 8.3724,0.749755462 C5.8594,0.7388 3.8134,2.7668 3.8024,5.2808 L3.8024,5.3008 L3.8024,7.4478"></path> <path d="M12.1832,19.2496 L4.5422,19.2496 C2.4482,19.2496 0.7502,17.5526 0.7502,15.4576 L0.7502,11.1686 C0.7502,9.0736 2.4482,7.3766 4.5422,7.3766 L12.1832,7.3766 C14.2772,7.3766 15.9752,9.0736 15.9752,11.1686 L15.9752,15.4576 C15.9752,17.5526 14.2772,19.2496 12.1832,19.2496 Z"></path> <line x1="8.3629" y1="12.2027" x2="8.3629" y2="14.4237"></line> </g> </g></svg></i>Retenue de garantie reprise</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="0.0926400664" y1="7.40425532" x2="17.9165888" y2="7.40425532"></line> <line x1="13.4420736" y1="11.3096927" x2="13.4513376" y2="11.3096927"></line> <line x1="9.00461445" y1="11.3096927" x2="9.01387846" y2="11.3096927"></line> <line x1="4.55789127" y1="11.3096927" x2="4.56715527" y2="11.3096927"></line> <line x1="13.4420736" y1="15.1962175" x2="13.4513376" y2="15.1962175"></line> <line x1="9.00461445" y1="15.1962175" x2="9.01387846" y2="15.1962175"></line> <line x1="4.55789127" y1="15.1962175" x2="4.56715527" y2="15.1962175"></line> <line x1="13.0437213" y1="-2.26485497e-14" x2="13.0437213" y2="3.29078014"></line> <line x1="4.96550756" y1="-2.26485497e-14" x2="4.96550756" y2="3.29078014"></line> <path d="M13.2382655,1.57919622 L4.77096342,1.57919622 C1.83427331,1.57919622 0,3.21513002 0,6.22222222 L0,15.2718676 C0,18.3262411 1.83427331,20 4.77096342,20 L13.2290015,20 C16.1749556,20 18,18.3546099 18,15.3475177 L18,6.22222222 C18.0092289,3.21513002 16.1842196,1.57919622 13.2382655,1.57919622 Z"></path> </g> </g></svg></i>Échéances et conditions posées</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor"> <path d="M10.0001,0.7501 C15.1081,0.7501 19.2501,4.8911 19.2501,10.0001 C19.2501,15.1081 15.1081,19.2501 10.0001,19.2501 C4.8911,19.2501 0.7501,15.1081 0.7501,10.0001 C0.7501,4.8911 4.8911,0.7501 10.0001,0.7501 Z" stroke-width="1.5"></path> <line x1="9.9952" y1="6.2042" x2="9.9952" y2="10.6232" stroke-width="1.5"></line> <line x1="9.995" y1="13.7961" x2="10.005" y2="13.7961" stroke-width="2"></line> </g> </g></svg></i>Alerte si écart devis / facturé</li>
         </ul>
-        <a class="ac-card-go" href="reserver.html">Suivre mes chantiers longs <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
+        <a class="ac-card-go" href="reserver.html">Suivre mes chantiers longs <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
       </article>
 
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-facturation.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Conformité</span>
+          <span class="ac-card-role">Conformité 2026</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Tenir la réforme</p>
         <h3>Conforme 2026, sans y penser</h3>
         <p class="ac-card-acc">Factur-X et numérotation continue <span>· la première chose qu'on contrôle</span></p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></i>Numérotation sans trou ni doublon</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 12 8.72V 8.72"/><path d="M 14.45 5.05H 16.21C 18.85 5.05 21 7.2 21 9.86V 15.93C 21 18.58 18.85 20.74 16.21 20.74H 7.8C 5.15 20.74 3 18.58 3 15.93V 9.86C 3 7.2 5.15 5.05 7.8 5.05H 9.53"/><path d="M 14.46 5.17V 9.42C 14.46 10.47 13.61 11.32 12.56 11.32H 11.44C 10.39 11.32 9.54 10.47 9.54 9.42V 5.17C 9.54 4.12 10.39 3.27 11.44 3.27H 12.56C 13.61 3.27 14.46 4.12 14.46 5.17Z"/></svg></i>TVA et autoliquidation au bon taux</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 15.83 8.17L 10.11 13.96L 3.6 9.89C 2.67 9.3 2.86 7.89 3.92 7.58L 19.37 3.05C 20.34 2.77 21.23 3.67 20.95 4.64L 16.37 20.09C 16.06 21.14 14.65 21.33 14.07 20.4L 10.11 13.96"/></svg></i>Format électronique 2026</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg></i>Mentions obligatoires posées</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></i>Reprend votre numérotation</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M15.8572,17.4171 C17.7302,17.4171 19.2492,15.8991 19.2501995,14.0261 L19.2501995,14.0241 L19.2501995,11.3241 C18.0132,11.3241 17.0112,10.3221 17.0102,9.0851 C17.0102,7.8491 18.0122,6.8461 19.2492,6.8461 L19.2501995,6.8461 L19.2501995,4.1461 C19.2522,2.2721 17.7352,0.7521 15.8622,0.7501 L15.8562,0.7501 L4.1442,0.7501 C2.2702,0.7501 0.7512,2.2681 0.750199507,4.1421 L0.750199507,4.1431 L0.750199507,6.9331 C1.9442,6.8911 2.9452,7.8251 2.9872,9.0191 C2.9882,9.0411 2.9892,9.0631 2.9892,9.0851 C2.9902,10.3201 1.9912,11.3221 0.7562,11.3241 L0.750199507,11.3241 L0.750199507,14.0241 C0.7492,15.8971 2.2682,17.4171 4.1412,17.4171 L4.1422,17.4171 L15.8572,17.4171 Z"></path> <path d="M10.3713,6.0631 L10.9873,7.3101 C11.0473,7.4321 11.1633,7.5171 11.2983,7.5371 L12.6753,7.7381 C13.0163,7.7881 13.1513,8.2061 12.9053,8.4451 L11.9093,9.4151 C11.8113,9.5101 11.7673,9.6471 11.7893,9.7821 L12.0243,11.1521 C12.0823,11.4911 11.7273,11.7491 11.4233,11.5891 L10.1923,10.9421 C10.0713,10.8781 9.9273,10.8781 9.8063,10.9421 L8.5763,11.5891 C8.2713,11.7491 7.9163,11.4911 7.9743,11.1521 L8.2093,9.7821 C8.2323,9.6471 8.1873,9.5101 8.0893,9.4151 L7.0943,8.4451 C6.8483,8.2061 6.9833,7.7881 7.3233,7.7381 L8.7003,7.5371 C8.8353,7.5171 8.9523,7.4321 9.0123,7.3101 L9.6273,6.0631 C9.7793,5.7551 10.2193,5.7551 10.3713,6.0631 Z"></path> </g> </g></svg></i>Numérotation sans trou ni doublon</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor"> <path d="M2.7949,5.056 C2.7949,3.807 3.8069,2.795 5.0559,2.794 L6.0849,2.794 C6.6819,2.794 7.2539,2.557 7.6779,2.137 L8.3969,1.417 C9.2779,0.531 10.7099,0.527 11.5959,1.408 L11.5969,1.409 L11.6059,1.417 L12.3259,2.137 C12.7499,2.558 13.3219,2.794 13.9189,2.794 L14.9469,2.794 C16.1959,2.794 17.2089,3.806 17.2089,5.056 L17.2089,6.083 C17.2089,6.68 17.4449,7.253 17.8659,7.677 L18.5859,8.397 C19.4719,9.278 19.4769,10.71 18.5959,11.596 C18.5959,11.596 18.5949,11.597 18.5949,11.597 L18.5859,11.606 L17.8659,12.326 C17.4449,12.749 17.2089,13.321 17.2089,13.918 L17.2089,14.947 C17.2089,16.196 16.1969,17.208 14.9479,17.208 L14.9469,17.208 L13.9169,17.208 C13.3199,17.208 12.7469,17.445 12.3239,17.866 L11.6039,18.585 C10.7239,19.471 9.2929,19.476 8.4069,18.597 C8.4059,18.596 8.4049,18.595 8.4039,18.594 L8.3949,18.585 L7.6759,17.866 C7.2529,17.445 6.6799,17.209 6.0829,17.208 L5.0559,17.208 C3.8069,17.208 2.7949,16.196 2.7949,14.947 L2.7949,13.916 C2.7949,13.319 2.5579,12.747 2.1369,12.324 L1.4179,11.604 C0.5319,10.724 0.5269,9.293 1.4069,8.407 C1.4069,8.406 1.4079,8.405 1.4089,8.404 L1.4179,8.395 L2.1369,7.675 C2.5579,7.251 2.7949,6.679 2.7949,6.081 L2.7949,5.056" stroke-width="1.5"></path> <line x1="7.4316" y1="12.5717" x2="12.5716" y2="7.4317" stroke-width="1.5"></line> <line x1="12.4955" y1="12.5" x2="12.5045" y2="12.5" stroke-width="2"></line> <line x1="7.4955" y1="7.5" x2="7.5045" y2="7.5" stroke-width="2"></line> </g> </g></svg></i>TVA et autoliquidation au bon taux</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path> <polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline> </g> </g></svg></i>Format électronique 2026</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i>Mentions obligatoires posées</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(4.000000, 4.500000)" stroke="currentColor" stroke-width="1.5"> <line x1="6.33015655" y1="12.0929063" x2="0.0294393477" y2="12.0929063"></line> <line x1="9.14048198" y1="2.40037662" x2="15.4411992" y2="2.40037662"></line> <path d="M4.72628792,2.34625359 C4.72628792,1.05059752 3.66812728,1.79725516e-14 2.36314396,1.79725516e-14 C1.05816064,1.79725516e-14 1.25389895e-15,1.05059752 1.25389895e-15,2.34625359 C1.25389895e-15,3.64190965 1.05816064,4.69250717 2.36314396,4.69250717 C3.66812728,4.69250717 4.72628792,3.64190965 4.72628792,2.34625359 Z"></path> <path d="M16,12.0537464 C16,10.7580903 14.942654,9.70749283 13.6376706,9.70749283 C12.3318727,9.70749283 11.2737121,10.7580903 11.2737121,12.0537464 C11.2737121,13.3494025 12.3318727,14.4 13.6376706,14.4 C14.942654,14.4 16,13.3494025 16,12.0537464 Z"></path> </g> </g></svg></i>Reprend votre numérotation</li>
         </ul>
-        <a class="ac-card-go" href="reserver.html">Être prêt pour 2026 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
+        <a class="ac-card-go" href="reserver.html">Être prêt pour 2026 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
       </article>
 
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-facturation.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Archivage</span>
+          <span class="ac-card-role">Archivage et export</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Ranger et transmettre</p>
         <h3>Tout est retrouvable en deux clics</h3>
         <p class="ac-card-acc">Dix ans d'archives <span>· et un export mensuel propre</span></p>
         <hr class="ac-card-sep">
         <p class="ac-card-cap">Ce qu'il fait :</p>
         <ul>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 16.42 9.45L 16.42 7.3C 16.42 4.79 14.39 2.75 11.87 2.75C 9.36 2.74 7.31 4.77 7.3 7.28L 7.3 7.3L 7.3 9.45"/><path d="M 15.68 21.25L 8.04 21.25C 5.95 21.25 4.25 19.55 4.25 17.46L 4.25 13.17C 4.25 11.07 5.95 9.38 8.04 9.38L 15.68 9.38C 17.78 9.38 19.48 11.07 19.48 13.17L 19.48 17.46C 19.48 19.55 17.78 21.25 15.68 21.25Z"/><path d="M11.86 14.2L11.86 16.42"/></svg></i>Dix ans, facture et devis liés</li>
-          <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <circle cx="9.76659044" cy="9.76659044" r="8.9885584"></circle> <line x1="16.0183067" y1="16.4851259" x2="19.5423342" y2="20.0000001"></line> </g></svg></i>Recherche par client ou chantier</li>
-          <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></i>Export au format de votre cabinet</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 11.98 15.35C 8.12 15.35 4.81 15.93 4.81 18.27C 4.81 20.61 8.1 21.22 11.98 21.22C 15.85 21.22 19.15 20.63 19.15 18.29C 19.15 15.95 15.87 15.35 11.98 15.35Z"/><path d="M 11.98 12.01C 14.52 12.01 16.58 9.95 16.58 7.41C 16.58 4.87 14.52 2.81 11.98 2.81C 9.45 2.81 7.39 4.87 7.39 7.41C 7.38 9.94 9.42 12 11.95 12.01L 11.98 12.01Z"/></svg></i>Accès lecture pour le comptable</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.72 16.22L8.5 16.22"/><path d="M15.72 12.04L8.5 12.04"/><path d="M11.25 7.86L8.5 7.86"/><path d="M 15.91 2.75C 15.91 2.75 8.23 2.75 8.22 2.75C 5.46 2.77 3.75 4.59 3.75 7.36L 3.75 16.55C 3.75 19.34 5.47 21.16 8.26 21.16C 8.26 21.16 15.93 21.16 15.95 21.16C 18.71 21.14 20.42 19.32 20.42 16.55L 20.42 7.36C 20.42 4.57 18.69 2.75 15.91 2.75Z"/></svg></i>Pièces du chantier au même endroit</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(1.500000, 1.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M19.9189,14.2321 C19.9189,17.8101 17.8099,19.9191 14.2319,19.9191 L6.4499,19.9191 C2.8629,19.9191 0.7499,17.8101 0.7499,14.2321 L0.7499,6.4321 C0.7499,2.8591 2.0639,0.7501 5.6429,0.7501 L7.6429,0.7501 C8.3609,0.7511 9.0369,1.0881 9.4669,1.6631 L10.3799,2.8771 C10.8119,3.4511 11.4879,3.7891 12.2059,3.7901 L15.0359,3.7901 C18.6229,3.7901 19.9469,5.6161 19.9469,9.2671 L19.9189,14.2321 Z"></path> <line x1="5.981" y1="12.963" x2="14.716" y2="12.963"></line> </g> </g></svg></i>Dix ans, facture et devis liés</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <circle cx="9.76659044" cy="9.76659044" r="8.9885584"></circle> <line x1="16.0183067" y1="16.4851259" x2="19.5423342" y2="20.0000001"></line> </g> </g></svg></i>Recherche par client ou chantier</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.8324759,5.17463303 L7.10903824,10.9591851 L0.599436312,6.88767232 C-0.333249591,6.30414294 -0.139234755,4.88743509 0.915720913,4.57892564 L16.3712257,0.0527673159 C17.3372579,-0.230371288 18.2325555,0.67283071 17.9455752,1.6419969 L13.3730902,17.0867511 C13.059837,18.1431929 11.6512085,18.331952 11.073206,17.3952605 L7.10600676,10.9602"></path> </g> </g></svg></i>Export au format de votre cabinet</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(4.814286, 2.814476)" stroke="currentColor"> <path d="M7.17047619,12.531714 C3.30285714,12.531714 -4.08562073e-14,13.1164759 -4.08562073e-14,15.4583807 C-4.08562073e-14,17.8002854 3.28190476,18.4059997 7.17047619,18.4059997 C11.0380952,18.4059997 14.34,17.8202854 14.34,15.479333 C14.34,13.1383807 11.0590476,12.531714 7.17047619,12.531714 Z" stroke-width="1.5"></path> <path d="M7.17047634,9.19142857 C9.70857158,9.19142857 11.7657144,7.13333333 11.7657144,4.5952381 C11.7657144,2.05714286 9.70857158,-5.32907052e-15 7.17047634,-5.32907052e-15 C4.6323811,-5.32907052e-15 2.574259,2.05714286 2.574259,4.5952381 C2.56571443,7.1247619 4.60952396,9.18285714 7.13809539,9.19142857 L7.17047634,9.19142857 Z" stroke-width="1.42857143"></path> </g> </g></svg></i>Accès lecture pour le comptable</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M11.2365,0.761863533 L4.5845,0.761863533 C2.5045,0.7529 0.7995,2.4109 0.7505,4.4909 L0.7505,15.3399 C0.7155,17.3899 2.3485,19.0809 4.3995,19.1169 C4.4605,19.1169 4.5225,19.1169 4.5845,19.1149 L12.5725,19.1149 C14.6415,19.0939 16.3055,17.4089 16.3025041,15.3399 L16.3025041,6.0399 L11.2365,0.761863533 Z"></path> <path d="M10.9733,0.7501 L10.9733,3.6591 C10.9733,5.0791 12.1223,6.2301 13.5423,6.2341 L16.2963,6.2341"></path> <line x1="10.7927" y1="11.7472" x2="5.8927" y2="11.7472"></line> </g> </g></svg></i>Pièces du chantier au même endroit</li>
         </ul>
-        <a class="ac-card-go" href="reserver.html">Simplifier ma fin de mois <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a>
+        <a class="ac-card-go" href="reserver.html">Simplifier ma fin de mois <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
       </article>
 
     </div>
@@ -1521,7 +1599,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   <div class="shell ac-tools-head">
     <h2 class="ac-h2">Vous gardez votre compta et vos outils, <em>il travaille avec</em>.</h2>
     <p class="ac-sub">Il reprend votre numérotation là où elle en est et exporte dans le format que votre cabinet attend. Personne n'a à changer de logiciel, ni vous ni lui.</p>
-    <p class="ac-tools-count"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg> +75 intégrations disponibles</p>
+    <p class="ac-tools-count"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg> +75 intégrations disponibles</p>
   </div>
 
   <div class="ac-belt" aria-hidden="true">
@@ -1598,7 +1676,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     <div class="ac-duo-card">
       <div class="ac-duo-pair">
         <img src="perso/avatar-facturation.webp" width="82" height="82" alt="Assistant facturation" loading="lazy" decoding="async">
-        <span class="ac-duo-plus" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></span>
+        <span class="ac-duo-plus" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(4.814286, 2.814476)" stroke="currentColor"> <path d="M7.17047619,12.531714 C3.30285714,12.531714 -4.08562073e-14,13.1164759 -4.08562073e-14,15.4583807 C-4.08562073e-14,17.8002854 3.28190476,18.4059997 7.17047619,18.4059997 C11.0380952,18.4059997 14.34,17.8202854 14.34,15.479333 C14.34,13.1383807 11.0590476,12.531714 7.17047619,12.531714 Z" stroke-width="1.5"></path> <path d="M7.17047634,9.19142857 C9.70857158,9.19142857 11.7657144,7.13333333 11.7657144,4.5952381 C11.7657144,2.05714286 9.70857158,-5.32907052e-15 7.17047634,-5.32907052e-15 C4.6323811,-5.32907052e-15 2.574259,2.05714286 2.574259,4.5952381 C2.56571443,7.1247619 4.60952396,9.18285714 7.13809539,9.19142857 L7.17047634,9.19142857 Z" stroke-width="1.42857143"></path> </g> </g></svg></span>
         <img src="perso/avatar-tresorerie.webp" width="82" height="82" alt="Assistante trésorerie" loading="lazy" decoding="async">
       </div>
 
@@ -1610,7 +1688,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
       <div class="ac-duo-act">
         <button type="button" data-panier="tresorerie" data-panier-texte="Ajouter à mon équipe"><span data-panier-label>Ajouter à mon équipe</span><span data-panier-ico aria-hidden="true"></span></button>
-        <a class="ac-duo-all" href="assistant-tresorerie.html">Voir sa fiche <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg></a>
+        <a class="ac-duo-all" href="assistant-tresorerie.html">Voir sa fiche <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g> </g></svg></a>
       </div>
     </div>
 
@@ -1684,13 +1762,13 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
          première le jour où la caisse est ouverte, la seconde d'ici là.
          On ne promet « commander » que quand on sait encaisser. -->
     <p class="ac-direct" data-achat hidden>Vous savez déjà ce qu'il vous faut ?
-      <a href="commander.html">Commander en ligne, sans rendez-vous <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg></a></p>
+      <a href="commander.html">Commander en ligne, sans rendez-vous <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g> </g></svg></a></p>
     <p class="ac-direct" data-achat-sinon>Vous savez déjà ce qu'il vous faut ?
-      <a href="commander.html">Composer mon équipe <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg></a></p>
+      <a href="commander.html">Composer mon équipe <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g> </g></svg></a></p>
     <ul class="ac-reassure">
-      <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Mise en place personnalisée</li>
-      <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Conforme à la réforme 2026</li>
-      <li><i aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Données hébergées en France</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.500000, 1.500000)" stroke="currentColor" stroke-width="1.5"> <path d="M18.3066362,6.12356982 L17.6842106,5.04347829 C17.1576365,4.12955711 15.9906873,3.8142761 15.0755149,4.33867279 L15.0755149,4.33867279 C14.6398815,4.59529992 14.1200613,4.66810845 13.6306859,4.54104256 C13.1413105,4.41397667 12.7225749,4.09747295 12.4668193,3.66132725 C12.3022855,3.38410472 12.2138742,3.06835005 12.2105264,2.74599544 L12.2105264,2.74599544 C12.2253694,2.22917739 12.030389,1.72835784 11.6700024,1.3576252 C11.3096158,0.986892553 10.814514,0.777818938 10.2974829,0.778031878 L9.04347831,0.778031878 C8.53694532,0.778031878 8.05129106,0.97987004 7.69397811,1.33890085 C7.33666515,1.69793166 7.13715288,2.18454839 7.13958814,2.69107553 L7.13958814,2.69107553 C7.12457503,3.73688099 6.27245786,4.57676682 5.22654465,4.57665906 C4.90419003,4.57331126 4.58843537,4.48489995 4.31121284,4.32036615 L4.31121284,4.32036615 C3.39604054,3.79596946 2.22909131,4.11125048 1.70251717,5.02517165 L1.03432495,6.12356982 C0.508388616,7.03634945 0.819378585,8.20256183 1.72997713,8.73226549 L1.72997713,8.73226549 C2.32188101,9.07399614 2.68650982,9.70554694 2.68650982,10.3890161 C2.68650982,11.0724852 2.32188101,11.704036 1.72997713,12.0457667 L1.72997713,12.0457667 C0.820534984,12.5718952 0.509205679,13.7352837 1.03432495,14.645309 L1.03432495,14.645309 L1.6659039,15.7345539 C1.9126252,16.1797378 2.3265816,16.5082503 2.81617164,16.6473969 C3.30576167,16.7865435 3.83061824,16.7248517 4.27459956,16.4759726 L4.27459956,16.4759726 C4.71105863,16.2212969 5.23116727,16.1515203 5.71931837,16.2821523 C6.20746948,16.4127843 6.62321383,16.7330005 6.87414191,17.1716248 C7.03867571,17.4488473 7.12708702,17.764602 7.13043482,18.0869566 L7.13043482,18.0869566 C7.13043482,19.1435014 7.98693356,20.0000001 9.04347831,20.0000001 L10.2974829,20.0000001 C11.3504633,20.0000001 12.2054882,19.1490783 12.2105264,18.0961099 L12.2105264,18.0961099 C12.2080776,17.5879925 12.4088433,17.0999783 12.7681408,16.7406809 C13.1274382,16.3813834 13.6154524,16.1806176 14.1235699,16.1830664 C14.4451523,16.1916732 14.7596081,16.2797208 15.0389017,16.4393593 L15.0389017,16.4393593 C15.9516813,16.9652957 17.1178937,16.6543057 17.6475973,15.7437072 L17.6475973,15.7437072 L18.3066362,14.645309 C18.5617324,14.2074528 18.6317479,13.6859659 18.5011783,13.1963297 C18.3706086,12.7066935 18.0502282,12.2893121 17.6109841,12.0366133 L17.6109841,12.0366133 C17.17174,11.7839145 16.8513595,11.3665332 16.7207899,10.876897 C16.5902202,10.3872608 16.6602358,9.86577384 16.9153319,9.42791767 C17.0812195,9.13829096 17.3213574,8.89815312 17.6109841,8.73226549 L17.6109841,8.73226549 C18.5161253,8.20284891 18.8263873,7.04344892 18.3066362,6.13272314 L18.3066362,6.13272314 L18.3066362,6.12356982 Z"></path> <circle cx="9.67505726" cy="10.3890161" r="2.63615562"></circle> </g> </g></svg></i>Mise en place personnalisée</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path> <polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline> </g> </g></svg></i>Conforme à la réforme 2026</li>
+      <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M12.9234,7.4478 L12.9234,5.3008 C12.9234,2.7878 10.8854,0.749755462 8.3724,0.749755462 C5.8594,0.7388 3.8134,2.7668 3.8024,5.2808 L3.8024,5.3008 L3.8024,7.4478"></path> <path d="M12.1832,19.2496 L4.5422,19.2496 C2.4482,19.2496 0.7502,17.5526 0.7502,15.4576 L0.7502,11.1686 C0.7502,9.0736 2.4482,7.3766 4.5422,7.3766 L12.1832,7.3766 C14.2772,7.3766 15.9752,9.0736 15.9752,11.1686 L15.9752,15.4576 C15.9752,17.5526 14.2772,19.2496 12.1832,19.2496 Z"></path> <line x1="8.3629" y1="12.2027" x2="8.3629" y2="14.4237"></line> </g> </g></svg></i>Données hébergées en France</li>
     </ul>
   </div>
 </section>
@@ -1857,44 +1935,135 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     show(n);
     n.focus();
   });
+
+  /* ── sur téléphone, le rail se balaie ────────────────────────────────
+     La carte la plus proche du centre devient la mission active : l'écran
+     du téléphone au-dessus suit le doigt, sans qu'on ait à taper. Les
+     points disent combien il en reste — sans eux, on croit qu'il n'y en a
+     qu'une. */
+  var rail  = list;
+  var dots  = document.getElementById('acMissDots');
+  var etroit = window.matchMedia('(max-width:960px)');
+  var attente = null;
+
+  if (dots){
+    for (var d = 0; d < tabs.length; d++){
+      (function(idx){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Mission ' + (idx + 1) + ' sur ' + tabs.length);
+        b.setAttribute('aria-current', idx === 0 ? 'true' : 'false');
+        b.addEventListener('click', function(){
+          tabs[idx].scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+          show(tabs[idx]);
+        });
+        dots.appendChild(b);
+      })(d);
+    }
+    dots.removeAttribute('aria-hidden');
+  }
+
+  function pointer(i){
+    if (!dots) return;
+    for (var k = 0; k < dots.children.length; k++){
+      dots.children[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+    }
+  }
+
+  /* la carte dont le centre est le plus proche du centre du rail */
+  function centree(){
+    var r = rail.getBoundingClientRect();
+    var axe = r.left + r.width / 2;
+    var best = 0, ecart = Infinity;
+    for (var i = 0; i < tabs.length; i++){
+      var c = tabs[i].getBoundingClientRect();
+      var e = Math.abs(c.left + c.width / 2 - axe);
+      if (e < ecart){ ecart = e; best = i; }
+    }
+    return best;
+  }
+
+  rail.addEventListener('scroll', function(){
+    if (!etroit.matches) return;
+    /* on attend la fin du geste : changer l'écran à chaque pixel donnerait
+       un clignotement pendant le balayage */
+    clearTimeout(attente);
+    attente = setTimeout(function(){
+      var i = centree();
+      pointer(i);
+      if (tabs[i].getAttribute('aria-selected') !== 'true') show(tabs[i]);
+    }, 90);
+  }, {passive:true});
+
+  /* le rail garde sa position quand on change de largeur : on resynchronise */
+  etroit.addEventListener && etroit.addEventListener('change', function(){
+    if (etroit.matches) pointer(centree());
+  });
 })();
 
 
-/* ═══ 3 · LE SCÉNARIO — quel onglet est au-dessus de la pile ════════════ */
+/* ═══ 3 · LES DEUX PROMESSES — pile collante et entrées décalées ═════════
+   Une seule boucle de défilement pilote les deux effets : la carte recouverte
+   recule, la carte qui entre dans l'écran révèle son contenu. Pas d'observer :
+   une carte plus haute que la fenêtre ne franchit jamais son seuil de façon
+   fiable, et son contenu resterait invisible.
+   Sous 900 px rien ne colle et rien ne s'anime — on retire les classes pour
+   qu'une rotation d'écran ne laisse rien de figé. */
 (function(){
-  var steps = [].slice.call(document.querySelectorAll('#acSteps .ac-step'));
-  if (!steps.length) return;
+  var stack = document.getElementById('acPile');
+  if (!stack) return;
 
-  var wide = window.matchMedia('(min-width:961px)');
+  var cards = [].slice.call(stack.querySelectorAll('.ac-pile-card'));
+  if (!cards.length) return;
+
+  var large = window.matchMedia('(min-width:900px)');
+  var calme = window.matchMedia('(prefers-reduced-motion:reduce)');
   var ticking = false;
 
-  function stickTop(){
-    var v = parseFloat(getComputedStyle(steps[0]).top);
-    return isNaN(v) ? 0 : v;
-  }
+  function anime(){ return large.matches && !calme.matches; }
 
-  function paint(){
+  function peindre(){
     ticking = false;
-    var act = -1;
-    if (wide.matches){
-      var line = stickTop() + 1;
-      for (var i = 0; i < steps.length; i++){
-        if (steps[i].getBoundingClientRect().top <= line) act = i;
+    var i, r;
+
+    if (!anime()){
+      for (i = 0; i < cards.length; i++){
+        cards[i].classList.remove('is-back');
+        cards[i].classList.add('is-in');
       }
-      if (act < 0) act = 0;
+      return;
     }
-    for (var j = 0; j < steps.length; j++) steps[j].classList.toggle('is-on', j === act);
+
+    var h = window.innerHeight || document.documentElement.clientHeight;
+    for (i = 0; i < cards.length; i++){
+      r = cards[i].getBoundingClientRect();
+
+      /* entrée : dès que le haut de la carte est monté dans l'écran */
+      if (r.top < h * 0.92) cards[i].classList.add('is-in');
+
+      /* recul : la carte suivante est venue se poser par-dessus */
+      var suiv = cards[i + 1];
+      cards[i].classList.toggle('is-back',
+        !!suiv && suiv.getBoundingClientRect().top <= r.bottom - 8);
+    }
   }
 
-  function onScroll(){
+  function auScroll(){
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(paint);
+    requestAnimationFrame(peindre);
   }
 
-  window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', onScroll);
-  paint();
+  window.addEventListener('scroll', auScroll, {passive:true});
+  window.addEventListener('resize', auScroll);
+  if (large.addEventListener) large.addEventListener('change', auScroll);
+
+  /* arrivée directe sur une ancre, ou position de défilement restaurée par le
+     navigateur après le chargement : aucun événement de défilement n'est émis,
+     et les cartes resteraient masquées. On repasse une fois. */
+  window.addEventListener('load', auScroll);
+  setTimeout(peindre, 300);
+  peindre();
 })();
 
 </script>
