@@ -2174,6 +2174,47 @@ html[data-theme="light"] .t-price .seg{background:#fff;box-shadow:0 1px 2px rgba
   box-shadow:0 5px 16px rgba(var(--bronze-rgb),.38)}
 .t-price .plan .setup .lancement svg{width:12px;height:12px;flex:0 0 12px}
 
+/*  Le bloc qui explique l'offre. Il arrive entre le titre et le choix de
+    durée, à l'endroit où l'on décide — pas en bas de page. Fond braise à
+    9 % plutôt qu'une carte pleine : c'est une annonce, pas un produit de
+    plus dans la grille. Les trois montants sont des pastilles, comme
+    ailleurs sur le site, et chacune porte le mot « offerte » : la couleur
+    seule ne dirait pas ce qui se passe.  */
+.t-price .lanc{position:relative;max-width:720px;margin:0 auto 34px;
+  padding:26px 28px 24px;border-radius:24px;text-align:center;
+  background:rgba(var(--bronze-rgb),.09);
+  border:1px solid rgba(var(--bronze-rgb),.28);
+  scroll-margin-top:120px}
+html[data-theme="light"] .t-price .lanc{background:rgba(var(--bronze-rgb),.07)}
+.t-price .lanc-tag{display:inline-flex;align-items:center;
+  padding:5px 12px;border-radius:100px;background:var(--bronze);color:#fff;
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;white-space:nowrap;
+  box-shadow:0 5px 16px rgba(var(--bronze-rgb),.34)}
+.t-price .lanc-t{margin:16px 0 0;font-size:clamp(22px,2.6vw,30px);font-weight:800;
+  letter-spacing:-1px;line-height:1.1;color:var(--parch);text-wrap:balance}
+.t-price .lanc-t b{color:var(--bronze);font-weight:800}
+.t-price .lanc-p{margin:12px auto 0;max-width:520px;
+  font-size:14.5px;line-height:1.6;color:var(--lin)}
+.t-price .lanc-pills{list-style:none;margin:20px 0 0;padding:0;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:9px}
+.t-price .lanc-pills li{display:inline-flex;align-items:baseline;gap:7px;
+  padding:8px 14px;border-radius:100px;
+  background:rgba(var(--bronze-rgb),.1);
+  border:1px solid rgba(var(--bronze-rgb),.26);
+  font-size:13px;letter-spacing:-.1px}
+.t-price .lanc-pills span{font-weight:700;color:var(--parch)}
+.t-price .lanc-pills s{color:var(--lin);font-variant-numeric:tabular-nums}
+.t-price .lanc-pills b{font-weight:800;color:var(--bronze)}
+.t-price .lanc-f{margin:18px auto 0;max-width:540px;
+  font-size:12.5px;line-height:1.55;color:var(--lin)}
+.t-price .lanc-f b{color:var(--parch);font-weight:700}
+@media (max-width:560px){
+  .t-price .lanc{padding:22px 18px 20px;border-radius:20px;margin-bottom:26px}
+  .t-price .lanc-pills{gap:7px}
+  .t-price .lanc-pills li{padding:7px 12px;font-size:12.5px}
+}
+
 /*  la pastille du segmenté : remplie plutôt que cernée, pour qu'on la
     lise comme une exception et non comme un simple pourcentage  */
 .t-price .seg button[data-k="m"] .off{background:var(--bronze);border-color:transparent;
@@ -3051,6 +3092,26 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <p>Talos automatise vos devis, relances, factures et rendez-vous. Choisissez la formule
          adaptée à votre volume d'activité — mise en place incluse.</p>
     </div>
+
+    <!-- L'offre de lancement expliquée. La pastille posée sur chaque carte
+         annonce qu'il y a une offre ; elle ne dit pas ce qu'elle vaut ni
+         jusqu'à quand. Comme la pastille du héros de l'accueil mène ici,
+         la réponse doit être la première chose qu'on lit en arrivant. -->
+    <aside class="lanc" id="lancement" aria-labelledby="lancTitre" data-tx-skip>
+      <span class="lanc-tag">Offre de lancement</span>
+      <h2 class="lanc-t" id="lancTitre">La mise en place est <b>offerte</b>.</h2>
+      <p class="lanc-p">On récupère vos documents, vos tarifs et vos règles, puis on règle
+         votre assistant dessus. C'est la seule chose qu'on facture une fois —
+         et en ce moment, on ne la facture pas.</p>
+      <ul class="lanc-pills">
+        <li><span>Starter</span><s>149 €</s><b>offerte</b></li>
+        <li><span>Business</span><s>449 €</s><b>offerte</b></li>
+        <li><span>Évolution</span><s>690 €</s><b>offerte</b></li>
+      </ul>
+      <p class="lanc-f">Pour les <b>30 premiers clients</b> au mensuel, et sur tout
+         engagement de six ou douze mois. Passé ce cap, elle redevient payante —
+         on préfère l'annoncer que de la retirer un jour sans prévenir.</p>
+    </aside>
 
     <div class="engage">
       <div class="seg" id="seg" role="radiogroup" aria-label="Durée d'engagement">
