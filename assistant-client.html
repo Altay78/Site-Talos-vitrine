@@ -736,19 +736,21 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
    de l'assistant, un titre, une ligne d'accroche, puis la liste complète.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.ac-feat{padding:96px 0 108px;border-top:1px solid var(--line)}
-.ac-feat-head{max-width:720px;margin:0 0 46px}
+.ac-feat{padding:80px 0 88px;border-top:1px solid var(--line)}
+.ac-feat-head{max-width:720px;margin:0 0 34px}
 
 /* On fait glisser au lieu d'empiler : une carte à la fois, calée sur son
    bord. Les huit rangées sont déclarées ici et reprises par chaque carte
    en subgrid — vignette, titre, accroche, liste et bouton tombent donc au
    même niveau d'une carte à l'autre, quelle que soit la longueur du texte.
-   Huit, comme les huit enfants de .ac-card : en déclarer une de plus
-   laisserait une rangée vide, donc une gouttière de 22 px en bas. */
+   Sept, comme les sept enfants de .ac-card : en déclarer une de plus
+   laisserait une rangée vide, donc une gouttière en bas de chaque carte. */
 .ac-feat-rail{display:grid;grid-auto-flow:column;
   grid-auto-columns:var(--w,46%);
-  grid-template-rows:repeat(8,auto);
-  gap:22px;align-items:stretch;
+  grid-template-rows:repeat(7,auto);
+  /* rangées collées : la gouttière ne sert qu'entre les cartes. Appliquée
+     aussi aux rangées, elle ajoutait 18 px sous chacun des sept blocs. */
+  gap:0 18px;align-items:stretch;
   overflow-x:auto;overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;
   padding:4px 4px 10px;margin:-4px -4px -10px;
@@ -759,7 +761,7 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
 
 .ac-card{grid-row:1 / -1;display:grid;grid-template-rows:subgrid;
   scroll-snap-align:start;
-  padding:30px 30px 28px;
+  padding:26px 26px 24px;
   border-radius:26px;background:var(--ink-2);border:1px solid var(--line-2);
   transition:border-color .3s var(--e),transform .3s var(--e)}
 /* sans subgrid la carte reste lisible, seules les rangées ne s'alignent plus */
@@ -770,7 +772,7 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
 html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 .ac-card:hover{border-color:rgba(var(--bronze-rgb),.4);transform:translateY(-3px)}
 
-.ac-card-top{display:flex;align-items:center;gap:12px;margin:0 0 22px}
+.ac-card-top{display:flex;align-items:center;gap:12px;margin:0 0 20px}
 .ac-card-av{width:42px;height:42px;border-radius:13px;flex:0 0 auto;
   object-fit:cover;background:var(--ink-3);border:1px solid var(--line-2)}
 .ac-card-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
@@ -778,18 +780,16 @@ html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 .ac-card-n{margin-left:auto;font-family:var(--mono);font-size:11.5px;
   letter-spacing:.08em;color:var(--bronze);white-space:nowrap}
 
-.ac-card-lab{margin:0 0 6px;font-size:14px;font-weight:700;letter-spacing:-.2px;
-  color:var(--parch)}
-.ac-card h3{margin:0 0 10px;font-size:clamp(23px,2.2vw,29px);line-height:1.12;
+.ac-card h3{margin:0 0 8px;font-size:clamp(23px,2.2vw,29px);line-height:1.12;
   letter-spacing:-1.1px;font-weight:800;color:var(--parch);text-wrap:balance}
-.ac-card-acc{margin:0 0 14px;font-size:15px;line-height:1.5;font-weight:700;
+.ac-card-acc{margin:0 0 18px;font-size:15px;line-height:1.5;font-weight:700;
   letter-spacing:-.2px;color:var(--bronze)}
 .ac-card-acc span{color:var(--lin);font-weight:500}
 .ac-card > p{margin:0 0 22px;font-size:15px;line-height:1.62;color:var(--lin)}
 
 .ac-card-sep{margin:0 0 16px;padding:0;border:0;border-top:1px solid var(--line)}
-.ac-card-cap{margin:0 0 14px;font-size:13px;font-weight:600;color:var(--lin)}
-.ac-card ul{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:12px}
+.ac-card-cap{margin:0 0 10px;font-size:13px;font-weight:600;color:var(--lin)}
+.ac-card ul{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:11px}
 .ac-card li{display:flex;align-items:flex-start;gap:11px;
   font-size:14.5px;line-height:1.45;letter-spacing:-.1px;color:var(--parch)}
 .ac-card li i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
@@ -1056,7 +1056,7 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .t-asst .actions{flex-direction:column}
   .t-asst .btn{width:100%}
   .ac-mission{padding:20px 18px 20px 18px}
-  .ac-card{padding:26px 22px 24px;border-radius:22px}
+  .ac-card{padding:22px 20px 22px;border-radius:22px}
   .ac-ba-table td{padding:13px 12px;font-size:13px}
   .ac-ba-table th{padding:13px 12px 11px}
   .ac-card-go{width:100%;justify-content:center}
@@ -1381,7 +1381,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
     <div class="ac-feat-head">
       <p class="ac-tag">Ce qu'elle prend en charge</p>
-      <h2 class="ac-h2">Trois missions, <em>zéro appel le soir</em>.</h2>
+      <h2 class="ac-h2">4 missions, <em>20 fonctionnalités</em>.</h2>
       <p class="ac-sub">Du message reçu à 21 h jusqu'au rappel deux heures avant l'intervention, voici exactement ce que votre assistante client fait à votre place.</p>
     </div>
 
@@ -1391,10 +1391,9 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-client.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Réponse</span>
+          <span class="ac-card-role">Réponses 24/7</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Répondre 24 h/24</p>
         <h3>Personne ne tombe sur la messagerie</h3>
         <p class="ac-card-acc">Réponse en moins d'une minute <span>· nuit, week-end et congés</span></p>
         <hr class="ac-card-sep">
@@ -1412,10 +1411,9 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-client.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Qualification</span>
+          <span class="ac-card-role">Qualification automatique</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Poser les bonnes questions</p>
         <h3>La demande arrive complète</h3>
         <p class="ac-card-acc">Tout ce qu'il vous faut <span>· avant même de décrocher</span></p>
         <hr class="ac-card-sep">
@@ -1433,10 +1431,9 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-client.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Agenda</span>
+          <span class="ac-card-role">Rendez-vous calés</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Caler le rendez-vous</p>
         <h3>Votre semaine se remplit toute seule</h3>
         <p class="ac-card-acc">Créneaux compatibles <span>· trajets compris</span></p>
         <hr class="ac-card-sep">
@@ -1454,10 +1451,9 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <article class="ac-card">
         <div class="ac-card-top">
           <img class="ac-card-av" src="perso/avatar-client.webp" width="42" height="42" alt="" loading="lazy" decoding="async">
-          <span class="ac-card-role">Rappels</span>
+          <span class="ac-card-role">Rappels J-1 et H-2</span>
           <span class="ac-card-n">05 fonctionnalités</span>
         </div>
-        <p class="ac-card-lab">Confirmer et rappeler</p>
         <h3>Moins de déplacements pour rien</h3>
         <p class="ac-card-acc">J-1 et H-2 <span>· par SMS et par e-mail</span></p>
         <hr class="ac-card-sep">
