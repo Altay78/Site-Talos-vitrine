@@ -126,12 +126,18 @@
   /* la barre se resserre d'autant : rien ne doit déborder à 375 px */
   .tnav { gap: 10px; padding: 9px 9px 9px 15px; }
   .tnav-act { gap: 7px; }
-  /* deux bascules pour un même réglage sèmeraient le doute : celle du
-     menu s'efface tant que celle de la barre est là */
-  .tnav-menu .m-theme { display: none; }
+  /* La bascule du menu reste, elle aussi. On avait craint que deux
+     commandes pour un même réglage sèment le doute ; à l'usage c'est
+     l'inverse qui s'est produit : une pastille de 36 px sans libellé,
+     posée entre un logo et un bouton orange, ne se remarque pas. Celle
+     du menu porte son nom — « Mode clair », « Mode sombre » — et c'est
+     elle qu'on trouve quand on cherche le réglage.
+
+     Les deux affichent le même état et appellent le même code : il n'y a
+     pas deux réglages, seulement deux portes. */
+  .tnav-menu .m-theme { display: flex; }
 }
-/* sous 360 px il n'y a plus la place : la pastille repasse dans le menu,
-   où elle n'a jamais cessé d'exister */
+/* sous 360 px la barre n'a plus la place : seule celle du menu subsiste */
 @media (max-width: 360px) {
   .tnav .theme-toggle { display: none; }
   .tnav-menu .m-theme { display: flex; }
