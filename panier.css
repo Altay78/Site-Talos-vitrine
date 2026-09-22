@@ -96,10 +96,20 @@ html.pn-ouvert .pn-tiroir{transform:none}
   line-height:1.25}
 .pn-ag-t small{display:block;font-size:12.5px;line-height:1.3;color:var(--pn-doux);
   margin-top:2px}
-.pn-ag-x{flex:0 0 auto;display:grid;place-items:center;width:26px;height:26px;
-  border-radius:50%;border:1px solid var(--pn-fil);color:var(--pn-doux)}
-.pn-ag-x svg{width:14px;height:14px}
-.pn-ag.on .pn-ag-x{background:var(--pn-acc);border-color:var(--pn-acc);color:#fff}
+/* La marque de sélection. Un anneau vide au repos, un disque plein dont la
+   coche se trace quand l'assistant est choisi. Le dessin ne change jamais :
+   seules la teinte et la longueur du trait bougent, donc la pastille se
+   remplit au lieu de sauter d'une icône à l'autre. */
+.pn-ag-x{flex:0 0 auto;width:24px;height:24px}
+.pn-ag-x svg{display:block;width:24px;height:24px}
+.pn-mk-r{fill:none;stroke:color-mix(in oklab,var(--pn-txt) 26%,transparent);stroke-width:1.4;
+  transition:fill .28s var(--pn-e),stroke .28s var(--pn-e)}
+.pn-mk-v{fill:none;stroke:#fff;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:14;stroke-dashoffset:14;
+  transition:stroke-dashoffset .34s var(--pn-e) .04s}
+.pn-ag:hover .pn-mk-r{stroke:color-mix(in oklab,var(--pn-txt) 46%,transparent)}
+.pn-ag.on .pn-mk-r,.pn-ag.on:hover .pn-mk-r{fill:var(--pn-acc);stroke:var(--pn-acc)}
+.pn-ag.on .pn-mk-v{stroke-dashoffset:0}
 
 /* ═══ L'ENGAGEMENT ══════════════════════════════════════════════════════ */
 .pn-engs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
@@ -121,30 +131,42 @@ html.pn-ouvert .pn-tiroir{transform:none}
   background:var(--pn-surf);border:1px solid var(--pn-fil)}
 .pn-vide{margin:0;font-size:14px;line-height:1.5;color:var(--pn-doux)}
 
-.pn-formule{margin:0 0 14px;padding:0 0 14px;border-bottom:1px solid var(--pn-fil)}
+/* Une seule chose doit sauter aux yeux : ce qu'il y a à payer le premier
+   mois. Tout le reste — le nom de la formule, les deux lignes du détail —
+   se tient un cran en dessous, sinon trois graisses se disputent la carte
+   et on ne sait plus où regarder. */
+.pn-formule{margin:0 0 16px;padding:0 0 16px;
+  border-bottom:1px solid color-mix(in oklab,var(--pn-txt) 8%,transparent)}
 .pn-formule-l{display:block;font-family:ui-monospace,"SF Mono",Menlo,monospace;
-  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pn-doux)}
-.pn-formule b{display:block;margin:4px 0 2px;font-size:22px;font-weight:800;
-  letter-spacing:-.8px;color:var(--pn-txt)}
-.pn-formule small{font-size:13px;color:var(--pn-doux)}
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:color-mix(in oklab,var(--pn-txt) 42%,transparent)}
+.pn-formule b{display:block;margin:6px 0 3px;font-size:26px;font-weight:800;
+  letter-spacing:-1.1px;line-height:1;color:var(--pn-txt)}
+.pn-formule small{font-size:13px;line-height:1.4;color:var(--pn-doux)}
 
-.pn-lignes{margin:0;display:grid;gap:9px}
+.pn-lignes{margin:0;display:grid;gap:11px}
 .pn-lignes > div{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
-.pn-lignes dt{font-size:14px;color:var(--pn-doux)}
-.pn-lignes dd{margin:0;font-size:15px;font-weight:700;letter-spacing:-.3px;
+.pn-lignes dt{font-size:13.5px;color:var(--pn-doux)}
+.pn-lignes dd{margin:0;font-size:14.5px;font-weight:600;letter-spacing:-.2px;
   color:var(--pn-txt);font-variant-numeric:tabular-nums;text-align:right}
 .pn-lignes dd span{font-weight:500;font-size:12.5px;color:var(--pn-doux)}
-.pn-lignes dd s{color:var(--pn-doux);font-weight:500}
-.pn-lignes dd em{font-style:normal;color:var(--pn-acc)}
-.pn-fort{margin-top:5px;padding-top:11px;border-top:1px solid var(--pn-fil)}
-.pn-fort dt{color:var(--pn-txt);font-weight:700}
-.pn-fort dd{font-size:21px;font-weight:800;letter-spacing:-.7px}
+.pn-lignes dd s{color:color-mix(in oklab,var(--pn-txt) 38%,transparent);font-weight:500}
+.pn-lignes dd em{font-style:normal;font-weight:700;color:var(--pn-acc)}
+.pn-fort{margin-top:7px;padding-top:15px;
+  border-top:1px solid color-mix(in oklab,var(--pn-txt) 8%,transparent)}
+.pn-fort dt{color:var(--pn-txt);font-weight:700;font-size:14.5px;letter-spacing:-.2px}
+.pn-fort dd{font-size:28px;font-weight:800;letter-spacing:-1.2px;line-height:1}
 
-.pn-eco{display:flex;align-items:flex-start;gap:8px;margin:14px 0 0;
-  font-size:13.5px;line-height:1.45;color:var(--pn-acc)}
-.pn-eco svg{width:15px;height:15px;flex:0 0 auto;margin-top:1px}
-.pn-eco b{font-weight:800}
-.pn-note{margin:12px 0 0;font-size:12.5px;line-height:1.5;color:var(--pn-doux)}
+/* L'économie était une phrase précédée d'une coche, c'est-à-dire la même
+   ponctuation que les listes de garanties plus bas. Ce n'est pas une
+   garantie, c'est un montant : une pastille le dit mieux qu'un signe. */
+.pn-eco{display:inline-flex;align-items:baseline;gap:5px;margin:16px 0 0;
+  padding:7px 13px;border-radius:100px;
+  background:color-mix(in oklab,var(--pn-acc) 13%,transparent);
+  font-size:13px;line-height:1.3;letter-spacing:-.2px;color:var(--pn-acc)}
+.pn-eco b{font-weight:800;font-variant-numeric:tabular-nums}
+.pn-note{margin:14px 0 0;font-size:12.5px;line-height:1.55;
+  color:color-mix(in oklab,var(--pn-txt) 46%,transparent)}
 
 /* ═══ LES ACTIONS ═══════════════════════════════════════════════════════ */
 .pn-actions{display:grid;gap:10px;margin-top:20px}
@@ -160,11 +182,9 @@ html.pn-ouvert .pn-tiroir{transform:none}
 .pn-cta.off{pointer-events:none;opacity:.4;box-shadow:none}
 /* la ligne qui rassure, juste sous le bouton qui prend l'argent :
    c'est elle qui fait cliquer, pas le bouton */
-.pn-rassure{display:flex;align-items:flex-start;gap:7px;
-  margin:-2px 0 2px;padding:0 4px;
-  font-size:12.5px;line-height:1.45;color:var(--pn-doux)}
-.pn-rassure svg{width:14px;height:14px;flex:0 0 auto;margin-top:2px;
-  color:var(--pn-acc)}
+.pn-rassure{margin:-2px 0 2px;padding:0 4px;text-align:center;
+  font-size:12.5px;line-height:1.45;
+  color:color-mix(in oklab,var(--pn-txt) 46%,transparent)}
 .pn-cta2{display:inline-flex;align-items:center;justify-content:center;
   min-height:46px;padding:12px 20px;border-radius:100px;text-decoration:none;
   border:1px solid var(--pn-fil);color:var(--pn-txt);
@@ -246,9 +266,16 @@ html[data-theme="light"] .cm-aside{box-shadow:0 40px 80px -56px rgba(40,25,16,.4
 
 [data-panier-page] .cm-rass{list-style:none;margin:22px 0 0;padding:18px 0 0;
   border-top:1px solid var(--pn-fil);display:grid;gap:10px}
-[data-panier-page] .cm-rass li{display:flex;align-items:flex-start;gap:9px;
+/* En flex, un lien posé dans la phrase devenait un deuxième élément de la
+   rangée : le texte se coupait en deux colonnes. La puce est donc détachée
+   du flux, et la ligne redevient une simple phrase. */
+[data-panier-page] .cm-rass li{position:relative;padding-left:24px;
   font-size:13.5px;line-height:1.45;color:var(--pn-doux)}
-[data-panier-page] .cm-rass svg{width:15px;height:15px;flex:0 0 auto;margin-top:1px;color:var(--pn-acc)}
+[data-panier-page] .cm-rass svg{position:absolute;left:0;top:2px;
+  width:15px;height:15px;color:var(--pn-acc)}
+[data-panier-page] .cm-rass a{color:var(--pn-txt);text-decoration:underline;
+  text-underline-offset:3px;text-decoration-color:color-mix(in oklab,var(--pn-acc) 60%,transparent)}
+[data-panier-page] .cm-rass a:hover{color:var(--pn-acc)}
 
 @media (max-width:960px){
   .cm[data-panier-page]{padding:24px 0 72px}
@@ -263,7 +290,9 @@ html[data-theme="light"] .cm-aside{box-shadow:0 40px 80px -56px rgba(40,25,16,.4
 }
 
 @media (prefers-reduced-motion:reduce){
-  .pn-tiroir,.pn-scrim,.pn-n,.pn-cta,[data-panier]{transition:none}
+  .pn-tiroir,.pn-scrim,.pn-n,.pn-cta,[data-panier],
+  .pn-mk-r,.pn-mk-v{transition:none}
+  .pn-ag.on .pn-mk-v{stroke-dashoffset:0}
   .pn-cta:hover,[data-panier]:hover{transform:none}
 }
 @media (prefers-reduced-transparency:reduce){

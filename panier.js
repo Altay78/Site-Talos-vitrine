@@ -72,6 +72,13 @@
     sac:    svg('<g transform="translate(2.500000, 1.500000)" stroke-width="1.5"> <path d="M14.01373,20.0000001 L5.66590392,20.0000001 C2.59954235,20.0000001 0.247139589,18.8924486 0.915331812,14.4347827 L1.69336385,8.39359272 C2.10526317,6.16933642 3.52402748,5.31807783 4.76887874,5.31807783 L14.9473685,5.31807783 C16.2105264,5.31807783 17.5469108,6.23340964 18.0228834,8.39359272 L18.8009154,14.4347827 C19.3684211,18.3890161 17.0800916,20.0000001 14.01373,20.0000001 Z"></path> <path d="M14.1510298,5.09839819 C14.1510298,2.71232585 12.216736,0.7779932 9.83066366,0.7779932 L9.83066366,0.7779932 C8.68166274,0.773163349 7.57805185,1.22619323 6.76386233,2.03694736 C5.9496728,2.84770148 5.49199087,3.94938696 5.49199087,5.09839819 L5.49199087,5.09839819"></path> <line x1="12.7963387" y1="9.60183071" x2="12.7505721" y2="9.60183071"></line> <line x1="6.96567509" y1="9.60183071" x2="6.9199085" y2="9.60183071"></line> </g>'),
     croix:  svg('<g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="12.3955" y1="7.5949" x2="7.6035" y2="12.3869"></line> <line x1="12.397" y1="12.3898" x2="7.601" y2="7.5928"></line> <path d="M14.3345,0.7502 L5.6655,0.7502 C2.6445,0.7502 0.7505,2.8892 0.7505,5.9162 L0.7505,14.0842 C0.7505,17.1112 2.6355,19.2502 5.6655,19.2502 L14.3335,19.2502 C17.3645,19.2502 19.2505,17.1112 19.2505,14.0842 L19.2505,5.9162 C19.2505,2.8892 17.3645,0.7502 14.3345,0.7502 Z"></path> </g>'),
     plus:   svg('<g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g>'),
+    /* La marque de sélection. Un seul dessin pour les deux états : ce n'est
+       pas l'icône qui change quand on choisit un assistant, c'est le CSS qui
+       remplit l'anneau et trace la coche. Échanger deux SVG faisait sauter
+       la pastille ; là, elle se remplit. */
+    marque: '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+            '<circle class="pn-mk-r" cx="12" cy="12" r="10.4"/>' +
+            '<path class="pn-mk-v" d="M7.6 12.4 10.7 15.4 16.5 9.3"/></svg>',
     check:  svg('<path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'),
     fleche: svg('<g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g>'),
     chev:   svg('<g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g>')
@@ -281,7 +288,7 @@
         '" data-bascule="' + a.id + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +
         '<img src="perso/avatar-' + a.id + '.webp" width="40" height="40" alt="" loading="lazy">' +
         '<span class="pn-ag-t"><b>' + a.nom + '</b><small>' + a.sous + '</small></span>' +
-        '<span class="pn-ag-x" aria-hidden="true">' + (on ? I.check : I.plus) + '</span>' +
+        '<span class="pn-ag-x" aria-hidden="true">' + I.marque + '</span>' +
         '</button></li>';
     }).join('');
   }
@@ -313,8 +320,8 @@
         '<div class="pn-fort"><dt>À régler le premier mois</dt><dd>' + eur(c.premier) + '</dd></div>' +
       '</dl>' +
       (c.economie > 0
-        ? '<p class="pn-eco">' + I.check + 'Vous économisez <b>' + eur(c.economie) +
-          '</b> sur ' + c.eng.mois + ' mois.</p>'
+        ? '<p class="pn-eco">Vous économisez <b>' + eur(c.economie) +
+          '</b> sur ' + c.eng.mois + ' mois</p>'
         : '') +
       '<p class="pn-note">' + c.eng.note + '</p>';
   }
@@ -332,7 +339,11 @@
         (pret ? '' : ' aria-disabled="true" tabindex="-1"') + '>' +
         label + ' ' + I.fleche + '</a>' +
       (pret && paie
-        ? '<p class="pn-rassure">' + I.check + c.eng.note + '</p>'
+        /* Cette ligne disait mot pour mot la note du récapitulatif, six
+           centimètres plus haut. Répéter, ce n'est pas rassurer. Elle dit
+           maintenant ce que le récapitulatif ne dit pas : ce qui se passe
+           une fois la carte passée. */
+        ? '<p class="pn-rassure">Paiement sécurisé par Stripe · vos accès s\'ouvrent aussitôt</p>'
         : '') +
       '<a class="pn-cta2" href="reserver.html">' + second + '</a>' +
       (c.n ? '<button type="button" class="pn-vider" data-vider>Vider mon équipe</button>' : '');
