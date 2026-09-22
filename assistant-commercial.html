@@ -852,14 +852,23 @@ html[data-theme="light"] .ac-card{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 .t-asst .ac-tools-head{text-align:center;max-width:640px;margin:0 auto 52px}
 .ac-tools-head .ac-h2{margin:0 0 14px}
 .ac-tools-head .ac-sub{margin:0 auto;max-width:52ch}
-/* l'icône est posée par le gabarit sans attribut de taille : c'est ici
-   qu'elle est dimensionnée, sinon elle prend toute la pastille */
-.ac-tools-count svg{width:14px;height:14px;flex:0 0 auto}
-.ac-tools-count{display:inline-flex;align-items:center;gap:8px;margin-top:24px;
-  padding:8px 16px;border-radius:100px;
-  background:rgba(var(--bronze-rgb),.12);border:1px solid rgba(var(--bronze-rgb),.3);
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--bronze);
-  white-space:nowrap}
+/* la pastille des intégrations — registre Apple : une surface neutre, une
+   hairline discrète, et le chiffre seul porte l'accent. L'ancienne version
+   criait en orange sur toute sa bordure, dans une police à chasse fixe qui
+   la faisait lire comme une étiquette technique. */
+.ac-tools-count{display:inline-flex;align-items:center;gap:11px;margin-top:26px;
+  padding:7px 20px 7px 7px;border-radius:100px;
+  background:var(--ink-2);border:1px solid var(--line-2);
+  font-family:var(--sans);font-size:15px;letter-spacing:-.2px;font-weight:400;
+  color:var(--lin);white-space:nowrap}
+html[data-theme="light"] .ac-tools-count{box-shadow:0 1px 2px rgba(40,25,16,.06)}
+.ac-tools-count i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;color:var(--bronze);
+  background:rgba(var(--bronze-rgb),.12)}
+.ac-tools-count i svg{width:17px;height:17px}
+.ac-tools-count b{font-weight:700;color:var(--parch);font-variant-numeric:tabular-nums}
+/* le chiffre et son mot forment une seule respiration : sans ce
+   regroupement, la gouttière du conteneur les séparait de 11 px */
 
 .ac-belt{position:relative;display:flex;flex-direction:column;gap:14px;
   overflow:hidden;
@@ -1523,7 +1532,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   <div class="shell ac-tools-head">
     <h2 class="ac-h2">Vous gardez vos outils, <em>il travaille avec</em>.</h2>
     <p class="ac-sub">Pas de migration, pas de logiciel à apprendre, pas de données à ressaisir. Il se branche sur votre messagerie, votre agenda et vos outils actuels.</p>
-    <p class="ac-tools-count"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg> +75 intégrations disponibles</p>
+    <p class="ac-tools-count"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.999141, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M0.000858865205,3.5 C0.000858865205,0.874787053 0.0289681101,0 3.50085887,0 C6.9727494,0 7.00085887,0.874787053 7.00085887,3.5 C7.00085887,6.12521295 7.01193168,7 3.50085887,7 C-0.010214169,7 0.000858865205,6.12521295 0.000858865205,3.5 Z"></path> <path d="M11.0008589,3.5 C11.0008589,0.874787053 11.0289681,0 14.5008589,0 C17.9727494,0 18.0008589,0.874787053 18.0008589,3.5 C18.0008589,6.12521295 18.0119317,7 14.5008589,7 C10.9897858,7 11.0008589,6.12521295 11.0008589,3.5 Z"></path> <path d="M0.000858865205,14.5 C0.000858865205,11.8747871 0.0289681101,11 3.50085887,11 C6.9727494,11 7.00085887,11.8747871 7.00085887,14.5 C7.00085887,17.1252129 7.01193168,18 3.50085887,18 C-0.010214169,18 0.000858865205,17.1252129 0.000858865205,14.5 Z"></path> <path d="M11.0008589,14.5 C11.0008589,11.8747871 11.0289681,11 14.5008589,11 C17.9727494,11 18.0008589,11.8747871 18.0008589,14.5 C18.0008589,17.1252129 18.0119317,18 14.5008589,18 C10.9897858,18 11.0008589,17.1252129 11.0008589,14.5 Z"></path> </g> </g></svg></i><span><b>+75</b> intégrations disponibles</span></p>
   </div>
 
   <div class="ac-belt" aria-hidden="true">
