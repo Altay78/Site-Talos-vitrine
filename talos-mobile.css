@@ -282,7 +282,9 @@ html:has(.t-roi.sheets-open) { overflow: hidden; }
   /* ── boutons et liens trop plats ───────────────────────────────── */
   :root .tx-pill,
   :root .tpick-clear,
-  :root .hero-achat,
+  /*  .hero-achat sort de cette liste : c'était un lien de 22 px qu'il
+      fallait épaissir, c'est devenu un bouton de 54 px — la règle le
+      rabotait à 44.  */
   :root .mr-b1, :root .mr-b2 { min-height: 44px; }
 
   :root .tx-pill,
