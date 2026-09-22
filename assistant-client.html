@@ -605,8 +605,9 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
 .ac-mission[aria-selected="true"]::before{opacity:1}
 
 /* les points ne servent que là où l'on balaie */
-.ac-miss-dots{display:none;justify-content:center;gap:8px;margin:16px 0 0}
-.ac-miss-dots button{width:30px;height:30px;display:grid;place-items:center;
+.ac-miss-dots{display:none;justify-content:center;gap:0;margin:10px 0 0}
+/* le point ne fait que 7 px, mais le doigt a droit à ses 44 */
+.ac-miss-dots button{width:44px;height:44px;display:grid;place-items:center;
   border-radius:50%;background:none}
 .ac-miss-dots button::before{content:"";width:7px;height:7px;border-radius:50%;
   background:var(--line-2);transition:background-color .25s var(--e),
@@ -1065,11 +1066,14 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-pile-pts li{font-size:15px;gap:12px}
   .ac-pile-pts i{width:30px;height:30px;border-radius:9px}
   .ac-pile-pts svg{width:15px;height:15px}
-  .acv-row{flex-wrap:wrap;gap:6px 10px;padding:11px 14px;font-size:14px}
+  /* le libellé prend sa ligne, la donnée et la coche restent ensemble
+     sur la suivante : sinon la coche tombait seule sous le prix */
+  .acv-row{flex-wrap:wrap;gap:3px 10px;padding:11px 14px;font-size:14.5px}
+  .acv-row .slot{flex:1 1 100%}
   .acv-row .meta{margin-left:0}
   .acv-row .val{margin-left:auto}
-  .acv-k{padding:10px 14px}
-  .acv-chip{font-size:10.5px;padding:6px 11px}
+  .acv-k{padding:10px 14px;font-size:11.5px}
+  .acv-chip{font-size:11.5px;padding:6px 12px}
 }
 
 @media (max-width:560px){
