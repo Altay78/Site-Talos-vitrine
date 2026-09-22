@@ -578,6 +578,16 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
   transition:opacity .3s var(--e)}
 .ac-mission[aria-selected="true"]::before{opacity:1}
 
+/* les points ne servent que là où l'on balaie */
+.ac-miss-dots{display:none;justify-content:center;gap:8px;margin:16px 0 0}
+.ac-miss-dots button{width:30px;height:30px;display:grid;place-items:center;
+  border-radius:50%;background:none}
+.ac-miss-dots button::before{content:"";width:7px;height:7px;border-radius:50%;
+  background:var(--line-2);transition:background-color .25s var(--e),
+  transform .25s var(--e)}
+.ac-miss-dots button[aria-current="true"]::before{background:var(--bronze);
+  transform:scale(1.35)}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
    3 · LES DEUX PROMESSES — une pile de cartes
@@ -601,8 +611,10 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
 .ac-pile-k{display:flex;align-items:center;gap:11px;margin:0 0 28px;
   font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--lin)}
-.ac-pile-k i{flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--bronze)}
-.ac-pile-k b{font-weight:500;color:var(--bronze)}
+.ac-pile-k i{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;color:var(--bronze);
+  border:1px solid rgba(var(--bronze-rgb),.32);background:rgba(var(--bronze-rgb),.10)}
+.ac-pile-k i svg{width:18px;height:18px}
 .ac-pile-k em{font-style:normal;color:var(--parch)}
 .ac-pile-k s{text-decoration:none;min-width:0;overflow:hidden;text-overflow:ellipsis;
   white-space:nowrap}
@@ -661,7 +673,9 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
 .acv-dots{display:inline-flex;gap:4px;flex:0 0 auto}
 .acv-dots span{width:5px;height:5px;border-radius:50%;background:var(--bronze);opacity:.3}
 
-/* l'animation n'existe qu'au-dessus de 900 px, et jamais en mouvement réduit */
+/* l'animation n'existe qu'au-dessus de 900 px, et jamais en mouvement réduit.
+   Sur téléphone, la carte s'affiche d'un coup : une chorégraphie de deux
+   secondes sur un écran qu'on balaie au pouce coûte plus qu'elle ne montre. */
 @media (min-width:900px) and (prefers-reduced-motion:no-preference){
   .acv-dots span{animation:acv-dot 1.5s ease-in-out infinite}
   .acv-dots span:nth-child(2){animation-delay:.18s}
@@ -671,6 +685,48 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
   .ac-pile-card [data-rise]{opacity:0;transform:translateY(16px);
     transition:opacity .62s var(--e),transform .62s var(--e);transition-delay:var(--d,0ms)}
   .ac-pile-card.is-in [data-rise]{opacity:1;transform:none}
+
+  /* ─── la carte de droite joue la scène ─────────────────────────────────
+     Les pastilles s'allument, les lignes tombent l'une après l'autre, le
+     créneau retenu se remplit puis se coche, la ligne hors zone se barre.
+     L'ordre est celui du travail réel : on regarde, on trie, on décide. */
+  .ac-pile-vis .acv-chip,
+  .ac-pile-vis .acv-row,
+  .ac-pile-vis .acv-k,
+  .ac-pile-vis .acv-foot{opacity:0}
+
+  .is-in .acv-chip{animation:acv-pop .5s var(--e) calc(var(--n) * 110ms + 300ms) both}
+  .is-in .acv-k{animation:acv-pop .45s var(--e) 600ms both}
+  .is-in .acv-row{animation:acv-drop .55s var(--e) calc(var(--n) * 130ms + 720ms) both}
+  .is-in .acv-foot{animation:acv-pop .5s var(--e) 1.9s both}
+
+  @keyframes acv-pop{from{opacity:0;transform:translateY(7px) scale(.94)}
+                     to{opacity:1;transform:none}}
+  @keyframes acv-drop{from{opacity:0;transform:translateX(22px)}
+                      to{opacity:1;transform:none}}
+
+  /* le créneau retenu : le fond se remplit après coup, la coche se pose
+     avec un léger dépassement — c'est le moment où la décision est prise */
+  .acv-row.pick{background:transparent}
+  .is-in .acv-row.pick{animation:acv-drop .55s var(--e) calc(var(--n) * 130ms + 720ms) both,
+                                 acv-fill .55s var(--e) 1.5s forwards}
+  @keyframes acv-fill{to{background:rgba(var(--bronze-rgb),.12)}}
+
+  .acv-row .tick svg{opacity:0}
+  .is-in .acv-row .tick svg{animation:acv-tick .5s cubic-bezier(.34,1.56,.64,1) 1.75s both}
+  @keyframes acv-tick{from{opacity:0;transform:scale(.3) rotate(-14deg)}
+                      to{opacity:1;transform:none}}
+
+  /* la ligne hors zone : le trait se tire, il ne surgit pas */
+  .acv-row.out .slot{text-decoration:none;position:relative}
+  .acv-row.out .slot::after{content:"";position:absolute;left:0;right:0;top:52%;
+    height:1.5px;background:rgba(var(--bronze-rgb),.75);
+    transform:scaleX(0);transform-origin:left center}
+  .is-in .acv-row.out .slot::after{animation:acv-barre .45s var(--e) 1.8s both}
+  @keyframes acv-barre{to{transform:scaleX(1)}}
+
+  .acv-row.out .x{opacity:0}
+  .is-in .acv-row.out .x{animation:acv-tick .4s cubic-bezier(.34,1.56,.64,1) 2.1s both}
 }
 
 
@@ -918,6 +974,21 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
   .ac-miss{padding:72px 0 80px}
   .ac-miss-head{margin-bottom:34px;max-width:none}
   .ac-miss-grid{grid-template-columns:1fr;gap:28px}
+
+  /* 2 · les missions : sur téléphone on balaie, on ne déroule pas. Une carte
+     par écran, la voisine qui dépasse pour dire qu'il y en a d'autres, et
+     l'écran du téléphone au-dessus qui suit le doigt. */
+  .ac-miss-list{display:grid;grid-auto-flow:column;grid-auto-columns:var(--mw,84%);
+    gap:12px;align-items:stretch;
+    overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+    padding:4px;margin:-4px;scrollbar-width:none;
+    -webkit-overflow-scrolling:touch}
+  .ac-miss-list::-webkit-scrollbar{display:none}
+  .ac-miss-list:focus-visible{outline:3px solid var(--bronze);outline-offset:4px;
+    border-radius:24px}
+  .ac-mission{scroll-snap-align:center;height:100%}
+  .ac-mission p{max-width:none}
+  .ac-miss-dots{display:flex}
   .ac-scene{height:clamp(340px,62vw,440px);padding-top:34px}
 
   /* 3 · les promesses : sous 900 px on n'empile plus et on n'anime plus.
@@ -962,6 +1033,9 @@ html[data-theme="light"] .ac-cta-av{box-shadow:0 26px 54px -26px rgba(40,25,16,.
 }
 
 @media (max-width:620px){
+  .ac-miss-list{--mw:88%}
+  .ac-pile-k i{width:30px;height:30px;border-radius:9px}
+  .ac-pile-k i svg{width:16px;height:16px}
   .ac-pile-pts li{font-size:15px;gap:12px}
   .ac-pile-pts i{width:30px;height:30px;border-radius:9px}
   .ac-pile-pts svg{width:15px;height:15px}
@@ -1210,6 +1284,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         </button>
 
       </div>
+
+      <div class="ac-miss-dots" id="acMissDots" aria-hidden="true"></div>
     </div>
   </div>
 </section>
@@ -1221,7 +1297,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     <div class="ac-pile-stack" id="acPile">
 
       <article class="ac-pile-card" id="agenda" style="--i:0">
-        <p class="ac-pile-k"><i aria-hidden="true"></i><b>01</b> <em>Agenda</em><s>— il se remplit sans vous</s></p>
+        <p class="ac-pile-k"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="0.0926400664" y1="7.40425532" x2="17.9165888" y2="7.40425532"></line> <line x1="13.4420736" y1="11.3096927" x2="13.4513376" y2="11.3096927"></line> <line x1="9.00461445" y1="11.3096927" x2="9.01387846" y2="11.3096927"></line> <line x1="4.55789127" y1="11.3096927" x2="4.56715527" y2="11.3096927"></line> <line x1="13.4420736" y1="15.1962175" x2="13.4513376" y2="15.1962175"></line> <line x1="9.00461445" y1="15.1962175" x2="9.01387846" y2="15.1962175"></line> <line x1="4.55789127" y1="15.1962175" x2="4.56715527" y2="15.1962175"></line> <line x1="13.0437213" y1="-2.26485497e-14" x2="13.0437213" y2="3.29078014"></line> <line x1="4.96550756" y1="-2.26485497e-14" x2="4.96550756" y2="3.29078014"></line> <path d="M13.2382655,1.57919622 L4.77096342,1.57919622 C1.83427331,1.57919622 0,3.21513002 0,6.22222222 L0,15.2718676 C0,18.3262411 1.83427331,20 4.77096342,20 L13.2290015,20 C16.1749556,20 18,18.3546099 18,15.3475177 L18,6.22222222 C18.0092289,3.21513002 16.1842196,1.57919622 13.2382655,1.57919622 Z"></path> </g> </g></svg></i><em>Agenda</em><s>— il se remplit sans vous</s></p>
 
         <div class="ac-pile-grid">
           <div class="ac-pile-txt">
@@ -1237,18 +1313,18 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
           <div class="ac-pile-vis" data-rise style="--d:210ms">
             <div class="acv-chips">
-              <span class="acv-chip on"><i aria-hidden="true"></i>3 créneaux compatibles</span>
-              <span class="acv-chip">Temps de trajet inclus</span>
+              <span style="--n:0" class="acv-chip on"><i aria-hidden="true"></i>3 créneaux compatibles</span>
+              <span style="--n:1" class="acv-chip">Temps de trajet inclus</span>
             </div>
             <div class="acv-card">
               <p class="acv-k">Mme Dubois · chaudière · Le Perreux</p>
-              <div class="acv-row pick">
+              <div style="--n:0" class="acv-row pick">
                 <span class="slot">Mardi 9 h 00</span>
                 <span class="meta">11 km · 18 min</span>
                 <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg></span>
               </div>
-              <div class="acv-row"><span class="slot">Mardi 14 h 30</span><span class="meta">11 km · 22 min</span></div>
-              <div class="acv-row"><span class="slot">Mercredi 8 h 00</span><span class="meta">9 km · 15 min</span></div>
+              <div style="--n:1" class="acv-row"><span class="slot">Mardi 14 h 30</span><span class="meta">11 km · 22 min</span></div>
+              <div style="--n:2" class="acv-row"><span class="slot">Mercredi 8 h 00</span><span class="meta">9 km · 15 min</span></div>
             </div>
             <p class="acv-foot"><span class="acv-dots" aria-hidden="true"><span></span><span></span><span></span></span>
               M. Ferrand a décalé : replanifié jeudi 10 h</p>
@@ -1257,7 +1333,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       </article>
 
       <article class="ac-pile-card" id="deplacements" style="--i:1">
-        <p class="ac-pile-k"><i aria-hidden="true"></i><b>02</b> <em>Déplacements</em><s>— vérifiés avant de monter dans la camionnette</s></p>
+        <p class="ac-pile-k"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(4.500000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M10,7.50050782 C10,6.11923624 8.88076376,5 7.50050782,5 C6.11923624,5 5,6.11923624 5,7.50050782 C5,8.88076376 6.11923624,10 7.50050782,10 C8.88076376,10 10,8.88076376 10,7.50050782 Z"></path> <path d="M7.49951162,18 C6.30103536,18 0,12.8983747 0,7.5632901 C0,3.38663602 3.357101,0 7.49951162,0 C11.6419223,0 15,3.38663602 15,7.5632901 C15,12.8983747 8.69798789,18 7.49951162,18 Z"></path> </g> </g></svg></i><em>Déplacements</em><s>— vérifiés avant de monter dans la camionnette</s></p>
 
         <div class="ac-pile-grid">
           <div class="ac-pile-txt">
@@ -1273,16 +1349,16 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
           <div class="ac-pile-vis" data-rise style="--d:210ms">
             <div class="acv-chips">
-              <span class="acv-chip">Ivry-sur-Seine (94)</span>
-              <span class="acv-chip">11 km du dépôt</span>
-              <span class="acv-chip on"><i aria-hidden="true"></i>Dans votre zone</span>
+              <span style="--n:0" class="acv-chip">Ivry-sur-Seine (94)</span>
+              <span style="--n:1" class="acv-chip">11 km du dépôt</span>
+              <span style="--n:2" class="acv-chip on"><i aria-hidden="true"></i>Dans votre zone</span>
             </div>
             <div class="acv-card">
               <p class="acv-k">Avant de vous déplacer</p>
-              <div class="acv-row"><span class="lab">Nature des travaux</span><span class="val">Chaudière gaz, panne totale</span></div>
-              <div class="acv-row"><span class="lab">Urgence</span><span class="val">Sous 3 semaines</span></div>
-              <div class="acv-row"><span class="lab">Budget évoqué</span><span class="val">9 000 €</span></div>
-              <div class="acv-row out">
+              <div style="--n:0" class="acv-row"><span class="lab">Nature des travaux</span><span class="val">Chaudière gaz, panne totale</span></div>
+              <div style="--n:1" class="acv-row"><span class="lab">Urgence</span><span class="val">Sous 3 semaines</span></div>
+              <div style="--n:2" class="acv-row"><span class="lab">Budget évoqué</span><span class="val">9 000 €</span></div>
+              <div style="--n:3" class="acv-row out">
                 <span class="x" aria-hidden="true">✕</span>
                 <span class="slot">Saint-Ouen-l'Aumône · 38 km</span>
                 <span class="meta">hors zone, écarté</span>
@@ -1741,6 +1817,70 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     e.preventDefault();
     show(n);
     n.focus();
+  });
+
+  /* ── sur téléphone, le rail se balaie ────────────────────────────────
+     La carte la plus proche du centre devient la mission active : l'écran
+     du téléphone au-dessus suit le doigt, sans qu'on ait à taper. Les
+     points disent combien il en reste — sans eux, on croit qu'il n'y en a
+     qu'une. */
+  var rail  = list;
+  var dots  = document.getElementById('acMissDots');
+  var etroit = window.matchMedia('(max-width:960px)');
+  var attente = null;
+
+  if (dots){
+    for (var d = 0; d < tabs.length; d++){
+      (function(idx){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Mission ' + (idx + 1) + ' sur ' + tabs.length);
+        b.setAttribute('aria-current', idx === 0 ? 'true' : 'false');
+        b.addEventListener('click', function(){
+          tabs[idx].scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+          show(tabs[idx]);
+        });
+        dots.appendChild(b);
+      })(d);
+    }
+    dots.removeAttribute('aria-hidden');
+  }
+
+  function pointer(i){
+    if (!dots) return;
+    for (var k = 0; k < dots.children.length; k++){
+      dots.children[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+    }
+  }
+
+  /* la carte dont le centre est le plus proche du centre du rail */
+  function centree(){
+    var r = rail.getBoundingClientRect();
+    var axe = r.left + r.width / 2;
+    var best = 0, ecart = Infinity;
+    for (var i = 0; i < tabs.length; i++){
+      var c = tabs[i].getBoundingClientRect();
+      var e = Math.abs(c.left + c.width / 2 - axe);
+      if (e < ecart){ ecart = e; best = i; }
+    }
+    return best;
+  }
+
+  rail.addEventListener('scroll', function(){
+    if (!etroit.matches) return;
+    /* on attend la fin du geste : changer l'écran à chaque pixel donnerait
+       un clignotement pendant le balayage */
+    clearTimeout(attente);
+    attente = setTimeout(function(){
+      var i = centree();
+      pointer(i);
+      if (tabs[i].getAttribute('aria-selected') !== 'true') show(tabs[i]);
+    }, 90);
+  }, {passive:true});
+
+  /* le rail garde sa position quand on change de largeur : on resynchronise */
+  etroit.addEventListener && etroit.addEventListener('change', function(){
+    if (etroit.matches) pointer(centree());
   });
 })();
 
