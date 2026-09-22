@@ -470,10 +470,10 @@ html[data-theme="light"] .ac-hero::before{
   width:min(46vw,560px);height:auto;max-width:none;display:block}
 
 .ac-hero h1{margin:0 0 20px;font-size:clamp(36px,4.35vw,60px);line-height:1.03;
-  letter-spacing:-2px;font-weight:800;color:var(--parch);max-width:17ch;
+  letter-spacing:-2px;font-weight:800;color:var(--parch);max-width:22ch;
   text-wrap:balance}
 .ac-hero .ac-lede{margin:0 0 26px;font-size:17.5px;line-height:1.62;
-  color:var(--lin);max-width:46ch}
+  color:var(--lin);max-width:58ch}
 
 /* la barre de preuve — le « screen » de la maquette */
 .ac-proof{display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;
@@ -649,7 +649,7 @@ html[data-theme="light"] .ac-mission[aria-selected="true"]{
 
 .ac-pile-h{font-size:clamp(27px,3vw,42px);line-height:1.06;letter-spacing:-.035em;
   color:var(--parch);text-wrap:balance;max-width:20ch}
-.ac-pile-txt p{margin:16px 0 0;max-width:44ch;font-size:16px;line-height:1.62;color:var(--lin)}
+.ac-pile-txt p{margin:16px 0 0;max-width:56ch;font-size:16px;line-height:1.62;color:var(--lin)}
 .ac-pile-pts{margin:26px 0 0}
 .ac-pile-pts li{display:flex;align-items:center;gap:14px;padding:10px 0;
   font-size:16px;font-weight:600;line-height:1.35;color:var(--parch)}
@@ -1331,7 +1331,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 </section>
 
 
-<!-- ═══ 3 · LA PROMESSE ═══════════════════════════════════════════════════ -->
+<!-- ═══ 3 · LES DEUX PROMESSES ════════════════════════════════════════ -->
 <section class="t-asst ac-pile" id="promesses">
   <div class="shell">
     <div class="ac-pile-stack" id="acPile">
@@ -1341,7 +1341,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
         <div class="ac-pile-grid">
           <div class="ac-pile-txt">
-            <h2 class="ac-pile-h" data-rise>Plus besoin de laisser vos devis attendre au fond de votre boîte mail.</h2>
+            <h2 class="ac-pile-h" data-rise>Ne laissez plus vos devis attendre.</h2>
             <p data-tx-skip data-rise style="--d:70ms">Il prépare vos propositions commerciales, les adapte au besoin
               du client et les envoie rapidement. Vous pouvez vous concentrer sur le chantier, il s'occupe de faire
               avancer la vente.</p>
@@ -1366,6 +1366,40 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
             </div>
             <p class="acv-foot"><span class="acv-dots" aria-hidden="true"><span></span><span></span><span></span></span>
               Signé en ligne il y a 4 min · acompte de 30 % encaissé</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="ac-pile-card" id="relances" style="--i:1">
+        <p class="ac-pile-k"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="14.8395556" y1="17.1642222" x2="14.8395556" y2="3.54644444"></line> <polyline points="18.9172222 13.0681111 14.8394444 17.1647778 10.7616667 13.0681111"></polyline> <line x1="4.91111111" y1="0.832888889" x2="4.91111111" y2="14.4506667"></line> <polyline points="0.833444444 4.929 4.91122222 0.832333333 8.989 4.929"></polyline> </g> </g></svg></i><em>Relances</em><s>— aucun devis sans suite</s></p>
+
+        <div class="ac-pile-grid">
+          <div class="ac-pile-txt">
+            <h2 class="ac-pile-h" data-rise>Vos devis se relancent tout seuls.</h2>
+            <p data-tx-skip data-rise style="--d:70ms">Il suit vos opportunités et relance vos clients au bon
+              moment, sans que vous ayez à y penser.</p>
+            <ul class="ac-pile-pts" data-rise style="--d:140ms">
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="14.8395556" y1="17.1642222" x2="14.8395556" y2="3.54644444"></line> <polyline points="18.9172222 13.0681111 14.8394444 17.1647778 10.7616667 13.0681111"></polyline> <line x1="4.91111111" y1="0.832888889" x2="4.91111111" y2="14.4506667"></line> <polyline points="0.833444444 4.929 4.91122222 0.832333333 8.989 4.929"></polyline> </g> </g></svg></i><span class="d">Relances automatiques<em>J+3, J+7, J+14 : il s'en charge.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="5.37142857" y1="8.20171265" x2="5.37142857" y2="15.0618459"></line> <line x1="10.0380952" y1="4.91912464" x2="10.0380952" y2="15.0618459"></line> <line x1="14.6285714" y1="11.8268316" x2="14.6285714" y2="15.0618459"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g> </g></svg></i><span class="d">Suivi des opportunités<em>Vous savez où en est chaque devis.</em></span></li>
+              <li class="dit"><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor"> <path d="M10.0001,0.7501 C15.1081,0.7501 19.2501,4.8911 19.2501,10.0001 C19.2501,15.1081 15.1081,19.2501 10.0001,19.2501 C4.8911,19.2501 0.7501,15.1081 0.7501,10.0001 C0.7501,4.8911 4.8911,0.7501 10.0001,0.7501 Z" stroke-width="1.5"></path> <line x1="9.9952" y1="6.2042" x2="9.9952" y2="10.6232" stroke-width="1.5"></line> <line x1="9.995" y1="13.7961" x2="10.005" y2="13.7961" stroke-width="2"></line> </g> </g></svg></i><span class="d">Alertes commerciales<em>Il vous signale les opportunités à traiter.</em></span></li>
+            </ul>
+          </div>
+
+          <div class="ac-pile-vis" data-rise style="--d:210ms">
+            <div class="acv-chips">
+              <span style="--n:0" class="acv-chip on"><i aria-hidden="true"></i>4 devis en attente</span>
+              <span style="--n:1" class="acv-chip">28 400 € en jeu</span>
+            </div>
+            <div class="acv-card">
+              <p class="acv-k">Relances en cours</p>
+              <div style="--n:0" class="acv-row"><span class="slot">M. Ferrand</span><span class="meta">J+3 · envoyée</span><span class="val">4 200 €</span></div>
+              <div style="--n:1" class="acv-row pick"><span class="slot">SCI Bellevue</span><span class="meta">J+7 · appel proposé</span><span class="val">12 480 €</span>
+                <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path> <polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline> </g> </g></svg></span></div>
+              <div style="--n:2" class="acv-row"><span class="slot">Mme Roussel</span><span class="meta">J+14 · validité</span><span class="val">9 890 €</span></div>
+              <div style="--n:3" class="acv-row out"><span class="x" aria-hidden="true">✕</span><span class="slot">Copro Jaurès · signé</span><span class="meta">relances arrêtées</span></div>
+            </div>
+            <p class="acv-foot"><span class="acv-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              SCI Bellevue a rouvert le devis deux fois — à traiter en priorité</p>
           </div>
         </div>
       </article>
