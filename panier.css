@@ -8,8 +8,15 @@
    valeur de repli pour chacune, au cas où une page ancienne en manquerait.
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/*  --ink porte DEUX sens dans ce site. À la racine c'est la couleur du
+    texte ; dans les sections .t-story, .t-asst, .t-price & co, c'est la
+    couleur de fond de la section. Un bouton du panier posé dans une de
+    ces sections héritait donc d'un texte de la couleur du fond : noir sur
+    noir en sombre, blanc sur blanc en clair. On lit --parch en premier,
+    le vrai jeton de texte de ces sections, et --foreground ensuite pour
+    le reste du site. --ink n'est plus consulté : il est ambigu.  */
 .pn-btn,.pn-tiroir,.pn-scrim,[data-panier],[data-panier-page]{
-  --pn-txt:var(--ink,#F6EEE7);
+  --pn-txt:var(--parch,var(--foreground,#F6EEE7));
   --pn-fond:var(--background,#140F0C);
   --pn-surf:var(--surface-tint,#1C1611);
   --pn-fil:var(--border,rgba(246,238,231,.1));
