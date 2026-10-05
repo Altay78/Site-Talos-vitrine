@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <script>(function(){try{var t=localStorage.getItem('talos-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulateur — Talos, l'assistant IA qui gère votre administratif 24/7</title>
+<title>Simulateur de gains — Talos</title>
 <meta name="author" content="Talos">
-<meta name="description" content="Calculez en 30 secondes le temps et l'argent que vous perdez chaque mois sur vos devis, relances et factures — et ce que Talos vous rend.">
+<meta name="description" content="Votre métier, vos devis, votre temps : calculez en 2 minutes ce que Talos vous rend chaque année, tâche par tâche.">
 <meta property="og:title" content="Simulateur — Talos, l'assistant IA qui gère votre administratif 24/7">
 <meta property="og:description" content="Vos chiffres, pas les nôtres. Deux simulateurs : le coût réel de votre administratif, et le chiffre d'affaires que vos devis laissent filer.">
 <meta property="og:type" content="website">
@@ -1588,678 +1588,375 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 .tnav-links .tnav-drop-t.is-here::after{transform:scaleX(1)}
 @media (max-width:1060px){.tnav-pan{display:none}}
 @media (prefers-reduced-motion:reduce){.tnav-pan,.tnav-chev{transition:none}}
-</style></head>
+</style><style>
+/* ═══ simulateur détaillé — formulaire à gauche, résultat qui suit à droite ═══ */
+.t-sim2{position:relative;padding:132px 0 96px;background:var(--background);color:var(--ink)}
+.t-sim2 .ic{width:20px;height:20px;flex:0 0 auto;display:block}
+.s2-wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.s2-head{max-width:760px;margin-bottom:36px}
+.s2-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--indigo-light)}
+.s2-eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--indigo)}
+.s2-head h1{margin:14px 0 0;font-size:clamp(2.1rem,1.4rem + 3vw,3.6rem);line-height:1.04;letter-spacing:-.03em;font-weight:700;text-wrap:balance}
+.s2-head h1 em{font-style:normal;color:var(--indigo-light)}
+.s2-head > p{margin:18px 0 0;font-size:17px;line-height:1.6;color:var(--ink-soft);max-width:580px}
+.s2-trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin:20px 0 0;padding:0;list-style:none;font-size:14px;color:var(--ink-soft)}
+.s2-trust li{display:inline-flex;align-items:center;gap:7px}
+.s2-trust .ic{width:18px;height:18px;color:var(--indigo-light)}
+
+.s2-grid{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:28px;align-items:start}
+.s2-grid[hidden]{display:none}
+.s2-form{display:flex;flex-direction:column;gap:16px;min-width:0}
+.s2-card{margin:0;padding:22px 22px 22px;border:1px solid var(--border);border-radius:20px;background:var(--surface-tint);min-width:0}
+.s2-card legend{display:flex;align-items:center;gap:12px;padding:0;margin-bottom:10px;float:left;width:100%}
+.s2-card legend + *{clear:both}
+.s2-n{flex:0 0 auto;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--indigo) 16%,transparent);color:var(--indigo-light)}
+.s2-card legend b{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.s2-card legend em{display:block;font-style:normal;font-size:13.5px;color:var(--ink-soft);margin-top:2px}
+
+.s2-card{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
+.s2-card legend{grid-column:1/-1}
+.s2-field{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:4px 12px;padding:12px 0;border-top:1px solid var(--border);min-width:0}
+.s2-field-full{grid-column:1/-1}
+.s2-field label,.s2-lbl{font-size:14.5px;font-weight:500;line-height:1.35}
+.s2-field output{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.s2-field input[type=range]{grid-column:1/-1;width:100%;height:28px;margin:2px 0 0;accent-color:var(--indigo);cursor:pointer;touch-action:pan-y}
+.s2-help{grid-column:1/-1;margin:0;font-size:12.5px;line-height:1.45;color:var(--ink-soft)}
+.s2-field-full{grid-template-columns:1fr}
+.s2-select{position:relative;margin-top:6px}
+.s2-select select{appearance:none;-webkit-appearance:none;width:100%;min-height:48px;padding:0 44px 0 14px;border:1px solid var(--border);border-radius:12px;background:var(--background);color:var(--ink);font:inherit;font-size:15.5px;cursor:pointer}
+.s2-select .ic{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--ink-soft)}
+.s2-select select:focus-visible{outline:2px solid var(--indigo-light);outline-offset:2px}
+
+.s2-chips{display:grid;gap:8px;margin-top:6px}
+.s2-chips-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.s2-chips-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.s2-chips label,.s2-team label,.s2-cas label{position:relative;cursor:pointer;display:block}
+.s2-chips input,.s2-team input,.s2-cas input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.s2-chips span{display:grid;place-items:center;min-height:46px;padding:6px 8px;border:1px solid var(--border);border-radius:12px;font-size:13.5px;font-weight:600;text-align:center;line-height:1.25;transition:border-color .2s,background-color .2s}
+.s2-chips input:checked + span,.s2-team input:checked + span{border-color:var(--indigo);background:color-mix(in srgb,var(--indigo) 14%,transparent)}
+.s2-chips input:focus-visible + span,.s2-team input:focus-visible + span,.s2-cas input:focus-visible + span{outline:2px solid var(--indigo-light);outline-offset:2px}
+
+.s2-team{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;padding-top:12px;border-top:1px solid var(--border)}
+.s2-team span{display:grid;grid-template-columns:40px 1fr;column-gap:10px;align-items:center;min-height:72px;padding:12px;border:1px solid var(--border);border-radius:14px;transition:border-color .2s,background-color .2s}
+.s2-team img{grid-row:1/4;width:40px;height:40px;border-radius:50%;object-fit:cover}
+.s2-team b{font-size:14.5px;font-weight:700;line-height:1.2}
+.s2-team em{font-style:normal;font-size:12.5px;color:var(--ink-soft);line-height:1.3}
+.s2-team i{font-style:normal;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--indigo-light);margin-top:2px}
+
+.s2-cas-top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0 4px;border-top:1px solid var(--border);font-size:13.5px;color:var(--ink-soft)}
+.s2-link{min-height:40px;padding:0 4px;border:0;background:none;color:var(--indigo-light);font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+.s2-link:focus-visible{outline:2px solid var(--indigo-light);border-radius:6px}
+.s2-cas{grid-column:1/-1;display:flex;flex-direction:column;gap:14px}
+.s2-cas-g h3{display:flex;align-items:center;gap:8px;margin:6px 0 8px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.s2-cas-g h3 img{width:22px;height:22px;border-radius:50%}
+.s2-cas-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.s2-cas span{display:flex;align-items:flex-start;gap:10px;min-height:48px;padding:11px 12px;border:1px solid var(--border);border-radius:12px;font-size:13.5px;line-height:1.35;transition:border-color .2s,background-color .2s}
+.s2-cas span::before{content:'';flex:0 0 18px;height:18px;margin-top:1px;border:1.5px solid var(--ink-soft);border-radius:6px;transition:background-color .2s,border-color .2s}
+.s2-cas input:checked + span{border-color:color-mix(in srgb,var(--indigo) 60%,transparent)}
+.s2-cas input:checked + span::before{border-color:var(--indigo);background:var(--indigo) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+.s2-cas-vide{margin:0;padding:14px;border:1px dashed var(--border);border-radius:12px;font-size:13.5px;color:var(--ink-soft);text-align:center}
+
+.s2-res{position:sticky;top:96px;padding:24px 22px 20px;border-radius:24px;border:1px solid var(--border);background:var(--surface-tint);min-width:0}
+.s2-res-k{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.s2-res-k2{margin-top:20px}
+.s2-big{margin:10px 0 0;font-size:clamp(2.5rem,2rem + 2vw,3.3rem);line-height:1;font-weight:800;letter-spacing:-.035em;color:var(--indigo-light);font-variant-numeric:tabular-nums}
+.s2-res.is-neg .s2-big{color:var(--ink-soft)}
+.s2-sub{margin:10px 0 0;font-size:14px;color:var(--ink-soft);line-height:1.45}
+.s2-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0 0}
+.s2-stats div{display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:8px;padding:12px;border-radius:14px;background:var(--background);border:1px solid var(--border);min-width:0}
+.s2-stats .ic{width:18px;height:18px;color:var(--indigo-light)}
+.s2-stats b{font-size:19px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.s2-stats span{grid-column:1/-1;margin-top:3px;font-size:12px;color:var(--ink-soft);line-height:1.3}
+.s2-bars{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.s2-bars li{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:13.5px}
+.s2-bars li em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums}
+.s2-bars li i{grid-column:1/-1;height:6px;border-radius:99px;background:var(--border);overflow:hidden}
+.s2-bars li i::after{content:'';display:block;height:100%;width:var(--w,0%);border-radius:inherit;background:var(--indigo);transition:width .35s ease-out}
+.s2-bars li.off{opacity:.45}
+.s2-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;margin-top:18px;padding:0 18px;border:0;border-radius:999px;background:var(--indigo);color:#fff;font:inherit;font-size:15.5px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;transition:filter .2s}
+.s2-cta .ic{width:18px;height:18px}
+.s2-cta:hover{filter:brightness(1.08)}
+.s2-cta:focus-visible{outline:2px solid var(--indigo-light);outline-offset:3px}
+.s2-cta[disabled]{opacity:.6;cursor:progress}
+.s2-cta-sub{display:flex;align-items:center;justify-content:center;gap:6px;margin:10px 0 0;font-size:12.5px;color:var(--ink-soft)}
+.s2-cta-sub .ic{width:15px;height:15px}
+
+/* ── la demande de numéro ── */
+.s2-gate{width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:0;border:1px solid var(--border);border-radius:24px;background:var(--surface-tint);color:var(--ink);overflow:auto}
+.s2-gate::backdrop{background:rgba(10,7,5,.6);backdrop-filter:blur(3px)}
+.s2-gate-in{position:relative;padding:28px 24px 24px}
+.s2-gate-x{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:12px;background:none;color:var(--ink-soft);cursor:pointer}
+.s2-gate-x:focus-visible{outline:2px solid var(--indigo-light)}
+.s2-gate-ic{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:color-mix(in srgb,var(--indigo) 16%,transparent);color:var(--indigo-light)}
+.s2-gate-ic .ic{width:24px;height:24px}
+.s2-gate h2{margin:16px 0 0;font-size:24px;font-weight:700;letter-spacing:-.02em}
+.s2-gate p{margin:8px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
+.s2-gate-l{display:block;margin-top:20px;font-size:14px;font-weight:600}
+.s2-tel{display:flex;align-items:center;gap:10px;margin-top:8px;padding:0 14px;min-height:52px;border:1px solid var(--border);border-radius:14px;background:var(--background)}
+.s2-tel:focus-within{border-color:var(--indigo);outline:2px solid color-mix(in srgb,var(--indigo) 30%,transparent)}
+.s2-tel .ic{color:var(--ink-soft)}
+.s2-tel input{flex:1;min-width:0;height:50px;border:0;background:none;color:var(--ink);font:inherit;font-size:17px;outline:none}
+.s2-tel.is-err{border-color:#E5484D}
+.s2-err{margin:8px 0 0 !important;color:#E5484D !important;font-size:13.5px !important;font-weight:600}
+.s2-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.s2-ok{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:13px;line-height:1.45;color:var(--ink-soft);cursor:pointer}
+.s2-ok input{flex:0 0 auto;width:20px;height:20px;margin:0;accent-color:var(--indigo)}
+.s2-ok a{color:var(--ink)}
+.s2-ok.is-err span{color:#E5484D}
+
+/* ── le rapport ── */
+.s2-report{display:flex;flex-direction:column;gap:18px}
+.s2-report[hidden]{display:none}
+.s2-rp-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px}
+.s2-rp-top h2{margin:0;font-size:clamp(1.6rem,1.2rem + 1.5vw,2.3rem);font-weight:700;letter-spacing:-.025em}
+.s2-rp-top p{margin:6px 0 0;color:var(--ink-soft);font-size:14.5px}
+.s2-rp-act{display:flex;flex-wrap:wrap;gap:8px}
+.s2-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--border);border-radius:999px;background:var(--surface-tint);color:var(--ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none}
+.s2-btn .ic{width:18px;height:18px}
+.s2-btn:focus-visible{outline:2px solid var(--indigo-light);outline-offset:2px}
+.s2-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.s2-kpi{padding:18px;border:1px solid var(--border);border-radius:18px;background:var(--surface-tint);min-width:0}
+.s2-kpi .ic{width:20px;height:20px;color:var(--indigo-light)}
+.s2-kpi b{display:block;margin-top:10px;font-size:clamp(1.4rem,1.1rem + 1vw,2rem);font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.s2-kpi.is-main b{color:var(--indigo-light)}
+.s2-kpi span{display:block;margin-top:4px;font-size:13px;color:var(--ink-soft);line-height:1.35}
+.s2-rp-card{padding:22px;border:1px solid var(--border);border-radius:20px;background:var(--surface-tint);min-width:0}
+.s2-rp-card h3{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:17px;font-weight:700}
+.s2-rp-card h3 .ic{color:var(--indigo-light)}
+.s2-rp-2{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px}
+.s2-rp-a + .s2-rp-a{margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.s2-rp-ah{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.s2-rp-ah img{width:32px;height:32px;border-radius:50%}
+.s2-rp-ah b{font-size:15px}
+.s2-rp-ah em{margin-left:auto;font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.s2-tab{width:100%;border-collapse:collapse;font-size:13.5px}
+.s2-tab td,.s2-tab th{padding:8px 0;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+.s2-tab th{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.s2-tab td + td,.s2-tab th + th{text-align:right;padding-left:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.s2-tab tr:last-child td{border-bottom:0}
+.s2-tab .tot td{font-weight:700}
+.s2-chart{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;gap:6px;height:180px;padding-top:10px}
+.s2-chart div{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.s2-chart i{display:block;width:100%;min-height:2px;border-radius:6px 6px 2px 2px;background:var(--indigo);opacity:.85}
+.s2-chart div:last-child i{opacity:1}
+.s2-chart span{font-size:11px;color:var(--ink-soft)}
+.s2-chart-k{display:flex;justify-content:space-between;margin-top:10px;font-size:13.5px}
+.s2-chart-k b{font-variant-numeric:tabular-nums}
+.s2-hyp{margin:0;padding-left:18px;font-size:13.5px;line-height:1.6;color:var(--ink-soft)}
+.s2-hyp b{color:var(--ink)}
+.s2-rp-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:24px;border-radius:20px;background:var(--indigo);color:#fff}
+.s2-rp-cta h3{margin:0;font-size:20px;font-weight:700}
+.s2-rp-cta p{margin:4px 0 0;opacity:.9;font-size:14.5px}
+.s2-rp-cta a{display:inline-flex;align-items:center;gap:8px;min-height:50px;padding:0 22px;border-radius:999px;background:#fff;color:#1C1310;font-weight:700;text-decoration:none}
+.s2-rp-cta a .ic{width:18px;height:18px}
+.s2-toast{position:fixed;left:50%;bottom:24px;z-index:60;transform:translate(-50%,20px);padding:12px 18px;border-radius:12px;background:var(--ink);color:var(--background);font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.s2-toast.on{opacity:1;transform:translate(-50%,0)}
+
+.s2-bar{display:none}
+@media (max-width:1020px){
+  .t-sim2{padding:112px 0 88px}
+  .s2-grid{grid-template-columns:1fr}
+  .s2-res{position:static}
+  .s2-rp-2{grid-template-columns:1fr}
+  .s2-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .s2-bar{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:40;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;background:var(--ink);color:var(--background);text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.28);transition:transform .25s,opacity .25s}
+  .s2-bar span{font-size:14px;font-weight:600;margin-right:auto}
+  .s2-bar b{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
+  .s2-bar .ic{width:18px;height:18px}
+  .s2-bar.is-off{transform:translateY(140%);opacity:0;pointer-events:none}
+}
+@media (max-width:640px){
+  .s2-card{grid-template-columns:1fr}
+  .s2-chips-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .s2-wrap{padding:0 16px}
+  .s2-card{padding:18px 16px}
+  .s2-team{grid-template-columns:1fr}
+  .s2-cas-l{grid-template-columns:1fr}
+  .s2-res{padding:22px 16px 18px}
+  .s2-rp-card{padding:18px 16px}
+  .s2-chips-3{grid-template-columns:1fr}
+  .s2-chart{gap:3px}
+  .s2-chart span{font-size:9.5px}
+}
+@media (prefers-reduced-motion:reduce){.s2-bar,.s2-chips span,.s2-team span,.s2-cas span,.s2-bars li i::after,.s2-toast{transition:none}}
+@media print{
+  .tnav-wrap,.t-ft,.s2-bar,.s2-rp-act,.s2-rp-cta,.s2-head{display:none !important}
+  .t-sim2{padding:0}
+}
+.s2-bar[hidden]{display:none !important}
+</style>
+</head>
 <body>
 <main>
 
 <header class="tnav-wrap" id="tnav-wrap"><nav class="tnav" id="tnav" aria-label="Navigation principale"><a class="tnav-logo" href="index.html#top" aria-label="Talos — accueil"><svg viewBox="253 302 472 550" width="23" height="27" aria-hidden="true"><mask id="tnav-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#tnav-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg><span>Talos</span></a><div class="tnav-links"><span class="tnav-drop"><a class="tnav-drop-t" href="offres.html">Offres<svg class="tnav-chev" width="11" height="11" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a><span class="tnav-pan"><a class="tnav-ag" href="assistant-commercial.html"><img src="perso/avatar-commercial.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant commercial</b><small>Devis, signature, relances</small></a><a class="tnav-ag" href="assistant-tresorerie.html"><img src="perso/avatar-tresorerie.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante trésorerie</b><small>Impayés et relances</small></a><a class="tnav-ag" href="assistant-client.html"><img src="perso/avatar-client.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante client</b><small>Réponses et rendez-vous</small></a><a class="tnav-ag" href="assistant-facturation.html"><img src="perso/avatar-facturation.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant facturation</b><small>Factures, acomptes, situations</small></a><a class="tnav-ag" href="assistant-administratif.html"><img src="perso/avatar-administratif.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistante administrative</b><small>Tri des mails et classement</small></a><span class="tnav-ag is-soon"><img src="perso/avatar-chantier.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant chef de chantier <i class="tnav-soon">Bientôt</i></b><small>Planning, suivi, rapports</small></span><span class="tnav-ag is-soon"><img src="perso/avatar-stock.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><b>Assistant gestion de stock <i class="tnav-soon">Bientôt</i></b><small>Stocks, commandes, alertes</small></span><a class="tnav-pan-all" href="offres.html">Voir toutes les offres<svg width="13" height="13" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg></a></span></span><a href="comment-ca-marche.html">Comment ça marche</a><span class="tnav-drop"><a class="tnav-drop-t is-here" href="tarifs.html">Tarifs<svg class="tnav-chev" width="11" height="11" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a><span class="tnav-pan is-mini"><a class="tnav-ag" href="tarifs.html"><span class="tnav-ic"><svg width="17" height="17" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)"> <path d="M2.7949,5.056 C2.7949,3.807 3.8069,2.795 5.0559,2.794 L6.0849,2.794 C6.6819,2.794 7.2539,2.557 7.6779,2.137 L8.3969,1.417 C9.2779,0.531 10.7099,0.527 11.5959,1.408 L11.5969,1.409 L11.6059,1.417 L12.3259,2.137 C12.7499,2.558 13.3219,2.794 13.9189,2.794 L14.9469,2.794 C16.1959,2.794 17.2089,3.806 17.2089,5.056 L17.2089,6.083 C17.2089,6.68 17.4449,7.253 17.8659,7.677 L18.5859,8.397 C19.4719,9.278 19.4769,10.71 18.5959,11.596 C18.5959,11.596 18.5949,11.597 18.5949,11.597 L18.5859,11.606 L17.8659,12.326 C17.4449,12.749 17.2089,13.321 17.2089,13.918 L17.2089,14.947 C17.2089,16.196 16.1969,17.208 14.9479,17.208 L14.9469,17.208 L13.9169,17.208 C13.3199,17.208 12.7469,17.445 12.3239,17.866 L11.6039,18.585 C10.7239,19.471 9.2929,19.476 8.4069,18.597 C8.4059,18.596 8.4049,18.595 8.4039,18.594 L8.3949,18.585 L7.6759,17.866 C7.2529,17.445 6.6799,17.209 6.0829,17.208 L5.0559,17.208 C3.8069,17.208 2.7949,16.196 2.7949,14.947 L2.7949,13.916 C2.7949,13.319 2.5579,12.747 2.1369,12.324 L1.4179,11.604 C0.5319,10.724 0.5269,9.293 1.4069,8.407 C1.4069,8.406 1.4079,8.405 1.4089,8.404 L1.4179,8.395 L2.1369,7.675 C2.5579,7.251 2.7949,6.679 2.7949,6.081 L2.7949,5.056" stroke-width="1.5"></path> <line x1="7.4316" y1="12.5717" x2="12.5716" y2="7.4317" stroke-width="1.5"></line> <line x1="12.4955" y1="12.5" x2="12.5045" y2="12.5" stroke-width="2"></line> <line x1="7.4955" y1="7.5" x2="7.5045" y2="7.5" stroke-width="2"></line> </g></svg></span><b>Formules et tarifs</b><small>Starter, Business, Évolution</small></a><a class="tnav-ag" href="simulateur.html" aria-current="page"><span class="tnav-ic"><svg width="17" height="17" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7.88522 3H16.1234C18.9898 3 20.7654 4.59859 20.7567 7.53697V16.4543C20.7567 19.3926 18.981 21 16.1146 21H7.88522C5.0276 21 3.24316 19.3644 3.24316 16.3803V7.53697C3.24316 4.59859 5.0276 3 7.88522 3Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M7.64497 11.8516V11.8616M7.64497 16.3145V16.3245M11.9813 11.8516V11.8616M11.9813 16.3145V16.3245M16.3178 11.8516V11.8616M16.3178 16.3145V16.3245M7.6704 11.75C7.69511 11.7501 7.71923 11.7575 7.73972 11.7713C7.76021 11.7851 7.77616 11.8047 7.78555 11.8275C7.79493 11.8504 7.79734 11.8755 7.79246 11.8997C7.78759 11.9239 7.77564 11.9461 7.75814 11.9636C7.74064 11.981 7.71837 11.9929 7.69413 11.9976C7.6699 12.0024 7.64479 11.9999 7.62198 11.9904C7.59917 11.981 7.57967 11.9649 7.56596 11.9444C7.55224 11.9239 7.54492 11.8997 7.54492 11.875C7.54484 11.8585 7.54803 11.8422 7.55431 11.827C7.56059 11.8117 7.56983 11.7979 7.58151 11.7862C7.59319 11.7746 7.60706 11.7654 7.62232 11.7592C7.63758 11.753 7.65392 11.7499 7.6704 11.75ZM7.6704 16.2129C7.69511 16.213 7.71923 16.2204 7.73972 16.2342C7.76021 16.248 7.77616 16.2675 7.78555 16.2904C7.79493 16.3132 7.79734 16.3384 7.79246 16.3626C7.78759 16.3868 7.77564 16.409 7.75814 16.4265C7.74064 16.4439 7.71837 16.4557 7.69413 16.4605C7.6699 16.4653 7.64479 16.4628 7.62198 16.4533C7.59917 16.4439 7.57967 16.4278 7.56596 16.4073C7.55224 16.3867 7.54492 16.3626 7.54492 16.3379C7.54484 16.3214 7.54803 16.3051 7.55431 16.2898C7.56059 16.2746 7.56983 16.2608 7.58151 16.2491C7.59319 16.2375 7.60706 16.2283 7.62232 16.2221C7.63758 16.2159 7.65392 16.2127 7.6704 16.2129ZM12.0068 11.75C12.0315 11.7501 12.0556 11.7575 12.0761 11.7713C12.0966 11.7851 12.1125 11.8047 12.1219 11.8275C12.1313 11.8504 12.1337 11.8755 12.1288 11.8997C12.124 11.9239 12.112 11.9461 12.0945 11.9636C12.077 11.981 12.0547 11.9929 12.0305 11.9976C12.0063 12.0024 11.9812 11.9999 11.9583 11.9904C11.9355 11.981 11.916 11.9649 11.9023 11.9444C11.8886 11.9239 11.8813 11.8997 11.8813 11.875C11.8812 11.8585 11.8844 11.8422 11.8907 11.827C11.897 11.8117 11.9062 11.7979 11.9179 11.7862C11.9296 11.7746 11.9434 11.7654 11.9587 11.7592C11.9739 11.753 11.9903 11.7499 12.0068 11.75ZM12.0068 16.2129C12.0315 16.213 12.0556 16.2204 12.0761 16.2342C12.0966 16.248 12.1125 16.2675 12.1219 16.2904C12.1313 16.3132 12.1337 16.3384 12.1288 16.3626C12.124 16.3868 12.112 16.409 12.0945 16.4265C12.077 16.4439 12.0547 16.4557 12.0305 16.4605C12.0063 16.4653 11.9812 16.4628 11.9583 16.4533C11.9355 16.4439 11.916 16.4278 11.9023 16.4073C11.8886 16.3867 11.8813 16.3626 11.8813 16.3379C11.8812 16.3214 11.8844 16.3051 11.8907 16.2898C11.897 16.2746 11.9062 16.2608 11.9179 16.2491C11.9296 16.2375 11.9434 16.2283 11.9587 16.2221C11.9739 16.2159 11.9903 16.2127 12.0068 16.2129ZM16.3432 11.75C16.3679 11.7501 16.392 11.7575 16.4125 11.7713C16.433 11.7851 16.4489 11.8047 16.4583 11.8275C16.4677 11.8504 16.4701 11.8755 16.4653 11.8997C16.4604 11.9239 16.4484 11.9461 16.4309 11.9636C16.4134 11.981 16.3912 11.9929 16.3669 11.9976C16.3427 12.0024 16.3176 11.9999 16.2948 11.9904C16.272 11.981 16.2525 11.9649 16.2387 11.9444C16.225 11.9239 16.2177 11.8997 16.2177 11.875C16.2176 11.8585 16.2208 11.8422 16.2271 11.827C16.2334 11.8117 16.2426 11.7979 16.2543 11.7862C16.266 11.7746 16.2798 11.7654 16.2951 11.7592C16.3104 11.753 16.3267 11.7499 16.3432 11.75ZM16.3432 16.2129C16.3679 16.213 16.392 16.2204 16.4125 16.2342C16.433 16.248 16.4489 16.2675 16.4583 16.2904C16.4677 16.3132 16.4701 16.3384 16.4653 16.3626C16.4604 16.3868 16.4484 16.409 16.4309 16.4265C16.4134 16.4439 16.3912 16.4557 16.3669 16.4605C16.3427 16.4653 16.3176 16.4628 16.2948 16.4533C16.272 16.4439 16.2525 16.4278 16.2387 16.4073C16.225 16.3867 16.2177 16.3626 16.2177 16.3379C16.2176 16.3214 16.2208 16.3051 16.2271 16.2898C16.2334 16.2746 16.2426 16.2608 16.2543 16.2491C16.266 16.2375 16.2798 16.2283 16.2951 16.2221C16.3104 16.2159 16.3267 16.2127 16.3432 16.2129Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M7.11719 7.66211H16.8839" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Simulateur</b><small>Votre gain en 30 secondes</small></a></span></span><span class="tnav-drop"><a class="tnav-drop-t" href="pourquoi-talos.html">Pourquoi Talos<svg class="tnav-chev" width="11" height="11" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg></a><span class="tnav-pan is-mini"><a class="tnav-ag" href="pourquoi-talos.html"><span class="tnav-ic"><svg width="17" height="17" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M11.1272 10.0485C8.61782 9.47457 7.651 6.26645 7.651 6.26645C5.85462 7.47445 1.67749 14.9675 7.10054 19.2804C12.2296 23.3595 20.5073 19.7607 19.4999 12.9093C18.8565 8.53294 16.3557 7.66152 13.659 3C10.9175 6.26645 11.1272 10.0485 11.1272 10.0485Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M12.3138 16.3496C13.4492 16.0899 13.9675 14.3338 13.9675 14.3338C14.7803 14.8803 16.6703 18.2706 14.2166 20.222C11.8959 22.0676 8.15062 20.4393 8.6064 17.3394C8.89753 15.3592 10.029 14.965 11.2492 12.8558C12.4896 14.3338 12.3138 16.3496 12.3138 16.3496Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Notre histoire</b><small>D’où vient Talos</small></a><a class="tnav-ag" href="blog.html"><span class="tnav-ic"><svg width="17" height="17" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7.04356 16.0254H19.4373L19.4441 19.8044C19.4422 20.4651 18.906 20.9992 18.2454 20.9992H7.04356C5.66972 20.9992 4.55664 19.8861 4.55664 18.5123C4.55664 17.1385 5.66972 16.0254 7.04356 16.0254Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M4.55664 18.5131V5.59103C4.55664 4.15978 5.71642 3 7.14767 3H18.2386C18.9002 3 19.4373 3.53708 19.4373 4.1987V16.0262" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M11.9805 7.13086H13.4535M11.9805 10.0222H15.309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8.35938 3.01367V16.0081" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Blog</b><small>Guides et cas de chantier</small></a></span></span></div><div class="tnav-act"><button type="button" class="theme-toggle grid h-10 w-10 shrink-0 place-items-center rounded-lg" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 18.36 5.64L 17.39 6.61M 6.61 17.39L 5.64 18.36M 18.36 18.36L 17.39 17.39M 6.61 6.61L 5.64 5.64"/><path d="M 12 7.8C 14.32 7.8 16.2 9.68 16.2 12C 16.2 14.32 14.32 16.2 12 16.2C 9.68 16.2 7.8 14.32 7.8 12C 7.8 9.68 9.68 7.8 12 7.8Z"/><path d="M 12 4.35V 4.37M 12 19.63V 19.65M 19.66 12H 19.63M 4.37 12H 4.34"/></svg></button><a class="tnav-esp" href="https://app.talos-ai.tech/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 15.35C 8.12 15.35 4.81 15.93 4.81 18.27C 4.81 20.61 8.1 21.22 11.98 21.22C 15.85 21.22 19.15 20.63 19.15 18.29C 19.15 15.95 15.87 15.35 11.98 15.35Z"/><path d="M 11.98 12.01C 14.52 12.01 16.58 9.95 16.58 7.41C 16.58 4.87 14.52 2.81 11.98 2.81C 9.45 2.81 7.39 4.87 7.39 7.41C 7.38 9.94 9.42 12 11.95 12.01L 11.98 12.01Z"/></svg>Espace client</a><a class="tnav-cta" href="reserver.html">Réserver une démo</a><button class="tnav-burger" id="tnav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="tnav-menu"><i></i><i></i><i></i></button></div></nav><div class="tnav-menu" id="tnav-menu"><a href="offres.html">Offres</a><a href="comment-ca-marche.html">Comment ça marche</a><a href="tarifs.html">Tarifs</a><a href="simulateur.html" aria-current="page">Simulateur</a><a href="pourquoi-talos.html">Pourquoi Talos</a><a href="blog.html">Blog</a><a class="m-esp" href="https://app.talos-ai.tech/">Espace client</a><button type="button" class="theme-toggle m-theme" aria-label="Changer de thème"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18.3643 5.63574L17.3942 6.6058M6.60678 17.3937L5.63672 18.3638M18.3643 18.3638L17.3942 17.3937M6.60678 6.60628L5.63672 5.63622" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0002 7.80469C14.3178 7.80469 16.1957 9.68351 16.1957 12.0002C16.1957 14.3178 14.3178 16.1966 12.0002 16.1966C9.68254 16.1966 7.80469 14.3178 7.80469 12.0002C7.80469 9.68351 9.68254 7.80469 12.0002 7.80469Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M11.9999 4.35156V4.37188M11.9999 19.6281V19.6523M19.6639 12.0001H19.6279M4.37174 12.0001H4.33594" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl-dark">Mode clair</span><span class="lbl-light">Mode sombre</span></button><a class="m-cta" href="reserver.html">Réserver une démo</a></div></header>
 
 <!-- ═══ HERO — page simulateur ═══ -->
-<section class="t-simhero" id="top">
-<div class="halo"></div>
-<div class="wrap">
-  <div class="in">
-    <span class="eyebrow"><i></i>Simulateurs Talos</span>
-    <h1>Votre paperasse a un prix. <em>Mettez-le sur la table.</em></h1>
-    <p class="lead">
-      Deux calculs, vos chiffres. D'un côté ce que votre administratif vous coûte
-      réellement chaque mois. De l'autre le chiffre d'affaires que vos devis laissent
-      filer faute de relance. Rien ne quitte votre navigateur.
-    </p>
-
-    <div class="jump">
-      <a href="#cout-administratif">
-        <span class="n">1</span>
-        <span>
-          <b>Le coût de votre administratif</b>
-          <em>Temps passé et argent perdu, tâche par tâche</em>
-        </span>
-      </a>
-      <a href="#simulateur">
-        <span class="n">2</span>
-        <span>
-          <b>Le chiffre d'affaires récupérable</b>
-          <em>Ce que vos devis non relancés vous coûtent</em>
-        </span>
-      </a>
-    </div>
-
-    <div class="trust">
-      <span>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Calcul local, aucune donnée envoyée
-      </span>
-      <span>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Durées relevées chez de vrais artisans
-      </span>
-      <span>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Sans inscription
-      </span>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- ═══ CALCULATEUR DE COÛT ADMINISTRATIF ═══ -->
-<section class="t-gains" id="cout-administratif">
-<div class="g-orb a"></div>
-<div class="g-orb b"></div>
-
-<div class="wrap">
-
-  <div class="g-head">
-    <span class="eyebrow"><i></i>Calculez vos gains</span>
-    <h2>Découvrez ce que votre administratif <em>vous coûte</em> chaque mois.</h2>
-    <p>Cochez les tâches que vous réalisez vraiment, ajustez les fréquences, et lisez le temps
-       et l'argent que Talos peut vous rendre. Tout se calcule dans votre navigateur.</p>
-  </div>
-
-  <div class="g-grid">
-
-    <!-- ── colonne saisie ── -->
-    <div>
-      <div class="g-rate">
-        <div class="panel rate-in">
-          <div class="rate-top">
-            <span class="lb">Combien vaut votre heure de travail&nbsp;?</span>
-            <label class="fld" for="gRate">
-              <input type="number" id="gRate" min="10" max="500" step="5" value="60" aria-label="Taux horaire en euros">
-              <span class="cur">€</span>
-            </label>
-          </div>
-          <div class="presets" id="gPresets" role="group" aria-label="Taux horaires courants">
-            <button type="button" data-rate="40">40 €</button>
-            <button type="button" data-rate="60">60 €</button>
-            <button type="button" data-rate="80">80 €</button>
-            <button type="button" data-rate="100">100 €</button>
-          </div>
-        </div>
-        <p class="panel note">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M 21.25 12C 21.25 17.11 17.11 21.25 12 21.25C 6.89 21.25 2.75 17.11 2.75 12C 2.75 6.89 6.89 2.75 12 2.75C 17.11 2.75 21.25 6.89 21.25 12Z"/><path d="M15.43 14.94L11.66 12.69L11.66 7.85"/></svg>
-          Durées moyennes constatées chez nos clients artisans du bâtiment.
-        </p>
-      </div>
-
-      <div class="panel g-table">
-        <table id="gTable">
-          <thead>
-            <tr>
-              <th scope="col">Fonctionnalité</th>
-              <th scope="col">Durée moyenne</th>
-              <th scope="col">Combien par semaine</th>
-              <th scope="col">Temps / semaine</th>
-              <th scope="col">Coût / semaine</th>
-            </tr>
-          </thead>
-          <tbody>
-      <tr data-min="30" data-unit="sem">
-        <td class="task">
-          <div class="tk">
-            <label class="chk"><input type="checkbox" checked data-role="on" aria-label="Compter : Devis"><span></span></label>
-            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(3.500000, 2.000000)" stroke-width="1.5"> <path d="M11.2378,0.761771171 L4.5848,0.761771171 C2.5048,0.7538 0.7998,2.4118 0.7508,4.4908 L0.7508,15.2038 C0.7048,17.3168 2.3798,19.0678 4.4928,19.1148 C4.5238,19.1148 4.5538,19.1158 4.5848,19.1148 L12.5738,19.1148 C14.6678,19.0298 16.3178,17.2998 16.3029015,15.2038 L16.3029015,6.0378 L11.2378,0.761771171 Z"></path> <path d="M10.9751,0.75 L10.9751,3.659 C10.9751,5.079 12.1231,6.23 13.5431,6.234 L16.2981,6.234"></path> <line x1="10.7881" y1="13.3585" x2="5.3881" y2="13.3585"></line> <line x1="8.7432" y1="9.606" x2="5.3872" y2="9.606"></line> </g></svg></span>
-            <span><b>Devis</b><em>Création de devis</em></span>
-          </div>
-        </td>
-        <td class="dur">30 min</td>
-        <td class="qty"><input type="number" min="0" max="200" step="1" value="15" data-role="qty" aria-label="Devis — combien par semaine"></td>
-        <td class="tim" data-role="time">—</td>
-        <td class="cst" data-role="cost">—</td>
-      </tr>
-      <tr data-min="5" data-unit="sem">
-        <td class="task">
-          <div class="tk">
-            <label class="chk"><input type="checkbox" checked data-role="on" aria-label="Compter : Relance devis"><span></span></label>
-            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg></span>
-            <span><b>Relance devis</b><em>Relances et suivi</em></span>
-          </div>
-        </td>
-        <td class="dur">5 min</td>
-        <td class="qty"><input type="number" min="0" max="200" step="1" value="12" data-role="qty" aria-label="Relance devis — combien par semaine"></td>
-        <td class="tim" data-role="time">—</td>
-        <td class="cst" data-role="cost">—</td>
-      </tr>
-      <tr data-min="15" data-unit="sem">
-        <td class="task">
-          <div class="tk">
-            <label class="chk"><input type="checkbox" checked data-role="on" aria-label="Compter : Facturation"><span></span></label>
-            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(3.500000, 2.000000)" stroke-width="1.5"> <path d="M11.2378,0.761771171 L4.5848,0.761771171 C2.5048,0.7538 0.7998,2.4118 0.7508,4.4908 L0.7508,15.2038 C0.7048,17.3168 2.3798,19.0678 4.4928,19.1148 C4.5238,19.1148 4.5538,19.1158 4.5848,19.1148 L12.5738,19.1148 C14.6678,19.0298 16.3178,17.2998 16.3029015,15.2038 L16.3029015,6.0378 L11.2378,0.761771171 Z"></path> <path d="M10.9751,0.75 L10.9751,3.659 C10.9751,5.079 12.1231,6.23 13.5431,6.234 L16.2981,6.234"></path> <line x1="10.7881" y1="13.3585" x2="5.3881" y2="13.3585"></line> <line x1="8.7432" y1="9.606" x2="5.3872" y2="9.606"></line> </g></svg></span>
-            <span><b>Facturation</b><em>Création et envoi</em></span>
-          </div>
-        </td>
-        <td class="dur">15 min</td>
-        <td class="qty"><input type="number" min="0" max="200" step="1" value="12" data-role="qty" aria-label="Facturation — combien par semaine"></td>
-        <td class="tim" data-role="time">—</td>
-        <td class="cst" data-role="cost">—</td>
-      </tr>
-      <tr data-min="10" data-unit="sem">
-        <td class="task">
-          <div class="tk">
-            <label class="chk"><input type="checkbox" checked data-role="on" aria-label="Compter : Impayés"><span></span></label>
-            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)"> <path d="M10.0001,0.7501 C15.1081,0.7501 19.2501,4.8911 19.2501,10.0001 C19.2501,15.1081 15.1081,19.2501 10.0001,19.2501 C4.8911,19.2501 0.7501,15.1081 0.7501,10.0001 C0.7501,4.8911 4.8911,0.7501 10.0001,0.7501 Z" stroke-width="1.5"></path> <line x1="9.9952" y1="6.2042" x2="9.9952" y2="10.6232" stroke-width="1.5"></line> <line x1="9.995" y1="13.7961" x2="10.005" y2="13.7961" stroke-width="2"></line> </g></svg></span>
-            <span><b>Impayés</b><em>Relances impayés</em></span>
-          </div>
-        </td>
-        <td class="dur">10 min</td>
-        <td class="qty"><input type="number" min="0" max="200" step="1" value="8" data-role="qty" aria-label="Impayés — combien par semaine"></td>
-        <td class="tim" data-role="time">—</td>
-        <td class="cst" data-role="cost">—</td>
-      </tr>
-      <tr data-min="30" data-unit="sem" class="off">
-        <td class="task">
-          <div class="tk">
-            <label class="chk"><input type="checkbox" data-role="on" aria-label="Compter : Trésorerie"><span></span></label>
-            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.37 10.2L7.37 17.06"/><path d="M12.04 6.92L12.04 17.06"/><path d="M16.63 13.83L16.63 17.06"/><path d="M 16.69 2L 7.31 2C 4.05 2 2 4.31 2 7.59L 2 16.41C 2 19.69 4.04 22 7.31 22L 16.69 22C 19.96 22 22 19.69 22 16.41L 22 7.59C 22 4.31 19.96 2 16.69 2Z"/></svg></span>
-            <span><b>Trésorerie</b><em>Suivi et prévisionnel</em></span>
-          </div>
-        </td>
-        <td class="dur">30 min</td>
-        <td class="qty"><input type="number" min="0" max="200" step="1" value="1" data-role="qty" aria-label="Trésorerie — combien par semaine"></td>
-        <td class="tim" data-role="time">—</td>
-        <td class="cst" data-role="cost">—</td>
-      </tr>
-      <tr data-min="45" data-unit="jour">
-        <td class="task">
-          <div class="tk">
-            <label class="chk"><input type="checkbox" checked data-role="on" aria-label="Compter : E-mails"><span></span></label>
-            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg></span>
-            <span><b>E-mails</b><em>Tri et réponses</em></span>
-          </div>
-        </td>
-        <td class="dur">45 min / jour</td>
-        <td class="qty"><input type="number" min="0" max="200" step="1" value="5" data-role="qty" aria-label="E-mails — combien par semaine"></td>
-        <td class="tim" data-role="time">—</td>
-        <td class="cst" data-role="cost">—</td>
-      </tr>
-      <tr data-min="15" data-unit="jour">
-        <td class="task">
-          <div class="tk">
-            <label class="chk"><input type="checkbox" checked data-role="on" aria-label="Compter : Assistant 24/7"><span></span></label>
-            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg></span>
-            <span><b>Assistant 24/7</b><em>Réponses clients</em></span>
-          </div>
-        </td>
-        <td class="dur">15 min / jour</td>
-        <td class="qty"><input type="number" min="0" max="200" step="1" value="5" data-role="qty" aria-label="Assistant 24/7 — combien par semaine"></td>
-        <td class="tim" data-role="time">—</td>
-        <td class="cst" data-role="cost">—</td>
-      </tr>
-      <tr data-min="15" data-unit="sem">
-        <td class="task">
-          <div class="tk">
-            <label class="chk"><input type="checkbox" checked data-role="on" aria-label="Compter : Rendez-vous"><span></span></label>
-            <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.09 9.4L20.92 9.4"/><path d="M16.44 13.31L16.45 13.31"/><path d="M12 13.31L12.01 13.31"/><path d="M7.56 13.31L7.57 13.31"/><path d="M16.44 17.2L16.45 17.2"/><path d="M12 17.2L12.01 17.2"/><path d="M7.56 17.2L7.57 17.2"/><path d="M16.04 2L16.04 5.29"/><path d="M7.97 2L7.97 5.29"/><path d="M 16.24 3.58L 7.77 3.58C 4.83 3.58 3 5.22 3 8.22L 3 17.27C 3 20.33 4.83 22 7.77 22L 16.23 22C 19.17 22 21 20.35 21 17.35L 21 8.22C 21.01 5.22 19.18 3.58 16.24 3.58Z"/></svg></span>
-            <span><b>Rendez-vous</b><em>Planification et rappels</em></span>
-          </div>
-        </td>
-        <td class="dur">15 min</td>
-        <td class="qty"><input type="number" min="0" max="200" step="1" value="10" data-role="qty" aria-label="Rendez-vous — combien par semaine"></td>
-        <td class="tim" data-role="time">—</td>
-        <td class="cst" data-role="cost">—</td>
-      </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3"><span class="lb">Total des tâches cochées</span></td>
-              <td class="ftime"><span class="tt" id="gTotT">—</span></td>
-              <td><span class="tc" id="gTotC">—</span></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-
-    <!-- ── colonne verdict ── -->
-    <aside class="panel g-out" aria-live="polite">
-      <div class="lgd">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M 21.25 12C 21.25 17.11 17.11 21.25 12 21.25C 6.89 21.25 2.75 17.11 2.75 12C 2.75 6.89 6.89 2.75 12 2.75C 17.11 2.75 21.25 6.89 21.25 12Z"/><path d="M15.43 14.94L11.66 12.69L11.66 7.85"/></svg>
-        Votre estimation
-      </div>
-      <div class="tiles">
-        <div class="tile"><b id="gHw">—</b><em>par semaine</em></div>
-        <div class="tile"><b id="gHm">—</b><em>par mois</em></div>
-        <div class="tile"><b id="gHy">—</b><em>par an</em></div>
-        <div class="tile"><b id="gDy">—</b><em>jours / an</em></div>
-      </div>
-
-      <div class="lgd">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M 6.69 11.38C 7.38 10.23 8.12 9.1 8.85 7.97L 6.87 4.28C 6.87 4.28 7.02 4.15 7.4 3.85C 8.53 2.98 9.76 2.76 11.09 3.27C 12.36 3.77 13.65 4.14 15.02 4.06C 15.42 4.04 16.96 3.84 16.96 3.84L 15.16 7.96C 15.88 9.09 16.62 10.23 17.31 11.38C 18.44 13.26 19.53 15.37 18.65 17.56C 17.63 20.11 14.64 20.96 12 21C 9.35 20.96 6.37 20.11 5.35 17.56C 4.47 15.37 5.56 13.26 6.69 11.38Z"/><path d="M 8.85 7.98C 10.95 8.46 13.05 8.46 15.16 7.98"/></svg>
-        Coût de votre administratif
-      </div>
-      <!--  Le mois porte le chiffre principal, pas l'année. Trois raisons :
-            l'abonnement est mensuel, la comparaison juste en dessous est
-            mensuelle, et un artisan raisonne en mois. Un coût annuel en
-            tête obligeait à diviser de tête avant de pouvoir comparer.  -->
-      <div class="cost-hero">
-        <span class="k">Coût mensuel</span>
-        <b class="v" id="gCm">—</b>
-        <span class="s">soit <span id="gCd">—</span> par jour travaillé.</span>
-      </div>
-      <div class="mini tiles">
-        <div class="tile"><b id="gCw">—</b><em>par semaine</em></div>
-        <div class="tile"><b id="gCq">—</b><em>par trimestre</em></div>
-        <div class="tile"><b id="gCy2">—</b><em>par an</em></div>
-      </div>
-
-      <div class="lgd">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 1.500000)" stroke-width="1.5"> <polyline points="5.24485128 13.2814646 8.23798631 9.39130439 11.652174 12.0732266 14.5812358 8.29290622"></polyline> <circle cx="17.9954234" cy="2.70022885" r="1.92219681"></circle> <path d="M12.9244852,1.62013731 L5.6567506,1.62013731 C2.64530894,1.62013731 0.778032041,3.75286043 0.778032041,6.76430209 L0.778032041,14.846682 C0.778032041,17.8581237 2.60869567,19.9816935 5.6567506,19.9816935 L14.2608696,19.9816935 C17.2723113,19.9816935 19.1395882,17.8581237 19.1395882,14.846682 L19.1395882,7.80778036"></path> </g></svg>
-        Votre comparaison
-      </div>
-      <div class="vs">
-        <div class="side bad">
-          <div class="k">Sans Talos</div>
-          <div class="v" id="gNoTalos">—</div>
-          <div class="mtr"><i></i></div>
-          <div class="s">Coût de votre administratif</div>
-        </div>
-        <div class="mid">VS</div>
-        <div class="side good">
-          <div class="k">Avec Talos</div>
-          <div class="v" id="gTalos">—</div>
-          <div class="mtr"><i id="gMtr" style="width:4%"></i></div>
-          <div class="s" id="gTalosSub">—</div>
-        </div>
-      </div>
-
-      <div class="save">
-        <div class="txt">
-          <div class="k">Vous économiseriez</div>
-          <div class="v" id="gSave">—</div>
-        </div>
-        <div class="pct"><b id="gPct">—</b><em>d'économies</em></div>
-      </div>
-
-      <p class="fine">Estimation basée sur les durées que vous avez saisies et sur nos relevés terrain.
-         Nous comptons 4&nbsp;semaines par mois et 48&nbsp;semaines travaillées par an. Les gains réels
-         dépendent de votre activité et de vos processus.</p>
-    </aside>
-
-  </div>
-
-  <!-- ── réinvestissement ── -->
-  <div class="panel g-reinv">
-    <div class="lead">
-      <span class="bolt"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M 11.99 15.9L 14.11 12H 9.89L 12.01 8.1"/><path d="M 12 3C 16.97 3 21 7.03 21 12C 21 16.97 16.97 21 12 21C 7.03 21 3 16.97 3 12C 3 7.03 7.03 3 12 3Z"/></svg></span>
-      <div>
-        <h3>Réinvestissez votre temps là où ça compte vraiment.</h3>
-        <p>Ce temps peut aller à vos chantiers, à votre développement commercial, ou tout simplement à votre vie personnelle.</p>
-      </div>
-    </div>
-
-    <!--  Ce verdict convertissait les heures libérées en chantiers puis en
-          chiffre d'affaires, à raison de 5 000 € pour 28 h — soit 178 € de
-          l'heure, alors que le visiteur venait d'écrire que son heure vaut
-          60 €. Deux valeurs pour la même heure dans le même écran.
-
-          Et le second calcul annonçait déjà des chantiers récupérés, par un
-          tout autre chemin : la page donnait donc deux réponses différentes
-          à la même question.
-
-          Ici on s'en tient à ce que le tableau sait : des heures, et ce
-          qu'elles valent au taux que le visiteur a lui-même saisi. Les
-          chantiers récupérés restent la réponse du second calcul, et d'aucun
-          autre.  -->
-    <p class="verdict">
-      Avec votre activité actuelle, vous récupéreriez
-      <b id="gHours">—</b> de votre temps, soit <b id="gCa">—</b>
-      à votre propre taux horaire.
-    </p>
-
-    <a class="cta" href="reserver.html">
-      <span class="t">Essayez Talos <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg></span></span>
-      <span class="s">Démo de 15 minutes, sur vos vrais chiffres</span>
-      <ul>
-        <li>✓ Setup géré par nous</li>
-        <li>✓ Sans engagement</li>
-        <li>✓ Résiliable en 1 clic</li>
+<!-- ═══ SIMULATEUR — détaillé à gauche, résultat en direct à droite, rapport contre un numéro ═══ -->
+<section class="t-sim2" id="simulateur">
+  <div class="s2-wrap">
+    <header class="s2-head">
+      <span class="s2-eyebrow"><i></i>Simulateur de gains</span>
+      <h1>Combien Talos vous rend <em>chaque année&#8239;?</em></h1>
+      <p>Répondez sur votre entreprise, le résultat se met à jour à droite. Le rapport détaillé vous attend à la fin.</p>
+      <ul class="s2-trust">
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path><polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline></g></g></svg>Calcul dans votre navigateur</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path><polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline></g></g></svg>2 minutes</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path><polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline></g></g></svg>Sans engagement</li>
       </ul>
-    </a>
-  </div>
+    </header>
 
-</div>
-</section>
+    <div class="s2-grid" id="s2Grid">
+      <form class="s2-form" id="s2Form" onsubmit="return false" novalidate>
 
-<section class="t-roi" id="simulateur">
-<div class="orb a"></div>
-<div class="orb b"></div>
-
-<div class="wrap">
-<div class="sheet-veil" id="roiVeil" hidden></div>
-
-  <div class="head">
-    <span class="eyebrow"><i></i> Estimez vos gains</span>
-    <h2 class="roi-title">Calculez ce que Talos peut <em>vous faire gagner</em>.</h2>
-    <p>Vos chiffres, pas les nôtres. Cinq réponses, le montant apparaît. Le calcul est vérifiable ligne par ligne juste en dessous.</p>
-  </div>
-
-  <div class="grid">
-
-
-    <div class="pcol">
-
-      <!-- les trois curseurs restent en clair, y compris sur téléphone :
-           c'est ce qu'on bouge le plus souvent -->
-      <div class="glass quick open" id="roiQuick">
-        <button type="button" class="quick-hd" id="roiQuickBtn"
-                aria-expanded="true" aria-controls="roiQuickPanel">
-          <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg></span>
-          <span class="tx"><b>Vos chiffres</b><em id="quickSum">15 devis · 6 signés · 3 000 €</em></span>
-          <svg class="quick-chev" width="14" height="14" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg>
-        </button>
-        <div class="quick-panel" id="roiQuickPanel">
-          <div class="quick-panel-in">
-      <div class="ctrl">
-        <div class="top"><span class="nm">Devis envoyés par mois</span><span class="val" id="vV">15</span></div>
-        <div class="adj">
-          <button type="button" class="stp" data-for="V" data-dir="-1" aria-label="Moins de devis envoyés par mois"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.2178 3H7.78313C4.84378 3 3 5.08119 3 8.02638V15.9736C3 18.9188 4.83503 21 7.78313 21H16.2169C19.1659 21 21 18.9188 21 15.9736V8.02638C21 5.08119 19.1659 3 16.2178 3Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M15.3008 11.9924H8.70117" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <input type="range" id="V" min="1" max="50" step="1" value="15" aria-label="Devis envoyés par mois">
-          <button type="button" class="stp" data-for="V" data-dir="1" aria-label="Plus de devis envoyés par mois"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></button>
-        </div>
-        <div class="ends"><span>1</span><span>50</span></div>
-      </div>
-
-      <div class="ctrl">
-        <div class="top"><span class="nm">Devis signés aujourd'hui</span><span class="val" id="vS">6</span></div>
-        <div class="adj">
-          <button type="button" class="stp" data-for="S" data-dir="-1" aria-label="Moins de devis signés"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.2178 3H7.78313C4.84378 3 3 5.08119 3 8.02638V15.9736C3 18.9188 4.83503 21 7.78313 21H16.2169C19.1659 21 21 18.9188 21 15.9736V8.02638C21 5.08119 19.1659 3 16.2178 3Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M15.3008 11.9924H8.70117" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <input type="range" id="S" min="1" max="30" step="1" value="6" aria-label="Devis signés par mois">
-          <button type="button" class="stp" data-for="S" data-dir="1" aria-label="Plus de devis signés"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></button>
-        </div>
-        <div class="ends"><span>1</span><span id="sMax">30</span></div>
-      </div>
-
-      <div class="ctrl">
-        <div class="top"><span class="nm">Montant moyen d'un devis</span><span class="val" id="vM">3 000 €</span></div>
-        <div class="adj">
-          <button type="button" class="stp" data-for="M" data-dir="-1" aria-label="Montant moyen plus bas"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.2178 3H7.78313C4.84378 3 3 5.08119 3 8.02638V15.9736C3 18.9188 4.83503 21 7.78313 21H16.2169C19.1659 21 21 18.9188 21 15.9736V8.02638C21 5.08119 19.1659 3 16.2178 3Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M15.3008 11.9924H8.70117" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <input type="range" id="M" min="500" max="20000" step="500" value="3000" aria-label="Montant moyen d'un devis">
-          <button type="button" class="stp" data-for="M" data-dir="1" aria-label="Montant moyen plus haut"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <line x1="10" y1="6.32730733" x2="10" y2="13.6536632"></line> <line x1="13.6666667" y1="9.99048525" x2="6.33333333" y2="9.99048525"></line> <path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path> </g></svg></button>
-        </div>
-        <div class="ends"><span>500 €</span><span>20 000 €</span></div>
-      </div>
-
+        <fieldset class="s2-card">
+          <legend><span class="s2-n"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M20.9997 20.9995V10.4254C20.9881 9.71707 20.6524 9.05448 20.0881 8.62541L13.8553 3.64872C12.7598 2.78376 11.2137 2.78376 10.1182 3.64872L3.91166 8.63027C3.3454 9.0574 3.00876 9.72388 3 10.4341V20.9995" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.5926 21.0004V16.4985C15.5926 14.5234 13.9912 12.9219 12.0161 12.9219C10.04 12.9219 8.43945 14.5234 8.43945 16.4985V21.0004" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Votre entreprise</b><em>Étape 1 sur 5 · métier et taille</em></span></legend>
+          <div class="s2-field s2-field-full">
+            <label for="s2Metier">Votre métier</label>
+            <div class="s2-select">
+              <select id="s2Metier">
+                <option>Plomberie, chauffage</option>
+                <option>Électricité</option>
+                <option>Maçonnerie, gros œuvre</option>
+                <option>Menuiserie</option>
+                <option>Peinture, revêtements</option>
+                <option>Couverture, zinguerie</option>
+                <option>Carrelage</option>
+                <option>Plâtrerie, isolation</option>
+                <option selected>Rénovation tous corps d'état</option>
+                <option>Paysagisme</option>
+                <option>Autre métier du bâtiment</option>
+              </select>
+              <svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"><polyline points="14 0 7 7 0 0"></polyline></g></g></svg>
+            </div>
           </div>
-        </div>
-      </div>
-
-    <button type="button" class="sheet-btn" data-sheet="roiParams" aria-haspopup="dialog">
-      <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg></span>
-      <span class="tx"><b>Vos habitudes</b><em id="sheetSum">plus d'1 h par devis · envoi sous 3 à 5 jours</em></span>
-      <span class="go">Ajuster
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg>
-      </span>
-    </button>
-
-    <aside class="glass params sheet" id="roiParams" role="dialog" aria-modal="true" aria-label="Vos habitudes">
-      <div class="sheet-hd">
-        <span class="t">Vos habitudes</span>
-        <button type="button" class="sheet-ok" data-close>OK</button>
-      </div>
-      <h2>
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.33 16.59L4.03 16.59"/><path d="M13.14 6.9L19.44 6.9"/><path d="M 8.73 6.85C 8.73 5.55 7.67 4.5 6.36 4.5C 5.06 4.5 4 5.55 4 6.85C 4 8.14 5.06 9.19 6.36 9.19C 7.67 9.19 8.73 8.14 8.73 6.85Z"/><path d="M 20 16.55C 20 15.26 18.94 14.21 17.64 14.21C 16.33 14.21 15.27 15.26 15.27 16.55C 15.27 17.85 16.33 18.9 17.64 18.9C 18.94 18.9 20 17.85 20 16.55Z"/></svg>
-        Vos habitudes
-      </h2>
-
-      <div class="ctrl">
-        <div class="top"><span class="nm">Combien de temps passé pour un devis&nbsp;?</span></div>
-        <div class="risk tick" id="T" role="radiogroup" aria-label="Temps passé pour un devis">
-          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-vert)"
-                  data-t="0.25" data-lab="15 min">
-            <i></i><span class="l">15 min<em>Vous avez déjà un modèle bien rôdé</em></span><span class="p">0,25 h</span>
-          </button>
-          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-ambre)"
-                  data-t="0.5" data-lab="30 min">
-            <i></i><span class="l">30 min<em>Un chiffrage rapide, sans aller-retour</em></span><span class="p">0,5 h</span>
-          </button>
-          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-orange)"
-                  data-t="1" data-lab="1 h">
-            <i></i><span class="l">1 h<em>Métrés, prix, mise en forme : le cas courant</em></span><span class="p">1 h</span>
-          </button>
-          <button type="button" role="radio" aria-checked="true" class="on" style="--c:var(--sig-rouge)"
-                  data-t="1.5" data-lab="plus d'une heure">
-            <i></i><span class="l">Plus d'1 h<em>Chaque devis vous coûte une soirée entière</em></span><span class="p">1,5 h</span>
-          </button>
-        </div>
-        <div class="risk-note">Temps de préparation d'un devis, relances et mise au propre comprises.</div>
-      </div>
-
-      <div class="ctrl">
-        <div class="top"><span class="nm">Votre délai d'envoi actuel</span></div>
-        <div class="risk tick" id="D" role="radiogroup" aria-label="Délai d'envoi actuel">
-          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-vert)"
-                  data-d="0.05" data-lab="un envoi sous 2 heures">
-            <i></i><span class="l">Sous 2 heures<em>L'instant-réponse · risque minimal</em></span><span class="p">5 %</span>
-          </button>
-          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-ambre)"
-                  data-d="0.20" data-lab="un envoi sous 24 heures">
-            <i></i><span class="l">Sous 24 heures<em>Le standard élite · risque faible</em></span><span class="p">20 %</span>
-          </button>
-          <button type="button" role="radio" aria-checked="true" class="on" style="--c:var(--sig-orange)"
-                  data-d="0.50" data-lab="un envoi sous 3 à 5 jours">
-            <i></i><span class="l">Sous 3 à 5 jours<em>La moyenne du marché · zone critique</em></span><span class="p">50 %</span>
-          </button>
-          <button type="button" role="radio" aria-checked="false" style="--c:var(--sig-rouge)"
-                  data-d="0.75" data-lab="un envoi à plus de 7 jours">
-            <i></i><span class="l">Plus de 7 jours<em>La zone rouge · perte quasi certaine</em></span><span class="p">75 %</span>
-          </button>
-        </div>
-        <div class="risk-note">Part de vos devis <b>non signés</b> imputable au délai. Nous retenons le bas de chaque fourchette.</div>
-      </div>
-    </aside>
-
-    </div>
-
-    
-    <div class="results">
-
-      <div class="glass hero">
-        <div>
-          <div class="lab">Ce que Talos vous fait gagner</div>
-          <div class="big" id="chantiers">+1 chantier / mois</div>
-          <div class="sub">soit <b id="caMois">+3 000 €</b> de chiffre d'affaires chaque mois</div>
-        </div>
-        <div class="chip">
-          <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 1.500000)" stroke-width="1.5"> <polyline points="5.24485128 13.2814646 8.23798631 9.39130439 11.652174 12.0732266 14.5812358 8.29290622"></polyline> <circle cx="17.9954234" cy="2.70022885" r="1.92219681"></circle> <path d="M12.9244852,1.62013731 L5.6567506,1.62013731 C2.64530894,1.62013731 0.778032041,3.75286043 0.778032041,6.76430209 L0.778032041,14.846682 C0.778032041,17.8581237 2.60869567,19.9816935 5.6567506,19.9816935 L14.2608696,19.9816935 C17.2723113,19.9816935 19.1395882,17.8581237 19.1395882,14.846682 L19.1395882,7.80778036"></path> </g></svg></span>
-          <div><div class="k">Sur douze mois</div><div class="v" id="caAn">36 000 €</div></div>
-        </div>
-      </div>
-
-      <div class="duo">
-        <div class="glass stat">
-          <div class="k">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M 21.25 12C 21.25 17.11 17.11 21.25 12 21.25C 6.89 21.25 2.75 17.11 2.75 12C 2.75 6.89 6.89 2.75 12 2.75C 17.11 2.75 21.25 6.89 21.25 12Z"/><path d="M15.43 14.94L11.66 12.69L11.66 7.85"/></svg>
-            Heures récupérées
+          <div class="s2-field">
+            <label for="s2Eff">Effectif, vous compris</label>
+            <output id="s2EffV">3 personnes</output>
+            <input type="range" id="s2Eff" min="1" max="50" step="1" value="3">
           </div>
-          <div class="v" id="heures">22,5 h / mois</div>
-          <div class="s" id="heuresSub">Le temps que vous passez aujourd'hui à préparer et relancer vos devis.</div>
-        </div>
-        <div class="glass stat">
-          <div class="k">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M 21 12.72C 20.53 18.61 14.36 22.93 7.99 20.12C 6.14 19.31 4.64 17.8 3.84 15.95C 1.11 9.59 5.4 3.48 11.27 3C 10.71 5.52 11.41 8.47 13.25 10.31C 15.08 12.14 18.27 13.33 21 12.72Z"/></svg>
-            Soirées retrouvées
+          <div class="s2-field">
+            <label for="s2Ca">Chiffre d'affaires annuel</label>
+            <output id="s2CaV">400 000 €</output>
+            <input type="range" id="s2Ca" min="0" max="12" step="1" value="5">
           </div>
-          <div class="v" id="soirees">11,3 h / mois</div>
-          <div class="s" id="soireesSub">La moitié de cette paperasse se fait le soir ou le week-end. Vous la récupérez.</div>
-        </div>
-      </div>
+        </fieldset>
 
-      <div class="glass chart">
-        <div class="hd">
-          <div class="ttl">Cumul sur 12 mois<span>Vos chiffres actuels reportés à l'identique. Aucune hypothèse de croissance.</span></div>
-          <div class="leg">
-            <i><b style="background:rgba(var(--parch-rgb),.16)"></b> Sans Talos</i>
-            <i><b style="background:linear-gradient(180deg,#FFB27A,var(--bronze))"></b> Avec Talos</i>
+        <fieldset class="s2-card">
+          <legend><span class="s2-n"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M13.7857 3.00004C14.3434 3.00004 14.8777 3.22681 15.2641 3.62975L19.055 7.57935C19.422 7.96088 19.6264 8.46991 19.6264 8.99937V17.1633C19.641 19.2199 18.0234 20.9163 15.9697 21L8.04424 20.999C5.97114 20.9533 4.32823 19.2364 4.37398 17.1633V6.65667C4.42264 4.61764 6.09378 2.99128 8.13379 3.00004H13.7857Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.2695 3.0625V5.95511C14.2686 7.36637 15.4112 8.51291 16.8234 8.51583H19.5623" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Vos devis</b><em>Étape 2 sur 5 · ce que vous envoyez et signez</em></span></legend>
+          <div class="s2-field">
+            <label for="s2Devis">Devis envoyés par mois</label>
+            <output id="s2DevisV">12</output>
+            <input type="range" id="s2Devis" min="1" max="60" step="1" value="12">
           </div>
+          <div class="s2-field">
+            <label for="s2Montant">Montant moyen d'un devis</label>
+            <output id="s2MontantV">4 000 €</output>
+            <input type="range" id="s2Montant" min="500" max="30000" step="500" value="4000">
+          </div>
+          <div class="s2-field">
+            <label for="s2Taux">Devis signés aujourd'hui</label>
+            <output id="s2TauxV">30 %</output>
+            <input type="range" id="s2Taux" min="10" max="80" step="5" value="30">
+          </div>
+          <div class="s2-field">
+            <label for="s2Marge">Votre marge moyenne</label>
+            <output id="s2MargeV">30 %</output>
+            <input type="range" id="s2Marge" min="10" max="60" step="5" value="30">
+          </div>
+          <div class="s2-field s2-field-full">
+            <span class="s2-lbl" id="s2DelaiL">Un devis part en général</span>
+            <div class="s2-chips s2-chips-4" role="radiogroup" aria-labelledby="s2DelaiL">
+              <label><input type="radio" name="s2Delai" value="0"><span>Le jour même</span></label>
+              <label><input type="radio" name="s2Delai" value="1"><span>Sous 1 à 2 jours</span></label>
+              <label><input type="radio" name="s2Delai" value="2" checked><span>Sous 3 à 5 jours</span></label>
+              <label><input type="radio" name="s2Delai" value="3"><span>Plus d'une semaine</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="s2-card">
+          <legend><span class="s2-n"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path><polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline></g></g></svg></span><span><b>Votre temps</b><em>Étape 3 sur 5 · l'administratif et ce qu'il coûte</em></span></legend>
+          <div class="s2-field">
+            <label for="s2Heures">Heures d'administratif par semaine</label>
+            <output id="s2HeuresV">10 h</output>
+            <input type="range" id="s2Heures" min="1" max="40" step="1" value="10">
+            <p class="s2-help">Devis, factures, mails, relances, rendez-vous, comptes. La moyenne chez les artisans tourne autour de 10 h.</p>
+          </div>
+          <div class="s2-field s2-field-full">
+            <span class="s2-lbl" id="s2QuiL">Qui s'en occupe&#8239;?</span>
+            <div class="s2-chips s2-chips-3" role="radiogroup" aria-labelledby="s2QuiL">
+              <label><input type="radio" name="s2Qui" value="moi" checked><span>Moi, le soir</span></label>
+              <label><input type="radio" name="s2Qui" value="salarie"><span>Un(e) salarié(e)</span></label>
+              <label><input type="radio" name="s2Qui" value="deux"><span>Les deux</span></label>
+            </div>
+          </div>
+          <div class="s2-field">
+            <label for="s2Rate">Ce que vaut une heure de ce temps</label>
+            <output id="s2RateV">60 €</output>
+            <input type="range" id="s2Rate" min="20" max="120" step="5" value="60">
+          </div>
+          <div class="s2-field">
+            <label for="s2Retard">Factures payées en retard, en cours</label>
+            <output id="s2RetardV">5 000 €</output>
+            <input type="range" id="s2Retard" min="0" max="50000" step="1000" value="5000">
+          </div>
+        </fieldset>
+
+        <fieldset class="s2-card">
+          <legend><span class="s2-n"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0368 14.875C8.9146 14.875 6.25195 15.3854 6.25195 17.4278C6.25195 19.4713 8.90036 19.999 12.0368 19.999C15.1569 19.999 17.8216 19.4876 17.8216 17.4451C17.8216 15.4037 15.1742 14.875 12.0368 14.875Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.031 7.99549C16.031 10.2016 14.2427 11.991 12.0355 11.991C9.82933 11.991 8.04102 10.2016 8.04102 7.99549C8.04102 5.78933 9.82933 4 12.0355 4C14.2427 4 16.031 5.78933 16.031 7.99549Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.53386 13.4258H5.52573C3.80147 13.6942 2.5957 14.3215 2.5957 15.5862C2.5957 16.2389 2.92002 16.7228 3.4741 17.0736" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.4668 13.4258H18.4749C20.1992 13.6942 21.405 14.3215 21.405 15.5862C21.405 16.2389 21.0806 16.7228 20.5266 17.0736" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.1571 10.4081C19.4309 9.93131 20.166 8.56288 19.8213 7.21478C19.5428 6.12492 18.639 5.3614 17.5918 5.21094" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.84288 10.4081C4.569 9.93131 3.83395 8.56288 4.1786 7.21478C4.45717 6.12492 5.36098 5.3614 6.40815 5.21094" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Les assistants qui vous aideraient</b><em>Étape 4 sur 5 · le prix suit leur nombre</em></span></legend>
+          <div class="s2-team" id="s2Team"></div>
+        </fieldset>
+
+        <fieldset class="s2-card">
+          <legend><span class="s2-n"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path><polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline></g></g></svg></span><span><b>Ce qu'ils feraient pour vous</b><em>Étape 5 sur 5 · décochez ce qui ne vous concerne pas</em></span></legend>
+          <div class="s2-cas-top"><span id="s2CasN">0 tâche sélectionnée</span><button type="button" class="s2-link" id="s2Tout">Tout sélectionner</button></div>
+          <div class="s2-cas" id="s2Cas"></div>
+        </fieldset>
+      </form>
+
+      <aside class="s2-res" id="resultat" aria-live="polite">
+        <p class="s2-res-k">Gain net estimé par an</p>
+        <p class="s2-big" id="s2Net">—</p>
+        <p class="s2-sub" id="s2Roi">—</p>
+
+        <div class="s2-stats">
+          <div><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path><polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline></g></g></svg><b id="s2H">—</b><span>rendues par mois</span></div>
+          <div><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><line x1="9.9951" y1="14.6768" x2="9.9951" y2="12.1398"></line><g transform="translate(0.000000, 0.739900)"><path d="M16.1899,2.5903 C17.8799,2.5903 19.2399,3.9603 19.2399,5.6503 L19.2399,9.0903 C16.7799,10.5303 13.5299,11.4003 9.9899,11.4003 C6.4499,11.4003 3.2099,10.5303 0.7499,9.0903 L0.7499,5.6403 C0.7499,3.9503 2.1199,2.5903 3.8099,2.5903 L16.1899,2.5903 Z"></path><path d="M13.4951,2.5859 L13.4951,2.2199 C13.4951,0.9999 12.5051,0.0099 11.2851,0.0099 L8.7051,0.0099 C7.4851,0.0099 6.4951,0.9999 6.4951,2.2199 L6.4951,2.5859"></path><path d="M0.7744,12.7431 L0.9634,15.2521 C1.0914,16.9431 2.5004,18.2501 4.1954,18.2501 L15.7944,18.2501 C17.4894,18.2501 18.8984,16.9431 19.0264,15.2521 L19.2154,12.7431"></path></g></g></g></svg><b id="s2Sig">—</b><span>chantiers signés en plus par an</span></div>
+          <div><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path><polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline></g></g></svg><b id="s2NCas">—</b><span>tâches prises en charge</span></div>
+          <div><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M20.9999 14.406H16.646C15.5494 14.406 14.6621 13.5177 14.6621 12.4222V11.3276C14.6621 10.2321 15.5494 9.34375 16.646 9.34375H20.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.9966 11.8185H16.9936" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.9358 3.6875H16.0639C18.7901 3.6875 20.9997 5.89708 20.9997 8.6233V15.3727C20.9997 18.0989 18.7901 20.3085 16.0639 20.3085H7.9358C5.20958 20.3085 3 18.0989 3 15.3727V8.6233C3 5.89708 5.20958 3.6875 7.9358 3.6875Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><b id="s2Plan">—</b><span id="s2PlanN">abonnement</span></div>
         </div>
-        <div class="plotwrap">
-          <div class="yax" id="yax" aria-hidden="true"></div>
-          <div class="glines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-          <div class="plot" id="plot"></div>
-        </div>
-        <div class="xax" id="xax"></div>
-        <div class="chart-foot">
-          <span>Sans Talos <b id="sumSans">216 000 €</b></span>
-          <span class="up">Avec Talos <b id="sumAvec">396 000 €</b></span>
-          <span class="delta" id="sumDelta">+180 000 €</span>
-        </div>
-      </div>
+
+        <p class="s2-res-k s2-res-k2">Répartition par assistant</p>
+        <ul class="s2-bars" id="s2Bars"></ul>
+
+        <button type="button" class="s2-cta" id="s2Open">Voir mon rapport détaillé <svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke="currentColor" stroke-width="1.5"><line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line><polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline></g></g></svg></button>
+        <p class="s2-cta-sub"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M21 12.9668C21 7.9958 16.9709 3.9668 12 3.9668C7.02908 3.9668 3 7.9958 3 12.9668C3 17.9378 7.02908 21.9668 12 21.9668C16.9709 21.9668 21 17.9378 21 12.9668Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.2368 13.2951C13.7515 12.9161 14.0881 12.3111 14.0881 11.6221C14.0881 10.4701 13.1551 9.53711 12.0031 9.53711C10.852 9.53711 9.91797 10.4701 9.91797 11.6221C9.91797 12.3111 10.2556 12.9161 10.7703 13.2951L10.1243 15.2381C9.93447 15.8111 10.3607 16.4011 10.963 16.4011H13.0441C13.6464 16.4011 14.0726 15.8111 13.8828 15.2381L13.2368 13.2951Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gratuit · il suffit de votre numéro</p>
+      </aside>
     </div>
+
+    <!-- le rapport : rempli par le script une fois le numéro donné -->
+    <div class="s2-report" id="s2Report" hidden></div>
   </div>
 
-  
-  <div class="cta-m">
-    <a class="cta" href="reserver.html">
-      <span id="ctaMTxt">Récupérer ces 3 000 € — Réserver une démo</span>
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg>
-    </a>
-    <div class="hint">ou vérifiez le calcul juste en dessous ↓</div>
-  </div>
+  <a class="s2-bar" href="#resultat"><span>Gain net par an</span><b id="s2BarV">—</b><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke="currentColor" stroke-width="1.5"><line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line><polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline></g></g></svg></a>
 
-  
-  <button type="button" class="sheet-btn detail" data-sheet="roiAudit" aria-haspopup="dialog">
-    <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg></span>
-    <span class="tx"><b>Le détail du calcul</b><em>Chaque ligne, refaisable de tête</em></span>
-    <span class="go">Lire
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg>
-    </span>
-  </button>
-
-  <div class="glass audit sheet" id="roiAudit" role="dialog" aria-modal="true" aria-label="Le détail du calcul">
-    <div class="sheet-hd">
-      <span class="t">Le détail du calcul</span>
-      <button type="button" class="sheet-ok" data-close>OK</button>
-    </div>
-    <div class="hd">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 11.98 21.61C 11.98 21.61 19.66 19.28 19.66 12.88C 19.66 6.47 19.93 5.97 19.32 5.36C 18.7 4.74 12.99 2.75 11.98 2.75C 10.98 2.75 5.27 4.74 4.65 5.36C 4.03 5.97 4.31 6.47 4.31 12.88C 4.31 19.28 11.98 21.61 11.98 21.61Z"/><path d="M9.39 11.87L11.28 13.77L15.18 9.87"/></svg>
-      <div>
-        <h3>Comment on arrive à ce chiffre&nbsp;?</h3>
-        <p>Reprenez chaque ligne : rien n'est caché derrière un algorithme.</p>
-      </div>
-    </div>
-    <div class="steps">
-      <div class="st">
-        <div class="n">01</div>
-        <div class="t">Vous envoyez</div>
-        <div class="r" id="a1">15 devis</div>
-        <div class="f">par mois</div>
-      </div>
-      <div class="st">
-        <div class="n">02</div>
-        <div class="t">Vous en signez</div>
-        <div class="r" id="a2">6 devis</div>
-        <div class="f" id="a2f">taux de 40 %</div>
-      </div>
-      <div class="st">
-        <div class="n">03</div>
-        <div class="t">Vous en perdez donc</div>
-        <div class="r" id="a3">9 devis</div>
-        <div class="f" id="a3f">15 − 6</div>
-      </div>
-      <div class="st">
-        <div class="n">04</div>
-        <div class="t">Part perdue à cause du délai</div>
-        <div class="r" id="a4">1,35</div>
-        <div class="f" id="a4f">9 × 15 %</div>
-      </div>
-      <div class="st hi">
-        <div class="n">05</div>
-        <div class="t">Récupéré par Talos</div>
-        <div class="r" id="a5">+3 000 €</div>
-        <div class="f" id="a5f">1 chantier × 3 000 €</div>
-      </div>
-    </div>
-    <div class="note">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M 16.33 2.75L 7.67 2.75C 4.64 2.75 2.75 4.89 2.75 7.92L 2.75 16.08C 2.75 19.11 4.64 21.25 7.67 21.25L 16.33 21.25C 19.36 21.25 21.25 19.11 21.25 16.08L 21.25 7.92C 21.25 4.89 19.36 2.75 16.33 2.75Z"/><path d="M11.99 16L11.99 12"/><path d="M11.99 8.2L12 8.2"/></svg>
-      <span id="noteTxt">Estimation volontairement plafonnée à +5 chantiers par mois, quelles que soient vos valeurs. Le gain ne peut jamais dépasser le nombre de devis que vous perdez déjà — un simulateur qui promet plus que ça vous ment.</span>
-    </div>
-  </div>
-
-
-  <div class="glass creed">
-    <p class="turn">Si Talos ne vous rapporte pas plus qu'il ne vous coûte…</p>
-    <p class="cut">Ce n'est probablement pas la bonne solution pour vous.</p>
-  </div>
-
-
-  <div class="glass synth">
-    <p id="synth"></p>
-    <a class="cta" id="cta" href="reserver.html">
-      <span id="ctaTxt">Récupérer ces 3 000 € — Réserver une démo</span>
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg>
-    </a>
-    <div class="legal"><a href="mentions-legales.html">Mentions légales</a><span class="dot">·</span><a href="cgu.html">CGU</a><span class="dot">·</span><a href="cgv.html">CGV</a><span class="dot">·</span><a href="confidentialite.html">Politique de confidentialité</a></div>
-  </div>
-
-</div>
-</section>
-<!-- ═══ BANDEAU FINAL ═══ -->
-
-<!-- ═══ 3 · LE TOTAL ══════════════════════════════════════════════════
-     La page posait deux calculs et rendait deux gros chiffres, obtenus
-     par deux chemins différents. Le visiteur repartait sans savoir
-     lequel était le sien.
-
-     Ce bloc les additionne une fois, et une seule. Il ne recompte pas
-     les heures en chantiers : le temps rendu est valorisé au taux saisi
-     plus haut, les chantiers récupérés viennent du calcul sur les devis,
-     et l'abonnement est retiré. Le reste est l'impact net.
-     ══════════════════════════════════════════════════════════════════ -->
-<section class="t-total" id="total">
-  <div class="wrap">
-    <span class="eyebrow">Votre total</span>
-    <h2>Ce que Talos change, au bout du mois.</h2>
-    <p class="intro">Les deux calculs ci-dessus, additionnés une seule fois. Le temps rendu
-      compte à votre taux horaire, les chantiers récupérés comptent en chiffre d'affaires,
-      et l'abonnement est déduit.</p>
-
-    <div class="ligne">
-      <div class="lbl"><b><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(2.000000, 2.000000)" stroke-width="1.5"> <path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path> <polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline> </g></svg>Administratif que vous ne payez plus</b><em>votre temps, à votre taux horaire</em></div>
-      <div class="val" id="tTemps">—</div>
-    </div>
-    <div class="ligne">
-      <div class="lbl"><b><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(2.000000, 1.500000)" stroke-width="1.5"> <polyline points="5.24485128 13.2814646 8.23798631 9.39130439 11.652174 12.0732266 14.5812358 8.29290622"></polyline> <circle cx="17.9954234" cy="2.70022885" r="1.92219681"></circle> <path d="M12.9244852,1.62013731 L5.6567506,1.62013731 C2.64530894,1.62013731 0.778032041,3.75286043 0.778032041,6.76430209 L0.778032041,14.846682 C0.778032041,17.8581237 2.60869567,19.9816935 5.6567506,19.9816935 L14.2608696,19.9816935 C17.2723113,19.9816935 19.1395882,17.8581237 19.1395882,14.846682 L19.1395882,7.80778036"></path> </g></svg>Chantiers récupérés</b><em>devis signés grâce à la relance</em></div>
-      <div class="val" id="tCa">—</div>
-    </div>
-    <div class="ligne moins">
-      <div class="lbl"><b><svg class="ico" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(2.000000, 2.000000)"> <path d="M2.7949,5.056 C2.7949,3.807 3.8069,2.795 5.0559,2.794 L6.0849,2.794 C6.6819,2.794 7.2539,2.557 7.6779,2.137 L8.3969,1.417 C9.2779,0.531 10.7099,0.527 11.5959,1.408 L11.5969,1.409 L11.6059,1.417 L12.3259,2.137 C12.7499,2.558 13.3219,2.794 13.9189,2.794 L14.9469,2.794 C16.1959,2.794 17.2089,3.806 17.2089,5.056 L17.2089,6.083 C17.2089,6.68 17.4449,7.253 17.8659,7.677 L18.5859,8.397 C19.4719,9.278 19.4769,10.71 18.5959,11.596 C18.5959,11.596 18.5949,11.597 18.5949,11.597 L18.5859,11.606 L17.8659,12.326 C17.4449,12.749 17.2089,13.321 17.2089,13.918 L17.2089,14.947 C17.2089,16.196 16.1969,17.208 14.9479,17.208 L14.9469,17.208 L13.9169,17.208 C13.3199,17.208 12.7469,17.445 12.3239,17.866 L11.6039,18.585 C10.7239,19.471 9.2929,19.476 8.4069,18.597 C8.4059,18.596 8.4049,18.595 8.4039,18.594 L8.3949,18.585 L7.6759,17.866 C7.2529,17.445 6.6799,17.209 6.0829,17.208 L5.0559,17.208 C3.8069,17.208 2.7949,16.196 2.7949,14.947 L2.7949,13.916 C2.7949,13.319 2.5579,12.747 2.1369,12.324 L1.4179,11.604 C0.5319,10.724 0.5269,9.293 1.4069,8.407 C1.4069,8.406 1.4079,8.405 1.4089,8.404 L1.4179,8.395 L2.1369,7.675 C2.5579,7.251 2.7949,6.679 2.7949,6.081 L2.7949,5.056" stroke-width="1.5"></path> <line x1="7.4316" y1="12.5717" x2="12.5716" y2="7.4317" stroke-width="1.5"></line> <line x1="12.4955" y1="12.5" x2="12.5045" y2="12.5" stroke-width="2"></line> <line x1="7.4955" y1="7.5" x2="7.5045" y2="7.5" stroke-width="2"></line> </g></svg>Abonnement Talos</b><em id="tPlanNom">—</em></div>
-      <div class="val" id="tPlan">—</div>
-    </div>
-
-    <div class="net">
-      <span class="k"><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(3.000000, 3.500000)" stroke-width="1.5"> <path d="M10.1042564,0.67700614 L11.9316681,4.32775597 C12.1107648,4.68615589 12.4564632,4.93467388 12.8573484,4.99218218 L16.9453359,5.58061527 C17.9553583,5.72643988 18.3572847,6.95054503 17.6263201,7.65194084 L14.6701824,10.4924399 C14.3796708,10.7717659 14.2474307,11.173297 14.3161539,11.5676396 L15.0137982,15.5778163 C15.1856062,16.5698344 14.1297683,17.3266846 13.2269958,16.8573759 L9.57321374,14.9626829 C9.21502023,14.7768079 8.78602103,14.7768079 8.42678626,14.9626829 L4.77300425,16.8573759 C3.87023166,17.3266846 2.81439382,16.5698344 2.98724301,15.5778163 L3.68384608,11.5676396 C3.75256926,11.173297 3.62032921,10.7717659 3.32981762,10.4924399 L0.373679928,7.65194084 C-0.357284727,6.95054503 0.0446417073,5.72643988 1.05466409,5.58061527 L5.14265161,4.99218218 C5.54353679,4.93467388 5.89027643,4.68615589 6.06937319,4.32775597 L7.89574356,0.67700614 C8.34765049,-0.225668713 9.65234951,-0.225668713 10.1042564,0.67700614 Z"></path> </g></svg>Impact sur votre mois</span>
-      <b class="v" id="tNet">—</b>
-      <span class="s">soit <span id="tAn">—</span> sur douze mois, à activité constante.</span>
-    </div>
-
-    <p class="fine">Les deux lignes ne se recouvrent pas : les heures libérées sont
-      comptées en temps, jamais reconverties en chantiers. Elles ne sont pas de même
-      nature pour autant — la première est une dépense que vous cessez de subir, la
-      seconde du <b>chiffre d'affaires</b>, dont il reste à déduire vos matériaux et votre
-      main-d'œuvre. Tout se calcule dans votre navigateur, à partir des chiffres que vous
-      venez de saisir.</p>
-  </div>
-</section>
-
-<section class="t-simcta">
-<div class="wrap">
-  <div class="box">
-    <h2>Un chiffre, c'est bien. <em>Le récupérer, c'est mieux.</em></h2>
-    <p>
-      Quinze minutes suffisent pour rejouer ce calcul sur vos vrais devis, vos vraies
-      relances et vos vraies factures — et voir ce que Talos automatiserait dès la semaine
-      prochaine. Le paramétrage, c'est nous qui le faisons.
-    </p>
-    <div class="btns">
-      <a class="b1" href="reserver.html">
-        Réserver ma démo de 15 min
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke-width="1.5"> <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line> <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline> </g></svg>
-      </a>
-      <a class="b2" href="tarifs.html">Voir les tarifs</a>
-      <a class="b2" href="commander.html" data-achat hidden>Commander en ligne</a>
-    </div>
-  </div>
-</div>
+  <dialog class="s2-gate" id="s2Gate" aria-labelledby="s2GateT">
+    <form method="dialog" class="s2-gate-in" id="s2GateForm" novalidate>
+      <button type="button" class="s2-gate-x" id="s2GateX" aria-label="Fermer"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><line x1="12.3955" y1="7.5949" x2="7.6035" y2="12.3869"></line><line x1="12.397" y1="12.3898" x2="7.601" y2="7.5928"></line><path d="M14.3345,0.7502 L5.6655,0.7502 C2.6445,0.7502 0.7505,2.8892 0.7505,5.9162 L0.7505,14.0842 C0.7505,17.1112 2.6355,19.2502 5.6655,19.2502 L14.3335,19.2502 C17.3645,19.2502 19.2505,17.1112 19.2505,14.0842 L19.2505,5.9162 C19.2505,2.8892 17.3645,0.7502 14.3345,0.7502 Z"></path></g></g></svg></button>
+      <span class="s2-gate-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><line x1="5.37142857" y1="8.20171265" x2="5.37142857" y2="15.0618459"></line><line x1="10.0380952" y1="4.91912464" x2="10.0380952" y2="15.0618459"></line><line x1="14.6285714" y1="11.8268316" x2="14.6285714" y2="15.0618459"></line><path d="M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z"></path></g></g></svg></span>
+      <h2 id="s2GateT">Votre rapport détaillé</h2>
+      <p>Le détail tâche par tâche, vos devis avant et après, la projection sur 12 mois. Il s'ouvre tout de suite, et vous gardez le lien.</p>
+      <label for="s2Tel" class="s2-gate-l">Votre numéro de téléphone</label>
+      <div class="s2-tel"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.500000, 2.500000)" stroke="currentColor" stroke-width="1.5"><path d="M9.03174073,9.97238745 C13.0208243,13.9603606 13.9257751,9.34671782 16.4656491,11.8848116 C18.9142765,14.3327574 20.32162,14.8232052 17.2192381,17.9247236 C16.8306352,18.2370218 14.3616115,21.9942591 5.68460336,13.3196663 C-2.99347825,4.64400029 0.761584769,2.17244427 1.07396994,1.78394958 C4.18386634,-1.32615434 4.6658627,0.0893829491 7.11449014,2.53732879 C9.6543641,5.07649576 5.04265719,5.9844143 9.03174073,9.97238745 Z"></path></g></g></svg><input type="tel" id="s2Tel" name="tel" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required aria-describedby="s2TelErr"></div>
+      <p class="s2-err" id="s2TelErr" role="alert" hidden></p>
+      <input type="text" name="site" id="s2Hp" tabindex="-1" autocomplete="off" class="s2-hp" aria-hidden="true">
+      <label class="s2-ok"><input type="checkbox" id="s2Ok"><span>J'accepte que Talos me rappelle pour parler de ce calcul. Pas de démarchage ni de revente&#8239;: <a href="confidentialite.html" target="_blank" rel="noopener">confidentialité</a>.</span></label>
+      <button type="submit" class="s2-cta" id="s2Send">Ouvrir mon rapport <svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)" stroke="currentColor" stroke-width="1.5"><line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line><polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline></g></g></svg></button>
+    </form>
+  </dialog>
 </section>
 
 
@@ -2655,254 +2352,6 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 })();
 
 
-(function(){
-  'use strict';
-
-  var eurFmt = new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0});
-  var eur = { format: function(v){ return eurFmt.format(v).replace(/\u202f/g,'\u00a0'); } };
-  var num  = new Intl.NumberFormat('fr-FR',{maximumFractionDigits:0});
-  var dec1 = new Intl.NumberFormat('fr-FR',{maximumFractionDigits:1});
-  var dec2 = new Intl.NumberFormat('fr-FR',{maximumFractionDigits:2});
-  var pct  = new Intl.NumberFormat('fr-FR',{style:'percent',maximumFractionDigits:0});
-
-  var CAP = 5;   // plafond volontaire, en chantiers/mois
-  var MOIS = 12;
-
-  var $ = function(id){ return document.getElementById(id); };
-  var elV=$('V'), elS=$('S'), elM=$('M'), segT=$('T'), segD=$('D');
-  // défaut : « sous 3 à 5 jours », le délai moyen du marché
-  var malus = 0.50;
-  // défaut : « plus d'1 h » par devis
-  var tps = 1.5;
-  // part du temps administratif fait le soir ou le week-end
-  var PART_SOIR = 0.5;
-
-  /* remplissage de la piste du curseur */
-  function paint(el){
-    var p = (el.value - el.min) / (el.max - el.min) * 100;
-    el.style.setProperty('--pct', p);
-  }
-
-  /* ─────────────────────────────────────────────────────────
-     MODÈLE. Chaque ligne est refaisable de tête par l'artisan.
-     ───────────────────────────────────────────────────────── */
-  function model(){
-    var V = +elV.value;
-    var T = tps;
-    var M = +elM.value;
-
-    // Garde-fou : on ne peut pas signer plus de devis qu'on n'en envoie.
-    // Sans ça, S=30 / V=15 afficherait un taux de conversion de 200 %.
-    var S = Math.min(+elS.value, V);
-
-    var taux   = S / V;
-    var perdus = V - S;                       // devis non signés
-    var brut   = perdus * malus;              // part imputable au délai
-    var arrondi = Math.round(brut);
-    var chantiers = Math.min(CAP, arrondi);   // plafond volontaire
-    var plafonne  = arrondi > CAP;
-
-    return {
-      V:V, S:S, M:M, T:T, malus:malus,
-      taux:taux, perdus:perdus, brut:brut,
-      chantiers:chantiers, plafonne:plafonne,
-      caMois: chantiers * M,
-      caAn:   chantiers * M * MOIS,
-      heures: V * T,
-      soirees: V * T * PART_SOIR
-    };
-  }
-
-  /* ── graphe : cumul 12 mois, sans hypothèse de croissance ──
-     grille de fond, axe des montants en k€, total flotté sur le dernier mois */
-  function kEur(v){
-    if (v >= 1000) return num.format(Math.round(v / 1000)) + ' k€';
-    return num.format(Math.round(v)) + ' €';
-  }
-
-  function chart(r){
-    var plot=$('plot'), xax=$('xax'), yax=$('yax'), h='', x='', y='';
-    var maxTotal = (r.S + r.chantiers) * r.M * MOIS || 1;
-    for (var m=1; m<=MOIS; m++){
-      var base = r.S * r.M * m;
-      var add  = r.chantiers * r.M * m;
-      var lo = base / maxTotal * 100;
-      var up = add  / maxTotal * 100;
-      var last = (m === MOIS && add > 0);
-      h += '<div class="bar' + (last ? ' last' : '') + '"'
-         + ' title="Mois ' + m + ' — ' + eur.format(base + add) + ' cumulés">'
-         + (last ? '<span class="badge">+' + kEur(add) + '</span>' : '')
-         + (up > 0 ? '<div class="up" style="height:'+up.toFixed(2)+'%"></div>' : '')
-         + '<div class="lo" style="height:'+lo.toFixed(2)+'%"></div></div>';
-      x += '<span>M'+m+'</span>';
-    }
-    // 5 graduations, du haut vers le bas : elles s'alignent sur les lignes de grille
-    for (var g=4; g>=0; g--){ y += '<span>' + kEur(maxTotal * g / 4) + '</span>'; }
-    plot.innerHTML = h; xax.innerHTML = x; yax.innerHTML = y;
-
-    var sans = r.S * r.M * MOIS;
-    var avec = sans + r.caAn;
-    $('sumSans').textContent  = eur.format(sans);
-    $('sumAvec').textContent  = eur.format(avec);
-    $('sumDelta').textContent = (r.caAn > 0 ? '+' : '') + eur.format(r.caAn) + ' sur l\'année';
-  }
-
-  /* ── phrase de synthèse : deux cas, deux discours ── */
-  function phrase(r){
-    var hs = dec1.format(r.heures);
-    var jours = dec1.format(r.heures / 8);
-
-    if (r.chantiers === 0){
-      // Cas honnête : le calcul ne donne pas un chantier entier. On ne l'invente pas.
-      return 'À ce volume et avec ce délai, le calcul ne donne pas un chantier entier par mois — '
-           + 'on ne va pas vous vendre l\'inverse. Ce que Talos vous rend, c\'est <i>' + hs + ' h</i> '
-           + 'par mois, soit ' + jours + ' journées que vous ne passez plus sur l\'ordinateur.';
-    }
-    var plur = r.brut >= 2;
-    return 'Avec votre activité actuelle, Talos pourrait vous faire récupérer jusqu\'à '
-         + '<b>' + dec1.format(r.brut) + ' chantier' + (plur ? 's' : '') + ' par mois</b>, '
-         + 'soit <b>' + eur.format(r.caMois) + '</b> de plus '
-         + 'et <i>' + hs + ' h</i> d\'administratif en moins.';
-  }
-
-  function labelDelai(){
-    var b = segD.querySelector('.on');
-    return b ? b.dataset.lab : '';
-  }
-
-  /* ── rendu ── */
-  function render(){
-    var r = model();
-
-    // le curseur S ne doit jamais dépasser V : on borne le max dynamiquement
-    elS.max = Math.min(30, r.V);
-    $('sMax').textContent = elS.max;
-    if (+elS.value > +elS.max) { elS.value = elS.max; }
-    [elV, elS, elM].forEach(paint);
-
-    $('vV').textContent = r.V + ' devis';
-    $('vS').textContent = r.S + ' signé' + (r.S > 1 ? 's' : '');
-    $('vM').textContent = eur.format(r.M);
-
-    /* le bouton ne résume plus les curseurs — ils sont visibles — mais les
-       deux réglages restés dans la feuille */
-    /* le résumé du bloc replié : il remplace les curseurs quand ils sont cachés */
-    var qs = $('quickSum');
-    if (qs) qs.textContent = r.V + ' devis · ' + r.S + ' signé' + (r.S > 1 ? 's' : '')
-                           + ' · ' + eur.format(r.M);
-
-    var sum = $('sheetSum'), bT = segT.querySelector('.on');
-    if (sum) sum.textContent = (bT ? bT.dataset.lab + ' par devis' : '')
-                             + ' · ' + labelDelai();
-
-    // 1. ce qu'on gagne : des chantiers. 2. ce que ça pèse : des euros.
-    $('chantiers').textContent = r.chantiers > 0
-      ? '+' + r.chantiers + ' chantier' + (r.chantiers > 1 ? 's' : '') + ' / mois'
-      : 'Pas de chantier en plus';
-    $('caMois').textContent = (r.caMois > 0 ? '+' : '') + eur.format(r.caMois);
-    $('caAn').textContent   = eur.format(r.caAn);
-
-    /* le récapitulatif de fin de page écoute les deux calculs */
-    document.dispatchEvent(new CustomEvent('talos:sim', { detail: {
-      source: 'devis', chantiers: r.chantiers, caMois: r.caMois, caAn: r.caAn
-    }}));
-
-    // 3. les heures rendues. 4. la part qui vous mange vos soirées.
-    $('heures').textContent = dec1.format(r.heures) + ' h / mois';
-    $('heuresSub').textContent = 'Soit ' + dec1.format(r.heures / 8)
-      + ' journées de chantier rendues chaque mois.';
-    $('soirees').textContent = dec1.format(r.soirees) + ' h / mois';
-    $('soireesSub').textContent = 'La moitié de cette paperasse se fait le soir ou le week-end. Vous la récupérez.';
-
-    // audit
-    $('a1').textContent  = r.V + ' devis';
-    $('a2').textContent  = r.S + ' devis';
-    $('a2f').textContent = 'taux de ' + pct.format(r.taux);
-    $('a3').textContent  = r.perdus + ' devis';
-    $('a3f').textContent = r.V + ' − ' + r.S;
-    $('a4').textContent  = dec2.format(r.brut);
-    $('a4f').textContent = r.perdus + ' × ' + pct.format(r.malus);
-    $('a5').textContent  = (r.caMois > 0 ? '+' : '') + eur.format(r.caMois);
-    $('a5f').textContent = r.chantiers + ' chantier' + (r.chantiers > 1 ? 's' : '') + ' × ' + eur.format(r.M);
-
-    $('noteTxt').textContent = r.plafonne
-      ? 'Votre calcul brut donne ' + Math.round(r.brut) + ' chantiers : nous l\'avons volontairement ramené à ' + CAP + ', notre plafond. Nous préférons vous sous-promettre.'
-      : 'Estimation volontairement plafonnée à +' + CAP + ' chantiers par mois. Le gain ne peut jamais dépasser le nombre de devis que vous perdez déjà — un simulateur qui promet plus que ça vous ment.';
-
-    $('synth').innerHTML = phrase(r);
-
-    // un seul libellé pour les deux CTA (bas de page + duplicata mobile)
-    var ctaLabel = r.caMois > 0
-      ? 'Récupérer ces ' + eur.format(r.caMois) + ' — Réserver une démo'
-      : 'Récupérer ces ' + dec1.format(r.heures) + ' h — Réserver une démo';
-    $('ctaTxt').textContent  = ctaLabel;
-    $('ctaMTxt').textContent = ctaLabel;
-
-    chart(r);
-    syncStp();
-  }
-
-  [elV, elS, elM].forEach(function(el){
-    el.addEventListener('input', render);
-  });
-  document.addEventListener('talos:sim-ask', render);
-
-  /* boutons − / + : un appui = un pas de l'input, bornes comprises.
-     on repasse par render() pour que tout le reste suive (max de S, CTA, courbe) */
-  function syncStp(){
-    [].forEach.call(document.querySelectorAll('.t-roi .stp'), function(b){
-      var el = $(b.dataset.for);
-      if (!el) return;
-      b.disabled = +b.dataset.dir < 0
-        ? +el.value <= +el.min
-        : +el.value >= +el.max;
-    });
-  }
-  [].forEach.call(document.querySelectorAll('.t-roi .stp'), function(b){
-    b.addEventListener('click', function(){
-      var el = $(b.dataset.for);
-      if (!el) return;
-      var step = +el.step || 1;
-      var v = Math.min(+el.max, Math.max(+el.min, +el.value + step * +b.dataset.dir));
-      /* les pas décimaux (0,25 h) traînent des flottants : on recale sur le pas */
-      el.value = Math.round(v / step) * step;
-      render();
-    });
-  });
-
-  /* les deux groupes de puces se cochent de la même façon : une seule réponse
-     active, la couleur de la pastille dit si elle vous coûte cher ou non */
-  function puces(group, apply){
-    group.addEventListener('click', function(e){
-      var b = e.target.closest('button');
-      if (!b) return;
-      group.querySelectorAll('button').forEach(function(x){
-        x.classList.remove('on');
-        x.setAttribute('aria-checked','false');
-      });
-      b.classList.add('on');
-      b.setAttribute('aria-checked','true');
-      apply(b);
-      render();
-    });
-  }
-  puces(segD, function(b){ malus = +b.dataset.d; });
-  puces(segT, function(b){ tps   = +b.dataset.t; });
-
-
-  /* « Vos chiffres » se replie comme « Vos habitudes » s'ouvre : même
-     bouton, même geste. Ouvert par défaut — c'est ce qu'on vient régler. */
-  (function quickToggle(){
-    var box = document.getElementById('roiQuick'),
-        btn = document.getElementById('roiQuickBtn');
-    if (!box || !btn) return;
-    btn.addEventListener('click', function(){
-      var open = box.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  })();
-  render();
-})();
 
 /* Feuilles mobiles du simulateur. Les panneaux existent déjà dans la page :
    on ne fait que les basculer en overlay, donc aucun état n'est dupliqué. */
@@ -3033,181 +2482,381 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 })();
 </script>
 
-<script>
-/*  Le total : il n'a pas de moteur, il écoute les deux autres.
 
-    Chacun publie ses chiffres bruts au fil des réglages ; on additionne
-    ce qui est additionnable et on retire l'abonnement. Aucun calcul n'est
-    refait ici — deux implantations du même calcul finiraient par diverger. */
+
+
+<script>
+window.S2_IC={"3-user": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12.0368 14.875C8.9146 14.875 6.25195 15.3854 6.25195 17.4278C6.25195 19.4713 8.90036 19.999 12.0368 19.999C15.1569 19.999 17.8216 19.4876 17.8216 17.4451C17.8216 15.4037 15.1742 14.875 12.0368 14.875Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M16.031 7.99549C16.031 10.2016 14.2427 11.991 12.0355 11.991C9.82933 11.991 8.04102 10.2016 8.04102 7.99549C8.04102 5.78933 9.82933 4 12.0355 4C14.2427 4 16.031 5.78933 16.031 7.99549Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M5.53386 13.4258H5.52573C3.80147 13.6942 2.5957 14.3215 2.5957 15.5862C2.5957 16.2389 2.92002 16.7228 3.4741 17.0736\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M18.4668 13.4258H18.4749C20.1992 13.6942 21.405 14.3215 21.405 15.5862C21.405 16.2389 21.0806 16.7228 20.5266 17.0736\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M18.1571 10.4081C19.4309 9.93131 20.166 8.56288 19.8213 7.21478C19.5428 6.12492 18.639 5.3614 17.5918 5.21094\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M5.84288 10.4081C4.569 9.93131 3.83395 8.56288 4.1786 7.21478C4.45717 6.12492 5.36098 5.3614 6.40815 5.21094\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "danger-circle": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M18.364 5.6361C21.8787 9.15082 21.8787 14.8493 18.364 18.364C14.8492 21.8787 9.15076 21.8787 5.63604 18.364C2.12132 14.8493 2.12132 9.15082 5.63604 5.6361C9.15076 2.12138 14.8492 2.12138 18.364 5.6361Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M11.9836 16L14.5706 12.0011H9.42773L12.012 8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "tick-square": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2.000000, 2.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z\"></path><polyline points=\"6.4399 10.0002 8.8139 12.3732 13.5599 7.6272\"></polyline></g></g></svg>", "chart": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2.000000, 2.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><line x1=\"5.37142857\" y1=\"8.20171265\" x2=\"5.37142857\" y2=\"15.0618459\"></line><line x1=\"10.0380952\" y1=\"4.91912464\" x2=\"10.0380952\" y2=\"15.0618459\"></line><line x1=\"14.6285714\" y1=\"11.8268316\" x2=\"14.6285714\" y2=\"15.0618459\"></line><path d=\"M14.6857143,0 L5.31428571,0 C2.04761905,0 0,2.31208373 0,5.58515699 L0,14.414843 C0,17.6879163 2.03809524,20 5.31428571,20 L14.6857143,20 C17.9619048,20 20,17.6879163 20,14.414843 L20,5.58515699 C20,2.31208373 17.9619048,0 14.6857143,0 Z\"></path></g></g></svg>", "user": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"11.9389\" cy=\"8.48581\" r=\"4.98581\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M14.2716 13.7715H9.72842C7.1517 13.7715 5.06285 15.8603 5.06285 18.4371C5.06285 18.5296 5.06196 18.6226 5.06072 18.7157C5.04687 19.7489 5.88629 20.4992 6.9196 20.4992H17.0804C18.1137 20.4992 18.9531 19.7489 18.9393 18.7157C18.938 18.6225 18.9371 18.5296 18.9371 18.4371C18.9371 15.8603 16.8483 13.7715 14.2716 13.7715Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M15.9263 18.0215V20.4339\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M8.07373 18.0215V20.4339\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "home": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M20.9997 20.9995V10.4254C20.9881 9.71707 20.6524 9.05448 20.0881 8.62541L13.8553 3.64872C12.7598 2.78376 11.2137 2.78376 10.1182 3.64872L3.91166 8.63027C3.3454 9.0574 3.00876 9.72388 3 10.4341V20.9995\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M15.5926 21.0004V16.4985C15.5926 14.5234 13.9912 12.9219 12.0161 12.9219C10.04 12.9219 8.43945 14.5234 8.43945 16.4985V21.0004\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "lock": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M21 12.9668C21 7.9958 16.9709 3.9668 12 3.9668C7.02908 3.9668 3 7.9958 3 12.9668C3 17.9378 7.02908 21.9668 12 21.9668C16.9709 21.9668 21 17.9378 21 12.9668Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.2368 13.2951C13.7515 12.9161 14.0881 12.3111 14.0881 11.6221C14.0881 10.4701 13.1551 9.53711 12.0031 9.53711C10.852 9.53711 9.91797 10.4701 9.91797 11.6221C9.91797 12.3111 10.2556 12.9161 10.7703 13.2951L10.1243 15.2381C9.93447 15.8111 10.3607 16.4011 10.963 16.4011H13.0441C13.6464 16.4011 14.0726 15.8111 13.8828 15.2381L13.2368 13.2951Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "discount": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M8.20231 5.27619V9.58354V17.8198C8.20231 19.2588 7.03668 20.4244 5.59766 20.4244H17.7355C19.8196 20.4244 20.9755 19.0204 20.9755 16.7524L20.9843 5.27619C20.9843 4.44625 20.1903 3.90722 19.5014 4.26041L18.8486 4.60484C18.4594 4.80819 18.0099 4.81695 17.6032 4.63987L15.7584 3.81868C15.0083 3.49273 14.1783 3.49273 13.4281 3.81868L11.5834 4.63987C11.1767 4.81695 10.7262 4.80819 10.338 4.60484L9.68512 4.26041C8.99625 3.90722 8.20231 4.455 8.20231 5.27619Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M5.59778 20.4242C4.87389 20.4242 4.22102 20.1333 3.75302 19.6653C3.27627 19.1885 2.98438 18.5347 2.98438 17.8195V10.5719C2.98438 9.74192 3.77929 9.20386 4.46816 9.55705L5.12102 9.90148C5.50924 10.1048 5.95973 10.1136 6.36546 9.93651L7.61086 9.38094C7.70719 9.33619 7.95529 9.451 8.20243 9.58332\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M12.4707 14.6441L17.0972 10.0176\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M16.9832 14.57V14.6154M17.1673 14.5797C17.1673 14.682 17.0843 14.765 16.982 14.765C16.8798 14.765 16.7969 14.682 16.7969 14.5797C16.7969 14.4775 16.8798 14.3945 16.982 14.3945C17.0843 14.3945 17.1673 14.4775 17.1673 14.5797Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M12.4832 10.07V10.1154M12.6673 10.0797C12.6673 10.182 12.5843 10.265 12.482 10.265C12.3798 10.265 12.2969 10.182 12.2969 10.0797C12.2969 9.97745 12.3798 9.89453 12.482 9.89453C12.5843 9.89453 12.6673 9.97745 12.6673 10.0797Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "arrow-right": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><line x1=\"6.7743\" y1=\"15.75\" x2=\"6.7743\" y2=\"0.75\"></line><polyline points=\"12.7987 9.7002 6.7747 15.7502 0.7497 9.7002\"></polyline></g></g></svg>", "wallet": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M20.9999 14.406H16.646C15.5494 14.406 14.6621 13.5177 14.6621 12.4222V11.3276C14.6621 10.2321 15.5494 9.34375 16.646 9.34375H20.9999\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M16.9966 11.8185H16.9936\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M7.9358 3.6875H16.0639C18.7901 3.6875 20.9997 5.89708 20.9997 8.6233V15.3727C20.9997 18.0989 18.7901 20.3085 16.0639 20.3085H7.9358C5.20958 20.3085 3 18.0989 3 15.3727V8.6233C3 5.89708 5.20958 3.6875 7.9358 3.6875Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "work": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2.000000, 2.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><line x1=\"9.9951\" y1=\"14.6768\" x2=\"9.9951\" y2=\"12.1398\"></line><g transform=\"translate(0.000000, 0.739900)\"><path d=\"M16.1899,2.5903 C17.8799,2.5903 19.2399,3.9603 19.2399,5.6503 L19.2399,9.0903 C16.7799,10.5303 13.5299,11.4003 9.9899,11.4003 C6.4499,11.4003 3.2099,10.5303 0.7499,9.0903 L0.7499,5.6403 C0.7499,3.9503 2.1199,2.5903 3.8099,2.5903 L16.1899,2.5903 Z\"></path><path d=\"M13.4951,2.5859 L13.4951,2.2199 C13.4951,0.9999 12.5051,0.0099 11.2851,0.0099 L8.7051,0.0099 C7.4851,0.0099 6.4951,0.9999 6.4951,2.2199 L6.4951,2.5859\"></path><path d=\"M0.7744,12.7431 L0.9634,15.2521 C1.0914,16.9431 2.5004,18.2501 4.1954,18.2501 L15.7944,18.2501 C17.4894,18.2501 18.8984,16.9431 19.0264,15.2521 L19.2154,12.7431\"></path></g></g></g></svg>", "paper": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(3.500000, 2.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M11.2378,0.761771171 L4.5848,0.761771171 C2.5048,0.7538 0.7998,2.4118 0.7508,4.4908 L0.7508,15.2038 C0.7048,17.3168 2.3798,19.0678 4.4928,19.1148 C4.5238,19.1148 4.5538,19.1158 4.5848,19.1148 L12.5738,19.1148 C14.6678,19.0298 16.3178,17.2998 16.3029015,15.2038 L16.3029015,6.0378 L11.2378,0.761771171 Z\"></path><path d=\"M10.9751,0.75 L10.9751,3.659 C10.9751,5.079 12.1231,6.23 13.5431,6.234 L16.2981,6.234\"></path><line x1=\"10.7881\" y1=\"13.3585\" x2=\"5.3881\" y2=\"13.3585\"></line><line x1=\"8.7432\" y1=\"9.606\" x2=\"5.3872\" y2=\"9.606\"></line></g></g></svg>", "document": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M13.7857 3.00004C14.3434 3.00004 14.8777 3.22681 15.2641 3.62975L19.055 7.57935C19.422 7.96088 19.6264 8.46991 19.6264 8.99937V17.1633C19.641 19.2199 18.0234 20.9163 15.9697 21L8.04424 20.999C5.97114 20.9533 4.32823 19.2364 4.37398 17.1633V6.65667C4.42264 4.61764 6.09378 2.99128 8.13379 3.00004H13.7857Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M14.2695 3.0625V5.95511C14.2686 7.36637 15.4112 8.51291 16.8234 8.51583H19.5623\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "info-circle": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2.000000, 2.000000)\" stroke=\"currentColor\"><path d=\"M14.3341,0.7501 L5.6651,0.7501 C2.6441,0.7501 0.7501,2.8891 0.7501,5.9161 L0.7501,14.0841 C0.7501,17.1111 2.6351,19.2501 5.6651,19.2501 L14.3331,19.2501 C17.3641,19.2501 19.2501,17.1111 19.2501,14.0841 L19.2501,5.9161 C19.2501,2.8891 17.3641,0.7501 14.3341,0.7501 Z\" stroke-width=\"1.5\"></path><line x1=\"9.9947\" y1=\"14.0001\" x2=\"9.9947\" y2=\"10.0001\" stroke-width=\"1.5\"></line><line x1=\"9.9899\" y1=\"6.2043\" x2=\"9.9999\" y2=\"6.2043\" stroke-width=\"2\"></line></g></g></svg>", "time-circle": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2.000000, 2.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z\"></path><polyline points=\"13.4314 12.9429 9.6614 10.6939 9.6614 5.8469\"></polyline></g></g></svg>", "message": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2.000000, 3.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M15.9026143,5.8511436 L11.4593272,9.46418164 C10.6198313,10.1301843 9.4387043,10.1301843 8.59920842,9.46418164 L4.11842516,5.8511436\"></path><path d=\"M14.9088637,17.9999789 C17.9502135,18.0083748 20,15.5095497 20,12.4383622 L20,5.57001263 C20,2.49882508 17.9502135,5.32907052e-15 14.9088637,5.32907052e-15 L5.09113634,5.32907052e-15 C2.04978648,5.32907052e-15 1.77635684e-15,2.49882508 1.77635684e-15,5.57001263 L1.77635684e-15,12.4383622 C1.77635684e-15,15.5095497 2.04978648,18.0083748 5.09113634,17.9999789 L14.9088637,17.9999789 Z\"></path></g></g></svg>", "send": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(3.000000, 3.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M12.8324759,5.17463303 L7.10903824,10.9591851 L0.599436312,6.88767232 C-0.333249591,6.30414294 -0.139234755,4.88743509 0.915720913,4.57892564 L16.3712257,0.0527673159 C17.3372579,-0.230371288 18.2325555,0.67283071 17.9455752,1.6419969 L13.3730902,17.0867511 C13.059837,18.1431929 11.6512085,18.331952 11.073206,17.3952605 L7.10600676,10.9602\"></path></g></g></svg>", "star": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.8974 4.16836L9.06941 7.82136C8.88841 8.18136 8.54141 8.42936 8.14241 8.48536L4.05241 9.07435C3.38941 9.16138 2.9234 9.77038 3.0104 10.4334C3.0464 10.7044 3.17341 10.9564 3.37041 11.1464L6.32841 13.9884C6.61941 14.2654 6.75242 14.6684 6.68242 15.0644L5.9824 19.0764C5.8744 19.7464 6.33041 20.3764 7.00041 20.4844C7.26441 20.5264 7.53441 20.4814 7.77041 20.3564L11.4244 18.4624C11.7844 18.2764 12.2114 18.2764 12.5714 18.4624L16.2274 20.3573C16.8264 20.6753 17.5694 20.4473 17.8874 19.8484C18.0124 19.6114 18.0574 19.3414 18.0144 19.0774L17.3144 15.0644C17.2454 14.6694 17.3784 14.2664 17.6684 13.9894L20.6294 11.1474C21.1104 10.6834 21.1254 9.91738 20.6614 9.43538C20.4714 9.23838 20.2194 9.11138 19.9474 9.07535L15.8574 8.48636C15.4584 8.43036 15.1114 8.18236 14.9294 7.82236L13.0984 4.16836C12.7834 3.56037 12.0354 3.32337 11.4274 3.63837C11.2004 3.75537 11.0154 3.94037 10.8974 4.16836Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M12 3.49902V18.2982\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M3.06836 9.92872L17.3533 14.4561\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M20.9082 9.92872L6.62324 14.4561\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M6.48438 20.2778L15.3033 8.27148\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M17.4785 20.2779L8.72502 8.27148\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "shield-done": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(3.500000, 2.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z\"></path><polyline points=\"5.8859 9.8746 7.7779 11.7696 11.6759 7.8696\"></polyline></g></g></svg>", "call": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2.500000, 2.500000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M9.03174073,9.97238745 C13.0208243,13.9603606 13.9257751,9.34671782 16.4656491,11.8848116 C18.9142765,14.3327574 20.32162,14.8232052 17.2192381,17.9247236 C16.8306352,18.2370218 14.3616115,21.9942591 5.68460336,13.3196663 C-2.99347825,4.64400029 0.761584769,2.17244427 1.07396994,1.78394958 C4.18386634,-1.32615434 4.6658627,0.0893829491 7.11449014,2.53732879 C9.6543641,5.07649576 5.04265719,5.9844143 9.03174073,9.97238745 Z\"></path></g></g></svg>", "activity": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2.000000, 1.500000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><polyline points=\"5.24485128 13.2814646 8.23798631 9.39130439 11.652174 12.0732266 14.5812358 8.29290622\"></polyline><circle cx=\"17.9954234\" cy=\"2.70022885\" r=\"1.92219681\"></circle><path d=\"M12.9244852,1.62013731 L5.6567506,1.62013731 C2.64530894,1.62013731 0.778032041,3.75286043 0.778032041,6.76430209 L0.778032041,14.846682 C0.778032041,17.8581237 2.60869567,19.9816935 5.6567506,19.9816935 L14.2608696,19.9816935 C17.2723113,19.9816935 19.1395882,17.8581237 19.1395882,14.846682 L19.1395882,7.80778036\"></path></g></g></svg>", "calendar": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M19.8201 9.77583L19.4289 7.23194C19.2656 6.16993 18.3879 5.38892 17.3578 5.38892H7.23775C5.94657 5.38892 4.96194 6.59534 5.16667 7.92652L6.73161 18.1021C6.89494 19.1641 7.77259 19.9451 8.80269 19.9451H11.3327\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M10.2216 5.38892H6.68404C5.65394 5.38892 4.77628 6.16993 4.61295 7.23194L3.04802 17.4075C2.84329 18.7387 3.82792 19.9451 5.1191 19.9451H8.38327\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M9.22021 12.2046H9.23021\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M12.6284 12.2046H12.6384\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M10.1494 15.6604H10.1594\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M9.0457 7.14624C9.23646 7.37637 9.36207 7.34079 9.61194 7.34079C10.2636 7.34079 10.7919 6.42338 10.7919 5.2917C10.7919 4.16001 10.2636 3.2426 9.61194 3.2426C9.26419 3.2426 9.06067 3.2833 8.84473 3.69895\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M14.9544 7.14624C15.1452 7.37637 15.2708 7.34079 15.5206 7.34079C16.1723 7.34079 16.7005 6.42338 16.7005 5.2917C16.7005 4.16001 16.1723 3.2426 15.5206 3.2426C15.1729 3.2426 14.9694 3.2833 14.7534 3.69895\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M20.7346 18.0174L15.816 19.3504C15.5908 19.4115 15.3532 19.3085 15.2437 19.1024L14.4485 17.6054C14.3343 17.3905 14.3914 17.1246 14.5838 16.9756L18.6699 13.8103\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M18.395 13.2222L20.9792 18.5173\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M16.894 19.125L18.1479 20.7572\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "arrow-left": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><line x1=\"6.7743\" y1=\"15.75\" x2=\"6.7743\" y2=\"0.75\"></line><polyline points=\"12.7987 9.7002 6.7747 15.7502 0.7497 9.7002\"></polyline></g></g></svg>", "close-square": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2.000000, 2.000000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><line x1=\"12.3955\" y1=\"7.5949\" x2=\"7.6035\" y2=\"12.3869\"></line><line x1=\"12.397\" y1=\"12.3898\" x2=\"7.601\" y2=\"7.5928\"></line><path d=\"M14.3345,0.7502 L5.6655,0.7502 C2.6445,0.7502 0.7505,2.8892 0.7505,5.9162 L0.7505,14.0842 C0.7505,17.1112 2.6355,19.2502 5.6655,19.2502 L14.3335,19.2502 C17.3645,19.2502 19.2505,17.1112 19.2505,14.0842 L19.2505,5.9162 C19.2505,2.8892 17.3645,0.7502 14.3345,0.7502 Z\"></path></g></g></svg>", "arrow-down-2": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(5.000000, 8.500000)\" stroke=\"currentColor\" stroke-width=\"1.5\"><polyline points=\"14 0 7 7 0 0\"></polyline></g></g></svg>", "graph": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.3654 13.7543C13.0154 13.7543 14.3519 12.4167 14.3519 10.7678C14.3519 9.11781 13.0154 7.78125 11.3654 7.78125C9.71546 7.78125 8.37891 9.11781 8.37891 10.7678C8.37891 12.4167 9.71546 13.7543 11.3654 13.7543Z\" stroke=\"currentColor\" stroke-width=\"1.5\"/><path d=\"M14.5117 15.1699L12.0117 17.3187\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M15.5413 7.4043L15.5312 7.4143\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12.0005 21C16.9709 21 21 16.9709 21 11.9995C21 7.02913 16.9709 3 12.0005 3C7.03016 3 3 7.02913 3 11.9995C3 16.9709 7.03016 21 12.0005 21Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"};
+/*  Simulateur détaillé.
+    Tout se calcule dans le navigateur. Le numéro de téléphone est la seule
+    donnée envoyée, et seulement quand on demande le rapport détaillé
+    (talos-app : /api/simulateur). Prix : page Tarifs et
+    talos-app/lib/formules.ts — une modification là-bas se reporte ici.   */
 (function () {
   'use strict';
-  var bloc = document.getElementById('total');
-  if (!bloc) return;
+  var form = document.getElementById('s2Form');
+  if (!form) return;
+  var IC = window.S2_IC || {};
+  var API = 'https://app.talos-ai.tech/api/simulateur';
 
-  var eur = new Intl.NumberFormat('fr-FR',
-    { style:'currency', currency:'EUR', maximumFractionDigits:0 });
-  function e(v){ return eur.format(v).replace(/\u202f/g, '\u00a0'); }
-  function $(id){ return document.getElementById(id); }
+  /* ── ce que chaque tâche fait gagner, en heures par mois ──────────────
+     c = contexte : devis/mois, signés/mois, facteur d'équipe, encours.
+     pts = points de signature gagnés (assistant commercial seulement). */
+  var A = [
+    { k: 'commercial', nom: 'Assistant commercial', court: 'Commercial', role: 'Devis et relances', av: 'perso/avatar-commercial.webp', cas: [
+      { k: 'devis', nom: 'Devis chiffré depuis une photo, un vocal ou un mail', h: function (c) { return c.devis * 0.45; } },
+      { k: 'variantes', nom: 'Trois variantes Éco, Standard, Premium', h: function (c) { return c.devis * 0.05; }, pts: 2 },
+      { k: 'relances', nom: 'Relances J+3, J+7, J+14 jusqu’à la signature', h: function (c) { return c.devis * 0.12; }, pts: 3 },
+      { k: 'chaud', nom: 'Alerte quand un client rouvre son devis', h: function () { return 0.5; }, pts: 1 },
+      { k: 'signature', nom: 'Signature en ligne et acompte', h: function (c) { return c.devis * 0.06; }, pts: 1 }
+    ]},
+    { k: 'client', nom: 'Assistante client', court: 'Client', role: 'Réponses et rendez-vous', av: 'perso/avatar-client.webp', cas: [
+      { k: 'reponse', nom: 'Réponse aux demandes le soir et le week-end', h: function (c) { return 4 * c.eq; } },
+      { k: 'qualif', nom: 'Demande complète : chantier, adresse, délai, budget', h: function (c) { return c.devis * 0.1; } },
+      { k: 'rdv', nom: 'Rendez-vous posés dans votre agenda', h: function (c) { return c.devis * 0.15; } },
+      { k: 'rappels', nom: 'Rappels de rendez-vous la veille et 2 h avant', h: function (c) { return 1 * c.eq; } }
+    ]},
+    { k: 'administratif', nom: 'Assistante administrative', court: 'Administratif', role: 'Tri des mails', av: 'perso/avatar-administratif.webp', cas: [
+      { k: 'tri', nom: 'Tri des mails et résumé du matin', h: function (c) { return 6 * c.eq; } },
+      { k: 'brouillons', nom: 'Brouillons de réponse écrits comme vous', h: function (c) { return 3 * c.eq; } },
+      { k: 'comptable', nom: 'Factures fournisseurs transmises au comptable', h: function () { return 1; } }
+    ]},
+    { k: 'facturation', nom: 'Assistant facturation', court: 'Facturation', role: 'Factures et acomptes', av: 'perso/avatar-facturation.webp', cas: [
+      { k: 'facture', nom: 'Facture prête dès le devis signé', h: function (c) { return c.signes * 0.3; } },
+      { k: 'acomptes', nom: 'Acomptes et situations de travaux', h: function (c) { return c.signes * 0.2; } },
+      { k: 'mentions', nom: 'Numérotation et mentions obligatoires vérifiées', h: function () { return 0.5; } }
+    ]},
+    { k: 'tresorerie', nom: 'Assistante trésorerie', court: 'Trésorerie', role: 'Relances d’impayés', av: 'perso/avatar-tresorerie.webp', cas: [
+      { k: 'impayes', nom: 'Relances d’impayés J+7, J+15, J+30', h: function (c) { return 1 + c.retard / 5000; } },
+      { k: 'demeure', nom: 'Mise en demeure prête à valider', h: function (c) { return c.retard ? 0.5 : 0; } },
+      { k: 'encaisse', nom: 'Facture marquée payée, relances stoppées', h: function () { return 0.5; } }
+    ]}
+  ];
+  var NB_CAS = A.reduce(function (s, a) { return s + a.cas.length; }, 0);
+  var CA_PALIERS = [100000, 150000, 200000, 300000, 400000, 500000, 750000, 1000000, 1500000, 2000000, 3000000, 5000000, 10000000];
+  var DELAI_PTS = [0, 1, 2, 3];        /* devis parti le jour même : gain selon le délai actuel */
+  var PRISE = 0.85, PTS_MAX = 10, ACCELERE = 0.5;
+  function formule(n) {
+    if (n <= 1) return { nom: 'Starter', prix: 99 };
+    if (n <= 3) return { nom: 'Business', prix: 299 };
+    return { nom: 'Évolution', prix: 449 };
+  }
 
-  var etat = { coutMois:0, caMois:0, planPrix:0, planNom:'\u2014' };
+  var nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
+  var nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
+  function sp(s) { return s.replace(/ /g, ' '); }
+  function eur(v) { return sp(nf.format(Math.round(v))) + ' €'; }
+  function sgn(v) { return (v > 0 ? '+' : v < 0 ? '−' : '') + eur(Math.abs(v)); }
+  function h(v) { return sp(nf.format(Math.round(v))) + ' h'; }
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]; }); }
 
-  document.addEventListener('talos:sim', function (ev) {
-    var d = ev.detail || {};
-    if (d.source === 'temps') {
-      etat.coutMois = d.coutMois || 0;
-      etat.planPrix = d.planPrix || 0;
-      etat.planNom  = d.plan || '\u2014';
-    } else if (d.source === 'devis') {
-      etat.caMois = d.caMois || 0;
-    }
+  /* ── construction des étapes 4 et 5 ─────────────────────────────────── */
+  var team = $('s2Team'), casBox = $('s2Cas');
+  team.innerHTML = A.map(function (a, i) {
+    return '<label><input type="checkbox" name="s2A" value="' + a.k + '"' + (i < 2 ? ' checked' : '') + '>' +
+      '<span><img src="' + a.av + '" alt="" width="40" height="40" loading="lazy"><b>' + a.court + '</b><em>' + a.role + '</em><i>' + a.cas.length + ' tâches</i></span></label>';
+  }).join('');
+  var coches = {};            /* tâches cochées, mémorisées même quand l'assistant est retiré */
+  A.forEach(function (a) { a.cas.forEach(function (c) { coches[a.k + '.' + c.k] = true; }); });
+
+  function assistantsChoisis() {
+    return [].slice.call(team.querySelectorAll('input:checked')).map(function (i) { return i.value; });
+  }
+  function dessinerCas() {
+    var ch = assistantsChoisis();
+    if (!ch.length) { casBox.innerHTML = '<p class="s2-cas-vide">Choisissez au moins un assistant à l’étape 4.</p>'; return; }
+    casBox.innerHTML = A.filter(function (a) { return ch.indexOf(a.k) > -1; }).map(function (a) {
+      return '<div class="s2-cas-g"><h3><img src="' + a.av + '" alt="" width="22" height="22" loading="lazy">' + a.court + '</h3><div class="s2-cas-l">' +
+        a.cas.map(function (c) {
+          var id = a.k + '.' + c.k;
+          return '<label><input type="checkbox" name="s2C" value="' + id + '"' + (coches[id] ? ' checked' : '') + '><span>' + c.nom + '</span></label>';
+        }).join('') + '</div></div>';
+    }).join('');
+  }
+
+  /* ── lecture du formulaire ──────────────────────────────────────────── */
+  function radio(n, d) { var r = form.querySelector('input[name=' + n + ']:checked'); return r ? r.value : d; }
+  function lire() {
+    return {
+      m: $('s2Metier').value, e: +$('s2Eff').value, ca: +$('s2Ca').value,
+      d: +$('s2Devis').value, mt: +$('s2Montant').value, t: +$('s2Taux').value, mg: +$('s2Marge').value,
+      dl: +radio('s2Delai', 2), hs: +$('s2Heures').value, q: radio('s2Qui', 'moi'), r: +$('s2Rate').value,
+      rt: +$('s2Retard').value, a: assistantsChoisis(),
+      c: Object.keys(coches).filter(function (k) { return coches[k]; })
+    };
+  }
+  function ecrire(s) {
+    if (!s) return;
+    function set(id, v) { if (v != null && $(id)) $(id).value = v; }
+    set('s2Metier', s.m); set('s2Eff', s.e); set('s2Ca', s.ca); set('s2Devis', s.d); set('s2Montant', s.mt);
+    set('s2Taux', s.t); set('s2Marge', s.mg); set('s2Heures', s.hs); set('s2Rate', s.r); set('s2Retard', s.rt);
+    [['s2Delai', s.dl], ['s2Qui', s.q]].forEach(function (p) {
+      var el = form.querySelector('input[name=' + p[0] + '][value="' + p[1] + '"]'); if (el) el.checked = true;
+    });
+    if (s.a) [].forEach.call(team.querySelectorAll('input'), function (i) { i.checked = s.a.indexOf(i.value) > -1; });
+    if (s.c) Object.keys(coches).forEach(function (k) { coches[k] = s.c.indexOf(k) > -1; });
+  }
+
+  /* ── le calcul ──────────────────────────────────────────────────────── */
+  function calculer(s) {
+    var caAn = CA_PALIERS[s.ca] || 400000;
+    var ctx = { devis: s.d, signes: s.d * s.t / 100, eq: 1 + Math.min(s.e - 1, 19) * 0.05, retard: s.rt };
+    var parA = {}, brut = 0, pts = 0, nCas = 0;
+    A.forEach(function (a) {
+      var on = s.a.indexOf(a.k) > -1, lignes = [];
+      a.cas.forEach(function (c) {
+        if (!on || s.c.indexOf(a.k + '.' + c.k) < 0) return;
+        var hh = c.h(ctx); lignes.push({ nom: c.nom, h: hh }); brut += hh; nCas++;
+        if (c.pts) pts += c.pts;
+        if (a.k === 'commercial' && c.k === 'devis') pts += DELAI_PTS[s.dl];
+      });
+      parA[a.k] = { a: a, on: on && lignes.length > 0, lignes: lignes };
+    });
+    /* jamais plus que l'administratif déclaré : 85 % au plus, vous gardez la validation */
+    var plafond = s.hs * 4 * PRISE, k = brut > plafond ? plafond / brut : 1;
+    var heures = brut * k;
+    pts = Math.min(pts, PTS_MAX, Math.max(0, 90 - s.t));
+    var signesPlus = s.d * pts / 100;
+    var caPlus = Math.min(signesPlus * s.mt, caAn / 12 * 0.25);   /* jamais plus de +25 % du CA */
+    var margePlus = caPlus * s.mg / 100;
+    var temps = heures * s.r;
+    var nA = 0, rep = [];
+    A.forEach(function (a) {
+      var p = parA[a.k]; if (!p.on) { rep.push({ a: a, v: 0, h: 0, on: false, lignes: [] }); return; }
+      nA++;
+      var hA = p.lignes.reduce(function (t, l) { return t + l.h * k; }, 0);
+      p.lignes.forEach(function (l) { l.h *= k; l.v = l.h * s.r; });
+      rep.push({ a: a, h: hA, v: hA * s.r + (a.k === 'commercial' ? margePlus : 0), on: true, lignes: p.lignes });
+    });
+    var f = nA ? formule(nA) : { nom: '—', prix: 0 };
+    var brutMois = temps + margePlus, netMois = brutMois - f.prix;
+    return {
+      caAn: caAn, heures: heures, plafonne: k < 1, pts: pts, signesPlus: signesPlus, caPlus: caPlus, margePlus: margePlus,
+      temps: temps, f: f, nA: nA, nCas: nCas, brutMois: brutMois, netMois: netMois, netAn: netMois * 12,
+      roi: f.prix ? brutMois / f.prix : 0, rep: rep, signesAvant: ctx.signes,
+      tresoPlusTot: s.a.indexOf('tresorerie') > -1 && s.c.indexOf('tresorerie.impayes') > -1 ? s.rt * ACCELERE : 0
+    };
+  }
+
+  /* ── affichage en direct ────────────────────────────────────────────── */
+  var etat, res;
+  function rendre() {
+    etat = lire(); res = calculer(etat);
+    var caAn = CA_PALIERS[etat.ca];
+    $('s2EffV').textContent = etat.e + (etat.e > 1 ? ' personnes' : ' personne');
+    $('s2CaV').textContent = (etat.ca === CA_PALIERS.length - 1 ? 'plus de ' : '') + eur(caAn);
+    $('s2DevisV').textContent = etat.d;
+    $('s2MontantV').textContent = eur(etat.mt);
+    $('s2TauxV').textContent = etat.t + ' %';
+    $('s2MargeV').textContent = etat.mg + ' %';
+    $('s2HeuresV').textContent = etat.hs + ' h';
+    $('s2RateV').textContent = eur(etat.r);
+    $('s2RetardV').textContent = eur(etat.rt);
+    $('s2CasN').textContent = res.nCas + (res.nCas > 1 ? ' tâches sélectionnées' : ' tâche sélectionnée') + ' sur ' + NB_CAS;
+
+    var vide = !res.nA;
+    $('s2Net').textContent = vide ? '—' : sgn(res.netAn);
+    $('s2BarV').textContent = vide ? '—' : sgn(res.netAn);
+    $('s2Roi').textContent = vide ? 'Choisissez au moins un assistant et une tâche.'
+      : res.netMois > 0 ? 'Talos rapporte ' + sp(nf1.format(Math.floor(res.roi * 10) / 10)) + ' fois son prix, soit ' + sgn(res.netMois) + ' net par mois.'
+      : 'Avec ces réglages, l’abonnement coûte plus qu’il ne rapporte.';
+    $('s2H').textContent = h(res.heures);
+    $('s2Sig').textContent = res.signesPlus ? '+' + sp(nf1.format(Math.round(res.signesPlus * 12 * 10) / 10)) : '0';
+    $('s2NCas').textContent = res.nCas + ' / ' + NB_CAS;
+    $('s2Plan').textContent = res.f.prix ? eur(res.f.prix) : '—';
+    $('s2PlanN').textContent = res.f.prix ? 'par mois, formule ' + res.f.nom : 'abonnement';
+    var max = Math.max.apply(null, res.rep.map(function (r) { return r.v; }).concat([1]));
+    $('s2Bars').innerHTML = res.rep.map(function (r) {
+      return '<li' + (r.on ? '' : ' class="off"') + '><span>' + r.a.court + '</span><em>' + (r.on ? eur(r.v) + '/mois' : '—') + '</em><i style="--w:' + Math.round(r.v / max * 100) + '%"></i></li>';
+    }).join('');
+    $('resultat').classList.toggle('is-neg', !vide && res.netMois <= 0);
+    $('s2Open').disabled = vide;
+  }
+
+  form.addEventListener('input', function (e) {
+    if (e.target.name === 's2C') coches[e.target.value] = e.target.checked;
+    if (e.target.name === 's2Qui') { $('s2Rate').value = { moi: 60, salarie: 30, deux: 45 }[e.target.value]; }
+    if (e.target.name === 's2A') dessinerCas();
     rendre();
   });
-
-  function rendre(){
-    $('tTemps').textContent = e(etat.coutMois);
-    $('tCa').textContent    = (etat.caMois > 0 ? '+' : '') + e(etat.caMois);
-    $('tPlan').textContent  = '\u2212 ' + e(etat.planPrix);
-    $('tPlanNom').textContent = 'formule ' + etat.planNom
-      + ', d\u00e9duite du gain';
-
-    /* un impact négatif reste affiché tel quel : si l'abonnement coûte plus
-       que ce qu'il rapporte, le dire vaut mieux que de plafonner à zéro */
-    var net = etat.coutMois + etat.caMois - etat.planPrix;
-    $('tNet').textContent = (net > 0 ? '+' : '') + e(net);
-    $('tAn').textContent  = e(net * 12);
-    bloc.classList.toggle('nil', net <= 0);
-  }
-
-  /* les deux moteurs ont déjà tourné quand ce script s'exécute : leurs
-     premiers événements sont passés sans personne pour les entendre. On
-     leur demande de rejouer une fois. */
-  document.dispatchEvent(new CustomEvent('talos:sim-ask'));
-})();
-</script>
-
-<script>
-/*  Les huit tâches, repliées sur téléphone.
-
-    Dépliées, elles occupent plus de trois mille pixels avant le premier
-    résultat : on réglait sans jamais voir ce que ça changeait. Ici elles
-    passent dans un panneau, et un bouton résume l'état — combien de
-    tâches, combien d'heures, combien d'euros.
-
-    Le tableau est DÉPLACÉ, jamais recopié : le moteur de calcul garde
-    exactement les mêmes nœuds, donc il continue de fonctionner sans rien
-    savoir de ce panneau. Et si l'écran s'élargit, on le remet où il
-    était.                                                               */
-(function () {
-  'use strict';
-  var panel = document.querySelector('.t-gains .panel.g-table');
-  var table = document.getElementById('gTable');
-  if (!panel || !table) return;
-
-  var petit = window.matchMedia('(max-width:820px)');
-  var ancre = document.createComment('gTable');
-  var voile, panneau, corps, bouton, resume, ouvert = false, rendu;
-
-  function construire() {
-    bouton = document.createElement('button');
-    bouton.type = 'button';
-    bouton.className = 'gt-ouvrir';
-    bouton.innerHTML =
-      '<span><b>Vos t\u00e2ches</b><em class="gt-resume">\u2014</em></span>' +
-      '<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" ' +
-      'stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-      '<g transform="translate(8.500000, 6.000000)" stroke-width="1.5">' +
-      '<polyline points="0.75 0 6.75 6 0.75 12"></polyline></g></svg>';
-    resume = bouton.querySelector('.gt-resume');
-    bouton.addEventListener('click', ouvrir);
-
-    voile = document.createElement('div');
-    voile.className = 'gt-voile';
-    voile.addEventListener('click', fermer);
-
-    panneau = document.createElement('div');
-    panneau.className = 'gt-panneau';
-    panneau.setAttribute('role', 'dialog');
-    panneau.setAttribute('aria-modal', 'true');
-    panneau.setAttribute('aria-label', 'R\u00e9glage de vos t\u00e2ches');
-    panneau.innerHTML =
-      '<div class="gt-tete"><span><b>Vos t\u00e2ches</b>' +
-      '<em>Cochez ce que vous faites, ajustez les fr\u00e9quences</em></span>' +
-      '<button type="button" class="gt-fermer" aria-label="Fermer">' +
-      '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
-      'stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">' +
-      '<path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
-      /*  la classe « t-gains » sur l'enveloppe n'est pas décorative : toute
-          la mise en forme du tableau, et les jetons de couleur de la page,
-          sont accrochés à ce sélecteur. Hors de lui, le tableau ressort en
-          HTML brut.  */
-      '<div class="gt-corps"><div class="t-gains gt-hote"></div></div>' +
-      '<div class="gt-pied"><button type="button">Voir le r\u00e9sultat</button></div>';
-    corps = panneau.querySelector('.gt-hote');
-    panneau.querySelector('.gt-fermer').addEventListener('click', fermer);
-    panneau.querySelector('.gt-pied button').addEventListener('click', fermer);
-
-    document.body.appendChild(voile);
-    document.body.appendChild(panneau);
-    rendu = true;
-  }
-
-  function ouvrir() {
-    voile.classList.add('on');
-    panneau.classList.add('on');
-    document.body.style.overflow = 'hidden';
-    ouvert = true;
-    panneau.querySelector('.gt-fermer').focus();
-  }
-  function fermer() {
-    voile.classList.remove('on');
-    panneau.classList.remove('on');
-    document.body.style.overflow = '';
-    ouvert = false;
-    if (bouton) bouton.focus();
-  }
-  addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && ouvert) fermer();
+  form.addEventListener('change', function (e) {
+    if (e.target.name === 's2C') { coches[e.target.value] = e.target.checked; rendre(); }
+  });
+  $('s2Tout').addEventListener('click', function () {
+    [].forEach.call(team.querySelectorAll('input'), function (i) { i.checked = true; });
+    Object.keys(coches).forEach(function (k) { coches[k] = true; });
+    dessinerCas(); rendre();
   });
 
-  function replier() {
-    if (!rendu) construire();
-    if (corps.contains(table)) return;
-    panel.parentNode.insertBefore(ancre, panel);
-    panel.parentNode.insertBefore(bouton, panel);
-    corps.appendChild(panel);
-    /* le moteur republie : le résumé se remplit */
-    document.dispatchEvent(new CustomEvent('talos:sim-ask'));
-  }
-  function deplier() {
-    if (!rendu || !corps.contains(panel)) return;
-    fermer();
-    ancre.parentNode.insertBefore(panel, ancre);
-    if (bouton.parentNode) bouton.parentNode.removeChild(bouton);
+  /* ── le lien du rapport : les réponses voyagent dans l'adresse ──────── */
+  function encoder(s) { return btoa(unescape(encodeURIComponent(JSON.stringify(s)))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+  function decoder(t) {
+    try { t = t.replace(/-/g, '+').replace(/_/g, '/'); while (t.length % 4) t += '='; return JSON.parse(decodeURIComponent(escape(atob(t)))); }
+    catch (e) { return null; }
   }
 
-  /*  le résumé du bouton : il lit le pied du tableau, déjà tenu à jour par
-      le moteur — pas de second calcul à maintenir  */
-  /*  Le résumé du bouton prend ses chiffres dans l'événement du moteur, pas
-      dans le pied du tableau : celui-ci s'anime vers sa valeur, et le lire
-      pendant qu'il change donne un montant déjà périmé.  */
-  var eurSem = new Intl.NumberFormat('fr-FR',
-    { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
-
-  function majResume(ev) {
-    var d = ev && ev.detail;
-    if (!resume || !d || d.source !== 'temps') return;
-    var h = Math.floor(d.heuresSem), m = Math.round((d.heuresSem - h) * 60);
-    if (m === 60) { h++; m = 0; }
-    resume.textContent = d.taches + ' t\u00e2che' + (d.taches > 1 ? 's' : '')
-      + ' \u00b7 ' + h + ' h' + (m ? ' ' + (m < 10 ? '0' : '') + m : '')
-      + ' \u00b7 ' + eurSem.format(d.coutSem).replace(/\u202f/g, '\u00a0') + ' / sem';
+  /* ── la demande de numéro ───────────────────────────────────────────── */
+  var gate = $('s2Gate'), tel = $('s2Tel'), err = $('s2TelErr'), ok = $('s2Ok');
+  function normaliser(v) {
+    var d = String(v).replace(/[\s.\-()]/g, '');
+    if (/^0[1-9]\d{8}$/.test(d)) return '+33' + d.slice(1);
+    if (/^(\+|00)33[1-9]\d{8}$/.test(d)) return '+33' + d.slice(-9);
+    if (/^(\+|00)[1-9]\d{7,14}$/.test(d)) return '+' + d.replace(/^(\+|00)/, '');
+    return null;
   }
-  document.addEventListener('talos:sim', majResume);
+  function erreur(msg) {
+    err.textContent = msg; err.hidden = !msg;
+    tel.parentNode.classList.toggle('is-err', !!msg && /numéro/.test(msg));
+    ok.parentNode.classList.toggle('is-err', !!msg && /accord/.test(msg));
+  }
+  $('s2Open').addEventListener('click', function () {
+    erreur('');
+    if (typeof gate.showModal === 'function') gate.showModal(); else gate.setAttribute('open', '');
+    setTimeout(function () { tel.focus(); }, 30);
+  });
+  $('s2GateX').addEventListener('click', function () { gate.close ? gate.close() : gate.removeAttribute('open'); });
+  gate.addEventListener('click', function (e) { if (e.target === gate) gate.close(); });
+  $('s2GateForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var num = normaliser(tel.value);
+    if (!num) { erreur('Ce numéro ne semble pas valide. Exemple : 06 12 34 56 78.'); tel.focus(); return; }
+    if (!ok.checked) { erreur('Cochez la case pour donner votre accord.'); ok.focus(); return; }
+    erreur('');
+    var btn = $('s2Send'); btn.disabled = true;
+    var lien = location.origin + location.pathname + '#rapport=' + encoder(etat);
+    var corps = JSON.stringify({ telephone: num, consentement: true, site: $('s2Hp').value, lien: lien, reponses: etat,
+      resultat: { net_an: Math.round(res.netAn), heures_mois: Math.round(res.heures), formule: res.f.nom, chantiers_an: Math.round(res.signesPlus * 12 * 10) / 10 } });
+    var fini = false;
+    function ouvrir() {
+      if (fini) return; fini = true; btn.disabled = false;
+      gate.close ? gate.close() : gate.removeAttribute('open');
+      history.pushState(null, '', '#rapport=' + encoder(etat));
+      montrerRapport();
+    }
+    /* le rapport ne doit jamais rester bloqué par le réseau : 6 s au plus */
+    setTimeout(ouvrir, 6000);
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: corps, keepalive: true })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); })
+      .catch(function (x) { if (window.console) console.warn('simulateur : numéro non enregistré', x); })
+      .then(ouvrir);
+  });
 
-  function appliquer() { petit.matches ? replier() : deplier(); }
-  petit.addEventListener ? petit.addEventListener('change', appliquer)
-                         : petit.addListener(appliquer);
-  appliquer();
+  /* ── le rapport ─────────────────────────────────────────────────────── */
+  var report = $('s2Report'), grid = $('s2Grid');
+  function ic(n) { return IC[n] || ''; }
+  function montrerRapport() {
+    var r = res, s = etat;
+    var mois = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+    var debut = new Date().getMonth() + 1;
+    var cumul = [], acc = 0;
+    for (var i = 0; i < 12; i++) { acc += r.netMois; cumul.push(acc); }
+    var top = Math.max.apply(null, cumul.map(Math.abs).concat([1]));
+    var tauxApres = s.t + r.pts;
+    var date = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    report.innerHTML =
+      '<div class="s2-rp-top"><div><h2>Votre rapport Talos</h2><p>' + esc(s.m) + ' · ' + s.e + (s.e > 1 ? ' personnes' : ' personne') + ' · ' + date + '</p></div>' +
+      '<div class="s2-rp-act"><button type="button" class="s2-btn" data-act="retour">' + ic('arrow-left') + 'Modifier mes réponses</button>' +
+      '<button type="button" class="s2-btn" data-act="copier">' + ic('send') + 'Copier le lien</button>' +
+      '<button type="button" class="s2-btn" data-act="imprimer">' + ic('paper') + 'Enregistrer en PDF</button></div></div>' +
+
+      '<div class="s2-kpis">' +
+        '<div class="s2-kpi is-main">' + ic('wallet') + '<b>' + sgn(r.netAn) + '</b><span>gain net sur un an, abonnement déduit</span></div>' +
+        '<div class="s2-kpi">' + ic('time-circle') + '<b>' + h(r.heures * 12) + '</b><span>rendues sur un an, soit ' + h(r.heures) + ' par mois</span></div>' +
+        '<div class="s2-kpi">' + ic('work') + '<b>+' + sp(nf1.format(Math.round(r.signesPlus * 12 * 10) / 10)) + '</b><span>chantiers signés en plus sur un an</span></div>' +
+        '<div class="s2-kpi">' + ic('graph') + '<b>×' + sp(nf1.format(Math.floor(r.roi * 10) / 10)) + '</b><span>ce que Talos rapporte pour 1 € d’abonnement</span></div>' +
+      '</div>' +
+
+      '<div class="s2-rp-2">' +
+        '<div class="s2-rp-card"><h3>' + ic('3-user') + 'Tâche par tâche</h3>' +
+          r.rep.filter(function (x) { return x.on; }).map(function (x) {
+            return '<div class="s2-rp-a"><div class="s2-rp-ah"><img src="' + x.a.av + '" alt="" width="32" height="32"><b>' + x.a.nom + '</b><em>' + eur(x.v) + '/mois</em></div>' +
+              '<table class="s2-tab"><thead><tr><th>Tâche</th><th>Temps/mois</th><th>Valeur</th></tr></thead><tbody>' +
+              x.lignes.map(function (l) { return '<tr><td>' + l.nom + '</td><td>' + sp(nf1.format(Math.round(l.h * 10) / 10)) + ' h</td><td>' + eur(l.v) + '</td></tr>'; }).join('') +
+              (x.a.k === 'commercial' && r.margePlus ? '<tr><td>Marge des chantiers signés en plus</td><td>—</td><td>' + eur(r.margePlus) + '</td></tr>' : '') +
+              '</tbody></table></div>';
+          }).join('') +
+        '</div>' +
+
+        '<div style="display:flex;flex-direction:column;gap:18px;min-width:0">' +
+          '<div class="s2-rp-card"><h3>' + ic('chart') + 'Cumul sur 12 mois</h3><div class="s2-chart" role="img" aria-label="Gain net cumulé : ' + sgn(cumul[11]) + ' au bout de 12 mois">' +
+            cumul.map(function (v, i) { return '<div><i style="height:' + Math.max(2, Math.round(Math.abs(v) / top * 140)) + 'px' + (v < 0 ? ';background:var(--ink-soft)' : '') + '"></i><span>' + mois[(debut + i) % 12] + '</span></div>'; }).join('') +
+          '</div><div class="s2-chart-k"><span>Au bout de 12 mois</span><b>' + sgn(cumul[11]) + '</b></div></div>' +
+
+          '<div class="s2-rp-card"><h3>' + ic('document') + 'Vos devis, avant et après</h3><table class="s2-tab"><thead><tr><th></th><th>Aujourd’hui</th><th>Avec Talos</th></tr></thead><tbody>' +
+            '<tr><td>Devis signés</td><td>' + s.t + ' %</td><td>' + tauxApres + ' %</td></tr>' +
+            '<tr><td>Chantiers signés par mois</td><td>' + sp(nf1.format(Math.round(r.signesAvant * 10) / 10)) + '</td><td>' + sp(nf1.format(Math.round((r.signesAvant + r.signesPlus) * 10) / 10)) + '</td></tr>' +
+            '<tr><td>Chiffre d’affaires signé par mois</td><td>' + eur(r.signesAvant * s.mt) + '</td><td>' + eur(r.signesAvant * s.mt + r.caPlus) + '</td></tr>' +
+            '<tr class="tot"><td>Marge en plus par mois</td><td></td><td>' + sgn(r.margePlus) + '</td></tr>' +
+          '</tbody></table></div>' +
+
+          '<div class="s2-rp-card"><h3>' + ic('wallet') + 'Le bilan du mois</h3><table class="s2-tab"><tbody>' +
+            '<tr><td>Temps rendu (' + h(r.heures) + ' × ' + eur(s.r) + ')</td><td>' + sgn(r.temps) + '</td></tr>' +
+            '<tr><td>Marge des chantiers en plus</td><td>' + sgn(r.margePlus) + '</td></tr>' +
+            '<tr><td>Abonnement ' + r.f.nom + '</td><td>−' + eur(r.f.prix) + '</td></tr>' +
+            '<tr class="tot"><td>Net par mois</td><td>' + sgn(r.netMois) + '</td></tr>' +
+            (r.tresoPlusTot ? '<tr><td>Factures en retard rentrées plus tôt <em style="font-style:normal;color:var(--ink-soft)">(trésorerie, non compté dans le gain)</em></td><td>' + eur(r.tresoPlusTot) + '</td></tr>' : '') +
+          '</tbody></table></div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="s2-rp-card"><h3>' + ic('info-circle') + 'Comment c’est calculé</h3><ul class="s2-hyp">' +
+        '<li>Chaque tâche a un temps moyen relevé chez des artisans, ajusté à votre volume de devis et à la taille de l’équipe.</li>' +
+        '<li>Le temps rendu ne dépasse jamais <b>85 %</b> de l’administratif que vous avez déclaré' + (r.plafonne ? ' : <b>votre calcul a été ramené à ce plafond</b>' : '') + '. Vous gardez la validation.</li>' +
+        '<li>Devis signés en plus : variantes +2 points, relances +3, alerte +1, signature en ligne +1, et jusqu’à +3 quand le devis part le jour même. Plafond à <b>+10 points</b>.</li>' +
+        '<li>Seule la <b>marge</b> des chantiers en plus compte dans le gain, pas le chiffre d’affaires. Jamais plus de +25 % de votre CA.</li>' +
+        '<li>Abonnement mensuel sans engagement : 99 € (1 assistant), 299 € (2 ou 3), 449 € (4 ou 5).</li>' +
+      '</ul></div>' +
+
+      '<div class="s2-rp-cta"><div><h3>On rejoue ce calcul sur vos vrais devis&#8239;?</h3><p>15 minutes, avec vos chiffres. Le paramétrage, c’est nous qui le faisons.</p></div>' +
+      '<a href="reserver.html">Réserver ma démo ' + ic('arrow-right') + '</a></div>';
+
+    grid.hidden = true; report.hidden = false;
+    document.querySelector('.s2-head').hidden = true;
+    $('s2BarV').parentNode.hidden = true;
+    window.scrollTo({ top: Math.max(0, report.getBoundingClientRect().top + window.scrollY - 110) });
+  }
+  function cacherRapport() {
+    grid.hidden = false; report.hidden = true;
+    document.querySelector('.s2-head').hidden = false;
+    $('s2BarV').parentNode.hidden = false;
+  }
+  var toastEl;
+  function toast(m) {
+    if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 's2-toast'; toastEl.setAttribute('role', 'status'); document.body.appendChild(toastEl); }
+    toastEl.textContent = m; toastEl.classList.add('on');
+    clearTimeout(toastEl._t); toastEl._t = setTimeout(function () { toastEl.classList.remove('on'); }, 2600);
+  }
+  report.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var act = b.getAttribute('data-act');
+    if (act === 'retour') { history.pushState(null, '', location.pathname); cacherRapport(); window.scrollTo({ top: 0 }); }
+    if (act === 'imprimer') window.print();
+    if (act === 'copier') {
+      var url = location.href;
+      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(
+        function () { toast('Lien copié'); },
+        function () { window.prompt('Copiez le lien de votre rapport :', url); });
+    }
+  });
+
+  function depuisAdresse() {
+    var m = location.hash.match(/rapport=([\w-]+)/);
+    var s = m && decoder(m[1]);
+    if (s) { ecrire(s); dessinerCas(); rendre(); montrerRapport(); }
+    else { cacherRapport(); }
+  }
+  window.addEventListener('popstate', depuisAdresse);
+
+  dessinerCas(); rendre();
+  depuisAdresse();
+
+  /* la barre du bas s'efface quand le résultat est à l'écran */
+  var bar = document.querySelector('.s2-bar'), panneau = $('resultat');
+  if (bar && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) { bar.classList.toggle('is-off', e[0].isIntersecting); }, { threshold: 0.1 }).observe(panneau);
+  }
 })();
 </script>
 </body>
