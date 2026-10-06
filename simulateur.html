@@ -1786,6 +1786,105 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   .t-sim2{padding:0}
 }
 .s2-bar[hidden]{display:none !important}
+/* ═══ simulateur · DA « Une équipe sur mesure » (page Offres) ═══════════════
+   Mêmes jetons que .t-asst, renommés pour ne pas heurter ceux de la page :
+   --ink reste ici la couleur du texte, comme dans le reste du simulateur.  */
+.t-sim2{
+  --s-bg:#140F0C; --s-card:#1C1611; --s-card2:#241B15;
+  --s-tx:#F6EEE7; --s-lin:#AB9F95;
+  --s-line:rgba(246,238,231,.08); --s-line2:rgba(246,238,231,.15);
+  --s-br:#E0631F; --s-br2:#F4823E; --s-br-rgb:224,99,31;
+  --s-g1:#FFE7D4; --s-shadow:0 18px 44px -26px rgba(0,0,0,.8);
+  --s-mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --background:var(--s-bg); --surface-tint:var(--s-card); --ink:var(--s-tx); --ink-soft:var(--s-lin);
+  --border:var(--s-line); --indigo:var(--s-br); --indigo-light:var(--s-br2);
+  overflow:hidden;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+html[data-theme="light"] .t-sim2{
+  --s-bg:#FBF6F2; --s-card:#FFFFFF; --s-card2:#F4EBE3;
+  --s-tx:#1C1310; --s-lin:#6E6058;
+  --s-line:rgba(40,25,16,.12); --s-line2:rgba(40,25,16,.22);
+  --s-br:#C5531C; --s-br2:#E0631F; --s-br-rgb:197,83,28;
+  --s-g1:#8E3208; --s-shadow:0 18px 44px -30px rgba(40,25,16,.34)}
+
+/* le halo bronze, en haut à droite */
+.t-sim2::before{content:"";position:absolute;inset:-18% -14% auto auto;width:56%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(var(--s-br-rgb),.18) 0%,transparent 62%)}
+html[data-theme="light"] .t-sim2::before{background:radial-gradient(circle,rgba(var(--s-br-rgb),.11) 0%,transparent 62%)}
+.s2-wrap{position:relative}
+
+/* titre centré, mot d'impact en dégradé */
+.s2-head{max-width:720px;margin:0 auto 52px;text-align:center}
+.s2-eyebrow{font-family:var(--s-mono);font-weight:500;letter-spacing:.16em;color:var(--s-br2)}
+.s2-head h1{font-size:clamp(38px,4.4vw,62px);line-height:1.03;letter-spacing:-2.2px;font-weight:800;color:var(--s-tx)}
+.s2-head h1 em{background:linear-gradient(100deg,var(--s-g1) 0%,var(--s-br2) 48%,var(--s-br) 100%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:s2Flow 6s ease-in-out infinite}
+html[data-theme="light"] .s2-head h1 em{background-image:linear-gradient(100deg,#8E3208 0%,var(--s-br) 50%,#F0873F 100%)}
+@keyframes s2Flow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.s2-head > p{margin:18px auto 0;font-size:17.5px;color:var(--s-lin)}
+
+/* les trois repères : le bandeau du compteur d'équipe */
+.s2-trust{display:inline-flex;flex-wrap:nowrap;gap:0;margin:26px auto 0;padding:6px;border-radius:22px;
+  background:var(--s-card);border:1px solid var(--s-line2);box-shadow:var(--s-shadow)}
+.s2-trust li{position:relative;display:flex;align-items:center;gap:13px;padding:12px 22px;text-align:left;color:var(--s-tx)}
+.s2-trust li + li::before{content:"";position:absolute;left:0;top:14%;width:1px;height:72%;background:var(--s-line2)}
+.s2-trust b{display:block;font-size:23px;line-height:1;letter-spacing:-1px;font-weight:800;font-variant-numeric:tabular-nums}
+.s2-trust small{display:block;margin-top:5px;font-family:var(--s-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--s-lin)}
+
+/* la tuile d'icône bronze — partout où il y a une icône de repère */
+.s2-tile,.s2-n,.s2-gate-ic{flex:0 0 auto;display:grid;place-items:center;width:38px;height:38px;border-radius:13px;color:var(--s-br);
+  background:linear-gradient(140deg,rgba(var(--s-br-rgb),.24),rgba(var(--s-br-rgb),.08));border:1px solid rgba(var(--s-br-rgb),.30)}
+.s2-tile .ic,.s2-n .ic{width:19px;height:19px}
+.s2-trust .s2-tile .ic{color:var(--s-br)}
+
+/* les chiffres en dégradé, comme le compteur */
+.s2-trust b,.s2-big,.s2-stats b,.s2-field output,.s2-kpi b,.s2-bar b{
+  background:linear-gradient(100deg,var(--s-g1) 0%,var(--s-br2) 46%,var(--s-br) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+html[data-theme="light"] .s2-trust b,html[data-theme="light"] .s2-big,html[data-theme="light"] .s2-stats b,
+html[data-theme="light"] .s2-field output,html[data-theme="light"] .s2-kpi b{
+  background-image:linear-gradient(100deg,#8E3208 0%,var(--s-br) 52%,var(--s-br2) 100%)}
+.s2-res.is-neg .s2-big{background:none;-webkit-text-fill-color:var(--s-lin);color:var(--s-lin)}
+.s2-bar b{background:none;color:var(--s-bg);-webkit-text-fill-color:var(--s-bg)}
+
+/* cartes */
+.s2-card,.s2-res,.s2-rp-card,.s2-kpi{background:var(--s-card);border:1px solid var(--s-line);border-radius:24px;box-shadow:var(--s-shadow)}
+.s2-res{border-color:var(--s-line2);background:
+  radial-gradient(120% 60% at 100% 0%,rgba(var(--s-br-rgb),.14) 0%,transparent 60%),var(--s-card)}
+.s2-card legend em,.s2-res-k,.s2-team i,.s2-cas-g h3,.s2-tab th,.s2-stats span{font-family:var(--s-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.s2-card legend em{margin-top:4px;color:var(--s-lin)}
+.s2-stats span{font-size:10px;line-height:1.45}
+.s2-field{border-top-color:var(--s-line)}
+.s2-field input[type=range]{accent-color:var(--s-br)}
+.s2-select select,.s2-tel{background:var(--s-card2);border-color:var(--s-line2)}
+.s2-stats div{background:var(--s-card2);border-color:var(--s-line)}
+.s2-stats .s2-tile{width:30px;height:30px;border-radius:10px}
+.s2-stats .s2-tile .ic{width:16px;height:16px}
+
+/* sélections */
+.s2-chips span,.s2-team span,.s2-cas span{border-color:var(--s-line2);background:var(--s-card2)}
+.s2-chips input:checked + span,.s2-team input:checked + span{border-color:rgba(var(--s-br-rgb),.65);
+  background:linear-gradient(140deg,rgba(var(--s-br-rgb),.20),rgba(var(--s-br-rgb),.06))}
+.s2-cas input:checked + span{border-color:rgba(var(--s-br-rgb),.5);background:linear-gradient(140deg,rgba(var(--s-br-rgb),.12),rgba(var(--s-br-rgb),.03))}
+.s2-cas input:checked + span::before{background-color:var(--s-br);border-color:var(--s-br)}
+.s2-team i{color:var(--s-br2);font-size:10px}
+.s2-bars li i::after{background:linear-gradient(90deg,var(--s-br),var(--s-br2))}
+
+/* bouton principal */
+.s2-cta{background:linear-gradient(100deg,var(--s-br) 0%,var(--s-br2) 100%);box-shadow:0 14px 34px -14px rgba(var(--s-br-rgb),.75);
+  transition:transform .2s cubic-bezier(.16,1,.3,1),filter .2s}
+.s2-cta:hover{transform:translateY(-2px)}
+.s2-btn{background:var(--s-card);border-color:var(--s-line2)}
+.s2-rp-cta{background:linear-gradient(120deg,var(--s-br) 0%,var(--s-br2) 100%)}
+.s2-chart i{background:linear-gradient(180deg,var(--s-br2),var(--s-br))}
+.s2-gate{background:var(--s-card);border-color:var(--s-line2);box-shadow:var(--s-shadow)}
+.s2-gate-ic{width:48px;height:48px;border-radius:15px}
+
+@media (max-width:760px){
+  .s2-trust{display:flex;flex-direction:column;width:100%;border-radius:20px}
+  .s2-trust li{padding:11px 16px}
+  .s2-trust li + li::before{left:16px;right:16px;top:0;width:auto;height:1px}
+}
+@media (prefers-reduced-motion:reduce){.s2-head h1 em{animation:none}.s2-cta{transition:none}.s2-cta:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -1801,11 +1900,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       <span class="s2-eyebrow"><i></i>Simulateur de gains</span>
       <h1>Combien Talos vous rend <em>chaque année&#8239;?</em></h1>
       <p>Répondez sur votre entreprise, le résultat se met à jour à droite. Le rapport détaillé vous attend à la fin.</p>
-      <ul class="s2-trust">
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path><polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline></g></g></svg>Calcul dans votre navigateur</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path><polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline></g></g></svg>2 minutes</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path><polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline></g></g></svg>Sans engagement</li>
-      </ul>
+      <ul class="s2-trust"><li><span class="s2-tile"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path><polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline></g></g></svg></span><span><b>2 min</b><small>pour répondre</small></span></li><li><span class="s2-tile"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path><polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline></g></g></svg></span><span><b>18</b><small>tâches chiffrées</small></span></li><li><span class="s2-tile"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path><polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline></g></g></svg></span><span><b>0</b><small>donnée envoyée avant le rapport</small></span></li></ul>
     </header>
 
     <div class="s2-grid" id="s2Grid">
@@ -1923,10 +2018,10 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         <p class="s2-sub" id="s2Roi">—</p>
 
         <div class="s2-stats">
-          <div><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path><polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline></g></g></svg><b id="s2H">—</b><span>rendues par mois</span></div>
-          <div><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><line x1="9.9951" y1="14.6768" x2="9.9951" y2="12.1398"></line><g transform="translate(0.000000, 0.739900)"><path d="M16.1899,2.5903 C17.8799,2.5903 19.2399,3.9603 19.2399,5.6503 L19.2399,9.0903 C16.7799,10.5303 13.5299,11.4003 9.9899,11.4003 C6.4499,11.4003 3.2099,10.5303 0.7499,9.0903 L0.7499,5.6403 C0.7499,3.9503 2.1199,2.5903 3.8099,2.5903 L16.1899,2.5903 Z"></path><path d="M13.4951,2.5859 L13.4951,2.2199 C13.4951,0.9999 12.5051,0.0099 11.2851,0.0099 L8.7051,0.0099 C7.4851,0.0099 6.4951,0.9999 6.4951,2.2199 L6.4951,2.5859"></path><path d="M0.7744,12.7431 L0.9634,15.2521 C1.0914,16.9431 2.5004,18.2501 4.1954,18.2501 L15.7944,18.2501 C17.4894,18.2501 18.8984,16.9431 19.0264,15.2521 L19.2154,12.7431"></path></g></g></g></svg><b id="s2Sig">—</b><span>chantiers signés en plus par an</span></div>
-          <div><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path><polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline></g></g></svg><b id="s2NCas">—</b><span>tâches prises en charge</span></div>
-          <div><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M20.9999 14.406H16.646C15.5494 14.406 14.6621 13.5177 14.6621 12.4222V11.3276C14.6621 10.2321 15.5494 9.34375 16.646 9.34375H20.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.9966 11.8185H16.9936" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.9358 3.6875H16.0639C18.7901 3.6875 20.9997 5.89708 20.9997 8.6233V15.3727C20.9997 18.0989 18.7901 20.3085 16.0639 20.3085H7.9358C5.20958 20.3085 3 18.0989 3 15.3727V8.6233C3 5.89708 5.20958 3.6875 7.9358 3.6875Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><b id="s2Plan">—</b><span id="s2PlanN">abonnement</span></div>
+          <div><span class="s2-tile"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M19.2498,10.0005 C19.2498,15.1095 15.1088,19.2505 9.9998,19.2505 C4.8908,19.2505 0.7498,15.1095 0.7498,10.0005 C0.7498,4.8915 4.8908,0.7505 9.9998,0.7505 C15.1088,0.7505 19.2498,4.8915 19.2498,10.0005 Z"></path><polyline points="13.4314 12.9429 9.6614 10.6939 9.6614 5.8469"></polyline></g></g></svg></span><b id="s2H">—</b><span>rendues par mois</span></div>
+          <div><span class="s2-tile"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><line x1="9.9951" y1="14.6768" x2="9.9951" y2="12.1398"></line><g transform="translate(0.000000, 0.739900)"><path d="M16.1899,2.5903 C17.8799,2.5903 19.2399,3.9603 19.2399,5.6503 L19.2399,9.0903 C16.7799,10.5303 13.5299,11.4003 9.9899,11.4003 C6.4499,11.4003 3.2099,10.5303 0.7499,9.0903 L0.7499,5.6403 C0.7499,3.9503 2.1199,2.5903 3.8099,2.5903 L16.1899,2.5903 Z"></path><path d="M13.4951,2.5859 L13.4951,2.2199 C13.4951,0.9999 12.5051,0.0099 11.2851,0.0099 L8.7051,0.0099 C7.4851,0.0099 6.4951,0.9999 6.4951,2.2199 L6.4951,2.5859"></path><path d="M0.7744,12.7431 L0.9634,15.2521 C1.0914,16.9431 2.5004,18.2501 4.1954,18.2501 L15.7944,18.2501 C17.4894,18.2501 18.8984,16.9431 19.0264,15.2521 L19.2154,12.7431"></path></g></g></g></svg></span><b id="s2Sig">—</b><span>chantiers signés en plus par an</span></div>
+          <div><span class="s2-tile"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"><path d="M14.3344,0.7502 L5.6654,0.7502 C2.6444,0.7502 0.7504,2.8892 0.7504,5.9162 L0.7504,14.0842 C0.7504,17.1112 2.6354,19.2502 5.6654,19.2502 L14.3334,19.2502 C17.3644,19.2502 19.2504,17.1112 19.2504,14.0842 L19.2504,5.9162 C19.2504,2.8892 17.3644,0.7502 14.3344,0.7502 Z"></path><polyline points="6.4399 10.0002 8.8139 12.3732 13.5599 7.6272"></polyline></g></g></svg></span><b id="s2NCas">—</b><span>tâches prises en charge</span></div>
+          <div><span class="s2-tile"><svg class="ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M20.9999 14.406H16.646C15.5494 14.406 14.6621 13.5177 14.6621 12.4222V11.3276C14.6621 10.2321 15.5494 9.34375 16.646 9.34375H20.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.9966 11.8185H16.9936" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.9358 3.6875H16.0639C18.7901 3.6875 20.9997 5.89708 20.9997 8.6233V15.3727C20.9997 18.0989 18.7901 20.3085 16.0639 20.3085H7.9358C5.20958 20.3085 3 18.0989 3 15.3727V8.6233C3 5.89708 5.20958 3.6875 7.9358 3.6875Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b id="s2Plan">—</b><span id="s2PlanN">abonnement</span></div>
         </div>
 
         <p class="s2-res-k s2-res-k2">Répartition par assistant</p>
