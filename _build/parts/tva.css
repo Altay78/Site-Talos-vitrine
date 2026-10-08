@@ -1,0 +1,220 @@
+/* ═══════════════════════════════════════════════════════════════
+   CALCULATEUR TVA BTP — même grammaire que le simulateur (.t-sim2) :
+   cartes « étape », puces à cocher, panneau de résultat collant.
+   Le panneau parle au nom de l'assistant facturation : c'est lui
+   qui, chez un client, appliquerait ce taux sur chaque devis.
+   Tout passe par les variables du thème (clair et sombre).
+   ═══════════════════════════════════════════════════════════════ */
+.t-tva{padding:28px 0 96px;background:var(--background);color:var(--ink)}
+.tv-wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* ── en-tête ── */
+.tv-head{max-width:780px;margin-bottom:36px}
+.tv-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--indigo-light)}
+.tv-eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--indigo)}
+.tv-head h1{margin:14px 0 0;font-size:clamp(2.1rem,1.4rem + 3vw,3.6rem);line-height:1.04;
+  letter-spacing:-.03em;font-weight:700;text-wrap:balance}
+.tv-head h1 em{font-style:normal;color:var(--indigo-light)}
+.tv-head > p{margin:18px 0 0;font-size:17px;line-height:1.6;color:var(--ink-soft);max-width:600px}
+.tv-trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin:20px 0 0;font-size:14px;color:var(--ink-soft)}
+.tv-trust li{display:inline-flex;align-items:center;gap:7px}
+.tv-trust svg{width:17px;height:17px;color:var(--indigo-light)}
+
+/* ── grille : questions à gauche, l'assistant à droite ── */
+.tv-grid{display:grid;grid-template-columns:minmax(0,1fr) 410px;gap:28px;align-items:start}
+.tv-form{display:flex;flex-direction:column;gap:16px;min-width:0}
+.tv-card{margin:0;padding:22px;border:1px solid var(--border);border-radius:20px;
+  background:var(--surface-tint);min-width:0}
+.tv-card legend{display:flex;align-items:center;gap:12px;padding:0;margin-bottom:14px;float:left;width:100%}
+.tv-card legend + *{clear:both}
+.tv-n{flex:0 0 auto;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;
+  background:color-mix(in srgb,var(--indigo) 16%,transparent);color:var(--indigo-light);
+  font:800 15px/1 var(--mono,ui-monospace,Menlo,monospace)}
+.tv-card legend b{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.tv-card legend em{display:block;font-style:normal;font-size:13.5px;color:var(--ink-soft);margin-top:2px}
+.tv-card.is-off{opacity:.45;pointer-events:none}
+.tv-card.is-off legend em::after{content:' · sans objet pour votre cas'}
+
+/* puces : un choix parmi plusieurs */
+.tv-chips{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.tv-chips label{position:relative;cursor:pointer;display:block}
+.tv-chips input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.tv-chips span{display:flex;flex-direction:column;justify-content:center;gap:3px;min-height:58px;
+  height:100%;padding:10px 13px;border:1px solid var(--border);border-radius:12px;
+  font-size:14px;font-weight:600;line-height:1.3;transition:border-color .2s,background-color .2s}
+.tv-chips small{font-size:12.5px;font-weight:400;color:var(--ink-soft);line-height:1.35}
+.tv-chips label:hover span{border-color:color-mix(in srgb,var(--indigo) 45%,transparent)}
+.tv-chips input:checked + span{border-color:var(--indigo);
+  background:color-mix(in srgb,var(--indigo) 14%,transparent)}
+.tv-chips input:focus-visible + span{outline:2px solid var(--indigo-light);outline-offset:2px}
+.tv-chips-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+/* cases : plusieurs réponses possibles */
+.tv-checks{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.tv-checks label{position:relative;cursor:pointer;display:block}
+.tv-checks input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.tv-checks span{display:flex;align-items:flex-start;gap:10px;min-height:48px;height:100%;padding:11px 12px;
+  border:1px solid var(--border);border-radius:12px;font-size:13.5px;line-height:1.4;
+  transition:border-color .2s,background-color .2s}
+.tv-checks span::before{content:'';flex:0 0 18px;height:18px;margin-top:1px;
+  border:1.5px solid var(--ink-soft);border-radius:6px;transition:background-color .2s,border-color .2s}
+.tv-checks input:checked + span{border-color:color-mix(in srgb,var(--indigo) 60%,transparent)}
+.tv-checks input:checked + span::before{border-color:var(--indigo);
+  background:var(--indigo) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+.tv-checks input:focus-visible + span{outline:2px solid var(--indigo-light);outline-offset:2px}
+.tv-hint{margin:12px 0 0;font-size:12.5px;line-height:1.5;color:var(--ink-soft)}
+
+/* montant */
+.tv-amount{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.tv-amount label{font-size:14.5px;font-weight:500}
+.tv-money{position:relative}
+.tv-money input{width:190px;min-height:50px;padding:0 40px 0 14px;border:1px solid var(--border);
+  border-radius:12px;background:var(--background);color:var(--ink);font-size:18px;font-weight:700;
+  text-align:right;font-variant-numeric:tabular-nums}
+.tv-money input:focus-visible{outline:2px solid var(--indigo-light);outline-offset:2px}
+.tv-money::after{content:'€ HT';position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  font-size:12px;font-weight:700;color:var(--ink-soft);pointer-events:none}
+.tv-money input{padding-right:52px}
+
+/* ── l'assistant facturation répond ── */
+.tv-res{position:sticky;top:96px;padding:22px 22px 20px;border-radius:24px;border:1px solid var(--border);
+  background:var(--surface-tint);min-width:0}
+.tv-who{display:flex;align-items:center;gap:11px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.tv-who img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.tv-who b{display:block;font-size:14.5px;font-weight:700;line-height:1.2}
+.tv-who small{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft)}
+.tv-who small i{width:7px;height:7px;border-radius:50%;background:var(--indigo);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--indigo) 25%,transparent)}
+.tv-k{margin:16px 0 0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.tv-big{margin:8px 0 0;font-size:clamp(3rem,2.4rem + 2.4vw,4rem);line-height:1;font-weight:800;
+  letter-spacing:-.04em;color:var(--indigo-light);font-variant-numeric:tabular-nums}
+.tv-big small{font-size:.42em;letter-spacing:-.01em;color:var(--ink-soft);font-weight:700;margin-left:6px}
+.tv-say{margin:12px 0 0;font-size:14.5px;line-height:1.55}
+.tv-say b{color:var(--ink)}
+.tv-sums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:16px 0 0}
+.tv-sums div{padding:11px 12px;border-radius:14px;background:var(--background);border:1px solid var(--border);min-width:0}
+.tv-sums span{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.tv-sums b{display:block;margin-top:4px;font-size:16px;font-weight:800;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tv-sums .is-tva b{color:var(--indigo-light)}
+
+.tv-block{margin:16px 0 0;padding:14px;border-radius:14px;border:1px solid var(--border);background:var(--background)}
+.tv-block h3{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;letter-spacing:.02em}
+.tv-block h3 svg{width:16px;height:16px;color:var(--indigo-light);flex:0 0 auto}
+.tv-block p,.tv-block li{font-size:13px;line-height:1.5;color:var(--ink-soft)}
+.tv-block p{margin-top:6px}
+.tv-block ul{margin-top:6px;display:flex;flex-direction:column;gap:5px}
+.tv-block li{position:relative;padding-left:14px}
+.tv-block li::before{content:'';position:absolute;left:2px;top:.62em;width:5px;height:5px;border-radius:50%;
+  background:var(--indigo)}
+.tv-mention{margin-top:8px;padding:10px 12px;border-radius:10px;border:1px dashed color-mix(in srgb,var(--indigo) 55%,transparent);
+  font-size:12.5px;line-height:1.5;color:var(--ink)}
+.tv-copy{margin-top:8px;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;
+  border:1px solid var(--border);border-radius:100px;font-size:12.5px;font-weight:700;color:var(--indigo-light);
+  transition:border-color .2s}
+.tv-copy:hover{border-color:var(--indigo)}
+.tv-copy svg{width:15px;height:15px}
+.tv-warn{border-color:color-mix(in srgb,#D9A441 45%,transparent)}
+.tv-warn h3 svg{color:#D9A441}
+
+.tv-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;
+  margin-top:18px;padding:0 18px;border-radius:999px;background:var(--indigo);color:#fff;
+  font-size:15.5px;font-weight:700;text-align:center;transition:filter .2s,transform .3s cubic-bezier(.16,1,.3,1)}
+.tv-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.tv-cta svg{width:18px;height:18px}
+.tv-cta-sub{margin:10px 0 0;text-align:center;font-size:12.5px;color:var(--ink-soft)}
+.tv-cta-sub a{color:var(--indigo-light);font-weight:700}
+
+/* ── le guide sous l'outil : ce que lisent Google et les IA ── */
+.tv-guide{margin-top:72px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:start}
+.tv-art{min-width:0;max-width:760px}
+.tv-art h2{margin:44px 0 0;font-size:clamp(1.5rem,1.2rem + 1.2vw,2rem);line-height:1.15;letter-spacing:-.025em;
+  font-weight:700;scroll-margin-top:110px}
+.tv-art h2:first-child{margin-top:0}
+.tv-art h2 em{font-style:normal;color:var(--indigo-light)}
+.tv-art h3{margin:26px 0 0;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.tv-art p,.tv-art li{font-size:16px;line-height:1.7;color:var(--ink-soft)}
+.tv-art p{margin-top:12px}
+.tv-art p strong,.tv-art li strong{color:var(--ink);font-weight:700}
+.tv-art ul{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.tv-art ul li{position:relative;padding-left:18px}
+.tv-art ul li::before{content:'';position:absolute;left:3px;top:.72em;width:6px;height:6px;border-radius:50%;background:var(--indigo)}
+.tv-art a{color:var(--indigo-light);text-decoration:underline;text-underline-offset:3px}
+.tv-capsule{margin-top:14px;padding:16px 18px;border-left:3px solid var(--indigo);border-radius:0 14px 14px 0;
+  background:var(--surface-tint);font-size:16.5px !important;line-height:1.65 !important;color:var(--ink) !important}
+.tv-table{margin-top:16px;width:100%;overflow-x:auto;border:1px solid var(--border);border-radius:16px}
+.tv-table table{width:100%;min-width:560px;font-size:14.5px}
+.tv-table th,.tv-table td{padding:13px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+.tv-table tr:last-child td{border-bottom:0}
+.tv-table th{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
+  background:var(--surface-tint)}
+.tv-table td{color:var(--ink-soft);line-height:1.5}
+.tv-table td:first-child{font-weight:800;color:var(--indigo-light);font-size:17px;white-space:nowrap}
+.tv-faq{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.tv-faq details{border:1px solid var(--border);border-radius:14px;background:var(--surface-tint)}
+.tv-faq summary{display:flex;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer;
+  font-size:16px;font-weight:700;list-style:none}
+.tv-faq summary::-webkit-details-marker{display:none}
+.tv-faq summary::after{content:'+';flex:0 0 auto;font-size:20px;line-height:1;color:var(--indigo-light);transition:transform .25s}
+.tv-faq details[open] summary::after{transform:rotate(45deg)}
+.tv-faq details p{margin:0;padding:0 18px 16px}
+.tv-src{margin-top:12px;font-size:13.5px !important}
+.tv-meta{margin-top:40px;padding-top:18px;border-top:1px solid var(--border);font-size:13px !important}
+
+.tv-side{position:sticky;top:110px;display:flex;flex-direction:column;gap:12px}
+.tv-toc{padding:18px;border:1px solid var(--border);border-radius:18px;background:var(--surface-tint)}
+.tv-toc b{display:block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.tv-toc ol{margin-top:10px;display:flex;flex-direction:column;gap:7px;counter-reset:t}
+.tv-toc a{display:flex;gap:9px;font-size:14px;line-height:1.35;color:var(--ink);transition:color .2s}
+.tv-toc a::before{counter-increment:t;content:counter(t,decimal-leading-zero);font:700 11px/1.7 var(--mono,ui-monospace,Menlo,monospace);color:var(--indigo-light)}
+.tv-toc a:hover{color:var(--indigo-light)}
+.tv-pitch{padding:18px;border-radius:18px;border:1px solid color-mix(in srgb,var(--indigo) 35%,transparent);
+  background:linear-gradient(140deg,color-mix(in srgb,var(--indigo) 16%,transparent),transparent)}
+.tv-pitch img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.tv-pitch p{margin-top:10px;font-size:14px;line-height:1.55;color:var(--ink-soft)}
+.tv-pitch p b{color:var(--ink)}
+.tv-pitch a{margin-top:12px;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--indigo-light)}
+
+/* pastille du téléphone */
+.tv-pill{display:none}
+@media (max-width:1060px){
+  .tv-pill{position:fixed;left:50%;bottom:16px;z-index:50;transform:translate(-50%,0);
+    display:flex;align-items:center;gap:12px;padding:10px 10px 10px 18px;border-radius:100px;
+    background:color-mix(in oklab,var(--surface-tint) 92%,transparent);border:1px solid var(--border);
+    box-shadow:0 12px 32px rgba(0,0,0,.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    white-space:nowrap;transition:opacity .25s,transform .35s cubic-bezier(.16,1,.3,1)}
+  .tv-pill span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .tv-pill b{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--indigo-light);font-variant-numeric:tabular-nums}
+  .tv-pill em{font-style:normal;padding:8px 14px;border-radius:100px;background:var(--indigo);color:#fff;font-size:13px;font-weight:700}
+  .tv-pill.is-gone{opacity:0;pointer-events:none;transform:translate(-50%,24px)}
+
+  .tv-grid{grid-template-columns:1fr}
+  .tv-res{position:static}
+  .tv-guide{grid-template-columns:1fr}
+  .tv-side{position:static}
+}
+@media (max-width:600px){
+  .t-tva{padding:12px 0 72px}
+  .tv-wrap{padding:0 16px}
+  .tv-card{padding:18px 16px}
+  .tv-chips,.tv-chips-2{grid-template-columns:1fr}
+  .tv-amount{grid-template-columns:1fr}
+  .tv-money input{width:100%}
+  .tv-sums{grid-template-columns:1fr 1fr}
+  .tv-sums div:last-child{grid-column:1/-1}
+  .tv-guide{margin-top:52px}
+}
+
+/* ── mot d'impact : le dégradé signature de la DA (cf. shell.css),
+   sur les mots-clés des titres et sur le taux. Mêmes arrêts que les
+   autres pages : crème → braise en sombre, braise foncée → orange en clair. */
+.tv-head h1 em,.tv-art h2 em,.tv-big{
+  background:linear-gradient(100deg,#FFE7D4 0%,var(--indigo-light) 48%,var(--indigo) 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:daGradFlow 6s ease-in-out infinite}
+html[data-theme="light"] .tv-head h1 em,html[data-theme="light"] .tv-art h2 em,html[data-theme="light"] .tv-big{
+  background-image:linear-gradient(100deg,#8E3208 0%,var(--indigo) 50%,#F0873F 100%)}
+.tv-big small{-webkit-text-fill-color:var(--ink-soft);color:var(--ink-soft)}
+@media (prefers-reduced-motion:reduce){.tv-head h1 em,.tv-art h2 em,.tv-big{animation:none}}

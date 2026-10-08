@@ -1,0 +1,196 @@
+<!-- ═══ CALCULATEUR TVA BTP — l'outil, puis le guide qui l'explique ═══
+     Règles vérifiées le 08/10/2026 sur le CGI, le BOFiP du 09/09/2026,
+     impots.gouv (05/03/2026) et service-public (22/07/2026).
+     ⚠️  Au 01/01/2027, les articles 278-0 bis A et 279-0 bis du CGI
+     passent dans le CIBS (ordonnance n° 2025-1247) : mettre à jour les
+     références citées ici et dans tva.js à cette date. -->
+<section class="t-tva" id="top">
+<div class="tv-wrap">
+
+  <header class="tv-head">
+    <span class="tv-eyebrow"><i></i>Outil gratuit · Assistant facturation</span>
+    <h1>Quel taux de TVA sur vos travaux&nbsp;? <em>Réponse en 30&nbsp;secondes.</em></h1>
+    <p>Quatre questions, et l'assistant facturation de Talos vous donne le bon taux, le montant TTC et la mention à faire signer à votre client. Règles à jour de la loi de finances 2026.</p>
+    <ul class="tv-trust">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Vérifié sur les textes officiels le 8 octobre 2026</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Calcul dans votre navigateur</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Sans inscription</li>
+    </ul>
+  </header>
+
+  <div class="tv-grid">
+    <form class="tv-form" id="tvForm" onsubmit="return false" novalidate>
+
+      <fieldset class="tv-card">
+        <legend><span class="tv-n">1</span><span><b>Le local</b><em>Où ont lieu les travaux&nbsp;?</em></span></legend>
+        <div class="tv-chips">
+          <label><input type="radio" name="local" value="logement" checked><span>Un logement<small>Maison, appartement, garage, cave, terrasse</small></span></label>
+          <label><input type="radio" name="local" value="mixte"><span>Local mixte ou parties communes<small>Appartement avec cabinet, copropriété</small></span></label>
+          <label><input type="radio" name="local" value="pro-vers-logement"><span>Un local pro qui devient un logement<small>Bureau, boutique transformés en habitation</small></span></label>
+          <label><input type="radio" name="local" value="pro"><span>Un local professionnel<small>Bureau, commerce, hôtel, local agricole</small></span></label>
+        </div>
+        <div class="tv-chips tv-chips-2" id="tvMixte" hidden style="margin-top:10px">
+          <label><input type="radio" name="mixte50" value="oui" checked><span>Au moins 50 % d'habitation<small>Surface, hors dépendances</small></span></label>
+          <label><input type="radio" name="mixte50" value="non"><span>Moins de 50 % d'habitation<small>Le reste est professionnel</small></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="tv-card" id="tvAgeCard">
+        <legend><span class="tv-n">2</span><span><b>L'âge du bâtiment</b><em>À la date de début des travaux</em></span></legend>
+        <div class="tv-chips tv-chips-2">
+          <label><input type="radio" name="age" value="plus2" checked><span>Achevé depuis plus de 2 ans<small>Le cas de la plupart des rénovations</small></span></label>
+          <label><input type="radio" name="age" value="moins2"><span>Moins de 2 ans, ou construction neuve<small>Y compris un bâtiment en cours de construction</small></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="tv-card" id="tvTravCard">
+        <legend><span class="tv-n">3</span><span><b>Les travaux</b><em>Choisissez l'opération principale</em></span></legend>
+        <div class="tv-chips">
+          <label><input type="radio" name="trav" value="amelioration" checked><span>Rénovation, aménagement, entretien<small>Peinture, plomberie, électricité, salle de bain, cuisine intégrée</small></span></label>
+          <label><input type="radio" name="trav" value="energie"><span>Rénovation énergétique<small>Isolation, PAC air/eau, poêle à bois, chauffe-eau thermodynamique, VMC</small></span></label>
+          <label><input type="radio" name="trav" value="pac-air-air"><span>Climatisation ou PAC air/air<small>Mono-split, multi-split, gainable</small></span></label>
+          <label><input type="radio" name="trav" value="chaudiere-fossile"><span>Pose d'une chaudière gaz ou fioul<small>Y compris à condensation ou PAC hybride</small></span></label>
+          <label><input type="radio" name="trav" value="handicap"><span>Équipement pour personne handicapée<small>Monte-escalier, ascenseur spécialement conçu</small></span></label>
+          <label><input type="radio" name="trav" value="neuf"><span>Construction, extension, surélévation<small>Création d'un bâtiment ou ajout de surface</small></span></label>
+          <label><input type="radio" name="trav" value="jardin"><span>Espaces verts ou nettoyage<small>Jardin, élagage, nettoyage de fin de chantier</small></span></label>
+        </div>
+        <div class="tv-checks" id="tvPac" hidden style="margin-top:10px">
+          <label><input type="checkbox" name="pacOk"><span>L'appareil est une PAC air/air réversible fixe, classée A++ (mono-split) ou A+ (multi-split) jusqu'à 12 kW, avec un fluide conforme au règlement F-Gas et un pilotage à distance</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="tv-card" id="tvChkCard">
+        <legend><span class="tv-n">4</span><span><b>Les points qui changent tout</b><em>Cochez ce qui s'applique, sinon passez</em></span></legend>
+        <div class="tv-checks">
+          <label><input type="checkbox" name="surface"><span>Les travaux augmentent la surface de plancher de plus de 10 %</span></label>
+          <label><input type="checkbox" name="remiseNeuf"><span>Ils remettent à neuf la majorité des fondations, de la structure ou des façades</span></label>
+          <label><input type="checkbox" name="secondOeuvre"><span>Ils refont au moins les 2/3 de chacun des 6 éléments de second œuvre</span></label>
+          <label><input type="checkbox" name="electro"><span>Le devis inclut de l'électroménager ou du mobilier non intégré</span></label>
+          <label><input type="checkbox" name="clientAchete"><span>Le client achète lui-même une partie du matériel</span></label>
+          <label><input type="checkbox" name="soustraitance"><span>Vous intervenez en sous-traitance d'une autre entreprise</span></label>
+        </div>
+        <p class="tv-hint">Second œuvre : planchers non porteurs, huisseries extérieures, cloisons intérieures, plomberie et sanitaires, électricité, chauffage.</p>
+      </fieldset>
+
+      <fieldset class="tv-card">
+        <legend><span class="tv-n">5</span><span><b>Le montant</b><em>Facultatif, pour obtenir la TVA et le TTC</em></span></legend>
+        <div class="tv-amount">
+          <label for="tvHt">Montant des travaux hors taxes</label>
+          <div class="tv-money"><input id="tvHt" type="text" inputmode="decimal" autocomplete="off" value="5 000" aria-describedby="tvHtHint"></div>
+        </div>
+        <p class="tv-hint" id="tvHtHint">France métropolitaine hors Corse. En Guadeloupe, Martinique et à La Réunion, les taux sont de 2,1 % et 8,5 %.</p>
+      </fieldset>
+    </form>
+
+    <aside class="tv-res" id="tvRes" aria-live="polite">
+      <div class="tv-who">
+        <img src="perso/avatar-facturation.webp" alt="" width="42" height="42">
+        <span><b>Votre assistant facturation</b><small><i></i>Il a analysé votre cas</small></span>
+      </div>
+      <p class="tv-k">Taux à appliquer</p>
+      <p class="tv-big" id="tvRate">10 %</p>
+      <p class="tv-say" id="tvSay"></p>
+      <div class="tv-sums" id="tvSums">
+        <div><span>Hors taxes</span><b id="tvSHt">—</b></div>
+        <div class="is-tva"><span>TVA</span><b id="tvSTva">—</b></div>
+        <div><span>TTC</span><b id="tvSTtc">—</b></div>
+      </div>
+      <div class="tv-block" id="tvMentionBox">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h4"/></svg>La mention à faire figurer sur le devis</h3>
+        <p id="tvMentionWhy">Sans elle, le taux réduit tombe et c'est 20 % sur tout le chantier.</p>
+        <div class="tv-mention" id="tvMention"></div>
+        <button type="button" class="tv-copy" id="tvCopy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><span>Copier la mention</span></button>
+      </div>
+      <div class="tv-block tv-warn" id="tvWarnBox" hidden>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>À vérifier sur votre devis</h3>
+        <ul id="tvWarn"></ul>
+      </div>
+      <a class="tv-cta" href="assistant-facturation.html">Appliquer le bon taux sur chaque devis<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="tv-cta-sub">L'assistant facturation le fait pour vous, mention comprise. <a href="reserver.html">Voir une démo</a></p>
+    </aside>
+  </div>
+
+  <!-- téléphone : le résultat est sous les questions, la pastille le suit -->
+  <a class="tv-pill" id="tvPill" href="#tvRes"><span>Taux à appliquer</span><b id="tvPillRate">10 %</b><em>Voir le détail</em></a>
+
+  <!-- ═══ LE GUIDE — ce que lisent Google et les moteurs d'IA ═══ -->
+  <div class="tv-guide">
+    <article class="tv-art">
+
+      <h2 id="taux">Quel taux de TVA pour des travaux dans un logement&nbsp;?</h2>
+      <p class="tv-capsule">En France métropolitaine, les travaux dans un logement achevé depuis plus de 2 ans sont taxés à <strong>10 %</strong>. Ils passent à <strong>5,5 %</strong> pour la rénovation énergétique. Tout le reste est à <strong>20 %</strong> : construction neuve, logement de moins de 2 ans, local professionnel, chaudière gaz ou fioul.</p>
+      <div class="tv-table">
+        <table>
+          <thead><tr><th>Taux</th><th>Pour quels travaux</th><th>Conditions principales</th></tr></thead>
+          <tbody>
+            <tr><td>5,5 %</td><td>Rénovation énergétique : isolation, PAC air/eau, chauffe-eau thermodynamique, chauffage au bois, VMC, régulation. Équipements spécialement conçus pour les personnes handicapées.</td><td>Rénovation énergétique : logement achevé depuis plus de 2 ans, équipement listé à l'annexe IV du CGI avec ses seuils de performance. Handicap : matériel certifié conforme par le vendeur.</td></tr>
+            <tr><td>10 %</td><td>Amélioration, transformation, aménagement et entretien : peinture, plomberie, électricité, salle de bain, cuisine intégrée.</td><td>Logement achevé depuis plus de 2 ans. Pas de remise à neuf de l'immeuble. Surface de plancher augmentée de 10 % au plus.</td></tr>
+            <tr><td>20 %</td><td>Construction neuve, extension, surélévation, local professionnel, chaudière gaz ou fioul, climatisation, électroménager, espaces verts.</td><td>Taux normal : il s'applique dès qu'une condition des taux réduits manque.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="nouveautes">Ce qui a changé en <em>2025 et 2026</em></h2>
+      <ul>
+        <li><strong>Chaudières gaz et fioul à 20 % depuis le 1<sup>er</sup> mars 2025</strong>, y compris à condensation et en PAC hybride. Leur entretien reste à 10 %.</li>
+        <li><strong>Fin de l'attestation CERFA depuis 2025</strong> : le client certifie les conditions par une mention sur le devis ou sur la facture.</li>
+        <li><strong>PAC air/air à 5,5 % depuis juillet 2026</strong>, si l'appareil est réversible, classé A++ en mono-split ou A+ en multi-split jusqu'à 12 kW, avec un fluide conforme et un pilotage à distance.</li>
+        <li><strong>Doctrine fiscale refondue le 9 septembre 2026</strong> : le BOFiP du secteur a été réécrit, avec de nouveaux modèles de mention.</li>
+      </ul>
+
+      <h2 id="mention">Quelle mention faire signer au client&nbsp;?</h2>
+      <p class="tv-capsule">Pour appliquer 10 % ou 5,5 %, le client doit certifier sur le devis ou la facture que le logement a plus de 2 ans et que les travaux ne créent pas un immeuble neuf. Sans cette mention, tout le chantier repasse à 20 %.</p>
+      <p>L'administration publie des modèles. Vous pouvez les rédiger autrement, à condition de reprendre <strong>tous</strong> les éléments. Le calculateur ci-dessus vous donne le modèle adapté à votre taux, prêt à copier.</p>
+      <p>Pour un entretien ou une réparation de moins de 1 000 € TTC, la mention n'est pas exigée. La facture doit alors indiquer le nom et l'adresse du client, la nature des travaux et l'ancienneté de plus de 2 ans du logement.</p>
+
+      <h2 id="erreurs">Les 7 erreurs qui coûtent cher aux artisans</h2>
+      <ul>
+        <li><strong>Poser une chaudière gaz à condensation à 5,5 % ou 10 %</strong> : c'est 20 % depuis mars 2025, travaux annexes compris.</li>
+        <li><strong>Mettre la climatisation à 10 %</strong> : c'est 20 %, ou 5,5 % pour une PAC air/air qui remplit les critères de 2026.</li>
+        <li><strong>Oublier la mention du client</strong> : le taux réduit tombe sur l'ensemble des prestations.</li>
+        <li><strong>Facturer l'électroménager encastré à 10 %</strong> : four, plaque et réfrigérateur restent à 20 %, même posés.</li>
+        <li><strong>Appliquer 10 % dans un logement de moins de 2 ans</strong> : le délai court jusqu'au début des travaux.</li>
+        <li><strong>Facturer de la TVA en sous-traitance</strong> : le sous-traitant facture hors taxes, et l'entreprise principale autoliquide la TVA.</li>
+        <li><strong>Mélanger les taux sans les séparer</strong> : chaque part à 5,5 %, 10 % et 20 % doit apparaître à part sur le devis et la facture.</li>
+      </ul>
+
+      <h2 id="plusieurs-taux">Plusieurs taux sur le même devis&nbsp;: comment faire&nbsp;?</h2>
+      <p>Deux opérations indépendantes, par exemple une cuisine et l'isolation des combles, gardent chacune leur taux sur un même devis. Il suffit de les présenter sur des lignes distinctes.</p>
+      <p>Pour une opération unique, un élément accessoire suit le taux de l'élément principal. Exemple officiel : une chaudière gaz et la petite rénovation de son local passent ensemble à 20 %.</p>
+
+      <h2 id="faq">Questions fréquentes</h2>
+      <div class="tv-faq">
+        <details><summary>La TVA à 10 % s'applique-t-elle à une résidence secondaire&nbsp;?</summary><p>Oui. Résidence principale ou secondaire, occupée ou vacante, louée ou non : seul compte un logement achevé depuis plus de 2 ans.</p></details>
+        <details><summary>Quel taux pour le matériel acheté par le client&nbsp;?</summary><p>Le client paie 20 % sur ce qu'il achète lui-même. Vous ne facturez au taux réduit que la pose et les fournitures que vous achetez et facturez vous-même.</p></details>
+        <details><summary>Quel taux pour une pompe à chaleur&nbsp;?</summary><p>5,5 % pour une PAC air/eau ou géothermique qui respecte les seuils de performance. Pour une PAC air/air, 5,5 % depuis juillet 2026 si elle remplit les nouveaux critères, sinon 20 %.</p></details>
+        <details><summary>Le taux réduit s'applique-t-il dès l'acompte&nbsp;?</summary><p>Oui, à condition que la mention du client figure déjà sur le devis signé.</p></details>
+        <details><summary>Que risque le client s'il fait une fausse déclaration&nbsp;?</summary><p>S'il certifie des conditions inexactes, il devient solidairement redevable du complément de TVA. L'artisan reste seul responsable s'il applique le taux réduit à un équipement exclu.</p></details>
+        <details><summary>Quel taux pour des travaux dans un local professionnel transformé en logement&nbsp;?</summary><p>Le taux réduit est possible si le bâtiment a plus de 2 ans, s'il devient principalement un logement et si les travaux ne produisent pas un immeuble neuf. Dans le sens inverse, c'est toujours 20 %.</p></details>
+      </div>
+
+      <p class="tv-src">Sources : <a href="https://bofip.impots.gouv.fr/bofip/1642-PGP.html/identifiant=BOI-TVA-LIQ-30-20-90-10-20260909" rel="noopener" target="_blank">BOFiP, BOI-TVA-LIQ-30-20-90 (9 septembre 2026)</a> · <a href="https://bofip.impots.gouv.fr/bofip/14834-PGP.html/identifiant=BOI-LETTRE-000280-20260909" rel="noopener" target="_blank">modèles de mention, BOI-LETTRE-000280</a> · <a href="https://www.impots.gouv.fr/professionnel/questions/quel-taux-de-tva-appliquer-pour-les-travaux-realises-dans-les-logements" rel="noopener" target="_blank">impots.gouv.fr</a> · <a href="https://entreprendre.service-public.gouv.fr/actualites/A19002" rel="noopener" target="_blank">service-public, PAC air/air</a> · articles 278-0 bis A et 279-0 bis du CGI.</p>
+      <p class="tv-meta">Vérifié le <time datetime="2026-10-08">8 octobre 2026</time> par l'équipe Talos. Cet outil donne une information générale : en cas de doute sur un chantier, votre expert-comptable tranche.</p>
+    </article>
+
+    <aside class="tv-side">
+      <nav class="tv-toc" aria-label="Sommaire du guide">
+        <b>Dans ce guide</b>
+        <ol>
+          <li><a href="#taux">Les 3 taux de TVA</a></li>
+          <li><a href="#nouveautes">Les nouveautés 2025-2026</a></li>
+          <li><a href="#mention">La mention du client</a></li>
+          <li><a href="#erreurs">Les 7 erreurs à éviter</a></li>
+          <li><a href="#plusieurs-taux">Plusieurs taux sur un devis</a></li>
+          <li><a href="#faq">Questions fréquentes</a></li>
+        </ol>
+      </nav>
+      <div class="tv-pitch">
+        <img src="perso/avatar-facturation.webp" alt="" width="44" height="44">
+        <p><b>Plus jamais cette question.</b> L'assistant facturation applique le bon taux à chaque ligne, ajoute la mention et transforme le devis signé en facture.</p>
+        <a href="assistant-facturation.html">Découvrir l'assistant facturation →</a>
+      </div>
+    </aside>
+  </div>
+
+</div>
+</section>

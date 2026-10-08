@@ -1,0 +1,38 @@
+# Talos
+
+> Talos est un assistant IA qui prépare les devis, les factures et les relances des artisans et des entreprises du bâtiment. Talos s'adresse aux TPE du BTP en France. Chaque document est validé par l'artisan avant envoi.
+
+Éditeur : Altay Sakalli, entrepreneur individuel, SIREN 920 171 774. Contact : contact@talos-ai.tech.
+
+## Produit
+
+- [Logiciel devis et facture IA pour artisans du BTP](https://www.talos-ai.tech/): Talos prépare vos devis, relance vos clients et prépare vos factures pendant que vous êtes sur le chantier. +30 artisans du bâtiment accompagnés.
+- [Assistants IA pour artisans du BTP : les 5 offres](https://www.talos-ai.tech/offres.html): Cinq assistants IA qui gèrent devis, facturation, impayés, accueil client et mails pendant que vous êtes sur le chantier. Mise en place incluse.
+- [Comment fonctionne Talos, l'assistant IA des artisans](https://www.talos-ai.tech/comment-ca-marche.html): Rien à installer ni à apprendre : on configure Talos sur vos habitudes, il prépare devis, relances et factures. Vous validez, c'est tout.
+
+## Assistants
+
+- [Devis automatique artisan : assistant commercial IA](https://www.talos-ai.tech/assistant-commercial.html): Un devis préparé depuis un mail, un vocal ou une photo, signé en ligne avec l'acompte, puis relancé jusqu'à la réponse du client.
+- [Facturation automatique pour artisans du BTP](https://www.talos-ai.tech/assistant-facturation.html): Chaque devis signé devient une facture conforme : acompte, situations de travaux, TVA BTP, numérotation continue et archivage.
+- [Relance automatique des impayés pour artisans](https://www.talos-ai.tech/assistant-tresorerie.html): Talos repère les factures en retard, relance à J+7, J+15 et J+30, prépare pénalités et mise en demeure, et annonce ce qui va rentrer.
+- [Secrétariat IA 24 h/24 pour artisans du bâtiment](https://www.talos-ai.tech/assistant-client.html): L'assistante client répond à vos clients jour et nuit, qualifie les demandes, propose des créneaux compatibles avec vos trajets.
+- [Tri des mails et classement automatique pour artisans](https://www.talos-ai.tech/assistant-administratif.html): L'assistante administrative trie votre boîte mail en six catégories, remonte les urgences et classe chaque pièce au bon chantier.
+
+## Tarifs
+
+- Starter : 99 € par mois (1 assistant), 82 € par mois en engagement 12 mois
+- Business : 299 € par mois (3 assistants), 249 € par mois en engagement 12 mois
+- Évolution : 449 € par mois (5 assistants), 369 € par mois en engagement 12 mois
+
+TVA non applicable. Détail : https://www.talos-ai.tech/tarifs.html
+
+## Outils gratuits
+
+- [Calculateur TVA travaux 2026 : 5,5 %, 10 % ou 20 %](https://www.talos-ai.tech/calculateur-tva-btp.html): Quel taux de TVA pour vos travaux ? Répondez à 4 questions : taux, montant TTC et mention à faire signer au client. Règles de la loi de finances 2026.
+
+## Entreprise
+
+- [À propos de Talos : l'IA née dans une famille d'artisans](https://www.talos-ai.tech/pourquoi-talos.html): Talos est né autour d'une table familiale d'artisans du BTP, pour leur rendre le temps perdu dans l'administratif. Notre histoire, nos engagements.
+- [Blog Talos : devis, factures et relances pour le BTP](https://www.talos-ai.tech/blog.html): Guides concrets, cas de chantier et méthodes d'automatisation pour les entreprises du bâtiment : devis, relances, facturation électronique 2026, trésorerie.
+- [Démo Talos : 30 minutes sur vos vrais devis et factures](https://www.talos-ai.tech/reserver.html): Une démo pratique pour votre entreprise : un commercial vous montre la valeur de Talos sur vos devis, vos factures et vos relances. 30 minutes, sans engagement.
+- [Mentions légales](https://www.talos-ai.tech/mentions-legales.html)
