@@ -1,0 +1,14 @@
+{
+ "name": "Talos",
+ "url": "https://www.talos-ai.tech/",
+ "description": "Talos est une équipe d'agents IA qui prépare les devis, les factures, les relances et les rendez-vous des artisans et des entreprises du bâtiment.",
+ "language": "fr-FR",
+ "audience": "Artisans et TPE du bâtiment en France",
+ "category": "Agents IA pour artisans du BTP",
+ "human_validation": "Chaque document est validé par l'artisan avant envoi.",
+ "data_location": "France",
+ "contact": "contact@talos-ai.tech",
+ "pricing_url": "https://www.talos-ai.tech/tarifs.html",
+ "llms": "https://www.talos-ai.tech/llms.txt",
+ "llms_full": "https://www.talos-ai.tech/llms-full.txt"
+}

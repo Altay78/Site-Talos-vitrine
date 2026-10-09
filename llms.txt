@@ -1,30 +1,53 @@
 # Talos
 
-> Talos est un assistant IA qui prépare les devis, les factures et les relances des artisans et des entreprises du bâtiment. Talos s'adresse aux TPE du BTP en France. Chaque document est validé par l'artisan avant envoi.
+> Talos est une équipe d'agents IA qui prépare les devis, les factures, les relances et les rendez-vous des artisans et des entreprises du bâtiment. Talos s'adresse aux TPE du BTP en France. Chaque document est validé par l'artisan avant envoi.
 
 Éditeur : Altay Sakalli, entrepreneur individuel, SIREN 920 171 774. Contact : contact@talos-ai.tech.
 
 ## Produit
 
-- [Logiciel devis et facture IA pour artisans du BTP](https://www.talos-ai.tech/): Talos prépare vos devis, relance vos clients et prépare vos factures pendant que vous êtes sur le chantier. +30 artisans du bâtiment accompagnés.
-- [Assistants IA pour artisans du BTP : les 5 offres](https://www.talos-ai.tech/offres.html): Cinq assistants IA qui gèrent devis, facturation, impayés, accueil client et mails pendant que vous êtes sur le chantier. Mise en place incluse.
-- [Comment fonctionne Talos, l'assistant IA des artisans](https://www.talos-ai.tech/comment-ca-marche.html): Rien à installer ni à apprendre : on configure Talos sur vos habitudes, il prépare devis, relances et factures. Vous validez, c'est tout.
+- [Agents IA pour artisans du BTP : devis et factures](https://www.talos-ai.tech/): Des agents IA pour artisans du BTP : devis, factures, relances et rendez-vous préparés pendant le chantier. Vous validez. +30 artisans accompagnés.
+- [5 agents IA pour artisans du BTP : devis, factures, impayés](https://www.talos-ai.tech/offres.html): Cinq agents IA spécialisés pour artisans : devis, facturation, impayés, accueil client et tri des mails. Prenez ceux qu'il vous faut. Mise en place incluse.
+- [Comment fonctionnent les agents IA Talos pour artisans](https://www.talos-ai.tech/comment-ca-marche.html): Rien à installer ni à apprendre : on configure vos agents IA sur vos habitudes, ils préparent devis, relances et factures. Vous validez, c'est tout.
 
-## Assistants
+## Agents IA
 
-- [Devis automatique artisan : assistant commercial IA](https://www.talos-ai.tech/assistant-commercial.html): Un devis préparé depuis un mail, un vocal ou une photo, signé en ligne avec l'acompte, puis relancé jusqu'à la réponse du client.
-- [Facturation automatique pour artisans du BTP](https://www.talos-ai.tech/assistant-facturation.html): Chaque devis signé devient une facture conforme : acompte, situations de travaux, TVA BTP, numérotation continue et archivage.
-- [Relance automatique des impayés pour artisans](https://www.talos-ai.tech/assistant-tresorerie.html): Talos repère les factures en retard, relance à J+7, J+15 et J+30, prépare pénalités et mise en demeure, et annonce ce qui va rentrer.
-- [Secrétariat IA 24 h/24 pour artisans du bâtiment](https://www.talos-ai.tech/assistant-client.html): L'assistante client répond à vos clients jour et nuit, qualifie les demandes, propose des créneaux compatibles avec vos trajets.
-- [Tri des mails et classement automatique pour artisans](https://www.talos-ai.tech/assistant-administratif.html): L'assistante administrative trie votre boîte mail en six catégories, remonte les urgences et classe chaque pièce au bon chantier.
+- [Agent IA devis pour artisans : devis auto et relances](https://www.talos-ai.tech/assistant-commercial.html): L'agent IA commercial prépare un devis depuis un mail, un vocal ou une photo, le fait signer en ligne avec l'acompte, puis le relance jusqu'à la réponse.
+- [Agent IA facturation BTP : acomptes, situations, TVA](https://www.talos-ai.tech/assistant-facturation.html): L'agent IA facturation transforme chaque devis signé en facture conforme : acompte, situations de travaux, TVA BTP, numérotation continue et archivage.
+- [Agent IA relance des impayés pour artisans du BTP](https://www.talos-ai.tech/assistant-tresorerie.html): L'agent IA trésorerie repère les factures en retard, relance à J+7, J+15 et J+30, prépare pénalités et mise en demeure, et annonce ce qui va rentrer.
+- [Agent IA secrétariat pour artisans : réponses et RDV 24h/24](https://www.talos-ai.tech/assistant-client.html): L'agent IA client répond à vos clients jour et nuit, qualifie les demandes et propose des créneaux compatibles avec vos trajets. Vous gardez la main.
+- [Agent IA administratif pour artisans : tri des mails](https://www.talos-ai.tech/assistant-administratif.html): L'agent IA administratif trie votre boîte mail en six catégories, remonte les urgences et classe chaque pièce au bon chantier.
 
 ## Tarifs
 
-- Starter : 99 € par mois (1 assistant), 82 € par mois en engagement 12 mois
-- Business : 299 € par mois (3 assistants), 249 € par mois en engagement 12 mois
-- Évolution : 449 € par mois (5 assistants), 369 € par mois en engagement 12 mois
+- Starter : 99 € par mois (1 agent IA), 82 € par mois en engagement 12 mois
+- Business : 299 € par mois (3 agents IA), 249 € par mois en engagement 12 mois
+- Évolution : 449 € par mois (5 agents IA), 369 € par mois en engagement 12 mois
 
 TVA non applicable. Détail : https://www.talos-ai.tech/tarifs.html
+
+## Questions fréquentes
+
+**C’est quoi, un agent IA pour artisan ?**
+Un agent IA est un logiciel qui mène une tâche de bout en bout à votre place : il lit la demande, prépare le devis, la facture ou la relance, puis vous le soumet. Chez Talos, chaque agent a un métier (devis, factures, impayés, clients, mails) et rien ne part sans votre validation.
+
+**Et si l'IA se trompe sur un prix ou une TVA ?**
+Vous gardez un contrôle total. Talos utilise strictement votre propre grille tarifaire et les taux légaux de TVA BTP. Aucun devis ou facture ne part sans votre validation sur votre téléphone.
+
+**Je ne suis pas calé en informatique, est-ce dur à utiliser ?**
+Aucune formation requise. Si vous savez envoyer un vocal sur WhatsApp, vous savez utiliser Talos. Vous parlez à l'IA comme à un associé, elle s'occupe du reste.
+
+**Est-ce conforme à la loi sur la facture électronique (Factur-X) ?**
+Les factures intègrent les mentions obligatoires du bâtiment, la TVA travaux, les acomptes et les situations, avec une numérotation sans trou. Le format électronique Factur-X sera prêt avant l'obligation d'émission des TPE (septembre 2027) ; d'ici là, vos factures PDF restent valables.
+
+**Mes clients vont-ils savoir que c'est une IA qui répond ?**
+Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise. Dès qu'un échange demande une visite terrain, l'IA vous passe la main.
+
+**Mes tarifs et données clients sont-ils en sécurité ?**
+Vos données restent confidentielles et stockées en France. Elles sont votre propriété exclusive et ne servent jamais à entraîner des modèles publics.
+
+**Est-ce que cela remplace mon comptable ou mon Excel ?**
+Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire actuelle et exporter vos fichiers pour votre comptable en 1 clic.
 
 ## Outils gratuits
 
@@ -32,7 +55,7 @@ TVA non applicable. Détail : https://www.talos-ai.tech/tarifs.html
 
 ## Entreprise
 
-- [À propos de Talos : l'IA née dans une famille d'artisans](https://www.talos-ai.tech/pourquoi-talos.html): Talos est né autour d'une table familiale d'artisans du BTP, pour leur rendre le temps perdu dans l'administratif. Notre histoire, nos engagements.
+- [À propos de Talos : des agents IA nés chez des artisans](https://www.talos-ai.tech/pourquoi-talos.html): Talos est né autour d'une table familiale d'artisans du BTP, pour leur rendre le temps perdu dans l'administratif. Notre histoire, nos engagements.
 - [Blog Talos : devis, factures et relances pour le BTP](https://www.talos-ai.tech/blog.html): Guides concrets, cas de chantier et méthodes d'automatisation pour les entreprises du bâtiment : devis, relances, facturation électronique 2026, trésorerie.
-- [Démo Talos : 30 minutes sur vos vrais devis et factures](https://www.talos-ai.tech/reserver.html): Une démo pratique pour votre entreprise : un commercial vous montre la valeur de Talos sur vos devis, vos factures et vos relances. 30 minutes, sans engagement.
+- [Démo Talos : vos agents IA testés sur vos vrais devis](https://www.talos-ai.tech/reserver.html): Une démo pratique pour votre entreprise : un commercial vous montre la valeur de Talos sur vos devis, vos factures et vos relances. 30 minutes, sans engagement.
 - [Mentions légales](https://www.talos-ai.tech/mentions-legales.html)

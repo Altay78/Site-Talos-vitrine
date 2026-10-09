@@ -24,8 +24,8 @@ SITE = u'https://www.talos-ai.tech/'
 # La même phrase partout : c'est elle que les moteurs et les IA doivent
 # associer au nom « Talos », qui désigne aussi d'autres choses (Cisco
 # Talos, des projets de recherche…).
-ENTITE = (u"Talos est un assistant IA qui prépare les devis, les factures "
-          u"et les relances des artisans et des entreprises du bâtiment.")
+ENTITE = (u"Talos est une équipe d'agents IA qui prépare les devis, les factures, "
+          u"les relances et les rendez-vous des artisans et des entreprises du bâtiment.")
 
 ORG_ID = SITE + u'#organisation'
 SITE_ID = SITE + u'#site'
@@ -35,52 +35,52 @@ APP_ID = SITE + u'#logiciel'
 # None = garder ce que la page porte déjà.
 PAGES = [
     ('index.html',
-     u"Logiciel devis et facture IA pour artisans du BTP | Talos",
-     u"Talos prépare vos devis, relance vos clients et prépare vos factures "
-     u"pendant que vous êtes sur le chantier. +30 artisans du bâtiment accompagnés."),
+     u"Agents IA pour artisans du BTP : devis et factures | Talos",
+     u"Des agents IA pour artisans du BTP : devis, factures, relances et rendez-vous "
+     u"préparés pendant le chantier. Vous validez. +30 artisans accompagnés."),
     ('offres.html',
-     u"Assistants IA pour artisans du BTP : les 5 offres | Talos",
-     u"Cinq assistants IA qui gèrent devis, facturation, impayés, accueil "
-     u"client et mails pendant que vous êtes sur le chantier. Mise en place incluse."),
+     u"5 agents IA pour artisans du BTP : devis, factures, impayés",
+     u"Cinq agents IA spécialisés pour artisans : devis, facturation, impayés, accueil "
+     u"client et tri des mails. Prenez ceux qu'il vous faut. Mise en place incluse."),
     ('assistant-commercial.html',
-     u"Devis automatique artisan : assistant commercial IA | Talos",
-     u"Un devis préparé depuis un mail, un vocal ou une photo, signé en ligne "
-     u"avec l'acompte, puis relancé jusqu'à la réponse du client."),
+     u"Agent IA devis pour artisans : devis auto et relances | Talos",
+     u"L'agent IA commercial prépare un devis depuis un mail, un vocal ou une photo, "
+     u"le fait signer en ligne avec l'acompte, puis le relance jusqu'à la réponse."),
     ('assistant-facturation.html',
-     u"Facturation automatique pour artisans du BTP | Talos",
-     u"Chaque devis signé devient une facture conforme : acompte, situations "
-     u"de travaux, TVA BTP, numérotation continue et archivage."),
+     u"Agent IA facturation BTP : acomptes, situations, TVA | Talos",
+     u"L'agent IA facturation transforme chaque devis signé en facture conforme : "
+     u"acompte, situations de travaux, TVA BTP, numérotation continue et archivage."),
     ('assistant-tresorerie.html',
-     u"Relance automatique des impayés pour artisans | Talos",
-     u"Talos repère les factures en retard, relance à J+7, J+15 et J+30, "
+     u"Agent IA relance des impayés pour artisans du BTP | Talos",
+     u"L'agent IA trésorerie repère les factures en retard, relance à J+7, J+15 et J+30, "
      u"prépare pénalités et mise en demeure, et annonce ce qui va rentrer."),
     ('assistant-client.html',
-     u"Secrétariat IA 24 h/24 pour artisans du bâtiment | Talos",
-     u"L'assistante client répond à vos clients jour et nuit, qualifie les "
-     u"demandes, propose des créneaux compatibles avec vos trajets."),
+     u"Agent IA secrétariat pour artisans : réponses et RDV 24h/24",
+     u"L'agent IA client répond à vos clients jour et nuit, qualifie les demandes "
+     u"et propose des créneaux compatibles avec vos trajets. Vous gardez la main."),
     ('assistant-administratif.html',
-     u"Tri des mails et classement automatique pour artisans | Talos",
-     u"L'assistante administrative trie votre boîte mail en six catégories, "
+     u"Agent IA administratif pour artisans : tri des mails | Talos",
+     u"L'agent IA administratif trie votre boîte mail en six catégories, "
      u"remonte les urgences et classe chaque pièce au bon chantier."),
     ('tarifs.html',
-     u"Tarifs : logiciel devis et facture dès 99 €/mois | Talos",
+     u"Tarifs des agents IA pour artisans du BTP dès 99 €/mois",
      None),  # composée plus bas depuis panier.js
     ('comment-ca-marche.html',
-     u"Comment fonctionne Talos, l'assistant IA des artisans",
-     u"Rien à installer ni à apprendre : on configure Talos sur vos habitudes, "
-     u"il prépare devis, relances et factures. Vous validez, c'est tout."),
+     u"Comment fonctionnent les agents IA Talos pour artisans",
+     u"Rien à installer ni à apprendre : on configure vos agents IA sur vos habitudes, "
+     u"ils préparent devis, relances et factures. Vous validez, c'est tout."),
     ('simulateur.html',
-     u"Simulateur de gains : temps et chiffre récupérés | Talos",
+     u"Simulateur : ce que des agents IA rapportent à un artisan",
      None),
     ('pourquoi-talos.html',
-     u"À propos de Talos : l'IA née dans une famille d'artisans",
+     u"À propos de Talos : des agents IA nés chez des artisans",
      u"Talos est né autour d'une table familiale d'artisans du BTP, pour leur "
      u"rendre le temps perdu dans l'administratif. Notre histoire, nos engagements."),
     ('blog.html',
      u"Blog Talos : devis, factures et relances pour le BTP",
      None),
     ('reserver.html',
-     u"Démo Talos : 30 minutes sur vos vrais devis et factures",
+     u"Démo Talos : vos agents IA testés sur vos vrais devis",
      None),
     ('calculateur-tva-btp.html', None, None),  # titre posé par outils.py
     ('commander.html', None, None),
@@ -91,11 +91,11 @@ PAGES = [
 ]
 
 ASSISTANTS = {
-    'assistant-commercial.html': u"Assistant commercial",
-    'assistant-facturation.html': u"Assistant facturation",
-    'assistant-tresorerie.html': u"Assistante trésorerie",
-    'assistant-client.html': u"Assistante client",
-    'assistant-administratif.html': u"Assistante administrative",
+    'assistant-commercial.html': u"Agent IA commercial",
+    'assistant-facturation.html': u"Agent IA facturation",
+    'assistant-tresorerie.html': u"Agent IA trésorerie",
+    'assistant-client.html': u"Agent IA client",
+    'assistant-administratif.html': u"Agent IA administratif",
 }
 
 
@@ -193,7 +193,7 @@ def logiciel(grille):
         "name": "Talos",
         "description": ENTITE,
         "applicationCategory": "BusinessApplication",
-        "applicationSubCategory": "Logiciel de devis et de facturation pour artisans",
+        "applicationSubCategory": "Agents IA pour artisans du BTP : devis, facturation, relances",
         "operatingSystem": "Web",
         "url": SITE,
         "publisher": {"@id": ORG_ID},
@@ -208,7 +208,7 @@ def logiciel(grille):
         "offers": [{"@type": "Offer", "name": p['nom'], "price": str(p['m']),
                     "priceCurrency": "EUR", "url": SITE + "tarifs.html",
                     "category": "abonnement mensuel",
-                    "description": "%d assistant%s, abonnement mensuel"
+                    "description": "%d agent%s IA, abonnement mensuel"
                                    % (p['max'], 's' if p['max'] > 1 else '')}
                    for p in grille],
     }
@@ -341,7 +341,7 @@ def llms(grille):
         m = re.search(r'<meta name="description" content="([^"]*)">', s)
         return u'- [%s](%s): %s' % (t, url(f), html.unescape(m.group(1)) if m else u'')
 
-    prix = u'\n'.join(u'- %s : %d € par mois (%d assistant%s), %d € par mois en engagement 12 mois'
+    prix = u'\n'.join(u'- %s : %d € par mois (%d agent%s IA), %d € par mois en engagement 12 mois'
                       % (p['nom'], p['m'], p['max'], 's' if p['max'] > 1 else '', p['y'])
                       for p in grille)
     txt = u"""# Talos
@@ -354,7 +354,7 @@ def llms(grille):
 
 %s
 
-## Assistants
+## Agents IA
 
 %s
 
@@ -363,6 +363,10 @@ def llms(grille):
 %s
 
 TVA non applicable. Détail : %starifs.html
+
+## Questions fréquentes
+
+%s
 
 ## Outils gratuits
 
@@ -376,10 +380,111 @@ TVA non applicable. Détail : %starifs.html
        u'\n'.join(ligne(f) for f in ('index.html', 'offres.html', 'comment-ca-marche.html')),
        u'\n'.join(ligne(f) for f in ASSISTANTS),
        prix, SITE,
+       u'\n\n'.join(u'**%s**\n%s' % (q, r) for q, r in faq()),
        ligne('calculateur-tva-btp.html'),
        u'\n'.join(ligne(f) for f in ('pourquoi-talos.html', 'blog.html', 'reserver.html')),
        SITE)
     ecrire('llms.txt', txt)
+
+
+# ── robots.txt : les robots qui citent leurs sources, nommés un par un ──
+# « User-agent: * » les autorise déjà ; les nommer lève l'ambiguïté pour
+# les outils d'audit et pour les robots qui cherchent leur propre groupe.
+# Un robot qui trouve son groupe ignore « * » : les Disallow sont répétés.
+ROBOTS_CITATION = ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User',
+                   'PerplexityBot', 'Perplexity-User', 'Googlebot', 'Applebot', 'Bingbot']
+INTERDITS = ['/merci.html', '/404.html', '/espace-client.html']
+
+
+def robots():
+    regles = u'Allow: /\n' + u''.join(u'Disallow: %s\n' % d for d in INTERDITS)
+    ecrire('robots.txt', u"""# Talos — site vitrine
+# généré par _build/seo.py
+#
+# Disallow : pages sans intérêt pour un moteur — confirmation de commande,
+# page d'erreur, et l'espace client qui part vers l'application
+
+# moteurs et assistants IA qui citent leurs sources
+%s%s
+# tous les autres
+User-agent: *
+%s
+Sitemap: %ssitemap.xml
+""" % (u''.join(u'User-agent: %s\n' % b for b in ROBOTS_CITATION), regles, regles, SITE))
+
+
+# ── llms-full.txt : le texte lisible des pages clés, sans la mise en page ──
+PAGES_FULL = ['index.html', 'offres.html', 'assistant-commercial.html',
+              'assistant-facturation.html', 'assistant-tresorerie.html',
+              'assistant-client.html', 'assistant-administratif.html',
+              'comment-ca-marche.html', 'tarifs.html', 'pourquoi-talos.html']
+
+
+def texte(f):
+    s = lire(f)
+    s = re.sub(r'<(script|style|svg|noscript|template|dialog)\b.*?</\1>', ' ', s, flags=re.S | re.I)
+    s = re.sub(r'<(header|footer|nav)\b.*?</\1>', ' ', s, flags=re.S | re.I)
+    s = re.sub(r'<!--.*?-->', ' ', s, flags=re.S)
+    s = re.sub(r'<(br|/p|/h[1-6]|/li|/tr|/summary|/details|/blockquote|/figcaption)\b[^>]*>', '\n', s, flags=re.I)
+    s = re.sub(r'<h([1-3])\b[^>]*>', lambda m: '\n' + '#' * (int(m.group(1)) + 1) + ' ', s)
+    s = re.sub(r'<[^>]+>', ' ', s)
+    lignes, vu = [], set()
+    for l in html.unescape(s).split('\n'):
+        l = re.sub(r'\s+', ' ', l).strip()
+        if len(l) > 2 and l not in vu:
+            vu.add(l)
+            lignes.append(l)
+    return u'\n'.join(lignes)
+
+
+def llms_full():
+    corps = lire('llms.txt').rstrip() + u'\n'
+    for f in PAGES_FULL:
+        t = html.unescape(re.search(r'<title>([^<]*)</title>', lire(f)).group(1))
+        corps += u'\n---\n\n# %s\n\nSource : %s\n\n%s\n' % (t, url(f), texte(f))
+    ecrire('llms-full.txt', corps)
+
+
+# ── /ai/ et /.well-known/ai.txt : les mêmes faits, en format machine ──────
+# Standard émergent (geo-checklist.dev) : effet non démontré, coût nul,
+# et rien n'y est écrit qui ne soit déjà sur les pages.
+def decouverte_ia(grille):
+    os.makedirs(WEB + 'ai', exist_ok=True)
+    os.makedirs(WEB + '.well-known', exist_ok=True)
+    j = lambda o: json.dumps(o, ensure_ascii=False, indent=1) + u'\n'
+    ecrire('ai/summary.json', j({
+        "name": "Talos", "url": SITE, "description": ENTITE, "language": "fr-FR",
+        "audience": "Artisans et TPE du bâtiment en France",
+        "category": "Agents IA pour artisans du BTP",
+        "human_validation": "Chaque document est validé par l'artisan avant envoi.",
+        "data_location": "France", "contact": "contact@talos-ai.tech",
+        "pricing_url": SITE + "tarifs.html", "llms": SITE + "llms.txt",
+        "llms_full": SITE + "llms-full.txt"}))
+    ecrire('ai/faq.json', j({"faqs": [{"question": q, "answer": r} for q, r in faq()]}))
+    ecrire('ai/service.json', j({
+        "name": "Talos — agents IA pour artisans du BTP", "url": SITE, "provider": "Talos",
+        "capabilities": [{"name": ASSISTANTS[f], "url": url(f),
+                          "description": html.unescape(re.search(
+                              r'<meta name="description" content="([^"]*)">', lire(f)).group(1))}
+                         for f in ASSISTANTS],
+        "offers": [{"name": p['nom'], "agents": p['max'], "price_eur_month": p['m'],
+                    "price_eur_month_12_months": p['y']} for p in grille],
+        "area_served": "FR"}))
+    ecrire('.well-known/ai.txt', u"""# Talos — %s
+# %s
+
+Site: %s
+Summary: %sai/summary.json
+FAQ: %sai/faq.json
+Service: %sai/service.json
+LLMs: %sllms.txt
+LLMs-Full: %sllms-full.txt
+Contact: contact@talos-ai.tech
+
+# Les contenus publics du site peuvent être lus, résumés et cités avec un lien vers la source.
+Allow: /
+Disallow: /merci.html
+""" % (u"agents IA pour artisans du BTP", ENTITE, SITE, SITE, SITE, SITE, SITE, SITE))
 
 
 if __name__ == '__main__':
@@ -387,11 +492,14 @@ if __name__ == '__main__':
     # la remise affichée par le site, pas un arrondi recalculé ici
     remise = int(re.search(r"k: 'y'[^}]*?off: (\d+)", lire('panier.js')).group(1))
     desc_tarifs = (u"%s par mois. Jusqu'à −%d %% en vous engageant 12 mois. "
-                   u"Comparez les formules du logiciel devis et facture Talos."
+                   u"Comparez les formules des agents IA Talos pour artisans."
                    % (u', '.join(u'%s %d €' % (p['nom'], p['m']) for p in grille), remise))
     PAGES = [(f, t, desc_tarifs if f == 'tarifs.html' else d) for f, t, d in PAGES]
     for f, t, d in PAGES:
         print(u'%-28s %s' % (f, traiter(f, t, d, grille)))
     sitemap()
     llms(grille)
-    print(u'sitemap.xml et llms.txt écrits')
+    llms_full()
+    robots()
+    decouverte_ia(grille)
+    print(u'sitemap.xml, robots.txt, llms.txt, llms-full.txt, ai/ et .well-known/ai.txt écrits')

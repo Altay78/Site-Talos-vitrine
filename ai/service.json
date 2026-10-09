@@ -1,0 +1,53 @@
+{
+ "name": "Talos — agents IA pour artisans du BTP",
+ "url": "https://www.talos-ai.tech/",
+ "provider": "Talos",
+ "capabilities": [
+  {
+   "name": "Agent IA commercial",
+   "url": "https://www.talos-ai.tech/assistant-commercial.html",
+   "description": "L'agent IA commercial prépare un devis depuis un mail, un vocal ou une photo, le fait signer en ligne avec l'acompte, puis le relance jusqu'à la réponse."
+  },
+  {
+   "name": "Agent IA facturation",
+   "url": "https://www.talos-ai.tech/assistant-facturation.html",
+   "description": "L'agent IA facturation transforme chaque devis signé en facture conforme : acompte, situations de travaux, TVA BTP, numérotation continue et archivage."
+  },
+  {
+   "name": "Agent IA trésorerie",
+   "url": "https://www.talos-ai.tech/assistant-tresorerie.html",
+   "description": "L'agent IA trésorerie repère les factures en retard, relance à J+7, J+15 et J+30, prépare pénalités et mise en demeure, et annonce ce qui va rentrer."
+  },
+  {
+   "name": "Agent IA client",
+   "url": "https://www.talos-ai.tech/assistant-client.html",
+   "description": "L'agent IA client répond à vos clients jour et nuit, qualifie les demandes et propose des créneaux compatibles avec vos trajets. Vous gardez la main."
+  },
+  {
+   "name": "Agent IA administratif",
+   "url": "https://www.talos-ai.tech/assistant-administratif.html",
+   "description": "L'agent IA administratif trie votre boîte mail en six catégories, remonte les urgences et classe chaque pièce au bon chantier."
+  }
+ ],
+ "offers": [
+  {
+   "name": "Starter",
+   "agents": 1,
+   "price_eur_month": 99,
+   "price_eur_month_12_months": 82
+  },
+  {
+   "name": "Business",
+   "agents": 3,
+   "price_eur_month": 299,
+   "price_eur_month_12_months": 249
+  },
+  {
+   "name": "Évolution",
+   "agents": 5,
+   "price_eur_month": 449,
+   "price_eur_month_12_months": 369
+  }
+ ],
+ "area_served": "FR"
+}

@@ -1,0 +1,1293 @@
+# Talos
+
+> Talos est une équipe d'agents IA qui prépare les devis, les factures, les relances et les rendez-vous des artisans et des entreprises du bâtiment. Talos s'adresse aux TPE du BTP en France. Chaque document est validé par l'artisan avant envoi.
+
+Éditeur : Altay Sakalli, entrepreneur individuel, SIREN 920 171 774. Contact : contact@talos-ai.tech.
+
+## Produit
+
+- [Agents IA pour artisans du BTP : devis et factures](https://www.talos-ai.tech/): Des agents IA pour artisans du BTP : devis, factures, relances et rendez-vous préparés pendant le chantier. Vous validez. +30 artisans accompagnés.
+- [5 agents IA pour artisans du BTP : devis, factures, impayés](https://www.talos-ai.tech/offres.html): Cinq agents IA spécialisés pour artisans : devis, facturation, impayés, accueil client et tri des mails. Prenez ceux qu'il vous faut. Mise en place incluse.
+- [Comment fonctionnent les agents IA Talos pour artisans](https://www.talos-ai.tech/comment-ca-marche.html): Rien à installer ni à apprendre : on configure vos agents IA sur vos habitudes, ils préparent devis, relances et factures. Vous validez, c'est tout.
+
+## Agents IA
+
+- [Agent IA devis pour artisans : devis auto et relances](https://www.talos-ai.tech/assistant-commercial.html): L'agent IA commercial prépare un devis depuis un mail, un vocal ou une photo, le fait signer en ligne avec l'acompte, puis le relance jusqu'à la réponse.
+- [Agent IA facturation BTP : acomptes, situations, TVA](https://www.talos-ai.tech/assistant-facturation.html): L'agent IA facturation transforme chaque devis signé en facture conforme : acompte, situations de travaux, TVA BTP, numérotation continue et archivage.
+- [Agent IA relance des impayés pour artisans du BTP](https://www.talos-ai.tech/assistant-tresorerie.html): L'agent IA trésorerie repère les factures en retard, relance à J+7, J+15 et J+30, prépare pénalités et mise en demeure, et annonce ce qui va rentrer.
+- [Agent IA secrétariat pour artisans : réponses et RDV 24h/24](https://www.talos-ai.tech/assistant-client.html): L'agent IA client répond à vos clients jour et nuit, qualifie les demandes et propose des créneaux compatibles avec vos trajets. Vous gardez la main.
+- [Agent IA administratif pour artisans : tri des mails](https://www.talos-ai.tech/assistant-administratif.html): L'agent IA administratif trie votre boîte mail en six catégories, remonte les urgences et classe chaque pièce au bon chantier.
+
+## Tarifs
+
+- Starter : 99 € par mois (1 agent IA), 82 € par mois en engagement 12 mois
+- Business : 299 € par mois (3 agents IA), 249 € par mois en engagement 12 mois
+- Évolution : 449 € par mois (5 agents IA), 369 € par mois en engagement 12 mois
+
+TVA non applicable. Détail : https://www.talos-ai.tech/tarifs.html
+
+## Questions fréquentes
+
+**C’est quoi, un agent IA pour artisan ?**
+Un agent IA est un logiciel qui mène une tâche de bout en bout à votre place : il lit la demande, prépare le devis, la facture ou la relance, puis vous le soumet. Chez Talos, chaque agent a un métier (devis, factures, impayés, clients, mails) et rien ne part sans votre validation.
+
+**Et si l'IA se trompe sur un prix ou une TVA ?**
+Vous gardez un contrôle total. Talos utilise strictement votre propre grille tarifaire et les taux légaux de TVA BTP. Aucun devis ou facture ne part sans votre validation sur votre téléphone.
+
+**Je ne suis pas calé en informatique, est-ce dur à utiliser ?**
+Aucune formation requise. Si vous savez envoyer un vocal sur WhatsApp, vous savez utiliser Talos. Vous parlez à l'IA comme à un associé, elle s'occupe du reste.
+
+**Est-ce conforme à la loi sur la facture électronique (Factur-X) ?**
+Les factures intègrent les mentions obligatoires du bâtiment, la TVA travaux, les acomptes et les situations, avec une numérotation sans trou. Le format électronique Factur-X sera prêt avant l'obligation d'émission des TPE (septembre 2027) ; d'ici là, vos factures PDF restent valables.
+
+**Mes clients vont-ils savoir que c'est une IA qui répond ?**
+Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise. Dès qu'un échange demande une visite terrain, l'IA vous passe la main.
+
+**Mes tarifs et données clients sont-ils en sécurité ?**
+Vos données restent confidentielles et stockées en France. Elles sont votre propriété exclusive et ne servent jamais à entraîner des modèles publics.
+
+**Est-ce que cela remplace mon comptable ou mon Excel ?**
+Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire actuelle et exporter vos fichiers pour votre comptable en 1 clic.
+
+## Outils gratuits
+
+- [Calculateur TVA travaux 2026 : 5,5 %, 10 % ou 20 %](https://www.talos-ai.tech/calculateur-tva-btp.html): Quel taux de TVA pour vos travaux ? Répondez à 4 questions : taux, montant TTC et mention à faire signer au client. Règles de la loi de finances 2026.
+
+## Entreprise
+
+- [À propos de Talos : des agents IA nés chez des artisans](https://www.talos-ai.tech/pourquoi-talos.html): Talos est né autour d'une table familiale d'artisans du BTP, pour leur rendre le temps perdu dans l'administratif. Notre histoire, nos engagements.
+- [Blog Talos : devis, factures et relances pour le BTP](https://www.talos-ai.tech/blog.html): Guides concrets, cas de chantier et méthodes d'automatisation pour les entreprises du bâtiment : devis, relances, facturation électronique 2026, trésorerie.
+- [Démo Talos : vos agents IA testés sur vos vrais devis](https://www.talos-ai.tech/reserver.html): Une démo pratique pour votre entreprise : un commercial vous montre la valeur de Talos sur vos devis, vos factures et vos relances. 30 minutes, sans engagement.
+- [Mentions légales](https://www.talos-ai.tech/mentions-legales.html)
+
+---
+
+# Agents IA pour artisans du BTP : devis et factures | Talos
+
+Source : https://www.talos-ai.tech/
+
+Agents IA pour artisans du BTP : devis et factures | Talos
+Offre de lancement Gagnez jusqu’à 690 € de mise en place
+## Agents IA pour artisans et entreprises du BTP Votre bureau tourne pendant que vous êtes sur le chantier .
+Devis, relances, factures, rendez-vous : vos agents IA s’en chargent. Vous validez d’un clic.
+Réserver une démo Commander sans démo Gratuit • 2 min • Sans engagement
+### On se branche à vos outils.
+Talos se connecte à 24 outils que les artisans utilisent déjà : messagerie, agenda, logiciels de devis du bâtiment (Batigest, EBP, Obat, Tolteck), comptabilité, paiement et signature électronique.
+Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Agents IA pour le BTP
+### Talos, qu’est-ce que c’est ?
+Talos est une équipe d’agents IA pour les artisans et les entreprises
+du bâtiment. Cinq agents spécialisés préparent les devis, les factures, les relances
+d’impayés, les rendez-vous et le tri des mails, à partir de vos prix et de vos habitudes.
+Chaque document est validé par l’artisan avant envoi. Talos se connecte à 24 outils du
+métier, dont Batigest, EBP Bâtiment, Obat, Gmail et WhatsApp Business. L’offre démarre à
+99 € par mois pour un agent, mise en place incluse, et plus de 30 artisans du bâtiment
+sont déjà accompagnés.
+Talos en bref
+Pour qui Artisans et TPE du bâtiment, en France
+Ce que font les agents Devis, factures, relances, rendez-vous, tri des mails
+Qui décide Vous : rien ne part sans votre validation
+Mise en route 0 formation, mise en place incluse
+Données Hébergées en France, jamais utilisées pour entraîner un modèle public
+Prix À partir de 99 € par mois pour un agent
+« Nous ne croyons pas à une IA qui remplace les humains. Nous croyons à une IA
+qui leur rend du temps. »
+Altay Sakalli , fondateur de Talos, issu d’une famille d’artisans du BTP
+L'équipe Talos
+### Vos Agents IA, à la carte .
+Chaque assistant Talos a un rôle précis : attirer et qualifier vos demandes,
+préparer vos devis, gérer vos factures, suivre votre trésorerie ou organiser vos
+emails… Choisissez ceux dont vous avez besoin.
+Assistante Client
+Elle transforme vos demandes en opportunités.
+Demandes entrantes · Qualification · RDV
+Découvrir
+Assistant Commercial
+Il prépare et suit vos devis.
+Création · Signature · Relances
+Assistant Facturation
+Il gère vos factures dès qu’un devis est signé.
+Facturation · Acomptes · Archivage
+Assistante Trésorerie
+Elle vous aide à récupérer votre argent.
+Impayés · Encaissements · Mises en demeure
+Assistante Administrative
+Elle met de l’ordre dans votre boîte mail.
+Emails · Documents · Alertes
+Commencez avec les assistants dont vous avez besoin. Ajoutez-en d’autres au fur et à mesure que votre entreprise grandit.
+Bientôt : Assistant chef de chantier (plannings, comptes rendus) et Assistant gestion de stock (stocks, commandes).
+Comment Talos travaille
+### Du premier appel
+jusqu'au paiement .
+Pendant que vous êtes sur le chantier, Talos prépare vos devis, relance vos clients, facture vos interventions et suit vos paiements.
+Vous faites votre métier. Talos s'occupe du reste.
+#### Demande
+Ne laissez plus passer une demande.
+Agent : Assistante client
+Comment ça marche
+Réduire
+Chaque email, formulaire ou message est centralisé et transformé en une fiche client prête à être traitée.
+La demande client qui arrive
+#### Devis
+Vos devis en quelques minutes.
+Agent : Assistant commercial
+Une photo, une note vocale ou quelques informations suffisent à Talos pour préparer un devis prêt à être envoyé.
+Le devis créé depuis une photo
+#### Relance
+Plus de devis signés, moins d'oublis.
+Talos relance automatiquement vos clients jusqu'à la signature.
+Les relances qui tournent seules
+#### Facture
+Facturez sans effort.
+Agent : Assistant facturation
+Les factures sont préparées automatiquement dès que le chantier avance.
+La facture prête à valider
+#### Paiement
+Gardez une vision claire de votre activité.
+Agent : Assistante trésorerie
+Suivez vos encaissements et laissez Talos relancer les impayés.
+Le suivi des encaissements
+#### Planning
+Votre planning s'organise tout seul.
+Prise de rendez-vous, rappels et organisation de vos journées.
+Le planning de la semaine
+Et ce n'est pas tout
+vos cinq assistants.
+Devis, facturation, trésorerie, relation client, administratif : chacun a ses missions, vous prenez ceux dont vous avez besoin.
+9:41
+Une fin de journée
+La réactivité client
+Trésorerie & relances
+Ce que Talos sait faire
+### Découvrez une journée simplifiée
+Le temps devient votre allié.
+#### Une fin de journée
+Avant Vous rentrez à 19 h.
+Vous faites encore des devis.
+Après Vous rentrez.
+Vos devis sont déjà prêts.
+#### La réactivité client
+Avant Le client attend trois jours.
+Il rappelle un autre artisan.
+Après Le client attend un quart d'heure.
+Il signe avec vous.
+#### Trésorerie & relances
+Avant Vous relancez vous-même.
+Ou vous n'osez pas.
+Après Talos relance à votre place.
+L'argent rentre.
+Comment ça se passe
+###
+Le client vous contacte ,
+Talos prépare tout ,
+vous validez.
+Capter
+Traiter
+Livrer
+####
+Sans mauvaise surprise
+0 formation nécessaire
+Hébergé en France
+100 % modifiable
+Je veux voir Talos sur mon entreprise
+Estimez vos gains
+### Calculez ce que Talos peut vous faire gagner .
+Vos chiffres, pas les nôtres. Cinq réponses, le montant apparaît. Le calcul est vérifiable ligne par ligne juste en dessous.
+Vos chiffres 15 devis · 6 signés · 3 000 €
+Devis envoyés par mois 15
+1 50
+Devis signés aujourd'hui 6
+1 30
+Montant moyen d'un devis 3 000 €
+500 € 20 000 €
+Vos habitudes plus d'1 h par devis · envoi sous 3 à 5 jours
+Ajuster
+Vos habitudes
+Combien de temps passé pour un devis ?
+15 min Vous avez déjà un modèle bien rôdé 0,25 h
+30 min Un chiffrage rapide, sans aller-retour 0,5 h
+1 h Métrés, prix, mise en forme : le cas courant 1 h
+Plus d'1 h Chaque devis vous coûte une soirée entière 1,5 h
+Temps de préparation d'un devis, relances et mise au propre comprises.
+Votre délai d'envoi actuel
+Sous 2 heures L'instant-réponse · risque minimal 5 %
+Sous 24 heures Le standard élite · risque faible 20 %
+Sous 3 à 5 jours La moyenne du marché · zone critique 50 %
+Plus de 7 jours La zone rouge · perte quasi certaine 75 %
+Part de vos devis non signés imputable au délai. Nous retenons le bas de chaque fourchette.
+Ce que Talos vous fait gagner
++1 chantier / mois
+soit +3 000 € de chiffre d'affaires chaque mois
+Sur douze mois 36 000 €
+Heures récupérées
+22,5 h / mois
+Le temps que vous passez aujourd'hui à préparer et relancer vos devis.
+Soirées retrouvées
+11,3 h / mois
+La moitié de cette paperasse se fait le soir ou le week-end. Vous la récupérez.
+Cumul sur 12 mois Vos chiffres actuels reportés à l'identique. Aucune hypothèse de croissance.
+Sans Talos
+Avec Talos
+Sans Talos 216 000 €
+Avec Talos 396 000 €
++180 000 €
+Récupérer ces 3 000 € — Réserver une démo
+ou vérifiez le calcul juste en dessous ↓
+Le détail du calcul Chaque ligne, refaisable de tête
+Lire
+Le détail du calcul
+#### Comment on arrive à ce chiffre ?
+Reprenez chaque ligne : rien n'est caché derrière un algorithme.
+Vous envoyez
+15 devis
+par mois
+Vous en signez
+6 devis
+taux de 40 %
+Vous en perdez donc
+9 devis
+15 − 6
+Part perdue à cause du délai
+1,35
+9 × 15 %
+Récupéré par Talos
++3 000 €
+1 chantier × 3 000 €
+Estimation volontairement plafonnée à +5 chantiers par mois, quelles que soient vos valeurs. Le gain ne peut jamais dépasser le nombre de devis que vous perdez déjà — un simulateur qui promet plus que ça vous ment.
+Si Talos ne vous rapporte pas plus qu'il ne vous coûte…
+Ce n'est probablement pas la bonne solution pour vous.
+Mentions légales · CGU · CGV · Politique de confidentialité
+Une question ?
+### Ce qu'on nous
+demande le plus .
+Si votre question n'est pas là, elle attend une réponse directe
+sur WhatsApp — pas un formulaire de contact.
+Poser ma question sur WhatsApp
+Une vraie personne vous répond, sans formulaire.
+C’est quoi, un agent IA pour artisan ?
+Un agent IA est un logiciel qui mène une tâche de bout en bout à votre place : il lit
+la demande, prépare le devis, la facture ou la relance, puis vous le soumet. Chez Talos,
+chaque agent a un métier (devis, factures, impayés, clients, mails) et rien ne part sans
+votre validation.
+Et si l'IA se trompe sur un prix ou une TVA ?
+Vous gardez un contrôle total. Talos utilise strictement votre propre grille tarifaire
+et les taux légaux de TVA BTP. Aucun devis ou facture ne part sans votre validation
+sur votre téléphone.
+Je ne suis pas calé en informatique, est-ce dur à utiliser ?
+Aucune formation requise. Si vous savez envoyer un vocal sur WhatsApp, vous savez
+utiliser Talos. Vous parlez à l'IA comme à un associé, elle s'occupe du reste.
+Est-ce conforme à la loi sur la facture électronique (Factur-X) ?
+Les factures intègrent les mentions obligatoires du bâtiment, la TVA travaux, les acomptes et les situations, avec une numérotation sans trou. Le format électronique Factur-X sera prêt avant l'obligation d'émission des TPE (septembre 2027) ; d'ici là, vos factures PDF restent valables.
+Mes clients vont-ils savoir que c'est une IA qui répond ?
+Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit
+le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise.
+Dès qu'un échange demande une visite terrain, l'IA vous passe la main.
+Mes tarifs et données clients sont-ils en sécurité ?
+Vos données restent confidentielles et stockées en France. Elles sont votre propriété
+exclusive et ne servent jamais à entraîner des modèles publics.
+Est-ce que cela remplace mon comptable ou mon Excel ?
+Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire
+actuelle et exporter vos fichiers pour votre comptable en 1 clic.
+
+---
+
+# 5 agents IA pour artisans du BTP : devis, factures, impayés
+
+Source : https://www.talos-ai.tech/offres.html
+
+5 agents IA pour artisans du BTP : devis, factures, impayés
+## 5 agents IA pour artisans du BTP Une équipe sur mesure
+Choisissez les assistants dont vous avez besoin. Ils prennent en charge les
+tâches qui vous prennent du temps, pendant que vous vous concentrez sur vos
+chantiers.
+5 assistants
+15 missions
+99 fonctionnalités
+Assistante Client
+Elle transforme vos demandes en opportunités.
+Demandes entrantes · Qualification · RDV
+Découvrir
+Assistant Commercial
+Il prépare et suit vos devis.
+Création · Signature · Relances
+Assistant Facturation
+Il gère vos factures dès qu’un devis est signé.
+Facturation · Acomptes · Archivage
+Assistante Trésorerie
+Elle vous aide à récupérer votre argent.
+Impayés · Encaissements · Mises en demeure
+Assistante Administrative
+Elle met de l’ordre dans votre boîte mail.
+Emails · Documents · Alertes
+Bientôt
+Assistant Chef de chantier
+Vos plannings tiennent. Vos comptes rendus s’écrivent seuls.
+Plannings · Avancement · Comptes rendus
+En préparation
+Assistant Gestion de stock
+Vous savez ce qu’il reste et ce qu’il faut commander.
+Stocks · Alertes · Commandes
+Le poste de commande est inclus, quel que soit l'assistant
+Priorités du jour, synthèse de ce qui a été fait cette nuit, alertes et vision
+centralisée : client, chantier, devis, facture et échanges au même endroit.
+Vos assistants travaillent, vous ouvrez Talos le matin.
+Réserver une démo
+
+---
+
+# Agent IA devis pour artisans : devis auto et relances | Talos
+
+Source : https://www.talos-ai.tech/assistant-commercial.html
+
+Agent IA devis pour artisans : devis auto et relances | Talos
+Assistant commercial
+Le duo parfait Assistante client
+## Agent IA devis et relances Vendez pendant que vous êtes sur le chantier .
+Branché sur vos outils
+Mise en place personnalisée
+Votre Assistant Commercial prend en charge vos prospects, prépare vos propositions, suit vos opportunités et relance vos clients pour vous aider à signer davantage de chantiers.
+Prépare vos devis et propositions commerciales
+Relance automatiquement vos prospects et devis
+Suit chaque opportunité jusqu'à la signature
+Envoie les devis pour signature électronique
+Centralise les échanges avec vos prospects
+Ajouter à mon équipe
+Voir une démonstration
+### Vendez plus .
+01 — Capter
+#### Aucune demande ne reste sans réponse
+Le soir, le week-end, depuis le mail, le formulaire ou le SMS : il répond, récupère ce qui manque et vous remonte la demande complète.
+02 — Convertir
+#### Le devis part pendant que vous roulez
+Depuis une note vocale, une photo ou un e-mail, il chiffre sur votre grille tarifaire, envoie la proposition et récupère la signature en ligne.
+03 — Relancer
+#### Un devis envoyé n'est pas un devis oublié
+Il relance à J+3, J+7 et J+14, adapte le ton à chaque étape, et s'arrête net dès que le client répond ou signe.
+Transformer les demandes en ventes
+### Ne laissez plus vos devis attendre.
+Il prépare vos propositions commerciales, les adapte au besoin
+du client et les envoie rapidement. Vous pouvez vous concentrer sur le chantier, il s'occupe de faire
+avancer la vente.
+Préparation des devis Il transforme les informations du client en proposition commerciale prête à envoyer.
+Offres adaptées Il peut préparer différentes propositions — Éco, Standard, Premium — pour donner au client le choix.
+Envoi & signature Il envoie le devis au client et récupère sa signature directement en ligne.
+Devis n° 2026-0312
+Mme Roussel · toiture 40 m²
+Trois propositions, un seul chiffrage
+Éco tuiles reprises 7 450 €
+Standard tuiles neuves 9 890 €
+Premium + isolation 13 200 €
+Signé en ligne il y a 4 min · acompte de 30 % encaissé
+Relances — aucun devis sans suite
+### Vos devis se relancent tout seuls.
+Il suit vos opportunités et relance vos clients au bon
+moment, sans que vous ayez à y penser.
+Relances automatiques J+3, J+7, J+14 : il s'en charge.
+Suivi des opportunités Vous savez où en est chaque devis.
+Alertes commerciales Il vous signale les opportunités à traiter.
+4 devis en attente
+28 400 € en jeu
+Relances en cours
+M. Ferrand J+3 · envoyée 4 200 €
+SCI Bellevue J+7 · appel proposé 12 480 €
+Mme Roussel J+14 · validité 9 890 €
+✕ Copro Jaurès · signé relances arrêtées
+SCI Bellevue a rouvert le devis deux fois — à traiter en priorité
+Ce qu'il prend en charge
+### 4 missions, 22 fonctionnalités .
+De la demande reçue à 22 h jusqu'à l'acompte encaissé, voici exactement ce que votre assistant commercial fait à votre place.
+Captation 24 h/24
+05 fonctionnalités
+#### Rien ne se perd, même à 22 h
+Réponse immédiate · sur tous vos canaux
+Ce qu'il fait :
+Répond le soir et le week-end
+Pose les questions manquantes
+Chantier, adresse, délai, budget
+Mail, formulaire et SMS réunis
+Vous alerte sur les demandes chaudes
+Voir comment le devis part
+Chiffrage en minutes
+#### Le devis s'écrit pendant que vous roulez
+Cinq façons de le lancer · une seule grille tarifaire
+Depuis un e-mail client
+Depuis une note vocale
+Depuis une photo ou un plan
+Depuis le formulaire du site
+Sur votre grille et vos marges
+Le voir chiffrer mes devis
+Signature en ligne
+#### Il repart signé, avec l'acompte
+Signature en ligne · acompte encaissé à la commande
+Variantes Éco, Standard, Premium
+Signature depuis son téléphone
+Acompte de 30 % à la signature
+Date de validité sur chaque devis
+Conditions de paiement posées
+Faire signer mes devis en ligne
+Relances J+3 · J+7 · J+14
+07 fonctionnalités
+#### Il relance à votre place, et sait s'arrêter
+J+3, J+7, J+14 · puis plus rien
+Relance à J+3, courte et polie
+Relance à J+7, appel proposé
+Relance à J+14, validité rappelée
+S'arrête dès qu'il répond
+S'arrête à la signature
+Repère les devis relus
+Les dossiers chauds en haut de pile
+Ne plus relancer moi-même
+### Vous gardez vos outils, il travaille avec .
+Pas de migration, pas de logiciel à apprendre, pas de données à ressaisir. Il se branche sur votre messagerie, votre agenda et vos outils actuels.
+24 outils branchables
+Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
+Encore plus fort à deux
+### Combinez-le avec l'Assistant Facturation pour plus de résultats.
+Assistant facturation
+#### Du devis signé à la facture.
+Dès que votre client signe, votre Assistant Facturation prend le relais : acompte, facture, situations, archivage et export comptable. Vous ne ressaisissez rien, et vous ne courez plus après une pièce manquante.
+Voir sa fiche
+Le changement
+### Avant, et avec Talos .
+Avant Avec Talos
+Vous rappelez les demandes le soir Talos répond immédiatement
+Vous reprenez les infos à la main Talos les qualifie
+Vous faites vos devis le soir Talos les prépare
+Vous devez penser aux relances Talos les effectue
+Vous cherchez où en est chaque client Talos vous le signale
+Vous perdez parfois des demandes Chaque demande est suivie
+### Vous avez besoin d'un commercial en plus ?
+Celui-ci travaille les soirs, les week-ends et les jours de chantier. Il commence une semaine après votre appel, sur vos vrais devis.
+Vous savez déjà ce qu'il vous faut ?
+Commander en ligne, sans rendez-vous
+Composer mon équipe
+Sans engagement
+Données hébergées en France
+
+---
+
+# Agent IA facturation BTP : acomptes, situations, TVA | Talos
+
+Source : https://www.talos-ai.tech/assistant-facturation.html
+
+Agent IA facturation BTP : acomptes, situations, TVA | Talos
+Assistant facturation
+Le duo parfait Assistante trésorerie
+## Agent IA facturation BTP Vos factures partent sans que vous ayez à y penser .
+Branché sur vos outils
+Mise en place personnalisée
+Il transforme vos devis signés en factures, gère vos acomptes et vous aide à facturer chaque chantier au bon moment.
+Génère vos factures automatiquement
+Gère acomptes et soldes
+Numérote vos factures sans erreur
+Applique la TVA adaptée
+Envoie vos factures aux clients
+Ajouter à mon équipe
+Voir une démonstration
+### Facturez sans y penser .
+01 — Facturer
+#### Le devis signé devient une facture
+Dès la signature, la facture d'acompte est générée avec le bon montant, la bonne TVA et les mentions obligatoires. Rien à ressaisir.
+02 — Envoyer
+#### Elle part au client, pas dans vos brouillons
+La facture est envoyée dès qu'elle est prête, avec l'échéance et les conditions de paiement déjà posées.
+03 — Suivre
+#### Vous savez qui a payé quoi
+Émise, partiellement payée, soldée : chaque facture porte son état, et les échéances à surveiller remontent d'elles-mêmes.
+Factures — elle ne laisse rien passer
+### Chaque chantier terminé devient une facture.
+Elle récupère les informations de vos devis et prépare vos factures dès qu'elles doivent être émises.
+Génération automatique Le devis devient une facture en quelques secondes.
+Acomptes & soldes Elle suit ce qui a déjà été payé et ce qu'il reste à facturer.
+Numérotation automatique Vos factures restent organisées et conformes.
+Ce que ça règle
+Vous oubliez parfois de facturer un chantier
+Déclenchement de la facturation à partir des devis et des étapes prévues.
+Vous refaites les mêmes informations à chaque facture
+Les données du devis sont reprises automatiquement.
+Vous perdez du temps sur la gestion des factures
+Génération, numérotation et préparation automatisées.
+Chaque chantier est facturé au bon moment, sans oubli.
+Envoi — elle fait partir vos factures
+### Une facture créée n'est utile que si elle arrive au client.
+Elle prépare et envoie vos factures directement au client, avec les bonnes informations et les bonnes conditions de paiement.
+Envoi automatique La facture part dès qu'elle est prête.
+Conditions de paiement Acompte, solde et échéance sont clairement indiqués.
+Suivi des factures Vous savez ce qui est envoyé, payé ou encore en attente.
+Vos factures restent parfois dans vos brouillons
+Envoi automatique dès qu'elles sont prêtes.
+Vous perdez du temps à vérifier ce qui a été payé
+Suivi centralisé des factures et des paiements.
+Vous devez régulièrement rappeler les échéances
+Les informations de paiement sont intégrées dès l'envoi.
+Vos factures partent plus vite et votre argent peut rentrer plus tôt.
+Suivi — vous savez où en est chaque facture
+### Plus besoin de chercher qui a payé quoi.
+Votre facturation reste organisée : factures émises, acomptes reçus, soldes à encaisser et échéances à venir.
+Vue d'ensemble Toutes vos factures au même endroit.
+Suivi des paiements Payé, partiellement payé ou en attente.
+Échéances Les paiements à surveiller remontent automatiquement.
+Vous avez du mal à savoir où en sont vos factures
+Une vision claire de chaque facture.
+Des soldes passent entre les mailles
+Suivi des montants restant à encaisser.
+Vous perdez du temps à faire vos vérifications
+Les informations importantes remontent automatiquement.
+Une facturation propre, suivie et sans charge mentale.
+Ce qu'il prend en charge
+### 4 missions, 20 fonctionnalités .
+Du devis signé jusqu'à l'export du comptable, voici exactement ce que votre assistant facturation fait à votre place.
+Émission dès la signature
+05 fonctionnalités
+#### Elle part sans que vous y pensiez
+Dès la signature · sans une seule ressaisie
+Ce qu'il fait :
+Générée depuis le devis signé
+Acompte au pourcentage convenu
+Solde, déductions faites
+Avoirs rattachés à l'origine
+Rien ne part sans vous
+Voir comment la facture se crée
+Situations de travaux
+#### Chaque situation à son moment
+Vous déclarez l'avancement · il calcule le reste
+Situations selon l'avancement
+Reste à facturer recalculé
+Retenue de garantie reprise
+Échéances et conditions posées
+Alerte si écart devis / facturé
+Suivre mes chantiers longs
+Conformité
+#### Conforme, sans y penser
+Numérotation continue et mentions légales · la première chose qu'on contrôle
+Numérotation sans trou ni doublon
+TVA et autoliquidation au bon taux
+Acomptes et situations déduits
+Mentions obligatoires posées
+Reprend votre numérotation
+Facturer sans erreur
+Archivage et export
+#### Tout est retrouvable en deux clics
+Dix ans d'archives · et un export mensuel propre
+Dix ans, facture et devis liés
+Recherche par client ou chantier
+Export au format de votre cabinet
+Accès lecture pour le comptable
+Pièces du chantier au même endroit
+Simplifier ma fin de mois
+### Vous gardez votre compta et vos outils, il travaille avec .
+Il reprend votre numérotation là où elle en est et exporte dans le format que votre cabinet attend. Personne n'a à changer de logiciel, ni vous ni lui.
+24 outils branchables
+Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
+Encore plus fort à deux
+### Combinez-le avec l'Assistante Trésorerie pour plus de résultats.
+Assistante trésorerie
+#### Une facture émise n'est pas une facture payée.
+Dès que l'échéance est dépassée, l'Assistante Trésorerie prend le relais : relance graduée, pénalités de retard, échéancier et mise en demeure. Vous voyez enfin ce qui rentre, et quand.
+Voir sa fiche
+Le changement
+### Avant, et avec Talos .
+Avant Avec Talos
+Vous refaites la facture le dimanche Elle part le jour de la signature
+Vous ressaisissez les lignes du devis Rien n'est retapé
+Vous recalculez le reste à facturer Le cumul est juste à chaque situation
+Vous cherchez le bon taux de TVA Il est posé selon le chantier
+Vous redoutez la réforme de 2026 Le format est déjà celui attendu
+Votre comptable relance trois fois L'export part en fin de mois
+### Vous avez besoin d'une facturation carrée ?
+Il facture pendant que vous êtes sur le chantier, au bon montant et au bon format. La réforme 2026 arrive — celui-ci l'a déjà passée.
+Vous savez déjà ce qu'il vous faut ?
+Commander en ligne, sans rendez-vous
+Composer mon équipe
+Conforme à la réforme 2026
+Données hébergées en France
+
+---
+
+# Agent IA relance des impayés pour artisans du BTP | Talos
+
+Source : https://www.talos-ai.tech/assistant-tresorerie.html
+
+Agent IA relance des impayés pour artisans du BTP | Talos
+Assistante trésorerie
+Le duo parfait Assistant facturation
+## Agent IA relance des impayés Votre trésorerie ne devrait jamais vous prendre par surprise .
+Branché sur vos outils
+Mise en place personnalisée
+Elle repère vos impayés, relance vos clients et vous aide à anticiper vos encaissements avant que le manque de trésorerie devienne un problème.
+Repère les factures en retard
+Relance automatiquement vos clients
+Prévoit vos encaissements
+Calcule les pénalités de retard
+Prépare les mises en demeure
+Ajouter à mon équipe
+Voir une démonstration
+### Soyez payé sans courir après .
+01 — Repérer
+#### Un retard se voit le jour même
+Dès qu'une échéance est dépassée, la facture bascule en impayé avec son ancienneté et le montant en jeu. Plus besoin d'éplucher vos relevés.
+02 — Relancer
+#### Les relances partent à votre place
+Un rappel poli, puis plus direct, puis la dernière chance avant mise en demeure. Chaque niveau est écrit, vous validez d'un clic.
+03 — Anticiper
+#### Vous savez ce qui rentre et quand
+Projection des encaissements semaine par semaine, et une alerte avant que le solde ne passe sous votre seuil.
+Impayés — elle les repère avant vous
+### Ne laissez plus vos impayés s'accumuler.
+Elle surveille vos échéances et vous signale immédiatement les factures qui dépassent leur date de paiement.
+Repérage automatique Chaque retard est identifié dès l'échéance.
+Suivi des impayés Vous savez qui doit, combien et depuis quand.
+Alertes Les factures à traiter remontent automatiquement.
+Ce que ça règle
+Vous oubliez de suivre certaines factures
+Suivi automatique des échéances et alertes sur les retards.
+Vous découvrez les impayés trop tard
+Détection dès le premier jour de retard, et suivi de l'ancienneté.
+Vous perdez du temps à vérifier qui vous doit quoi
+Une vision centralisée de tous vos impayés.
+Relances — elle récupère votre argent
+### Vos clients sont relancés. Vous n'avez rien à faire.
+Elle adapte chaque relance au retard et suit les échanges jusqu'au paiement.
+Relances automatiques J+7, J+15, J+30 : elle s'en charge.
+Relances adaptées Le ton évolue avec l'ancienneté du retard.
+Mise en demeure Elle prépare les courriers lorsque la situation l'exige.
+Vous devez courir après vos clients pour être payé
+Relances automatiques, sans intervention de votre part.
+Vous n'aimez pas réclamer votre argent
+Les relances partent à votre place, avec le bon ton.
+Vous ne savez pas quoi faire quand un client ne paie toujours pas
+Escalade automatique jusqu'à la mise en demeure.
+Trésorerie — bientôt disponible
+### Voyez le manque de trésorerie avant qu'il arrive.
+Elle projette vos encaissements et vous alerte lorsqu'un trou de trésorerie se profile.
+Projection des encaissements Vous savez ce qui devrait rentrer et quand.
+Prévision de trésorerie Elle vous donne une vision des prochaines semaines.
+Alertes de tension Vous êtes prévenu avant de passer dans le rouge.
+Vous ne savez pas combien vous aurez le mois prochain
+Projection des encaissements à venir.
+Vous avez des décalages entre vos entrées et vos sorties
+Vision anticipée de votre trésorerie.
+Vous découvrez les problèmes quand il est trop tard
+Alertes avant les périodes de tension.
+Vous anticipez vos besoins de trésorerie au lieu de les subir.
+Ce qu'elle prend en charge
+### 4 missions, 19 fonctionnalités .
+De l'échéance dépassée jusqu'au virement reçu, voici exactement ce que votre assistante trésorerie fait à votre place.
+Détection dès l'échéance
+05 fonctionnalités
+#### Vous savez qui doit, et depuis quand
+Dès le lendemain de l'échéance · sans éplucher vos relevés
+Ce qu'elle fait :
+Dès l'échéance dépassée
+Classé par ancienneté et montant
+Payée en un clic, relances stoppées
+S'arrête dès la facture réglée
+Historique par client
+Voir comment elle les repère
+Relances J+7 · J+15 · J+30
+#### Le bon ton, au bon moment
+J+7, J+15, J+30 · trois niveaux, un seul clic
+J+7, courtoise
+J+15, directe, facture jointe
+J+30, dernier rappel
+Seuil en dessous duquel on n'insiste pas
+Mise en pause d'un client
+Ne plus relancer moi-même
+Recouvrement encadré
+#### Les mots que vous n'osez pas écrire
+Pénalités et mise en demeure · aux bonnes mentions
+Pénalités au taux légal
+Indemnité de 40 € par facture
+Mise en demeure prête à envoyer
+Échéancier en trois ou quatre fois
+Pénalités annoncées dès le 2ᵉ rappel
+Réclamer ce qui m'est dû
+Prévision à 3 mois
+Bientôt
+#### Vous savez ce qui rentre, et quand
+Alerte tous les lundis à 8 h · solde prévu, retards, priorités
+Encaissements semaine par semaine
+Alerte hebdo par e-mail et SMS
+Signal sous votre seuil
+Les priorités, montant en tête
+Voir ma trésorerie à trois mois
+### Vous gardez votre banque et vos outils, elle travaille avec .
+Elle n'a jamais accès à votre compte bancaire. Vous marquez une facture payée d'un clic, elle arrête aussitôt les relances.
+24 outils branchables
+Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
+Encore plus fort à deux
+### Combinez-la avec l'Assistant Facturation pour plus de résultats.
+Assistant facturation
+#### Une facture juste se relance mieux.
+La moitié des impayés viennent d'une facture partie en retard, mal numérotée ou sans les bonnes mentions. L'Assistant Facturation l'émet propre et à l'heure ; l'Assistante Trésorerie n'a plus qu'à la faire payer.
+Voir sa fiche
+Le changement
+### Avant, et avec Talos .
+Avant Avec Talos
+Vous découvrez les retards trop tard Talos les repère dès l'échéance
+Vous n'osez pas relancer vos clients Talos écrit la relance, vous validez
+Vous relancez tous sur le même ton Le ton monte d'un cran à chaque niveau
+Vous ne réclamez jamais les pénalités Elles sont calculées et annoncées
+Vous ignorez ce qui rentre ce mois-ci La projection arrive chaque lundi
+Un impayé finit par passer à la perte Chaque facture est suivie jusqu'au solde
+### Vous avez besoin d'une trésorerie tenue ?
+Elle réclame à votre place, avec les mots justes et au bon moment. Vous gardez la relation client, elle prend le mauvais rôle.
+Vous savez déjà ce qu'il vous faut ?
+Commander en ligne, sans rendez-vous
+Composer mon équipe
+Aucun virement possible
+Données hébergées en France
+
+---
+
+# Agent IA secrétariat pour artisans : réponses et RDV 24h/24
+
+Source : https://www.talos-ai.tech/assistant-client.html
+
+Agent IA secrétariat pour artisans : réponses et RDV 24h/24
+Assistante client
+Le duo parfait Assistant commercial
+## Agent IA accueil client et rendez-vous Vous êtes sur un chantier. Elle s'occupe de vos clients.
+Branché sur vos outils
+Mise en place personnalisée
+Votre Assistante Client répond aux demandes, qualifie les prospects et gère vos rendez-vous, même lorsque vous ne pouvez pas décrocher.
+Réponse automatique aux appels et demandes clients
+Qualification des prospects
+Vérification de la zone d'intervention
+Prise et gestion des rendez-vous
+Confirmation et relance des rendez-vous
+Ajouter à mon équipe
+Voir une démonstration
+### Ne perdez plus de clients faute de réponse .
+01 — Répondre
+#### Réponse 24 h/24
+Le soir, le week-end, pendant les congés : elle répond dans la minute depuis votre base de connaissances — vos prestations, votre zone, vos délais.
+02 — Qualifier
+#### Qualification automatique des demandes
+Nature des travaux, adresse, urgence, budget évoqué : elle pose les questions qui manquent et vérifie que le chantier est bien dans votre zone d'intervention.
+03 — Collecter
+#### Collecte des informations du prospect
+Nom, téléphone, adresse du chantier, nature des travaux, budget évoqué : tout est consigné dans la fiche client avant même que vous rappeliez.
+Agenda — il se remplit sans vous
+### Plus besoin de passer sa journée au téléphone.
+Elle prend les rendez-vous, tient l'agenda à jour et replanifie
+ceux qui bougent. Vous ouvrez votre semaine, elle est déjà remplie.
+Prise de rendez-vous automatique
+Gestion de l'agenda
+Reprogrammation des rendez-vous
+3 créneaux compatibles
+Temps de trajet inclus
+Mme Dubois · chaudière · Le Perreux
+Mardi 9 h 00
+11 km · 18 min
+Mardi 14 h 30 11 km · 22 min
+Mercredi 8 h 00 9 km · 15 min
+M. Ferrand a décalé : replanifié jeudi 10 h
+Déplacements — vérifiés avant de monter dans la camionnette
+### Éviter les déplacements inutiles.
+Avant de vous envoyer sur place, elle vérifie que le chantier est
+dans votre zone et que la demande tient debout.
+Qualification du besoin avant le déplacement
+Organisation des rendez-vous selon vos disponibilités
+Ivry-sur-Seine (94)
+11 km du dépôt
+Dans votre zone
+Avant de vous déplacer
+Nature des travaux Chaudière gaz, panne totale
+Urgence Sous 3 semaines
+Budget évoqué 9 000 €
+Saint-Ouen-l'Aumône · 38 km
+hors zone, écarté
+Regroupé avec 2 chantiers du 94, mardi matin
+Ce qu'elle prend en charge
+### 4 missions, 20 fonctionnalités .
+Du message reçu à 21 h jusqu'au rappel deux heures avant l'intervention, voici exactement ce que votre assistante client fait à votre place.
+Réponses 24/7
+05 fonctionnalités
+#### Personne ne tombe sur la messagerie
+Réponse en moins d'une minute · nuit, week-end et congés
+Ce qu'elle fait :
+Hors horaires, week-end et congés
+Réponses tirées de vos infos
+Aucun prix ferme sans vous
+E-mail, formulaire, SMS
+Vous passe la main hors cadre
+Voir comment l'agenda se remplit
+Qualification automatique
+#### La demande arrive complète
+Tout ce qu'il vous faut · avant même de décrocher
+Urgence, devis, renseignement, suivi
+Vérifie votre zone
+Complète ce qui manque
+Crée la fiche client
+Remonte les vraies urgences
+Qualifier mes demandes
+Rendez-vous calés
+#### Votre semaine se remplit toute seule
+Créneaux compatibles · trajets compris
+Créneaux tirés de votre agenda
+Temps de trajet compris
+Ajout dans Google Agenda ou Outlook
+Récapitulatif envoyé au client
+Aucun rendez-vous hors zone
+Remplir mon agenda
+Rappels J-1 et H-2
+#### Moins de déplacements pour rien
+J-1 et H-2 · par SMS et par e-mail
+Rappel la veille, heure et adresse
+Rappel deux heures avant
+Sur son canal habituel
+Confirmé dès qu'il répond
+Replanifie en cas d'empêchement
+Réduire mes rendez-vous manqués
+### Vous gardez votre agenda et vos outils, elle travaille avec .
+Elle écrit dans l'agenda que vous utilisez déjà et répond sur les canaux où vos clients vous écrivent. Rien de nouveau à installer sur votre téléphone.
+24 outils branchables
+Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
+Encore plus fort à deux
+### Combinez-la avec l'Assistant Commercial pour plus de résultats.
+Assistant commercial
+#### Elle qualifie, il chiffre.
+Une demande bien qualifiée devient un devis juste. Dès que l'Assistante Client a réuni la surface, l'adresse et le délai, l'Assistant Commercial prépare le devis sur votre grille tarifaire et le relance jusqu'à la signature.
+Voir sa fiche
+Le changement
+### Avant, et avec Talos .
+Avant Avec Talos
+Vous rappelez le soir, entre deux repas Talos répond dans la minute
+Un appel manqué est un client perdu Chaque message reçoit une réponse
+Vous posez les questions au téléphone La demande arrive déjà qualifiée
+Vous vous déplacez hors de votre zone Le secteur est vérifié avant le rendez-vous
+Vous enchaînez deux chantiers trop loin Le trajet est pris en compte
+Des clients oublient le rendez-vous Ils sont rappelés la veille et H-2
+### Vous avez besoin d'un standard qui ne dort pas ?
+Elle répond pendant que vous êtes sur un toit, et cale les rendez-vous dans les trous de votre semaine. Vous ouvrez votre agenda le matin, il est rempli.
+Vous savez déjà ce qu'il vous faut ?
+Commander en ligne, sans rendez-vous
+Composer mon équipe
+Sans engagement
+Données hébergées en France
+
+---
+
+# Agent IA administratif pour artisans : tri des mails | Talos
+
+Source : https://www.talos-ai.tech/assistant-administratif.html
+
+Agent IA administratif pour artisans : tri des mails | Talos
+Assistante administrative
+Transversale Elle alimente les quatre autres
+## Agent IA tri des mails Vous êtes artisan. Pas secrétaire .
+Branché sur vos outils
+Mise en place personnalisée
+Votre Assistante Administrative s'occupe des tâches qui s'accumulent entre deux chantiers pour que vous puissiez rester concentré sur votre activité.
+Trie vos demandes et vos e-mails
+Prépare vos documents
+Classe vos informations
+Suit vos tâches administratives
+Vous rappelle ce qui doit être fait
+Ajouter à mon équipe
+Voir une démonstration
+### Rendez-vous vos soirées .
+01 — Organiser
+#### Chaque chose retrouve sa place
+Demande client, facture fournisseur, administratif, chantier : chaque message est rangé dès son arrivée, et chaque pièce jointe part au bon dossier.
+02 — Gérer
+#### Les tâches qui reviennent, elle les prend
+Préparation des documents, actions hebdomadaires, relances de routine : ce qui se répète ne vous demande plus rien.
+03 — Suivre
+#### Vous n'avez plus à tout retenir
+Les échéances remontent au bon moment, et ce qui demande vraiment votre attention passe devant le reste.
+Administration — elle met de l'ordre
+### Fini les papiers et les demandes qui s'empilent.
+Elle trie, organise et centralise vos informations pour que vous retrouviez rapidement ce dont vous avez besoin.
+Tri des demandes Les informations importantes sont identifiées et classées.
+Organisation des documents Chaque document retrouve sa place.
+Informations centralisées Vous retrouvez rapidement ce que vous cherchez.
+Ce que ça règle
+Votre boîte mail est impossible à suivre
+Les demandes sont triées et priorisées.
+Vous cherchez régulièrement vos documents
+Classement et organisation centralisés.
+Trop d'informations à garder en tête
+Les informations importantes sont regroupées au même endroit.
+Vous savez quoi faire, où trouver l'information et ce qui mérite votre attention.
+Tâches — elle s'occupe du quotidien
+### Les petites tâches ne devraient plus vous prendre vos soirées.
+Elle prend en charge les tâches administratives répétitives qui vous font perdre du temps chaque semaine.
+Préparation des documents Elle prépare les éléments dont vous avez besoin.
+Tâches répétitives Elle s'occupe des actions qui reviennent chaque semaine.
+Rappels automatiques Elle vous rappelle ce qui ne doit pas être oublié.
+Vous passez trop de temps sur l'administratif
+Les tâches répétitives sont prises en charge.
+Vous avez toujours quelque chose à ne pas oublier
+Rappels et suivi des tâches.
+Vous finissez vos journées avec du bureau
+Une partie du travail administratif est faite en amont.
+Moins d'administratif le soir. Plus de temps pour votre entreprise.
+Pilotage — elle vous dit ce qui reste à faire
+### Vous ne devriez pas avoir à tout retenir.
+Elle garde une trace de vos tâches, demandes et échéances pour que rien d'important ne passe à la trappe.
+Rappels intelligents Les échéances importantes remontent au bon moment.
+Suivi des tâches Vous savez ce qui est fait et ce qui reste à faire.
+Alertes Les éléments nécessitant votre attention sont signalés.
+Vous oubliez certaines démarches
+Rappels automatiques.
+Vous avez trop de choses à retenir
+Suivi centralisé des tâches.
+Vous découvrez parfois un problème trop tard
+Alertes sur les éléments importants.
+Moins d'oublis, moins de charge mentale et une entreprise mieux organisée.
+Ce qu'elle prend en charge
+### 4 missions, 18 fonctionnalités .
+Du tri de la nuit jusqu'au classement des pièces au bon chantier, voici exactement ce que votre assistante administrative fait à votre place.
+Tri dès la réception
+05 fonctionnalités
+#### Six catégories, dès l'arrivée
+Trié pendant la nuit · rien n'est jamais supprimé
+Ce qu'elle fait :
+Six catégories dès la réception
+Adresses, dates et montants extraits
+Publicités écartées, jamais supprimées
+Accusé de réception au client
+Expéditeurs exclus sur demande
+Voir comment elle trie
+Résumés de fils
+04 fonctionnalités
+#### Vingt échanges en trois lignes
+Décidé, bloqué, attendu de vous · rien d'autre
+Les longs fils en trois lignes
+Décidé, bloqué, attendu de vous
+Montants, dates et références
+Historique client rattaché
+Ne plus tout relire
+Urgences en tête de pile
+#### Ce qui ne peut pas attendre passe devant
+En haut de la pile · avec le motif de l'alerte
+Urgences chantier et administratives
+Échéances repérées dans le mail
+En haut de pile, motif inclus
+Pièces manquantes rappelées
+Ne plus rater une urgence
+Classement au chantier
+#### Chaque pièce à son chantier
+Détachée, nommée, rangée · et prête pour le comptable
+Rattaché au bon chantier
+Factures fournisseurs prêtes
+Devis, PV et attestations réunis
+Recherche en langage courant
+Une correction ne se répète pas
+Ranger mes chantiers
+### Vous gardez votre boîte mail, elle travaille dedans .
+On branche votre adresse professionnelle, pas votre boîte privée. Vos dossiers restent les vôtres : elle range, elle ne déménage rien.
+24 outils branchables
+Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
+Encore plus fort à deux
+### Combinez-la avec l'Assistante Client pour plus de résultats.
+Assistante client
+#### Elle trie, l'autre répond.
+Une demande client repérée dans le tri de la nuit n'attend pas votre réveil : l'Assistante Client y répond dans la minute, la qualifie et cale le rendez-vous. Votre boîte se vide toute seule, par les deux bouts.
+Voir sa fiche
+Le changement
+### Avant, et avec Talos .
+Avant Avec Talos
+Vous triez vos mails le soir C'est fait avant votre réveil
+Vous relisez vingt messages d'affilée Le fil tient en trois lignes
+Une urgence se perd dans la masse Elle passe en haut de la pile
+Vous cherchez une facture fournisseur Elle est au dossier du chantier
+Le client attend un signe de vie L'accusé de réception est parti
+Il manque une pièce au dossier Le manque vous est signalé
+### Vous avez besoin d'une boîte mail tenue ?
+Elle trie la nuit et vous remet trois décisions le matin. Le reste est rangé, résumé, classé — et toujours consultable.
+Vous savez déjà ce qu'il vous faut ?
+Commander en ligne, sans rendez-vous
+Composer mon équipe
+Aucune suppression
+Données hébergées en France
+
+---
+
+# Comment fonctionnent les agents IA Talos pour artisans
+
+Source : https://www.talos-ai.tech/comment-ca-marche.html
+
+Comment fonctionnent les agents IA Talos pour artisans
+Comment ça fonctionne
+## Agents IA pour artisans du BTP Vous continuez votre journée.
+Talos continue votre administratif .
+Vous n'avez rien à apprendre. Rien à installer. Nous configurons Talos
+pour qu'il travaille comme vous.
+Flux de votre entreprise
+Talos actif
+Un email
+Un message
+Un appel manqué
+Une photo de chantier
+Talos
+Devis préparé Prêt
+Relance planifiée Prêt
+Facture prête Prêt
+Rendez-vous posé Prêt
+De la mise en route au quotidien
+### Six étapes. Vous n'en vivez qu'une .
+#### Nous découvrons votre entreprise.
+Chaque entreprise fonctionne différemment. Nous analysons votre façon
+de travailler, vos devis, vos clients et vos outils pour adapter Talos à votre activité.
+#### Nous configurons votre assistant.
+Vos habitudes deviennent les siennes. Vos tarifs, vos modèles de devis,
+vos relances, vos factures, vos rendez-vous : tout est réglé sur vous.
+#### Vous partez sur le chantier.
+L'écran reste immobile. Puis Talos se met au travail, tout seul,
+pendant que vous ne touchez à rien.
+#### Vous revenez.
+Tout ce qui s'est passé pendant votre absence vous attend,
+résumé sur un seul écran.
+#### Vous gardez toujours le contrôle.
+Talos ne prend jamais de décision importante à votre place. Les devis,
+les factures, les relances sensibles, les mises en demeure : tout reste validé par vous.
+#### Votre entreprise avance.
+Le chantier est terminé. L'administratif aussi. Vous rentrez chez vous
+sans un dossier qui traîne.
+Analyse en cours
+Boîte mail
+Agenda
+Clients
+Devis
+Tarifs
+Compta
+Configuration
+Vos tarifs
+Vos modèles de devis
+Vos relances
+Vos factures
+Vos rendez-vous
+Talos travaille
+Vous êtes sur le chantier.
+Vous ne touchez à rien.
+Nouveau prospect 08:12
+Devis préparé 08:41
+Relance envoyée 10:05
+Facture préparée 13:27
+Paiement reçu 15:48
+Rendez-vous confirmé 17:02
+Récapitulatif
+Pendant votre absence
+#### Voilà ce qui a avancé.
+Devis préparés 2
+Relances envoyées 4
+Facture créée 1
+À encaisser 8 420 €
+Rendez-vous confirmés 3
+En attente de vous
+Devis D-2026-051
+Valider
+Envoyer
+Envoyé au client
+Rien ne part sans votre accord
+Journée terminée
+Devis à faire
+Factures en retard
+Emails sans réponse
+Relances oubliées
+Tout est terminé.
+Vous rentrez chez vous. Il ne reste rien à rattraper ce soir.
+### Et si Talos faisait la même chose
+dans votre entreprise ?
+Voir une démonstration
+Voir les tarifs
+15 minutes · Sans engagement · Setup géré à 100 % par notre équipe
+
+---
+
+# Tarifs des agents IA pour artisans du BTP dès 99 €/mois
+
+Source : https://www.talos-ai.tech/tarifs.html
+
+Tarifs des agents IA pour artisans du BTP dès 99 €/mois
+Des formules adaptées à votre entreprise
+## Un agent personnalisé pour une efficacité 24/7 .
+Talos automatise vos devis, relances, factures et rendez-vous. Choisissez la formule
+adaptée à votre volume d'activité — mise en place incluse.
+Offre de lancement
+### La mise en place est offerte .
+On récupère vos documents, vos tarifs et vos règles, puis on règle
+votre assistant dessus. C'est la seule chose qu'on facture une fois —
+et en ce moment, on ne la facture pas.
+Starter 149 € offerte
+Business 449 € offerte
+Évolution 690 € offerte
+Pour les 30 premiers clients au mensuel, et sur tout
+engagement de six ou douze mois. Passé ce cap, elle redevient payante —
+on préfère l'annoncer que de la retirer un jour sans prévenir.
+Mensuel Lancement
+6 mois −10 %
+12 mois 2 mois offerts
+Choisissez les assistants qu'il vous faut
+0 / 5
+Tout décocher
+### Au-delà d'Évolution — sur devis
+Multi-agences, volumes hors grille, intégrations spécifiques ou contraintes métier
+particulières : on chiffre après un audit de votre organisation.
+Demander un devis
+Rencontrer un expert
+Mentions légales · CGU · CGV · Politique de confidentialité
+Le vrai calcul
+### Talos coûte moins cher
+que votre propre temps .
+Trois façons de traiter votre administratif. Une seule ne vous coûte
+pas une journée de chantier.
+99 €
+Talos
+Votre forfait, tout compris.
+~500 €
+Un secrétariat externe
+Partiel. Le reste revient vers vous.
+×18
+~1 800 €
+Le faire soi-même
+10 h/semaine que vous ne facturez pas.
+Montants par mois, TVA non applicable — 10 h/semaine à environ 45 €/h. Ajustez avec le simulateur.
+Et vous, combien perdez-vous vraiment ?
+Ces montants sont des moyennes. Mettez vos chiffres, le calcul se refait devant vous.
+Calculer mon manque à gagner
+Estimez vos gains
+### Calculez ce que Talos peut vous faire gagner .
+Vos chiffres, pas les nôtres. Cinq réponses, le montant apparaît. Chaque étape du calcul est affichée : vous pouvez la refaire de tête.
+Vos chiffres 15 devis · 6 signés · 3 000 €
+Devis envoyés par mois 15
+1 50
+Devis signés aujourd'hui 6
+1 30
+Montant moyen d'un devis 3 000 €
+500 € 20 000 €
+Vos habitudes plus d'1 h par devis · envoi sous 3 à 5 jours
+Ajuster
+Vos habitudes
+###
+Combien de temps passé pour un devis ?
+15 min Vous avez déjà un modèle bien rôdé 0,25 h
+30 min Un chiffrage rapide, sans aller-retour 0,5 h
+1 h Métrés, prix, mise en forme : le cas courant 1 h
+Plus d'1 h Chaque devis vous coûte une soirée entière 1,5 h
+Temps de préparation d'un devis, relances et mise au propre comprises.
+Votre délai d'envoi actuel
+Sous 2 heures L'instant-réponse · risque minimal 5 %
+Sous 24 heures Le standard élite · risque faible 20 %
+Sous 3 à 5 jours La moyenne du marché · zone critique 50 %
+Plus de 7 jours La zone rouge · perte quasi certaine 75 %
+Part de vos devis non signés imputable au délai. Nous retenons le bas de chaque fourchette.
+Ce que Talos vous fait gagner
++1 chantier / mois
+soit +3 000 € de chiffre d'affaires chaque mois
+Sur douze mois 36 000 €
+Heures récupérées
+22,5 h / mois
+Le temps que vous passez aujourd'hui à préparer et relancer vos devis.
+Soirées retrouvées
+11,3 h / mois
+La moitié de cette paperasse se fait le soir ou le week-end. Vous la récupérez.
+Cumul sur 12 mois Vos chiffres actuels reportés à l'identique. Aucune hypothèse de croissance.
+Sans Talos
+Avec Talos
+Sans Talos 216 000 €
+Avec Talos 396 000 €
++180 000 €
+Récupérer ces 3 000 € — Réserver une démo
+ou vérifiez le calcul juste en dessous ↓
+Le détail du calcul Chaque ligne, refaisable de tête
+Lire
+Le détail du calcul
+#### Le détail du calcul
+Reprenez chaque ligne : rien n'est caché derrière un algorithme.
+Vous envoyez
+15 devis
+par mois
+Vous en signez
+6 devis
+taux de 40 %
+Vous en perdez donc
+9 devis
+15 − 6
+Part perdue à cause du délai
+1,35
+9 × 15 %
+Récupéré par Talos
++3 000 €
+1 chantier × 3 000 €
+Estimation volontairement plafonnée à +5 chantiers par mois, quelles que soient vos valeurs. Le gain ne peut jamais dépasser le nombre de devis que vous perdez déjà — un simulateur qui promet plus que ça vous ment.
+Si Talos ne vous rapporte pas plus qu'il ne vous coûte…
+Ce n'est probablement pas la bonne solution pour vous.
+
+---
+
+# À propos de Talos : des agents IA nés chez des artisans
+
+Source : https://www.talos-ai.tech/pourquoi-talos.html
+
+À propos de Talos : des agents IA nés chez des artisans
+1. Notre histoire
+Nous avons grandi avec des artisans et des professionnels du BTP.
+Nous avons vu nos parents finir leurs journées sur les chantiers ...
+Puis recommencer une deuxième journée derrière un ordinateur .
+Les acomptes. La TVA. Les situations. Le pointage.
+Les devis. Les factures. Les relances. Les rendez-vous.
+Les mails. Le planning. Les devis. Les relances.
+Nous avons trouvé ça injuste .
+Puis l'intelligence artificielle est arrivée.
+Pour beaucoup, elle représentait une menace.
+Celle de ne plus savoir quoi faire de ses mains.
+Pour nous, elle représentait une opportunité .
+Celle de rendre du temps à nos parents.
+C'est de là que Talos est né.
+Cette fois, c'était à notre tour de leur rendre ce qu'ils nous avaient transmis.
+2. Ce que Talos fait
+Aujourd'hui, un artisan termine son chantier...
+Mais pas sa journée .
+Talos est né pour changer ça .
+### Pendant que vous êtes sur le terrain,
+Talos prépare vos devis,
+relance vos clients,
+organise vos rendez-vous,
+prépare vos factures,
+suit vos paiements...
+Vous restez concentré sur votre métier.
+Talos s'occupe de l'administratif .
+3. Ce qu'il ne fera jamais
+Nous ne croyons pas à une IA qui remplace les humains.
+Nous croyons à une IA qui leur rend du temps .
+✕ Talos ne prendra jamais une décision importante à votre place.
+✕ Il ne modifiera jamais vos tarifs.
+✕ Il n'enverra jamais un devis sans validation.
+✕ Il ne promettra jamais une date à un client.
+Talos n'a pas pour but d'être un robot automatique de bureau.
+Nous voulons qu'il reste un assistant extrêmement compétent .
+Comme Jarvis .
+4. Pourquoi vous pouvez nous faire confiance
+Talos n'est pas né dans une salle de réunion.
+Il est né autour d'une table familiale ,
+en regardant nos parents rentrer fatigués...
+Puis rallumer leur ordinateur.
+Depuis,
+chaque fonctionnalité que nous développons répond à une seule question.
+Est-ce que cela ferait réellement gagner du temps à nos parents ?
+Si la réponse est non...
+Nous ne la développons pas.
+5. Notre vision
+Notre ambition n'est pas de créer un logiciel.
+Notre ambition est de créer l'assistant que chaque artisan aurait aimé avoir depuis toujours.
+Un assistant qui comprend rapidement.
+Qui travaille discrètement.
+Qui vous fait gagner du temps chaque jour.
+Et qui reste suffisamment accessible pour accompagner chaque artisan.
+Si un jour Talos devient indispensable à un artisan...
+Alors nous aurons réussi.
+Parce que nous croyons qu'un bon outil doit rester accessible à ceux qui en ont le plus besoin,
+Talos ne sera jamais un produit hors de prix.
+### Le temps est le plus beau chantier que nous pouvions vous rendre.
+Talos · Forgé main
+Réserver une démo
+Voir comment ça marche

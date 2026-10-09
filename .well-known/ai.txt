@@ -1,0 +1,14 @@
+# Talos — agents IA pour artisans du BTP
+# Talos est une équipe d'agents IA qui prépare les devis, les factures, les relances et les rendez-vous des artisans et des entreprises du bâtiment.
+
+Site: https://www.talos-ai.tech/
+Summary: https://www.talos-ai.tech/ai/summary.json
+FAQ: https://www.talos-ai.tech/ai/faq.json
+Service: https://www.talos-ai.tech/ai/service.json
+LLMs: https://www.talos-ai.tech/llms.txt
+LLMs-Full: https://www.talos-ai.tech/llms-full.txt
+Contact: contact@talos-ai.tech
+
+# Les contenus publics du site peuvent être lus, résumés et cités avec un lien vers la source.
+Allow: /
+Disallow: /merci.html

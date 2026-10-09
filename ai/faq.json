@@ -1,0 +1,32 @@
+{
+ "faqs": [
+  {
+   "question": "C’est quoi, un agent IA pour artisan ?",
+   "answer": "Un agent IA est un logiciel qui mène une tâche de bout en bout à votre place : il lit la demande, prépare le devis, la facture ou la relance, puis vous le soumet. Chez Talos, chaque agent a un métier (devis, factures, impayés, clients, mails) et rien ne part sans votre validation."
+  },
+  {
+   "question": "Et si l'IA se trompe sur un prix ou une TVA ?",
+   "answer": "Vous gardez un contrôle total. Talos utilise strictement votre propre grille tarifaire et les taux légaux de TVA BTP. Aucun devis ou facture ne part sans votre validation sur votre téléphone."
+  },
+  {
+   "question": "Je ne suis pas calé en informatique, est-ce dur à utiliser ?",
+   "answer": "Aucune formation requise. Si vous savez envoyer un vocal sur WhatsApp, vous savez utiliser Talos. Vous parlez à l'IA comme à un associé, elle s'occupe du reste."
+  },
+  {
+   "question": "Est-ce conforme à la loi sur la facture électronique (Factur-X) ?",
+   "answer": "Les factures intègrent les mentions obligatoires du bâtiment, la TVA travaux, les acomptes et les situations, avec une numérotation sans trou. Le format électronique Factur-X sera prêt avant l'obligation d'émission des TPE (septembre 2027) ; d'ici là, vos factures PDF restent valables."
+  },
+  {
+   "question": "Mes clients vont-ils savoir que c'est une IA qui répond ?",
+   "answer": "Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise. Dès qu'un échange demande une visite terrain, l'IA vous passe la main."
+  },
+  {
+   "question": "Mes tarifs et données clients sont-ils en sécurité ?",
+   "answer": "Vos données restent confidentielles et stockées en France. Elles sont votre propriété exclusive et ne servent jamais à entraîner des modèles publics."
+  },
+  {
+   "question": "Est-ce que cela remplace mon comptable ou mon Excel ?",
+   "answer": "Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire actuelle et exporter vos fichiers pour votre comptable en 1 clic."
+  }
+ ]
+}
