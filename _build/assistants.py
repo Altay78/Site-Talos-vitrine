@@ -136,7 +136,7 @@ def _b2(a):
             <div class="fx-bezel">
               <div class="fx-screen">
                 <div class="fx-ph"><b>Écran %02d</b><span>%s</span><i>780 × 1688 px · PNG</i></div>
-                <img src="shots/%s.webp?v=20261009" width="780" height="1688" loading="lazy"
+                <img src="shots/%s.webp?v=20261009b" width="780" height="1688" loading="lazy"
                      decoding="async" alt="%s">
               </div>
             </div>

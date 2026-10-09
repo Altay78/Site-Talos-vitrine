@@ -152,7 +152,7 @@ def _b2(f):
     ecrans, onglets = [], []
     for i, (num, titre, texte, ico, shot, alt) in enumerate(f['missions'], 1):
         ecrans.append(
-            u'              <img%s data-m="m%d" src="shots/%s.webp?v=20261009" width="780" height="1688" '
+            u'              <img%s data-m="m%d" src="shots/%s.webp?v=20261009b" width="780" height="1688" '
             u'loading="lazy" decoding="async" alt="%s">'
             % (u' class="on"' if i == 1 else u'', i, shot, alt))
         onglets.append(u'''        <button class="ac-mission" type="button" role="tab" id="acT%(i)d" data-m="m%(i)d"
