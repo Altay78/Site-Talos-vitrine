@@ -2849,8 +2849,15 @@ html[data-theme="light"] .t-feat .fx-arrow{background:#fff;box-shadow:0 1px 2px 
 .hd-scr>img{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hd-mac .hd-scr{left:11.689%;top:11.741%;width:76.623%;height:76.533%;
   border-radius:0.66%/1.02%}
-.hd-iph .hd-scr{left:7.255%;top:3.544%;width:85.775%;height:92.911%;
+.hd-iph .hd-scr{left:7.143%;top:3.47%;width:86.071%;height:93.06%;
   border-radius:13.27%/6.1%}
+/* L'écran de l'iPhone passe SOUS le cadre : la Dynamic Island et le bord
+   noir le recouvrent, comme sur un vrai téléphone. Il déborde d'1 px sous
+   le bord pour ne jamais laisser de liseré. L'ombre portée passe sur
+   l'ensemble : sur le cadre seul, elle tombait dans l'ouverture et
+   assombrissait le haut de l'écran. */
+.hd-iph{filter:drop-shadow(0 30px 50px oklch(0.17 0.008 30/0.45))}
+.hd-iph>.hd-frame{position:relative;z-index:1;pointer-events:none;filter:none}
 @media (max-width:640px){ .hd-iph{bottom:-0.5rem;right:0.5rem;width:30%} }
 </style><style id="joints-css">
 /* ── Les raccords entre sections ─────────────────────────────────────────
