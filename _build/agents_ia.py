@@ -141,7 +141,7 @@ DEF = u'''
         <tr><th scope="row">Ce que font les agents</th><td>Devis, factures, relances, rendez-vous, tri des mails</td></tr>
         <tr><th scope="row">Qui décide</th><td>Vous : rien ne part sans votre validation</td></tr>
         <tr><th scope="row">Mise en route</th><td>0 formation, mise en place incluse</td></tr>
-        <tr><th scope="row">Données</th><td>Hébergées en France, jamais utilisées pour entraîner un modèle public</td></tr>
+        <tr><th scope="row">Données</th><td>Hébergées en Europe, jamais utilisées pour entraîner un modèle public</td></tr>
         <tr><th scope="row">Prix</th><td>À partir de 99&nbsp;€ par mois pour un agent</td></tr>
       </tbody>
     </table>

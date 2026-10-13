@@ -44,7 +44,7 @@ Les factures intègrent les mentions obligatoires du bâtiment, la TVA travaux, 
 Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise. Dès qu'un échange demande une visite terrain, l'IA vous passe la main.
 
 **Mes tarifs et données clients sont-ils en sécurité ?**
-Vos données restent confidentielles et stockées en France. Elles sont votre propriété exclusive et ne servent jamais à entraîner des modèles publics.
+Vos données restent confidentielles et stockées en Europe. Elles sont votre propriété exclusive et ne servent jamais à entraîner des modèles publics.
 
 **Est-ce que cela remplace mon comptable ou mon Excel ?**
 Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire actuelle et exporter vos fichiers pour votre comptable en 1 clic.
@@ -88,7 +88,7 @@ Pour qui Artisans et TPE du bâtiment, en France
 Ce que font les agents Devis, factures, relances, rendez-vous, tri des mails
 Qui décide Vous : rien ne part sans votre validation
 Mise en route 0 formation, mise en place incluse
-Données Hébergées en France, jamais utilisées pour entraîner un modèle public
+Données Hébergées en Europe, jamais utilisées pour entraîner un modèle public
 Prix À partir de 99 € par mois pour un agent
 « Nous ne croyons pas à une IA qui remplace les humains. Nous croyons à une IA
 qui leur rend du temps. »
@@ -187,7 +187,7 @@ Livrer
 ####
 Sans mauvaise surprise
 0 formation nécessaire
-Hébergé en France
+Hébergé en Europe
 100 % modifiable
 Je veux voir Talos sur mon entreprise
 Estimez vos gains
@@ -283,7 +283,7 @@ Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le 
 le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise.
 Dès qu'un échange demande une visite terrain, l'IA vous passe la main.
 Mes tarifs et données clients sont-ils en sécurité ?
-Vos données restent confidentielles et stockées en France. Elles sont votre propriété
+Vos données restent confidentielles et stockées en Europe. Elles sont votre propriété
 exclusive et ne servent jamais à entraîner des modèles publics.
 Est-ce que cela remplace mon comptable ou mon Excel ?
 Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire
@@ -463,7 +463,7 @@ Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Sans engagement
-Données hébergées en France
+Données hébergées en Europe
 
 ---
 
@@ -602,7 +602,7 @@ Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Conforme à la réforme 2026
-Données hébergées en France
+Données hébergées en Europe
 
 ---
 
@@ -739,7 +739,7 @@ Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Aucun virement possible
-Données hébergées en France
+Données hébergées en Europe
 
 ---
 
@@ -869,7 +869,7 @@ Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Sans engagement
-Données hébergées en France
+Données hébergées en Europe
 
 ---
 
@@ -1007,7 +1007,7 @@ Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Aucune suppression
-Données hébergées en France
+Données hébergées en Europe
 
 ---
 

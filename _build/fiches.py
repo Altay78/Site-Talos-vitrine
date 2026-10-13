@@ -171,7 +171,7 @@ COMMERCIAL = dict(
  b8_sub=u"Celui-ci travaille les soirs, les week-ends et les jours de chantier. Il commence "
         u"une semaine après votre appel, sur vos vrais devis.",
  b8_reassure=[u"Mise en place personnalisée", u"Sans engagement",
-              u"Données hébergées en France"],
+              u"Données hébergées en Europe"],
 )
 
 
@@ -322,7 +322,7 @@ TRESORERIE = dict(
  b8_sub=u"Elle réclame à votre place, avec les mots justes et au bon moment. Vous gardez la "
         u"relation client, elle prend le mauvais rôle.",
  b8_reassure=[u"Mise en place personnalisée", u"Aucun virement possible",
-              u"Données hébergées en France"],
+              u"Données hébergées en Europe"],
 )
 
 
@@ -478,7 +478,7 @@ CLIENT = dict(
  b8_sub=u"Elle répond pendant que vous êtes sur un toit, et cale les rendez-vous dans les "
         u"trous de votre semaine. Vous ouvrez votre agenda le matin, il est rempli.",
  b8_reassure=[u"Mise en place personnalisée", u"Sans engagement",
-              u"Données hébergées en France"],
+              u"Données hébergées en Europe"],
 )
 
 
@@ -628,7 +628,7 @@ FACTURATION = dict(
  b8_sub=u"Il facture pendant que vous êtes sur le chantier, au bon montant et au bon format. "
         u"La réforme 2026 arrive — celui-ci l'a déjà passée.",
  b8_reassure=[u"Mise en place personnalisée", u"Conforme à la réforme 2026",
-              u"Données hébergées en France"],
+              u"Données hébergées en Europe"],
 )
 
 
@@ -776,7 +776,7 @@ ADMINISTRATIF = dict(
  b8_sub=u"Elle trie la nuit et vous remet trois décisions le matin. Le reste est rangé, "
         u"résumé, classé — et toujours consultable.",
  b8_reassure=[u"Mise en place personnalisée", u"Aucune suppression",
-              u"Données hébergées en France"],
+              u"Données hébergées en Europe"],
 )
 
 

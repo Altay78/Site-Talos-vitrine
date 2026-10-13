@@ -370,7 +370,7 @@ FAQ_FONCTIONNEMENT = [
  (u"Combien de temps pour le mettre en place ?", u"Comptez une semaine. On récupère vos documents et vos règles, on branche votre boîte mail, et il commence à travailler. La mise en place est incluse — vous n'avez rien à paramétrer."),
  (u"Est-ce que je dois changer de logiciel ?", u"Non. Il se branche sur ce que vous utilisez déjà : votre messagerie, votre agenda, votre logiciel de gestion s'il y en a un."),
  (u"Qu'est-ce que je vois, concrètement, tous les matins ?", u"Une pile : ce qu'il a préparé pendant la nuit, avec le montant en jeu et le temps que ça vous prendra de tout valider. En général deux minutes."),
- (u"Où sont hébergées mes données ?", u"En France. Votre banque est consultée en lecture seule, et chaque action est horodatée dans un journal que vous pouvez relire."),
+ (u"Où sont hébergées mes données ?", u"En Europe : la base de données est en Allemagne (Francfort). Votre banque est consultée en lecture seule, et chaque action est horodatée dans un journal que vous pouvez relire."),
  (u"Et si je veux arrêter ?", u"Vous partez avec vos données : clients, documents, historique, tout est exportable. Sans engagement et sans frais de sortie."),
 ]
 COMMERCIAL['faq_fonctionnement'] = [
