@@ -3859,7 +3859,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       + (isReco
            ? '<span class="tag reco">' + CHECK + ' Recommandé pour vous</span>'
            : p.best ? '<span class="tag">' + STAR + ' Le plus choisi</span>' : '')
-      + '<div class="shot"><img src="' + (p.shot || 'photos/offre-' + p.id + '.jpg') + '" alt="' + p.shotAlt + '" '
+      + '<div class="shot"><img src="' + p.shot + '" alt="' + p.shotAlt + '" '
       +   'width="760" height="380" loading="lazy" decoding="async"></div>'
       + '<h2>' + p.name + '</h2>'
       + '<p class="for">' + p.for + '</p>'
