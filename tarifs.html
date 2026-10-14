@@ -2349,6 +2349,13 @@ html[data-theme="light"] .t-price .tpick-list{background:#fff}
 .t-price .tpick-list input:checked + .tpick-box{background:var(--bronze);border-color:var(--bronze);color:#fff}
 .t-price .tpick-list input:focus-visible + .tpick-box{outline:2px solid var(--bronze);outline-offset:2px}
 .t-price .tpick-list input:checked ~ .tpick-txt{color:var(--parch);font-weight:600}
+/* annoncée, pas encore en vente */
+.t-price .tpick-list .soon label{cursor:default}
+.t-price .tpick-list .soon label:hover{background:none;color:rgba(var(--parch-rgb),.78)}
+.t-price .tpick-list .soon .tpick-box img{opacity:.6;filter:grayscale(.35)}
+.t-price .tpick-soon{margin-left:auto;flex:0 0 auto;padding:3px 8px;border-radius:999px;
+  font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--bronze);background:rgba(var(--bronze-rgb),.12)}
 .t-price .tpick-foot{display:flex;justify-content:flex-end;margin-top:10px}
 .t-price .tpick-clear{background:none;border:0;cursor:pointer;font-size:12.5px;color:var(--lin);
   text-decoration:underline;text-underline-offset:3px}
@@ -3752,14 +3759,18 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     check:'<path d="M4 12.5 9.5 18 20 6.5"/>'
   };
 
-  /* les cinq assistants — c'est eux qu'on choisit, pas des tâches isolées */
+  /* les assistants — c'est eux qu'on choisit, pas des tâches isolées.
+     « bientot » : montrée, mais pas cochable tant qu'elle n'est pas en vente
+     (même règle que dans panier.js) */
   var AGENTS = [
     {id:'commercial',    t:'Assistant commercial',    s:'Devis, signature, relances'},
     {id:'tresorerie',    t:'Assistante trésorerie',   s:'Impayés et relances'},
     {id:'client',        t:'Assistante client',       s:'Réponses et rendez-vous'},
     {id:'facturation',   t:'Assistant facturation',   s:'Factures, acomptes, situations'},
-    {id:'administratif', t:'Assistante administrative', s:'Tri des mails et classement'}
+    {id:'administratif', t:'Assistante administrative', s:'Tri des mails et classement'},
+    {id:'juridique',     t:'Assistante juridique',    s:'Contrats et conformité', bientot:true}
   ];
+  var EN_VENTE = AGENTS.filter(function(a){ return !a.bientot; });
 
   var picked = [];
 
@@ -3771,7 +3782,8 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   var PLANS = [
     {
       id:'starter', name:'Starter', agents:1,
-      shotAlt:'Un artisan seul dans son atelier',
+      shot:'photos/offre-starter-2.jpg',
+      shotAlt:'Votre premier assistant Talos, la main tendue',
       for:'Pour arrêter de faire son administratif le soir.',
       promise:'Votre premier assistant IA.',
       setup:149, p:{m:99, n:89, y:82},
@@ -3845,7 +3857,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       + (isReco
            ? '<span class="tag reco">' + CHECK + ' Recommandé pour vous</span>'
            : p.best ? '<span class="tag">' + STAR + ' Le plus choisi</span>' : '')
-      + '<div class="shot"><img src="photos/offre-' + p.id + '.jpg" alt="' + p.shotAlt + '" '
+      + '<div class="shot"><img src="' + (p.shot || 'photos/offre-' + p.id + '.jpg') + '" alt="' + p.shotAlt + '" '
       +   'width="760" height="380" loading="lazy" decoding="async"></div>'
       + '<h2>' + p.name + '</h2>'
       + '<p class="for">' + p.for + '</p>'
@@ -4030,16 +4042,18 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     /* un visage par assistant : le même que dans le menu, on reconnaît
        tout de suite qui on ajoute à son équipe */
     list.innerHTML = AGENTS.map(function(a){
-      return '<li><label><input type="checkbox" value="' + a.id + '">'
+      return '<li' + (a.bientot ? ' class="soon"' : '') + '><label><input type="checkbox" value="' + a.id + '"'
+           + (a.bientot ? ' disabled' : '') + '>'
            + '<span class="tpick-box"><img src="perso/avatar-' + a.id + '.webp" alt="" '
            +   'width="30" height="30" loading="lazy" decoding="async"></span>'
-           + '<span class="tpick-txt">' + a.t + '<small>' + a.s + '</small></span></label></li>';
+           + '<span class="tpick-txt">' + a.t + '<small>' + a.s + '</small></span>'
+           + (a.bientot ? '<span class="tpick-soon">Bientôt</span>' : '') + '</label></li>';
     }).join('');
 
     function plural(n){ return n > 1 ? 's' : ''; }
 
     function sync(){
-      count.textContent = picked.length + ' / ' + AGENTS.length;
+      count.textContent = picked.length + ' / ' + EN_VENTE.length;
       var r = reco();
       if (!r) {
         out.hidden = true;
@@ -4059,7 +4073,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
     /* le navigateur restaure l'état des cases au rechargement :
        on repart de ce qu'il affiche, pas d'une liste vide */
-    picked = AGENTS.filter(function(a){
+    picked = EN_VENTE.filter(function(a){
       var el = list.querySelector('input[value="' + a.id + '"]');
       return el && el.checked;
     }).map(function(a){ return a.id; });
