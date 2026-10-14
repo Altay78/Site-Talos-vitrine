@@ -37,7 +37,7 @@ PAGES = ['index.html', 'offres.html', 'comment-ca-marche.html',
          # elles gardaient un menu « Offres » d'une version en retard
          'assistant-commercial.html', 'assistant-tresorerie.html',
          'assistant-client.html', 'assistant-facturation.html',
-         'assistant-administratif.html',
+         'assistant-administratif.html', 'assistant-juridique.html',
          # commander et merci manquaient : régénérées par offres.py et
          # merci.py, elles repartaient sans le menu « Offres » et sans
          # le pied de page réaligné. Deux pages du tunnel d'achat, donc
@@ -83,6 +83,7 @@ EQUIPE = [
     ('client',        u'Assistante client',       u'Réponses et rendez-vous',       'assistant-client.html'),
     ('facturation',   u'Assistant facturation',   u'Factures conformes 2026',       'assistant-facturation.html'),
     ('administratif', u'Assistante administrative', u'Tri des mails et classement',   'assistant-administratif.html'),
+    ('juridique',     u'Assistante juridique',     u'Contrats et conformité',        'assistant-juridique.html'),
     ('chantier',      u'Assistant chef de chantier', u'Planning, suivi, rapports',     None),
     ('stock',         u'Assistant gestion de stock', u'Stocks, commandes, alertes',    None),
 ]

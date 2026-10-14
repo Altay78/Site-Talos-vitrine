@@ -17,6 +17,7 @@
 - [Agent IA relance des impayés pour artisans du BTP](https://www.talos-ai.tech/assistant-tresorerie.html): L'agent IA trésorerie repère les factures en retard, relance à J+7, J+15 et J+30, prépare pénalités et mise en demeure, et annonce ce qui va rentrer.
 - [Agent IA secrétariat pour artisans : réponses et RDV 24h/24](https://www.talos-ai.tech/assistant-client.html): L'agent IA client répond à vos clients jour et nuit, qualifie les demandes et propose des créneaux compatibles avec vos trajets. Vous gardez la main.
 - [Agent IA administratif pour artisans : tri des mails](https://www.talos-ai.tech/assistant-administratif.html): L'agent IA administratif trie votre boîte mail en six catégories, remonte les urgences et classe chaque pièce au bon chantier.
+- [Agent IA juridique pour artisans : contrats et conformité](https://www.talos-ai.tech/assistant-juridique.html): L'agent IA juridique vérifie les mentions obligatoires de vos devis et factures, suit les attestations de vos sous-traitants et vos garanties après réception.
 
 ## Tarifs
 

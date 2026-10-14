@@ -62,6 +62,10 @@ PAGES = [
      u"Agent IA administratif pour artisans : tri des mails | Talos",
      u"L'agent IA administratif trie votre boîte mail en six catégories, "
      u"remonte les urgences et classe chaque pièce au bon chantier."),
+    ('assistant-juridique.html',
+     u"Agent IA juridique pour artisans : contrats et conformité | Talos",
+     u"L'agent IA juridique vérifie les mentions obligatoires de vos devis et factures, "
+     u"suit les attestations de vos sous-traitants et vos garanties après réception."),
     ('tarifs.html',
      u"Tarifs des agents IA pour artisans du BTP dès 99 €/mois",
      None),  # composée plus bas depuis panier.js
@@ -96,6 +100,7 @@ ASSISTANTS = {
     'assistant-tresorerie.html': u"Agent IA trésorerie",
     'assistant-client.html': u"Agent IA client",
     'assistant-administratif.html': u"Agent IA administratif",
+    'assistant-juridique.html': u"Agent IA juridique",
 }
 
 
@@ -417,7 +422,7 @@ Sitemap: %ssitemap.xml
 PAGES_FULL = ['index.html', 'offres.html', 'assistant-commercial.html',
               'assistant-facturation.html', 'assistant-tresorerie.html',
               'assistant-client.html', 'assistant-administratif.html',
-              'comment-ca-marche.html', 'tarifs.html', 'pourquoi-talos.html']
+              'assistant-juridique.html', 'comment-ca-marche.html', 'tarifs.html', 'pourquoi-talos.html']
 
 
 def texte(f):
