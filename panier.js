@@ -50,14 +50,22 @@
     { id: 'tresorerie',    nom: 'Assistante trésorerie',   sous: 'Impayés et prévision' },
     { id: 'client',        nom: 'Assistante client',       sous: 'Réponses et rendez-vous' },
     { id: 'facturation',   nom: 'Assistant facturation',   sous: 'Factures conformes 2026' },
-    { id: 'administratif', nom: 'Assistante administrative', sous: 'Tri des mails et classement' }
+    { id: 'administratif', nom: 'Assistante administrative', sous: 'Tri des mails et classement' },
+    /* montrée, pas vendue : l'application n'a pas encore de modules pour
+       elle. Le jour où elle les a, on retire « bientot » — et on l'ajoute
+       à ASSISTANTS dans talos-app/lib/assistants.ts. */
+    { id: 'juridique',     nom: 'Assistante juridique',    sous: 'Contrats et conformité', bientot: true }
   ];
 
+  /* seuls les assistants en vente entrent dans PAR_ID : un « bientôt »
+     ne peut ni s'ajouter, ni survivre dans un panier enregistré */
   var PAR_ID = {};
-  AGENTS.forEach(function (a) { PAR_ID[a.id] = a; });
+  AGENTS.forEach(function (a) { if (!a.bientot) PAR_ID[a.id] = a; });
 
   var CLE = 'talos-panier';
-  var MAX = AGENTS.length;
+  /* le plafond, c'est la plus grande formule (Évolution : cinq au choix),
+     pas le nombre d'assistants affichés */
+  var MAX = PALIERS[PALIERS.length - 1].max;
 
   /* ── icônes ─────────────────────────────────────────────────────────── */
   function svg(d, trait) {
@@ -283,6 +291,13 @@
   /* ═══ LE RÉCAPITULATIF — le même dans le tiroir et sur la page ════════ */
   function htmlChoix(c) {
     return AGENTS.map(function (a) {
+      if (a.bientot) {
+        return '<li><div class="pn-ag soon" aria-disabled="true">' +
+          '<img src="perso/avatar-' + a.id + '.webp" width="40" height="40" alt="" loading="lazy">' +
+          '<span class="pn-ag-t"><b>' + a.nom + '</b><small>' + a.sous + '</small></span>' +
+          '<span class="pn-ag-soon">Bientôt</span>' +
+          '</div></li>';
+      }
       var on = dedans(a.id);
       return '<li><button type="button" class="pn-ag' + (on ? ' on' : '') +
         '" data-bascule="' + a.id + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +

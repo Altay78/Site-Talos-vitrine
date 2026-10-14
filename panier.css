@@ -107,6 +107,14 @@ html.pn-ouvert .pn-tiroir{transform:none}
    coche se trace quand l'assistant est choisi. Le dessin ne change jamais :
    seules la teinte et la longueur du trait bougent, donc la pastille se
    remplit au lieu de sauter d'une icône à l'autre. */
+/* annoncée, pas encore en vente : lisible, mais visiblement hors jeu */
+.pn-ag.soon{cursor:default;border-style:dashed}
+.pn-ag.soon:hover{border-color:var(--pn-fil)}
+.pn-ag.soon img{opacity:.6;filter:grayscale(.35)}
+.pn-ag.soon b{color:var(--pn-doux)}
+.pn-ag-soon{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 8px;border-radius:999px;color:var(--pn-acc);
+  background:color-mix(in oklab,var(--pn-acc) 14%,transparent)}
 .pn-ag-x{flex:0 0 auto;width:24px;height:24px}
 .pn-ag-x svg{display:block;width:24px;height:24px}
 .pn-mk-r{fill:none;stroke:color-mix(in oklab,var(--pn-txt) 26%,transparent);stroke-width:1.4;
