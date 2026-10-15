@@ -211,10 +211,12 @@ def accueil():
                  u'du BTP</span>Votre bureau tourne', deja='class="hero-cat"')
     s = remplace(s, u'votre assistant s’en charge.', u'vos agents IA s’en chargent.')
 
-    # bloc définition, en récapitulatif entre le simulateur et la FAQ : en tête de
-    # page il passait avant les agents eux-mêmes
+    # bloc définition, juste sous « On se branche à vos outils » : trois cartes
+    # courtes, il se lit avant les agents sans leur voler la vedette
     s = re.sub(r'\n<!-- ═══ DÉFINITION — agents_ia\.py.*?</section>\n', '\n', s, flags=re.S)
-    s = remplace(s, u'\n<section class="t-faq" id="faq">', DEF + u'<section class="t-faq" id="faq">')
+    a = s.index('<section class="int-band')
+    b = s.index('</section>', a) + len('</section>')
+    s = s[:b] + DEF.rstrip('\n') + s[b:]
     # une phrase sous « On se branche à vos outils » : ce que les logos ne disent pas
     s = remplace(s, u'<h2 class="int-sub">On se branche à vos outils.</h2>',
                  u'<h2 class="int-sub">On se branche à vos outils.</h2><p class="int-lead">Talos se '
@@ -234,7 +236,8 @@ def accueil():
         b = s.find('</p>', a) + 4
         assert a > 0
         s = s[:b] + (u'\n  <p class="crew-later"><b>Bientôt :</b> Assistant chef de chantier '
-                     u'(plannings, comptes rendus) et Assistant gestion de stock (stocks, commandes).</p>') + s[b:]
+                     u'(plannings, comptes rendus), Assistant gestion de stock (stocks, commandes) et '
+                     u'Assistante juridique (contrats et conformité).</p>') + s[b:]
 
     # l'agent responsable sous chaque étape du parcours
     if 'class="fx-agent"' not in s:

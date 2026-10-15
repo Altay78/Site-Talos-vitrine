@@ -91,6 +91,9 @@ EQUIPE = [
 # « Bientôt » et non cliquables — un lien vers une page absente serait pire
 # que pas de lien du tout.
 BIENTOT = {'chantier', 'stock'}
+# Celle-là a déjà sa page mais n'est pas encore en vente : le lien reste,
+# le badge « Bientôt » prévient avant le clic.
+BIENTOT_PAGE = {'juridique'}
 
 CHEV = (u'<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" '
         u'stroke="currentColor" stroke-width="2.6" stroke-linecap="round" '
@@ -129,6 +132,10 @@ IC_BLOG = (u'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke=
            u'a2.1 2.1 0 0 1 2.1-2.1h11.6a2.3 2.3 0 0 1 2.3 0z"/><path d="M7.4 8.7h8.2M7.4 12.3h8.2'
            u'M7.4 15.9h5"/></svg>')
 
+IC_TVA = (u'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+          u'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+          u'<rect x="3.5" y="3.5" width="17" height="17" rx="3.4"/><path d="M9 15l6-6"/>'
+          u'<circle cx="9.4" cy="9.4" r=".9"/><circle cx="14.6" cy="14.6" r=".9"/></svg>')
 MENUS = {
     'tarifs.html': [
         (IC_TARIF, u'Formules et tarifs', u'Solo, Pro, Business',       'tarifs.html'),
@@ -137,6 +144,7 @@ MENUS = {
     'pourquoi-talos.html': [
         (IC_HIST, u'Notre histoire', u'D\u2019o\xf9 vient Talos',        'pourquoi-talos.html'),
         (IC_BLOG, u'Blog',           u'Guides et cas de chantier',   'blog.html'),
+        (IC_TVA,  u'Calculateur TVA', u'Outil gratuit : 5,5 %, 10 % ou 20 %', 'calculateur-tva-btp.html'),
     ],
 }
 # Les libell\xe9s qui restent dans la barre. Les autres vivent dans un menu.
@@ -172,6 +180,9 @@ def offres_html(page):
                 u'<span class="tnav-ag is-soon">%s'
                 u'<b>%s <i class="tnav-soon">Bientôt</i></b><small>%s</small></span>'
                 % (img, nom, mission))
+        elif slug in BIENTOT_PAGE:
+            items.append(u'<a class="tnav-ag" href="%s">%s<b>%s <i class="tnav-soon">Bientôt</i></b>'
+                         u'<small>%s</small></a>' % (href, img, nom, mission))
         else:
             items.append(u'<a class="tnav-ag" href="%s">%s<b>%s</b><small>%s</small></a>'
                          % (href, img, nom, mission))
