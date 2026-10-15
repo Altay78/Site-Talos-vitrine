@@ -3190,8 +3190,15 @@ html[data-theme="light"] .t-def{--bronze:#B4491A;--parch:#1C1310;--lin:#5E5149;-
 .def-c p{margin:0;font-size:15px;line-height:1.55;color:var(--lin)}
 .def-f{margin:28px 0 0;font-size:14px;line-height:1.6;color:var(--lin)}
 .def-f span{margin:0 8px;opacity:.5}
-@media (max-width:860px){.t-def{padding-top:72px}.def-c{grid-template-columns:1fr;margin-top:40px}
-  .def-c li{padding:22px 20px 24px}}
+/* téléphone : les trois cartes défilent au doigt, la suivante dépasse pour
+   montrer qu'il y a de la suite */
+@media (max-width:860px){.t-def{padding-top:72px}
+  .def-c{display:flex;gap:12px;margin:40px -24px 0;padding:0 24px 4px;overflow-x:auto;
+    scroll-snap-type:x mandatory;scroll-padding:0 24px;overscroll-behavior-x:contain;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .def-c::-webkit-scrollbar{display:none}
+  .def-c::after{content:"";flex:0 0 12px}
+  .def-c li{flex:0 0 82%;scroll-snap-align:start;padding:22px 20px 24px}}
 .int-lead{margin:12px auto 0;max-width:62ch;text-align:center;font-size:16px;line-height:1.6;
   color:var(--color-ink-soft,#8C8480)}
 .crew-later{margin:14px auto 0;max-width:60ch;padding:0 24px;text-align:center;font-size:14px;
