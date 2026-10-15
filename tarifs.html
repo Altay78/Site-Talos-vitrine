@@ -2485,6 +2485,71 @@ html[data-theme="light"] .t-cmp .bar .mult{color:rgba(40,25,16,.22)}
 .t-cmp .cmp-cta .go:hover{transform:none}
 }
 
+/* ═══ VOTRE OUTIL FACE À TALOS — comparatif nommé ═══
+   Publicité comparative (C. conso. L122-1 s.) : chaque case doit pouvoir
+   être prouvée. Source unique : les pages publiques des éditeurs,
+   consultées le 15/10/2026 — garder les captures datées. « Non indiqué »
+   veut dire absent de ces pages, rien de plus. Sage Batigest est
+   volontairement absent : son site n'a pas pu être vérifié.
+   Sans JavaScript, toutes les colonnes s'affichent et le tableau défile. */
+.t-vs{border-top:1px solid var(--line)}
+.t-vs-in{position:relative;max-width:1080px;margin:0 auto;display:grid;gap:28px;min-width:0}
+.t-vs .lede{max-width:720px}
+.t-vs .lede p{max-width:58ch}
+.t-vs .pick{display:grid;gap:12px}
+.t-vs .pick-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--lin)}
+.t-vs .chips{display:flex;flex-wrap:wrap;gap:8px}
+.t-vs .chip{font:inherit;font-size:14px;font-weight:600;color:var(--parch);cursor:pointer;
+  min-height:44px;padding:10px 18px;border-radius:100px;border:1px solid var(--line-2);background:var(--ink-2);
+  transition:border-color .2s var(--e),background .2s var(--e),color .2s var(--e)}
+.t-vs .chip:hover{border-color:rgba(var(--bronze-rgb),.6)}
+.t-vs .chip:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.t-vs .chip[aria-pressed="true"]{background:var(--parch);color:var(--ink);border-color:var(--parch)}
+.t-vs .score{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding:18px 22px;border-radius:16px;
+  background:rgba(var(--bronze-rgb),.07);border:1px solid rgba(var(--bronze-rgb),.2)}
+.t-vs .score b{font-size:17px;font-weight:700;letter-spacing:-.3px}
+.t-vs .score b em{font-weight:800}
+.t-vs .score span{font-size:14px;color:var(--lin);line-height:1.5}
+.t-vs .vs-wrap{border-radius:20px;border:1px solid var(--line-2);background:var(--ink-2);overflow-x:auto}
+.t-vs table{width:100%;border-collapse:collapse;font-size:14.5px;line-height:1.4}
+.t-vs th,.t-vs td{padding:15px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.t-vs tbody tr:last-child th,.t-vs tbody tr:last-child td{border-bottom:0}
+.t-vs thead th{font-size:14px;font-weight:700;letter-spacing:-.2px;color:var(--parch);
+  text-align:center;vertical-align:bottom;padding:20px 12px 16px;white-space:nowrap}
+.t-vs thead th:first-child{text-align:left}
+.t-vs tbody th{text-align:left;font-weight:600;color:var(--parch)}
+.t-vs td{text-align:center;color:var(--lin);min-width:96px}
+.t-vs .tal{background:rgba(var(--bronze-rgb),.08);width:20%}
+.t-vs thead .tal{background:var(--bronze);color:#fff;font-size:16px;letter-spacing:-.4px}
+.t-vs .ic{display:inline-block;width:20px;height:20px;vertical-align:middle;background:currentColor;
+  -webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}
+.t-vs .yes{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");color:var(--parch)}
+.t-vs .no{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M8 12h8'/%3E%3C/svg%3E");color:var(--lin);opacity:.6}
+.t-vs .tal .yes,.t-vs .vs-key .yes.on{color:var(--bronze);width:24px;height:24px}
+.t-vs .part{font-size:12px;font-weight:600;color:var(--lin)}
+.t-vs .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* une seule colonne d'outil à la fois, celle que le visiteur a choisie */
+.t-vs[data-pick] [data-tool]:not(.on){display:none}
+.t-vs[data-pick] td[data-tool],.t-vs[data-pick] th[data-tool]{width:24%}
+.t-vs .vs-key{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;color:var(--lin)}
+.t-vs .vs-key span{display:inline-flex;align-items:center;gap:7px}
+.t-vs .vs-key .ic{width:18px;height:18px}
+.t-vs .vs-foot{font-size:12.5px;line-height:1.55;color:var(--lin);max-width:92ch}
+.t-vs .cmp-cta{margin:0}
+.t-vs .cmp-cta .go:hover svg{transform:translateX(3px)}
+@media (max-width:640px){
+.t-vs .chip{font-size:13.5px;padding:10px 14px}
+.t-vs .score{padding:16px}
+.t-vs .score b{font-size:15.5px}
+.t-vs table{font-size:13px}
+.t-vs th,.t-vs td{padding:12px 8px}
+.t-vs tbody th,.t-vs thead th:first-child{padding-left:14px}
+.t-vs thead th{font-size:12.5px;padding:14px 8px 12px}
+.t-vs td{min-width:84px}
+.t-vs .part{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){.t-vs .chip{transition:none}}
+
 /* la promesse ferme la carte : c'est la phrase qu'on retient */
 .t-price .promise{display:flex;align-items:flex-start;gap:10px;margin-top:auto;
   padding:14px 14px 13px;border-radius:14px;font-size:13px;line-height:1.45;font-weight:600;
@@ -3372,6 +3437,200 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     </a>
   </div>
 </section>
+
+<section class="t-cmp t-vs" id="face-aux-autres">
+  <div class="t-vs-in">
+
+    <div class="lede">
+      <span class="eyebrow"><i></i> Votre outil face à Talos</span>
+      <h2>Votre logiciel vous aide.<br><em>Talos travaille</em> à votre place.</h2>
+      <p>Choisissez ce que vous utilisez aujourd'hui. Vous verrez ce qu'il fait
+         pour vous, et ce qui vous reste à faire le soir.</p>
+    </div>
+
+    <div class="pick" hidden>
+      <span class="pick-lbl" id="vsPickLbl">Vous utilisez aujourd'hui</span>
+      <div class="chips" role="group" aria-labelledby="vsPickLbl">
+        <button type="button" class="chip" data-for="obat" aria-pressed="true">Obat</button>
+        <button type="button" class="chip" data-for="tolteck" aria-pressed="false">Tolteck</button>
+        <button type="button" class="chip" data-for="batappli" aria-pressed="false">Batappli</button>
+        <button type="button" class="chip" data-for="ebp" aria-pressed="false">EBP Bâtiment</button>
+        <button type="button" class="chip" data-for="kompa" aria-pressed="false">Kompa</button>
+        <button type="button" class="chip" data-for="excel" aria-pressed="false">Excel ou papier</button>
+      </div>
+    </div>
+
+    <p class="score" aria-live="polite" hidden></p>
+
+    <div class="vs-wrap" role="region" aria-label="Tableau comparatif : votre outil face à Talos" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr">Ce qu'il vous faut</span></th>
+            <th scope="col" data-tool="obat">Obat</th>
+            <th scope="col" data-tool="tolteck">Tolteck</th>
+            <th scope="col" data-tool="batappli">Batappli</th>
+            <th scope="col" data-tool="ebp">EBP Bâtiment</th>
+            <th scope="col" data-tool="kompa">Kompa</th>
+            <th scope="col" data-tool="excel">Excel ou papier</th>
+            <th scope="col" class="tal">Talos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Répond à vos clients 24 h/24</th>
+            <td data-tool="obat"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="tolteck"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="batappli"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="ebp"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="kompa"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="excel"><i class="ic no" aria-hidden="true"></i><span class="sr">Non</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Prend les rendez-vous clients pour vous</th>
+            <td data-tool="obat"><span class="part">Agenda seul</span></td>
+            <td data-tool="tolteck"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="batappli"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="ebp"><span class="part">Agenda seul</span></td>
+            <td data-tool="kompa"><span class="part">Agenda seul</span></td>
+            <td data-tool="excel"><i class="ic no" aria-hidden="true"></i><span class="sr">Non</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Prépare le devis depuis un vocal ou une photo</th>
+            <td data-tool="obat"><span class="part">Option payante</span></td>
+            <td data-tool="tolteck"><span class="part">Via un partenaire</span></td>
+            <td data-tool="batappli"><span class="part">8 à 16 par mois</span></td>
+            <td data-tool="ebp"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="kompa" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+            <td data-tool="excel"><i class="ic no" aria-hidden="true"></i><span class="sr">Non</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Relance les devis jusqu'à la signature</th>
+            <td data-tool="obat"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="tolteck"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="batappli"><span class="part">Liste seulement</span></td>
+            <td data-tool="ebp"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="kompa" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+            <td data-tool="excel"><i class="ic no" aria-hidden="true"></i><span class="sr">Non</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Fait signer le devis en ligne avec l'acompte</th>
+            <td data-tool="obat" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+            <td data-tool="tolteck"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="batappli"><span class="part">Paiement seul</span></td>
+            <td data-tool="ebp"><span class="part">Signature seule</span></td>
+            <td data-tool="kompa"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="excel"><i class="ic no" aria-hidden="true"></i><span class="sr">Non</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Factures d'acompte et de situation</th>
+            <td data-tool="obat" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+            <td data-tool="tolteck" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+            <td data-tool="batappli" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+            <td data-tool="ebp" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+            <td data-tool="kompa"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="excel"><span class="part">À la main</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Relance les impayés sans vous</th>
+            <td data-tool="obat"><span class="part">En un clic</span></td>
+            <td data-tool="tolteck"><span class="part">À la main</span></td>
+            <td data-tool="batappli"><span class="part">À la main</span></td>
+            <td data-tool="ebp"><span class="part">En partie</span></td>
+            <td data-tool="kompa" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+            <td data-tool="excel"><span class="part">À la main</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Prépare pénalités et mise en demeure</th>
+            <td data-tool="obat"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="tolteck"><span class="part">À la main</span></td>
+            <td data-tool="batappli"><span class="part">Modèle seul</span></td>
+            <td data-tool="ebp"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="kompa"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="excel"><i class="ic no" aria-hidden="true"></i><span class="sr">Non</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Trie vos mails et les range par chantier</th>
+            <td data-tool="obat"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="tolteck"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="batappli"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="ebp"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="kompa"><i class="ic no" aria-hidden="true"></i><span class="sr">Non indiqué</span></td>
+            <td data-tool="excel"><i class="ic no" aria-hidden="true"></i><span class="sr">Non</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Mise en place faite pour vous</th>
+            <td data-tool="obat"><span class="part">Selon la formule</span></td>
+            <td data-tool="tolteck"><span class="part">Formation offerte</span></td>
+            <td data-tool="batappli"><span class="part">Formation payante</span></td>
+            <td data-tool="ebp"><span class="part">Services payants</span></td>
+            <td data-tool="kompa"><span class="part">Migration offerte</span></td>
+            <td data-tool="excel"><i class="ic no" aria-hidden="true"></i><span class="sr">Non</span></td>
+            <td class="tal" data-v="y"><i class="ic yes" aria-hidden="true"></i><span class="sr">Oui</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="vs-key" aria-hidden="true">
+      <span><i class="ic yes on"></i> Fait pour vous</span>
+      <span><i class="ic yes"></i> Inclus dans l'outil</span>
+      <span><i class="ic no"></i> Non indiqué sur le site de l'éditeur</span>
+    </div>
+
+    <p class="vs-foot">Selon les pages publiques de chaque éditeur, consultées le 15 octobre 2026.
+       « Non indiqué » : la fonction n'apparaît pas sur ces pages. Obat, Tolteck, Batappli, EBP et Kompa
+       sont des marques de leurs propriétaires respectifs. Une information a changé ? Écrivez-nous à
+       contact@talos-ai.tech, nous corrigeons sous 48 h.</p>
+
+    <div class="cmp-cta">
+      <div class="tx">
+        <b>Voyez ce que Talos ajoute à votre outil.</b>
+        <span>En 30 minutes, sur vos vrais devis et vos vrais chantiers. Sans engagement.</span>
+      </div>
+      <a class="go" href="reserver.html">
+        Réserver une démo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+<script>
+/* comparatif : le visiteur choisit son outil, le tableau le met face à Talos */
+(function(){
+  var sec=document.getElementById('face-aux-autres'); if(!sec) return;
+  var N={"obat": "Obat", "tolteck": "Tolteck", "batappli": "Batappli", "ebp": "EBP Bâtiment", "kompa": "Kompa", "excel": "Excel ou papier"}, PLUG={"obat": true, "tolteck": true, "batappli": false, "ebp": true, "kompa": false, "excel": null}, total=10;
+  var chips=sec.querySelectorAll('.chip'), sc=sec.querySelector('.score');
+  function pick(t){
+    sec.setAttribute('data-pick',t);
+    chips.forEach(function(c){c.setAttribute('aria-pressed',c.dataset.for===t?'true':'false')});
+    sec.querySelectorAll('[data-tool]').forEach(function(el){el.classList.toggle('on',el.dataset.tool===t)});
+    var n=sec.querySelectorAll('td.on[data-v="y"]').length, name=N[t];
+    var head = t==='excel'
+      ? 'Sur Excel ou papier, <em>tout</em> repose sur vous. Talos fait les '+total+' tâches.'
+      : name+' fait <em>'+n+' tâche'+(n>1?'s':'')+' sur '+total+'</em> à votre place. Talos les fait toutes.';
+    var tail = PLUG[t]===true ? 'Gardez '+name+' : Talos s’y branche et prend le reste en charge.'
+      : PLUG[t]===false ? 'Gardez '+name+' pour facturer : Talos prend le reste. On vérifie le branchement ensemble pendant la mise en place.'
+      : 'Talos reprend vos prix et vos modèles, sans rien à installer.';
+    sc.innerHTML='<b>'+head+'</b><span>'+tail+'</span>';
+  }
+  chips.forEach(function(c){c.addEventListener('click',function(){pick(c.dataset.for)})});
+  sc.hidden=false; sec.querySelector('.pick').hidden=false;
+  pick('obat');
+})();
+</script>
+
+
 
 
 <footer class="t-ft" id="reserver">
