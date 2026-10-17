@@ -1175,7 +1175,9 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
     go.classList.add('busy');
     libelle('Ouverture de l\'agenda…');
-    setTimeout(function () { window.location.href = url; }, 420);
+    /* replace : l'adresse pré-remplie (nom, e-mail, besoin) ne reste pas
+       dans l'historique du navigateur sous le site. */
+    setTimeout(function () { window.location.replace(url); }, 420);
   });
 })();
 
