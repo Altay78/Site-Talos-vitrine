@@ -49,7 +49,7 @@
     { id: 'commercial',    nom: 'Assistant commercial',    sous: 'Devis, signature, relances' },
     { id: 'tresorerie',    nom: 'Assistante trésorerie',   sous: 'Impayés et prévision' },
     { id: 'client',        nom: 'Assistante client',       sous: 'Réponses et rendez-vous' },
-    { id: 'facturation',   nom: 'Assistant facturation',   sous: 'Factures conformes 2026' },
+    { id: 'facturation',   nom: 'Assistant facturation',   sous: 'Factures, acomptes, situations' },
     { id: 'administratif', nom: 'Assistante administrative', sous: 'Tri des mails et classement' },
     /* montrée, pas vendue : l'application n'a pas encore de modules pour
        elle. Le jour où elle les a, on retire « bientot » — et on l'ajoute

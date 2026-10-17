@@ -594,14 +594,14 @@ Vous refaites la facture le dimanche Elle part le jour de la signature
 Vous ressaisissez les lignes du devis Rien n'est retapé
 Vous recalculez le reste à facturer Le cumul est juste à chaque situation
 Vous cherchez le bon taux de TVA Il est posé selon le chantier
-Vous redoutez la réforme de 2026 Le format est déjà celui attendu
+Vous redoutez la réforme de 2026 Factur-X prêt avant l'échéance de 2027
 Votre comptable relance trois fois L'export part en fin de mois
 ### Vous avez besoin d'une facturation carrée ?
-Il facture pendant que vous êtes sur le chantier, au bon montant et au bon format. La réforme 2026 arrive — celui-ci l'a déjà passée.
+Il facture pendant que vous êtes sur le chantier, au bon montant et au bon format. La facture électronique arrive : il sera prêt avant votre échéance de septembre 2027.
 Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
-Conforme à la réforme 2026
+Factur-X prêt avant sept. 2027
 Données hébergées en Europe
 
 ---
