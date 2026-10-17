@@ -702,11 +702,13 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 <div class="lg-tw"><table><thead><tr><th>Cookie</th><th>Émetteur</th><th>Rôle</th><th>Durée</th></tr></thead><tbody>
 <tr><td>Cookies de session et d'authentification</td><td>Supabase</td><td>Vous maintenir connecté à votre espace client et sécuriser la session</td><td>Durée de la session, renouvelée à chaque connexion</td></tr>
 <tr><td>Cookies techniques d'infrastructure</td><td>Vercel</td><td>Répartition de charge, sécurité, affectation à la bonne version du site</td><td>Session</td></tr>
+<tr><td><code>talos_consentement</code></td><td>Talos</td><td>Retenir votre choix sur les cookies, pour le site et l'espace client</td><td>6 mois</td></tr>
+<tr><td>Thème et panier (stockage local du navigateur)</td><td>Talos</td><td>Garder le mode clair ou sombre choisi et votre sélection d'assistants</td><td>Jusqu'à effacement par vous</td></tr>
 </tbody></table></div>
 <p>Ces cookies sont <strong>exemptés de consentement</strong> : ils sont indispensables à la fourniture du service que vous demandez. Leur refus empêcherait l'accès à l'espace client.</p>
-<p><strong>Mesure d'audience.</strong> L'espace client (app.talos-ai.tech) utilise <em>Vercel Speed Insights</em>, qui mesure les performances d'affichage des pages. Cet outil <strong>ne dépose aucun cookie</strong>, ne suit pas les visiteurs d'un site à l'autre et ne produit que des statistiques agrégées. Il ne permet pas de vous identifier.</p>
+<p><strong>Mesure de performance, avec votre accord.</strong> L'espace client (app.talos-ai.tech) peut utiliser <em>Vercel Speed Insights</em>, qui mesure la vitesse d'affichage des pages. Cet outil ne dépose aucun cookie, ne suit pas les visiteurs d'un site à l'autre et ne produit que des statistiques agrégées. Il n'est chargé <strong>qu'après votre accord</strong>, donné dans le bandeau affiché à votre première visite.</p>
 <p><strong>Aucun cookie publicitaire, de reciblage, de réseau social ou de profilage n'est déposé</strong>, avec ou sans consentement. Aucun outil tiers de statistiques (Google Analytics, Meta Pixel ou équivalent) n'est utilisé.</p>
-<p>C'est pour cette raison que le site n'affiche pas de bandeau cookies : il n'y a rien à consentir. Si un traceur non exempté venait à être ajouté, un bandeau serait mis en place et cette section mise à jour au préalable.</p>
+<p><strong>Votre choix.</strong> À votre première visite, un bandeau vous propose de tout accepter, de tout refuser ou de choisir, avec la même facilité. Votre choix est conservé 6 mois, puis redemandé. Vous pouvez le modifier à tout moment par le lien <a href="#cookies" onclick="if(window.talosCookies){window.talosCookies.ouvrir();return false}">Cookies</a> en bas de chaque page. Le site n'appelle aucun service tiers au chargement (polices et scripts sont servis par Talos).</p>
 <hr>
 <p>Cette partie s'applique aux données que le Client fait traiter par le Service : courriels, pièces jointes, fiches clients, devis, factures, rendez-vous, conversations, coordonnées de ses propres clients et prospects.</p>
 <h2>B.1 Objet, durée, nature et finalité</h2>
@@ -907,6 +909,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 <script src="talos-paiement.js?v=626231fa" defer></script>
 <script src="panier.js?v=d1c3c79f" defer></script>
 <script src="talos-more.js?v=54fecf1f" defer></script>
+<script src="talos-cookies.js?v=41138395" defer></script>
 <script src="talos-lettre.js?v=da88f051" defer></script>
 </body>
 </html>

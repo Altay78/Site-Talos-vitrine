@@ -90,6 +90,7 @@ def page(fname, title, desc, css, body, js, og_title=None, og_desc=None,
     # les paragraphes gris se replient derrière « En savoir plus » sur
     # téléphone : le script se pose tout seul, page par page
     out += u'<script src="talos-more.js" defer></script>\n'
+    out += u'<script src="talos-cookies.js" defer></script>\n'
     # l'inscription à la lettre : un seul comportement pour les deux
     # formulaires du site, celui du pied de page et celui du blog
     out += u'<script src="talos-lettre.js" defer></script>\n</body>\n</html>\n'
