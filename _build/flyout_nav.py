@@ -125,9 +125,30 @@ def empreinte(nom):
     return hashlib.md5(io.open(WEB + nom, 'rb').read()).hexdigest()[:8]
 
 
+def ordonner_liens(s):
+    """Barre du PC : Agents IA, Tarifs, Comment ça marche, puis Pourquoi
+    Talos. Échange dans le balisage, pas en CSS (order) : l'ordre au clavier
+    et celui des lecteurs d'écran suivent ainsi l'ordre affiché."""
+    m = re.search(r'(<div class="tnav-links">)(.*?)(</div>)', s, re.S)
+    if not m:
+        return s
+    inner = m.group(2)
+    c = re.search(r'<a href="comment-ca-marche\.html"[^>]*>Comment ça marche</a>', inner)
+    t = inner.find('<span class="tnav-drop"><a class="tnav-drop-t')
+    t = inner.find('<span class="tnav-drop"><a class="tnav-drop-t', t + 1) if t >= 0 else -1
+    while t >= 0 and 'href="tarifs.html"' not in inner[t:t + 120]:
+        t = inner.find('<span class="tnav-drop"><a class="tnav-drop-t', t + 1)
+    p = inner.find('<span class="tnav-drop"><a class="tnav-drop-t', t + 1) if t >= 0 else -1
+    if not c or t < 0 or p < 0 or not (c.start() < t < p) or c.end() != t:
+        return s     # déjà dans le bon ordre, ou barre inattendue : on n'y touche pas
+    inner = inner[:c.start()] + inner[t:p] + inner[c.start():c.end()] + inner[p:]
+    return s[:m.start(2)] + inner + s[m.end(2):]
+
+
 def traiter(f):
     s = io.open(WEB + f, encoding='utf-8').read()
     avant = s
+    s = ordonner_liens(s)
     s, n = ANCIEN.subn(lambda m: BLOC, s, count=1)
     if not n:
         s = DEJA.sub(lambda m: BLOC, s, count=1)

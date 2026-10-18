@@ -170,3 +170,20 @@ html[data-theme="light"] .tfly-t.is-cta[aria-expanded="true"]{background:#E0631F
   .tfly-pan[data-state="open"],.tfly-pan[data-state="closing"]{animation-duration:1ms}
   .tfly-track,.tfly-pan,.tfly-go{transition:none}
 }
+
+
+/* ── LA BARRE DU PC : les liens au centre exact ────────────────────────
+   En flex « space-between », le bloc de liens tombait au milieu de
+   l'espace LIBRE, donc décalé : le logo et les actions n'ont pas la même
+   largeur. Une grille 1fr · auto · 1fr le pose au centre de la barre,
+   logo à gauche et actions à droite inchangés. Sous 1240 px les liens
+   passent dans le menu, la barre reprend son flex. */
+@media (min-width:1241px){
+  nav.tnav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+  nav.tnav > .tnav-logo{justify-self:start}
+  /* la barre a 22 px de marge à gauche et 12 px à droite (le bouton de
+     démo vient près du bord) : le centre de la grille est donc 5 px à
+     droite de celui de la barre, on le rattrape */
+  nav.tnav > .tnav-links{justify-self:center;position:relative;left:-5px}
+  nav.tnav > .tnav-act{justify-self:end}
+}
