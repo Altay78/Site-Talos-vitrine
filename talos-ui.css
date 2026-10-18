@@ -1,0 +1,172 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   TALOS · COMPOSANTS PARTAGÉS
+   La pastille d'annonce (.apill) et les menus volants de la barre (.tfly).
+
+   Chargée sur toutes les pages. Comme panier.css, elle ne lit pas --ink :
+   à la racine c'est la couleur du texte, dans les sections .t-price & co
+   c'est celle du fond. Les deux composants portent donc leurs propres
+   jetons, réglés pour chaque thème.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.apill,.tfly{
+  --u-fg:#F5EFE9;
+  --u-mut:rgba(245,239,233,.6);
+  --u-faint:rgba(245,239,233,.38);
+  --u-acc:#F4823E;
+  --u-acc-ink:#E0631F;
+  --u-line:rgba(245,239,233,.13);
+  --u-hi:rgba(255,255,255,.09);
+  --u-glass:rgba(32,25,20,.62);
+  --u-sheet:#1D1713;
+  --u-well:rgba(245,239,233,.06);
+  --u-well-2:rgba(245,239,233,.1);
+  --u-shadow:0 1px 1px rgba(0,0,0,.24),0 12px 28px -8px rgba(0,0,0,.55),0 32px 64px -24px rgba(0,0,0,.6);
+  --u-ease:cubic-bezier(.32,.72,0,1);
+  --u-font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif}
+html[data-theme="light"] .apill,html[data-theme="light"] .tfly{
+  --u-fg:#1C1310;
+  --u-mut:rgba(28,19,16,.6);
+  --u-faint:rgba(28,19,16,.38);
+  --u-acc:#C5531C;
+  --u-acc-ink:#C5531C;
+  --u-line:rgba(40,25,16,.11);
+  --u-hi:rgba(255,255,255,.9);
+  --u-glass:rgba(255,255,255,.72);
+  --u-sheet:#FFFFFF;
+  --u-well:rgba(40,25,16,.045);
+  --u-well-2:rgba(40,25,16,.08);
+  --u-shadow:0 1px 1px rgba(40,25,16,.05),0 12px 28px -10px rgba(40,25,16,.18),0 32px 64px -28px rgba(40,25,16,.22)}
+
+
+/* ── LA PASTILLE D'ANNONCE ─────────────────────────────────────────────
+   Le dessin des annonces d'Apple : un verre fumé, un filet d'un pixel,
+   un reflet en haut. Pas d'étiquette pleine ni de capitales à chasse
+   fixe — le mot accentué suffit à dire « offre », le chevron dit « lien ».
+   ──────────────────────────────────────────────────────────────────── */
+.apill{display:inline-flex;align-items:center;gap:11px;
+  min-height:36px;padding:7px 13px 7px 15px;border-radius:999px;
+  background:var(--u-glass);border:1px solid var(--u-line);
+  box-shadow:inset 0 1px 0 var(--u-hi),0 1px 2px rgba(0,0,0,.12);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  font-family:var(--u-font);font-size:14px;font-weight:500;line-height:1.25;
+  letter-spacing:-.016em;color:var(--u-fg);text-decoration:none;
+  -webkit-font-smoothing:antialiased;
+  transition:background-color .2s ease,border-color .2s ease}
+.apill-tag{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;
+  color:var(--u-acc);font-weight:600;white-space:nowrap}
+/* le reflet de braise : un point qui respire à peine, pas un clignotant */
+.apill-tag::before{content:"";width:6px;height:6px;border-radius:50%;flex:0 0 auto;
+  background:var(--u-acc);box-shadow:0 0 0 3px color-mix(in oklab,var(--u-acc) 22%,transparent)}
+.apill-sep{width:1px;height:14px;flex:0 0 auto;background:var(--u-line)}
+.apill-txt{color:var(--u-fg)}
+.apill-txt b{font-weight:600;font-variant-numeric:tabular-nums}
+.apill-txt .apill-s{display:none}
+.apill-chev{width:7px;height:12px;flex:0 0 auto;margin-left:1px;color:var(--u-faint);
+  transition:transform .3s var(--u-ease),color .2s ease}
+a.apill:hover{border-color:color-mix(in oklab,var(--u-fg) 22%,transparent)}
+a.apill:hover .apill-chev{transform:translateX(2px);color:var(--u-mut)}
+a.apill:focus-visible{outline:2px solid var(--u-acc);outline-offset:3px}
+/* sous 520 px la phrase longue ne tient plus : on garde l'essentiel */
+@media (max-width:520px){
+  .apill{gap:9px;padding:7px 12px 7px 13px;font-size:13px}
+  .apill-txt .apill-l{display:none}
+  .apill-txt .apill-s{display:inline}
+}
+@media (prefers-reduced-motion:reduce){.apill,.apill-chev{transition:none}}
+
+
+/* ── LES MENUS VOLANTS DE LA BARRE ─────────────────────────────────────
+   Un bouton-icône, et au clic un panneau qui sort de lui. Le panneau a
+   des niveaux : une entrée à sous-menu fait glisser la vue de droite à
+   gauche, « Retour » la ramène. La hauteur suit la vue affichée.
+
+   États (posés par talos-ui.js, sur le modèle d'AnimatePresence) :
+     data-state="closed"  → masqué (hidden)
+     data-state="open"    → entrée : 260 ms, courbe d'Apple
+     data-state="closing" → sortie : 160 ms, puis hidden
+   ──────────────────────────────────────────────────────────────────── */
+.tfly{position:relative;display:inline-flex;flex:0 0 auto}
+.tfly-t{display:grid;place-items:center;width:44px;height:44px;padding:0;
+  border-radius:50%;cursor:pointer;color:var(--u-fg);
+  background:transparent;border:1px solid var(--u-line);
+  transition:background-color .2s ease,border-color .2s ease,transform .2s var(--u-ease)}
+.tfly-t svg{width:19px;height:19px}
+.tfly-t:hover,.tfly-t[aria-expanded="true"]{background:var(--u-well-2)}
+.tfly-t:active{transform:scale(.94)}
+.tfly-t:focus-visible{outline:2px solid var(--u-acc);outline-offset:3px}
+/* la démo reste l'action principale de la barre : pleine, couleur de marque */
+.tfly-t.is-cta{background:var(--u-acc-ink);border-color:transparent;color:#fff;
+  box-shadow:0 6px 18px -6px color-mix(in oklab,var(--u-acc-ink) 70%,transparent)}
+.tfly-t.is-cta:hover,.tfly-t.is-cta[aria-expanded="true"]{background:#F4823E}
+html[data-theme="light"] .tfly-t.is-cta:hover,
+html[data-theme="light"] .tfly-t.is-cta[aria-expanded="true"]{background:#E0631F}
+
+.tfly-pan{position:absolute;top:calc(100% + 14px);right:-6px;z-index:70;
+  width:340px;max-width:calc(100vw - 24px);overflow:hidden;
+  border-radius:22px;background:var(--u-sheet);
+  border:1px solid var(--u-line);box-shadow:inset 0 1px 0 var(--u-hi),var(--u-shadow);
+  /* opaque : la barre porte déjà son propre backdrop-filter, et un flou
+     imbriqué n'en voit plus le fond — le texte du héros transparaissait */
+  font-family:var(--u-font);color:var(--u-fg);-webkit-font-smoothing:antialiased;
+  transform-origin:calc(100% - 28px) -8px;
+  transition:height .32s var(--u-ease)}
+.tfly-pan[hidden]{display:none}
+.tfly-pan[data-state="open"]{animation:tflyIn .26s var(--u-ease) both}
+.tfly-pan[data-state="closing"]{animation:tflyOut .16s cubic-bezier(.4,0,1,1) both;pointer-events:none}
+@keyframes tflyIn{from{opacity:0;transform:translateX(10px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes tflyOut{from{opacity:1;transform:none}to{opacity:0;transform:translateX(6px) scale(.98)}}
+
+/* les vues côte à côte : on fait glisser la piste, pas chaque vue */
+.tfly-track{display:flex;align-items:flex-start;width:100%;
+  transition:transform .36s var(--u-ease)}
+.tfly-view{flex:0 0 100%;min-width:0;padding:8px}
+.tfly-view[aria-hidden="true"]{visibility:hidden;transition:visibility 0s linear .36s}
+.tfly-view[aria-hidden="false"]{visibility:visible}
+
+.tfly-hd{padding:12px 12px 10px}
+.tfly-hd b{display:block;font-size:15px;font-weight:600;letter-spacing:-.022em}
+.tfly-hd span{display:block;margin-top:3px;font-size:12.5px;line-height:1.4;color:var(--u-mut);letter-spacing:-.005em}
+
+.tfly-back{display:inline-flex;align-items:center;gap:5px;margin:4px 4px 2px;
+  padding:7px 10px 7px 7px;border:0;border-radius:10px;background:none;cursor:pointer;
+  font:inherit;font-size:13px;font-weight:500;color:var(--u-acc);letter-spacing:-.01em}
+.tfly-back svg{width:15px;height:15px}
+.tfly-back:hover{background:var(--u-well)}
+.tfly-back:focus-visible{outline:2px solid var(--u-acc);outline-offset:-2px}
+
+.tfly-list{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
+.tfly-it{display:grid;grid-template-columns:38px minmax(0,1fr) 14px;align-items:center;
+  column-gap:12px;width:100%;padding:9px 10px;border:0;border-radius:14px;
+  background:none;cursor:pointer;text-align:left;text-decoration:none;color:inherit;
+  font:inherit;transition:background-color .18s ease}
+.tfly-it:hover{background:var(--u-well)}
+.tfly-it:focus-visible{outline:2px solid var(--u-acc);outline-offset:-2px}
+.tfly-ic{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;
+  background:var(--u-well-2);color:var(--u-fg)}
+.tfly-ic svg{width:19px;height:19px}
+.tfly-tx{min-width:0}
+.tfly-tx b{display:block;font-size:14px;font-weight:600;letter-spacing:-.018em;line-height:1.25}
+.tfly-tx small{display:block;margin-top:2px;font-size:12.5px;line-height:1.35;
+  color:var(--u-mut);letter-spacing:-.005em}
+.tfly-go{width:14px;height:14px;color:var(--u-faint);transition:transform .25s var(--u-ease)}
+.tfly-it:hover .tfly-go{transform:translateX(2px)}
+/* l'entrée principale d'un menu : seule à porter la couleur */
+.tfly-it.is-main .tfly-ic{background:var(--u-acc-ink);color:#fff}
+
+.tfly-ft{display:flex;align-items:center;gap:8px;margin:6px 4px 2px;padding:11px 10px 6px;
+  border-top:1px solid var(--u-line);font-size:12px;color:var(--u-mut);letter-spacing:-.005em}
+.tfly-ft svg{width:14px;height:14px;flex:0 0 auto;color:var(--u-faint)}
+.tfly-ft a{color:var(--u-fg);text-decoration:none;font-weight:500}
+.tfly-ft a:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* la barre se resserre : l'espace client part dans le menu du téléphone */
+@media (max-width:600px){
+  .tfly.is-esp{display:none}
+  .tfly-t{width:40px;height:40px}
+  .tfly-pan{position:fixed;top:74px;right:10px;left:10px;width:auto;max-width:none;
+    transform-origin:calc(100% - 70px) -8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tfly-pan[data-state="open"],.tfly-pan[data-state="closing"]{animation-duration:1ms}
+  .tfly-track,.tfly-pan,.tfly-go{transition:none}
+}

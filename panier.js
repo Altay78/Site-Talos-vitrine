@@ -204,7 +204,9 @@
       b.setAttribute('aria-haspopup', 'dialog');
       b.innerHTML = I.sac + '<span class="pn-btn-t">Mon équipe</span><span class="pn-n" aria-hidden="true">0</span>';
       b.addEventListener('click', ouvrir);
-      var cta = act.querySelector('.tnav-cta');
+      /* juste avant la démo : le bouton-icône depuis les menus volants,
+         l'ancien bouton texte sur une page qui ne serait pas passée */
+      var cta = act.querySelector(':scope > .tfly-demo, :scope > .tnav-cta');
       act.insertBefore(b, cta || act.firstChild);
     }
     /* le menu mobile a sa propre liste : la barre y est trop serrée */
