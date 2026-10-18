@@ -76,30 +76,24 @@
   }
 
   /* ── 2 bis · OÙ MÈNE LE BOUTON « COMMANDER » ───────────────────────────
-     Plus directement chez Stripe : vers l'espace client, qui crée le compte
-     s'il n'existe pas, puis rouvre le même lien Stripe avec l'identifiant
-     du compte accroché.
+     Droit chez Stripe : on paie d'abord, le compte s'ouvre ensuite.
+     L'espace client écoute chaque paiement, crée le compte avec l'e-mail
+     donné à Stripe et y envoie le lien pour choisir un mot de passe.
+     Si l'adresse a déjà un compte, l'abonnement s'y accroche.
 
-     Sans ce détour, Stripe encaisse une carte et une adresse e-mail, et
-     personne ne sait à quel compte ouvrir les assistants. C'est la seule
-     étape qui garantit qu'un paiement aboutit toujours à un accès.
-
-     Les liens ci-dessus restent la source : l'espace client lit la même
-     grille, et un lien vide ici éteint le bouton comme avant.           */
-  var SAS = 'https://app.talos-ai.tech/souscrire';
+     Seule la sélection d'assistants voyage avec le paiement
+     (client_reference_id) : c'est elle que l'espace client met en route.
+     La case des CGV est sur la page Stripe elle-même.                 */
 
   /* le lien d'une combinaison précise, ou '' s'il manque
      ref : la sélection d'assistants, qu'on fait voyager avec la commande
            pour la retrouver en face du paiement */
   function lien(formule, eng, ref) {
-    if (!propre(LIENS[formule + '-' + eng])) return '';
-    var url = SAS + '?f=' + encodeURIComponent(formule) + '&e=' + encodeURIComponent(eng);
-    if (ref) {
-      /* même jeu de caractères que Stripe : la référence finira chez lui */
-      ref = String(ref).replace(/[^A-Za-z0-9_-]+/g, '-').slice(0, 190);
-      url += '&ref=' + ref;
-    }
-    return url;
+    var base = propre(LIENS[formule + '-' + eng]);
+    if (!base) return '';
+    /* même jeu de caractères que Stripe : lettres, chiffres, - et _ */
+    ref = String(ref || '').replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 190);
+    return ref ? base + (base.indexOf('?') < 0 ? '?' : '&') + 'client_reference_id=' + ref : base;
   }
 
   /* ── l'allumage ─────────────────────────────────────────────────────────
