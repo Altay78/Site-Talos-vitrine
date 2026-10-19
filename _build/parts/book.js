@@ -3,7 +3,7 @@
 
    Trois briques : les menus déroulants (panneau arrondi qui glisse vers le
    bas), le choix des assistants (grisés tant qu'ils ne sont pas pris), et
-   l'envoi — le formulaire ouvre l'agenda Calendly déjà pré-rempli, comme
+   l'envoi — le formulaire ouvre l'agenda Cal.com déjà pré-rempli, comme
    avant : nom, e-mail, et tout le contexte dans la première question.
    ══════════════════════════════════════════════════════════════════════════ */
 (function () {
@@ -12,7 +12,7 @@
   var form = document.getElementById('bookForm');
   if (!form) return;
 
-  var CAL = 'https://calendly.com/contact-talos-ai/30min';
+  var CAL = 'https://cal.com/talos-contact-fqwkpl/30min';
 
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" '
             + 'stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg>';
@@ -222,7 +222,7 @@
     var url = CAL
       + '?name=' + encodeURIComponent(document.getElementById('bkName').value.trim())
       + '&email=' + encodeURIComponent(document.getElementById('bkEmail').value.trim())
-      + '&a1=' + encodeURIComponent(resume);
+      + '&notes=' + encodeURIComponent(resume);
 
     go.classList.add('busy');
     libelle('Ouverture de l\'agenda…');

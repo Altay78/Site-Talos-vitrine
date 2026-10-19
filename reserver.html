@@ -955,7 +955,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
 
    Trois briques : les menus déroulants (panneau arrondi qui glisse vers le
    bas), le choix des assistants (grisés tant qu'ils ne sont pas pris), et
-   l'envoi — le formulaire ouvre l'agenda Calendly déjà pré-rempli, comme
+   l'envoi — le formulaire ouvre l'agenda Cal.com déjà pré-rempli, comme
    avant : nom, e-mail, et tout le contexte dans la première question.
    ══════════════════════════════════════════════════════════════════════════ */
 (function () {
@@ -964,7 +964,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
   var form = document.getElementById('bookForm');
   if (!form) return;
 
-  var CAL = 'https://calendly.com/contact-talos-ai/30min';
+  var CAL = 'https://cal.com/talos-contact-fqwkpl/30min';
 
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6.85547C13.5636 9.48764 10.2433 14.2837 8.72078 17.1442C7.74399 15.5051 6.50533 14.0476 5 12.7764" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var CHEV = '<svg class="dd-chev" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(5.000000, 8.500000)" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g></svg>';
@@ -1171,7 +1171,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
     var url = CAL
       + '?name=' + encodeURIComponent(document.getElementById('bkName').value.trim())
       + '&email=' + encodeURIComponent(document.getElementById('bkEmail').value.trim())
-      + '&a1=' + encodeURIComponent(resume);
+      + '&notes=' + encodeURIComponent(resume);
 
     go.classList.add('busy');
     libelle('Ouverture de l\'agenda…');

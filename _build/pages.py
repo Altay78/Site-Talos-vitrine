@@ -149,7 +149,7 @@ for _f, _md, _t, _d in legal.DOCS:
 
 # ═══════════════════════════════════════════════════════════════════════════
 #  6 · LA PAGE RÉSERVER — la valeur à gauche, le formulaire à droite.
-#      Le formulaire ouvre l'agenda Calendly déjà pré-rempli.
+#      Le formulaire ouvre l'agenda Cal.com déjà pré-rempli.
 # ═══════════════════════════════════════════════════════════════════════════
 
 page('reserver.html',
