@@ -3793,6 +3793,14 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
       + (function(){
           var achat = window.TalosPaiement
             && window.TalosPaiement.lien(p.id, cur.k, picked.join('-'));
+          /* Sans assistant choisi, ou plus que la formule n'en ouvre, le
+             paiement ouvrirait un compte sans les bons assistants : on passe
+             par le panier, où le choix se fait. Évolution ouvre tout. */
+          if (achat && p.id !== 'evolution' && (!picked.length || picked.length > p.agents)) {
+            return '<a class="pcta' + (p.best || isReco ? ' solid' : '') + '" href="commander.html">'
+                 + 'Choisir ' + p.name + ARROW + '</a>'
+                 + '<a class="pcta-alt" href="reserver.html' + qs() + '">ou voir une démonstration</a>';
+          }
           if (!achat) {
             return '<a class="pcta' + (p.best || isReco ? ' solid' : '') + '" href="reserver.html' + qs() + '">'
                  + 'Choisir ' + p.name + ARROW + '</a>';
@@ -3969,7 +3977,7 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         out.hidden = false;
         out.innerHTML = 'Pour ' + picked.length + ' agent' + plural(picked.length)
           + ', la formule <b>' + pl.name + '</b> suffit — jusqu\'à ' + pl.agents
-          + ' agent' + plural(pl.agents) + ' inclus' + plural(pl.agents) + '.';
+          + ' agent' + plural(pl.agents) + ' inclus.';
       }
       render();
     }

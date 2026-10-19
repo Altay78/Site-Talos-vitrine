@@ -1099,6 +1099,13 @@ html[data-theme="light"] .tnav-pan{box-shadow:0 24px 60px rgba(40,25,16,.16)}
         + ' — on prépare la démo là-dessus.';
   });
 
+  /* La sélection faite sur Tarifs ou dans le panier arrive en ?agents=a,b */
+  var deja = new URLSearchParams(location.search).get('agents');
+  (deja ? deja.split(',') : []).forEach(function (id) {
+    var b = zone.querySelector('.ag[data-id="' + id.replace(/[^a-z]/g, '') + '"]');
+    if (b && b.getAttribute('aria-pressed') !== 'true') b.click();
+  });
+
   /* ── 3 · l'envoi ───────────────────────────────────────────────────────── */
   var go   = document.getElementById('bkGo'),
       lb   = document.getElementById('bkGoLb'),
