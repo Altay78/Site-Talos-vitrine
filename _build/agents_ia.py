@@ -57,7 +57,7 @@ def remplace(s, avant, apres, deja=None):
 
 def menu(s):
     s = s.replace('href="offres.html">Offres<', 'href="offres.html">Agents IA<')
-    s = s.replace('>Voir toutes les offres<', '>Voir les cinq agents IA<')
+    s = s.replace('>Voir toutes les offres<', '>Voir tous les agents IA<')
     # le menu mobile et le pied de page listent aussi « Offres »
     s = re.sub(r'(<a[^>]*href="offres\.html"[^>]*>)\s*Offres\s*(</a>)', r'\1Agents IA\2', s)
     s = re.sub(r'<span class="tnav-ag is-soon">(?:(?!<span class="tnav-ag|<a ).)*?</small></span>',
@@ -148,7 +148,7 @@ DEF = u'''
 # (titre de l'étape, agent qui la prend en charge)
 ETAPES = [(u'Demande', u'Assistante client'), (u'Devis', u'Assistant commercial'),
           (u'Relance', u'Assistant commercial'), (u'Facture', u'Assistant facturation'),
-          (u'Paiement', u'Assistante trésorerie'), (u'Planning', u'Assistante client')]
+          (u'Paiement', u'Assistante trésorerie (bientôt)'), (u'Planning', u'Assistante client')]
 
 FAQ_AGENT = u'''
       <div class="item open">
@@ -243,7 +243,8 @@ def accueil():
         b = s.find('</p>', a) + 4
         assert a > 0
         s = s[:b] + (u'\n  <p class="crew-later"><b>Bientôt :</b> Assistant chef de chantier '
-                     u'(plannings, comptes rendus), Assistant gestion de stock (stocks, commandes) et '
+                     u'(plannings, comptes rendus), Assistant gestion de stock (stocks, commandes), '
+                     u'Assistante trésorerie (impayés et relances) et '
                      u'Assistante juridique (contrats et conformité).</p>') + s[b:]
 
     # l'agent responsable sous chaque étape du parcours

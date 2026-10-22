@@ -7,14 +7,14 @@
 ## Produit
 
 - [Agents IA pour artisans du BTP : devis et factures](https://www.talos-ai.tech/): Des agents IA pour artisans du BTP : devis, factures, relances et rendez-vous préparés pendant le chantier. Vous validez. +30 artisans accompagnés.
-- [5 agents IA pour artisans du BTP : devis, factures, impayés](https://www.talos-ai.tech/offres.html): Cinq agents IA spécialisés pour artisans : devis, facturation, impayés, accueil client et tri des mails. Prenez ceux qu'il vous faut. Mise en place incluse.
+- [4 agents IA pour artisans du BTP : devis, factures, accueil](https://www.talos-ai.tech/offres.html): Quatre agents IA spécialisés pour artisans : devis, facturation, accueil client et tri des mails. Relance des impayés bientôt. Mise en place incluse.
 - [Comment fonctionnent les agents IA Talos pour artisans](https://www.talos-ai.tech/comment-ca-marche.html): Rien à installer ni à apprendre : on configure vos agents IA sur vos habitudes, ils préparent devis, relances et factures. Vous validez, c'est tout.
 
 ## Agents IA
 
 - [Agent IA devis pour artisans : devis auto et relances](https://www.talos-ai.tech/assistant-commercial.html): L'agent IA commercial prépare un devis depuis un mail, un vocal ou une photo, le fait signer en ligne avec l'acompte, puis le relance jusqu'à la réponse.
 - [Agent IA facturation BTP : acomptes, situations, TVA](https://www.talos-ai.tech/assistant-facturation.html): L'agent IA facturation transforme chaque devis signé en facture conforme : acompte, situations de travaux, TVA BTP, numérotation continue et archivage.
-- [Agent IA relance des impayés pour artisans du BTP](https://www.talos-ai.tech/assistant-tresorerie.html): L'agent IA trésorerie repère les factures en retard, relance à J+7, J+15 et J+30, prépare pénalités et mise en demeure, et annonce ce qui va rentrer.
+- [Agent IA relance des impayés pour artisans du BTP](https://www.talos-ai.tech/assistant-tresorerie.html): Bientôt disponible. L'agent IA trésorerie repère les factures en retard, relance à J+7, J+15 et J+30, et prépare pénalités et mise en demeure.
 - [Agent IA secrétariat pour artisans : réponses et RDV 24h/24](https://www.talos-ai.tech/assistant-client.html): L'agent IA client répond à vos clients jour et nuit, qualifie les demandes et propose des créneaux compatibles avec vos trajets. Vous gardez la main.
 - [Agent IA administratif pour artisans : tri des mails](https://www.talos-ai.tech/assistant-administratif.html): L'agent IA administratif trie votre boîte mail en six catégories, remonte les urgences et classe chaque pièce au bon chantier.
 - [Agent IA juridique pour artisans : contrats et conformité](https://www.talos-ai.tech/assistant-juridique.html): L'agent IA juridique vérifie les mentions obligatoires de vos devis et factures, suit les attestations de vos sous-traitants et vos garanties après réception.
@@ -23,7 +23,7 @@
 
 - Starter : 99 € par mois (1 agent IA), 82 € par mois en engagement 12 mois
 - Business : 299 € par mois (3 agents IA), 249 € par mois en engagement 12 mois
-- Évolution : 449 € par mois (5 agents IA), 369 € par mois en engagement 12 mois
+- Évolution : 449 € par mois (4 agents IA), 369 € par mois en engagement 12 mois
 
 TVA non applicable. Détail : https://www.talos-ai.tech/tarifs.html
 

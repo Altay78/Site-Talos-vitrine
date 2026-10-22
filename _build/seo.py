@@ -39,9 +39,9 @@ PAGES = [
      u"Des agents IA pour artisans du BTP : devis, factures, relances et rendez-vous "
      u"préparés pendant le chantier. Vous validez. +30 artisans accompagnés."),
     ('offres.html',
-     u"5 agents IA pour artisans du BTP : devis, factures, impayés",
-     u"Cinq agents IA spécialisés pour artisans : devis, facturation, impayés, accueil "
-     u"client et tri des mails. Prenez ceux qu'il vous faut. Mise en place incluse."),
+     u"4 agents IA pour artisans du BTP : devis, factures, accueil",
+     u"Quatre agents IA spécialisés pour artisans : devis, facturation, accueil client "
+     u"et tri des mails. Relance des impayés bientôt. Mise en place incluse."),
     ('assistant-commercial.html',
      u"Agent IA devis pour artisans : devis auto et relances | Talos",
      u"L'agent IA commercial prépare un devis depuis un mail, un vocal ou une photo, "
@@ -52,8 +52,8 @@ PAGES = [
      u"acompte, situations de travaux, TVA BTP, numérotation continue et archivage."),
     ('assistant-tresorerie.html',
      u"Agent IA relance des impayés pour artisans du BTP | Talos",
-     u"L'agent IA trésorerie repère les factures en retard, relance à J+7, J+15 et J+30, "
-     u"prépare pénalités et mise en demeure, et annonce ce qui va rentrer."),
+     u"Bientôt disponible. L'agent IA trésorerie repère les factures en retard, relance à "
+     u"J+7, J+15 et J+30, et prépare pénalités et mise en demeure."),
     ('assistant-client.html',
      u"Agent IA secrétariat pour artisans : réponses et RDV 24h/24",
      u"L'agent IA client répond à vos clients jour et nuit, qualifie les demandes "

@@ -33,7 +33,7 @@
   var PALIERS = [
     { id: 'starter',   nom: 'Starter',   max: 1, setup: 149, p: { m: 99,  n: 89,  y: 82  } },
     { id: 'business',  nom: 'Business',  max: 3, setup: 449, p: { m: 299, n: 269, y: 249 } },
-    { id: 'evolution', nom: 'Évolution', max: 5, setup: 690, p: { m: 449, n: 399, y: 369 } }
+    { id: 'evolution', nom: 'Évolution', max: 4, setup: 690, p: { m: 449, n: 399, y: 369 } }
   ];
 
   var ENGAGEMENTS = [
@@ -47,13 +47,14 @@
 
   var AGENTS = [
     { id: 'commercial',    nom: 'Assistant commercial',    sous: 'Devis, signature, relances' },
-    { id: 'tresorerie',    nom: 'Assistante trésorerie',   sous: 'Impayés et prévision' },
     { id: 'client',        nom: 'Assistante client',       sous: 'Réponses et rendez-vous' },
     { id: 'facturation',   nom: 'Assistant facturation',   sous: 'Factures, acomptes, situations' },
     { id: 'administratif', nom: 'Assistante administrative', sous: 'Tri des mails et classement' },
-    /* montrée, pas vendue : l'application n'a pas encore de modules pour
-       elle. Le jour où elle les a, on retire « bientot » — et on l'ajoute
-       à ASSISTANTS dans talos-app/lib/assistants.ts. */
+    /* montrées, pas vendues : la trésorerie attend sa connexion bancaire,
+       la juridique ses modules dans l'application. Le jour où l'une sort,
+       on lui retire « bientot » — et on la remet en vente dans
+       talos-app/lib/souscription.ts. */
+    { id: 'tresorerie',    nom: 'Assistante trésorerie',   sous: 'Impayés et prévision', bientot: true },
     { id: 'juridique',     nom: 'Assistante juridique',    sous: 'Contrats et conformité', bientot: true }
   ];
 
@@ -63,7 +64,7 @@
   AGENTS.forEach(function (a) { if (!a.bientot) PAR_ID[a.id] = a; });
 
   var CLE = 'talos-panier';
-  /* le plafond, c'est la plus grande formule (Évolution : cinq au choix),
+  /* le plafond, c'est la plus grande formule (Évolution : les quatre en vente),
      pas le nombre d'assistants affichés */
   var MAX = PALIERS[PALIERS.length - 1].max;
 

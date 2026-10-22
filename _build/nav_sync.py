@@ -91,9 +91,9 @@ EQUIPE = [
 # « Bientôt » et non cliquables — un lien vers une page absente serait pire
 # que pas de lien du tout.
 BIENTOT = {'chantier', 'stock'}
-# Celle-là a déjà sa page mais n'est pas encore en vente : le lien reste,
+# Celles-là ont déjà leur page mais ne sont pas encore en vente : le lien reste,
 # le badge « Bientôt » prévient avant le clic.
-BIENTOT_PAGE = {'juridique'}
+BIENTOT_PAGE = {'juridique', 'tresorerie'}
 
 CHEV = (u'<svg class="tnav-chev" width="11" height="11" viewBox="0 0 24 24" fill="none" '
         u'stroke="currentColor" stroke-width="2.6" stroke-linecap="round" '
