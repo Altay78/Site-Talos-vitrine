@@ -21,7 +21,27 @@
       "source": "/fonctionnalites",
       "destination": "/offres.html",
       "permanent": true
-    }
+    },
+    { "source": "/assistant-administratif", "destination": "/assistant-administratif.html", "permanent": true },
+    { "source": "/assistant-client", "destination": "/assistant-client.html", "permanent": true },
+    { "source": "/assistant-commercial", "destination": "/assistant-commercial.html", "permanent": true },
+    { "source": "/assistant-facturation", "destination": "/assistant-facturation.html", "permanent": true },
+    { "source": "/assistant-juridique", "destination": "/assistant-juridique.html", "permanent": true },
+    { "source": "/assistant-tresorerie", "destination": "/assistant-tresorerie.html", "permanent": true },
+    { "source": "/blog", "destination": "/blog.html", "permanent": true },
+    { "source": "/calculateur-tva-btp", "destination": "/calculateur-tva-btp.html", "permanent": true },
+    { "source": "/cgu", "destination": "/cgu.html", "permanent": true },
+    { "source": "/cgv", "destination": "/cgv.html", "permanent": true },
+    { "source": "/commander", "destination": "/commander.html", "permanent": true },
+    { "source": "/comment-ca-marche", "destination": "/comment-ca-marche.html", "permanent": true },
+    { "source": "/confidentialite", "destination": "/confidentialite.html", "permanent": true },
+    { "source": "/mentions-legales", "destination": "/mentions-legales.html", "permanent": true },
+    { "source": "/merci", "destination": "/merci.html", "permanent": true },
+    { "source": "/offres", "destination": "/offres.html", "permanent": true },
+    { "source": "/pourquoi-talos", "destination": "/pourquoi-talos.html", "permanent": true },
+    { "source": "/reserver", "destination": "/reserver.html", "permanent": true },
+    { "source": "/simulateur", "destination": "/simulateur.html", "permanent": true },
+    { "source": "/tarifs", "destination": "/tarifs.html", "permanent": true }
   ],
   "headers": [
     {
