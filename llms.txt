@@ -39,7 +39,10 @@ Vous gardez un contrôle total. Talos utilise strictement votre propre grille ta
 Aucune formation requise. Si vous savez envoyer un vocal sur WhatsApp, vous savez utiliser Talos. Vous parlez à l'IA comme à un associé, elle s'occupe du reste.
 
 **Est-ce conforme à la loi sur la facture électronique (Factur-X) ?**
-Les factures intègrent les mentions obligatoires du bâtiment, la TVA travaux, les acomptes et les situations, avec une numérotation sans trou. Le format électronique Factur-X sera prêt avant l'obligation d'émission des TPE (septembre 2027) ; d'ici là, vos factures PDF restent valables.
+Talos prépare la facture avec les mentions obligatoires du bâtiment et les nouvelles mentions de la réforme (SIREN du client, nature des travaux, adresse du chantier), puis votre plateforme agréée la transmet. Vos factures aux particuliers restent en PDF, même après la réforme. Pour vos clients professionnels, le format Factur-X sera prêt avant l'obligation d'émission des TPE, le 1er septembre 2027.
+
+**Dois-je changer de logiciel ou de plateforme pour la facture électronique ?**
+Non. Vous gardez la plateforme agréée de votre banque, de votre logiciel ou de votre comptable : Talos lui transmet vos factures au bon format. Vous n'en avez pas encore ? On vous en propose une pendant la mise en place.
 
 **Mes clients vont-ils savoir que c'est une IA qui répond ?**
 Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise. Dès qu'un échange demande une visite terrain, l'IA vous passe la main.

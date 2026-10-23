@@ -552,10 +552,10 @@ FACTURATION = dict(
    gain(u"11 500 €", u"de solde — après déduction de tout ce qui a déjà été facturé.")
    + dire(u"La retenue de garantie et les conditions de paiement du devis sont reprises "
           u"telles quelles.")),
-  (u"", u"J+1", u"Le lendemain de la réception", 'send', u"Transmise au format 2026",
-   chips(u"Factur-X", u"Numérotation continue", u"TVA 10 %", u"Archivée 10 ans")
-   + dire(u"Le format attendu par la réforme, sans que vous ayez eu à changer quoi que ce "
-          u"soit à vos habitudes.")),
+  (u"", u"J+1", u"Le lendemain de la réception", 'send', u"Prête pour votre plateforme",
+   chips(u"Plateforme agréée", u"Numérotation continue", u"TVA 10 %", u"Archivée 10 ans")
+   + dire(u"Votre plateforme agréée la transmet : vous gardez la vôtre, sans rien changer "
+          u"à vos habitudes.")),
   (u"", u"Fin mois", u"Le dernier jour du mois", 'grid', u"Export comptable",
    gain(u"1 fichier", u"pour douze factures — dans le format que votre cabinet attend.")
    + dire(u"Fini l'enveloppe de janvier et les trois relances de votre comptable.")),
@@ -583,9 +583,9 @@ FACTURATION = dict(
               ('cal', u"Échéances et conditions posées"),
               ('search', u"Alerte si écart devis / facturé")],
        cta=u"Suivre mes chantiers longs", href=u"reserver.html"),
-  dict(role=u"Conformité", lab=u"Tenir la réforme",
-       titre=u"Conforme 2026, sans y penser",
-       acc=u"Factur-X et numérotation continue", acc2=u"la première chose qu'on contrôle",
+  dict(role=u"Conformité", lab=u"Préparer la réforme",
+       titre=u"Conforme, sans y penser",
+       acc=u"Numérotation continue et mentions légales", acc2=u"la première chose qu'on contrôle",
        puces=[('grid', u"Numérotation sans trou ni doublon"),
               ('grille', u"TVA et autoliquidation au bon taux"),
               ('send', u"Format électronique 2026"),
@@ -620,14 +620,14 @@ FACTURATION = dict(
   (u"Vous ressaisissez les lignes du devis", u"Rien n'est retapé"),
   (u"Vous recalculez le reste à facturer", u"Le cumul est juste à chaque situation"),
   (u"Vous cherchez le bon taux de TVA", u"Il est posé selon le chantier"),
-  (u"Vous redoutez la réforme de 2026", u"Le format est déjà celui attendu"),
+  (u"Vous redoutez la facture électronique", u"Votre plateforme agréée la transmet"),
   (u"Votre comptable relance trois fois", u"L'export part en fin de mois"),
  ],
 
  b8_h2=u"Vous avez besoin d'une <em>facturation carrée</em> ?",
  b8_sub=u"Il facture pendant que vous êtes sur le chantier, au bon montant et au bon format. "
-        u"La réforme 2026 arrive — celui-ci l'a déjà passée.",
- b8_reassure=[u"Mise en place personnalisée", u"Conforme à la réforme 2026",
+        u"Pour la facture électronique, vous gardez votre plateforme agréée : il prépare, elle transmet.",
+ b8_reassure=[u"Mise en place personnalisée", u"Factur-X prêt avant sept. 2027",
               u"Données hébergées en Europe"],
 )
 

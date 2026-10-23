@@ -565,14 +565,14 @@ FACTURATION = dict(
   (u"Conformité &amp; classement", [
    (u"Numérotation continue", u"Une seule série, sans trou ni doublon. C'est la première chose que regarde un contrôle."),
    (u"TVA et mentions obligatoires", u"Taux applicable, autoliquidation, mentions légales : posés automatiquement selon le type de chantier."),
-   (u"Format électronique 2026", u"Les factures sont émises au format attendu par la réforme, prêtes à être transmises."),
+   (u"Facture électronique", u"Les nouvelles mentions de la réforme sont posées ; votre plateforme agréée transmet la facture. Factur-X prêt avant septembre 2027."),
    (u"Archivage pendant dix ans", u"Chaque facture est conservée avec son devis et son chantier, et retrouvable en deux clics."),
    (u"Export pour votre comptable", u"Un export mensuel propre, dans le format que votre cabinet attend."),
   ]),
  ],
  faq_missions=[
   (u"Est-ce qu'il envoie mes factures sans mon accord ?", u"Non. Il les prépare, vous relisez, vous envoyez. Comme pour les devis."),
-  (u"Et la facturation électronique de 2026, je dois faire quoi ?", u"Rien de votre côté : les factures sortent déjà au format attendu. C'est la raison d'être de cet assistant."),
+  (u"Et la facture électronique, je dois faire quoi ?", u"Garder votre plateforme agréée, ou en choisir une avec nous à la mise en place. Talos prépare, elle transmet. Vos factures aux particuliers restent en PDF."),
   (u"Est-ce qu'il gère les situations de travaux ?", u"Oui. Vous déclarez l'avancement, il calcule la situation et le reste à facturer."),
   (u"Et si je facture hors Talos, sur un logiciel à moi ?", u"Il reprend votre numérotation là où elle en est, pour ne pas casser la série."),
   (u"Est-ce qu'il relance mes impayés ?", u"Non, il émet et archive. Le recouvrement est le travail de l'assistant trésorerie."),

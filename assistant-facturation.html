@@ -936,6 +936,79 @@ html[data-theme="light"] .ac-chip{box-shadow:0 1px 2px rgba(40,25,16,.05)}
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   5 bis · LA FACTURE ÉLECTRONIQUE
+   Talos prépare, la plateforme agréée de l'artisan transmet. Trois étapes,
+   puis un vrai tableau : ce qui change selon le destinataire de la facture.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ac-pa{padding:92px 0 100px;border-top:1px solid var(--line)}
+.ac-pa-head{max-width:780px;margin:0 0 44px}
+.ac-pa-head .ac-sub{max-width:60ch}
+.ac-pa-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
+  margin:0 0 44px;padding:0;list-style:none}
+.ac-pa-step{position:relative;padding:28px 28px 30px;border-radius:24px;
+  background:var(--ink-2);border:1px solid var(--line-2)}
+/* la lueur est un fond, pas un calque : la flèche doit pouvoir déborder */
+.ac-pa-step.is-talos{background:
+  radial-gradient(circle at 8% 0%,rgba(var(--bronze-rgb),.17) 0%,transparent 58%),var(--ink-2)}
+.ac-pa-n{position:relative;display:block;font-family:var(--mono);font-size:11px;
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+.ac-pa-step h3{position:relative;margin:14px 0 10px;font-size:clamp(20px,1.9vw,24px);
+  line-height:1.15;letter-spacing:-.7px;font-weight:800;color:var(--parch)}
+.ac-pa-step p{position:relative;margin:0;font-size:15px;line-height:1.6;color:var(--lin)}
+.ac-pa-arrow{position:absolute;z-index:2;top:50%;right:-24px;transform:translateY(-50%);
+  display:flex;align-items:center;justify-content:center;width:30px;height:30px;
+  border-radius:50%;background:var(--bronze);color:#fff;border:3px solid var(--ink)}
+.ac-pa-arrow svg{width:14px;height:14px}
+
+.ac-pa-cap{margin:0 0 14px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--lin)}
+.ac-pa-tw{background:var(--ink-2);border:1px solid var(--line-2);border-radius:20px;overflow:hidden}
+.ac-pa-table{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0}
+.ac-pa-table th,.ac-pa-table td{padding:17px 22px;text-align:left;vertical-align:top;
+  font-size:15px;line-height:1.45}
+.ac-pa-table thead th{padding:15px 22px 13px;font-family:var(--mono);font-size:10.5px;
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lin)}
+.ac-pa-table thead th:last-child{color:var(--bronze)}
+.ac-pa-table tbody th{font-weight:600;color:var(--parch)}
+.ac-pa-table tbody td{color:var(--lin)}
+.ac-pa-table tbody td:last-child{color:var(--parch);font-weight:600}
+.ac-pa-table tbody tr > *{border-top:1px solid var(--line)}
+.ac-pa-table tr > * + *{border-left:1px solid var(--line)}
+.ac-pa-table tbody tr:nth-child(even){
+  background:color-mix(in oklab,var(--parch) 3.5%,transparent)}
+.ac-pa-table small{display:block;margin-top:4px;font-size:13px;font-weight:400;color:var(--lin)}
+.ac-pa-foot{margin:22px 0 0;font-size:15px;line-height:1.6;color:var(--lin);max-width:72ch}
+.ac-pa-foot b{color:var(--parch);font-weight:600}
+
+@media (max-width:960px){
+  .ac-pa{padding:72px 0 80px}
+  .ac-pa-flow{grid-template-columns:1fr;gap:14px}
+  .ac-pa-arrow{top:auto;right:auto;bottom:-22px;left:28px;transform:rotate(90deg)}
+}
+/* téléphone : trois colonnes ne tiennent pas. Chaque ligne devient un bloc,
+   l'en-tête passe en étiquette au-dessus de chaque valeur (data-l). */
+@media (max-width:620px){
+  .ac-pa-step{padding:24px 22px 26px}
+  .ac-pa-table,.ac-pa-table tbody,.ac-pa-table tr{display:block}
+  .ac-pa-table thead{position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+    overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .ac-pa-table tbody tr{display:grid;grid-template-columns:1fr 1fr}
+  .ac-pa-table tbody tr + tr{border-top:1px solid var(--line-2)}
+  .ac-pa-table tbody tr > *{border-top:0}
+  .ac-pa-table tbody th{grid-column:1 / -1;padding:16px 18px 4px;font-size:15.5px}
+  .ac-pa-table tbody td{padding:8px 18px 16px;font-size:14px}
+  .ac-pa-table tr > * + *{border-left:0}
+  .ac-pa-table tbody td + td{border-left:1px solid var(--line)}
+  .ac-pa-table tbody td::before{content:attr(data-l);display:block;margin:0 0 5px;
+    font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--lin)}
+  .ac-pa-table tbody td:last-child::before{color:var(--bronze)}
+  .ac-pa-table small{font-size:12.5px}
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
    6 · LE DUO — l'assistant qui complète celui-ci
    ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -1689,9 +1762,9 @@ html[data-theme="light"] h1 .h1-cat{color:#B4491A;-webkit-text-fill-color:#B4491
           <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(2.000000, 2.000000)" stroke="currentColor"> <path d="M2.7949,5.056 C2.7949,3.807 3.8069,2.795 5.0559,2.794 L6.0849,2.794 C6.6819,2.794 7.2539,2.557 7.6779,2.137 L8.3969,1.417 C9.2779,0.531 10.7099,0.527 11.5959,1.408 L11.5969,1.409 L11.6059,1.417 L12.3259,2.137 C12.7499,2.558 13.3219,2.794 13.9189,2.794 L14.9469,2.794 C16.1959,2.794 17.2089,3.806 17.2089,5.056 L17.2089,6.083 C17.2089,6.68 17.4449,7.253 17.8659,7.677 L18.5859,8.397 C19.4719,9.278 19.4769,10.71 18.5959,11.596 C18.5959,11.596 18.5949,11.597 18.5949,11.597 L18.5859,11.606 L17.8659,12.326 C17.4449,12.749 17.2089,13.321 17.2089,13.918 L17.2089,14.947 C17.2089,16.196 16.1969,17.208 14.9479,17.208 L14.9469,17.208 L13.9169,17.208 C13.3199,17.208 12.7469,17.445 12.3239,17.866 L11.6039,18.585 C10.7239,19.471 9.2929,19.476 8.4069,18.597 C8.4059,18.596 8.4049,18.595 8.4039,18.594 L8.3949,18.585 L7.6759,17.866 C7.2529,17.445 6.6799,17.209 6.0829,17.208 L5.0559,17.208 C3.8069,17.208 2.7949,16.196 2.7949,14.947 L2.7949,13.916 C2.7949,13.319 2.5579,12.747 2.1369,12.324 L1.4179,11.604 C0.5319,10.724 0.5269,9.293 1.4069,8.407 C1.4069,8.406 1.4079,8.405 1.4089,8.404 L1.4179,8.395 L2.1369,7.675 C2.5579,7.251 2.7949,6.679 2.7949,6.081 L2.7949,5.056" stroke-width="1.5"></path> <line x1="7.4316" y1="12.5717" x2="12.5716" y2="7.4317" stroke-width="1.5"></line> <line x1="12.4955" y1="12.5" x2="12.5045" y2="12.5" stroke-width="2"></line> <line x1="7.4955" y1="7.5" x2="7.5045" y2="7.5" stroke-width="2"></line> </g> </g></svg></i>TVA et autoliquidation au bon taux</li>
           <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.500000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <path d="M8.4845,19.606 C8.4845,19.606 16.1565,17.283 16.1565,10.879 C16.1565,4.474 16.4345,3.974 15.8195,3.358 C15.2035,2.742 9.4905,0.75 8.4845,0.75 C7.4785,0.75 1.7655,2.742 1.1505,3.358 C0.5345,3.974 0.8125,4.474 0.8125,10.879 C0.8125,17.283 8.4845,19.606 8.4845,19.606 Z"></path> <polyline points="5.8859 9.8746 7.7779 11.7696 11.6759 7.8696"></polyline> </g> </g></svg></i>Acomptes et situations déduits</li>
           <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(3.000000, 2.000000)" stroke="currentColor" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g> </g></svg></i>Mentions obligatoires posées</li>
-          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(4.000000, 4.500000)" stroke="currentColor" stroke-width="1.5"> <line x1="6.33015655" y1="12.0929063" x2="0.0294393477" y2="12.0929063"></line> <line x1="9.14048198" y1="2.40037662" x2="15.4411992" y2="2.40037662"></line> <path d="M4.72628792,2.34625359 C4.72628792,1.05059752 3.66812728,1.79725516e-14 2.36314396,1.79725516e-14 C1.05816064,1.79725516e-14 1.25389895e-15,1.05059752 1.25389895e-15,2.34625359 C1.25389895e-15,3.64190965 1.05816064,4.69250717 2.36314396,4.69250717 C3.66812728,4.69250717 4.72628792,3.64190965 4.72628792,2.34625359 Z"></path> <path d="M16,12.0537464 C16,10.7580903 14.942654,9.70749283 13.6376706,9.70749283 C12.3318727,9.70749283 11.2737121,10.7580903 11.2737121,12.0537464 C11.2737121,13.3494025 12.3318727,14.4 13.6376706,14.4 C14.942654,14.4 16,13.3494025 16,12.0537464 Z"></path> </g> </g></svg></i>Reprend votre numérotation</li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(4.000000, 4.500000)" stroke="currentColor" stroke-width="1.5"> <line x1="6.33015655" y1="12.0929063" x2="0.0294393477" y2="12.0929063"></line> <line x1="9.14048198" y1="2.40037662" x2="15.4411992" y2="2.40037662"></line> <path d="M4.72628792,2.34625359 C4.72628792,1.05059752 3.66812728,1.79725516e-14 2.36314396,1.79725516e-14 C1.05816064,1.79725516e-14 1.25389895e-15,1.05059752 1.25389895e-15,2.34625359 C1.25389895e-15,3.64190965 1.05816064,4.69250717 2.36314396,4.69250717 C3.66812728,4.69250717 4.72628792,3.64190965 4.72628792,2.34625359 Z"></path> <path d="M16,12.0537464 C16,10.7580903 14.942654,9.70749283 13.6376706,9.70749283 C12.3318727,9.70749283 11.2737121,10.7580903 11.2737121,12.0537464 C11.2737121,13.3494025 12.3318727,14.4 13.6376706,14.4 C14.942654,14.4 16,13.3494025 16,12.0537464 Z"></path> </g> </g></svg></i>Prête pour la facture électronique</li>
         </ul>
-        <a class="ac-card-go" href="reserver.html">Facturer sans erreur <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
+        <a class="ac-card-go" href="#facture-electronique">Voir la facture électronique <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"> <g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)" stroke="currentColor" stroke-width="1.5"> <polyline points="14 0 7 7 0 0"></polyline> </g> </g></svg></a>
       </article>
 
       <article class="ac-card">
@@ -1734,6 +1807,49 @@ html[data-theme="light"] h1 .h1-cat{color:#B4491A;-webkit-text-fill-color:#B4491
 </section>
 
 
+<!-- ═══ 5 bis · LA FACTURE ÉLECTRONIQUE ══════════════════════════════════ -->
+<section class="t-asst ac-pa" id="facture-electronique">
+  <div class="shell">
+    <div class="ac-pa-head">
+      <p class="ac-tag">La facture électronique</p>
+      <h2 class="ac-h2">La réforme arrive, <em>vous ne changez rien</em>.</h2>
+      <p class="ac-sub">Talos prépare la facture, votre plateforme agréée la transmet. Celle de votre banque, de votre logiciel ou de votre comptable : vous gardez la vôtre.</p>
+    </div>
+    <ol class="ac-pa-flow">
+      <li class="ac-pa-step is-talos" data-rise>
+        <span class="ac-pa-n">01 · Talos</span>
+        <h3>Il prépare la facture</h3>
+        <p>Montants, TVA et mentions du bâtiment, plus les nouvelles mentions de la réforme : SIREN du client, nature des travaux, adresse du chantier.</p>
+        <span class="ac-pa-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="ac-pa-step" data-rise style="--d:70ms">
+        <span class="ac-pa-n">02 · Votre plateforme</span>
+        <h3>Elle la transmet</h3>
+        <p>Elle envoie la facture à vos clients professionnels et déclare les montants de vos ventes aux particuliers. Talos lui passe tout, au bon format.</p>
+        <span class="ac-pa-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="ac-pa-step" data-rise style="--d:140ms">
+        <span class="ac-pa-n">03 · Vous</span>
+        <h3>Vous validez, c'est tout</h3>
+        <p>Rien ne part sans vous. Pas de nouveau logiciel, pas de format à apprendre, pas de double saisie.</p>
+      </li>
+    </ol>
+    <p class="ac-pa-cap" id="pa-cap">Ce qui change pour vos factures</p>
+    <div class="ac-pa-tw" data-rise>
+    <table class="ac-pa-table" aria-labelledby="pa-cap">
+      <thead>
+        <tr><th scope="col">Votre facture</th><th scope="col">Aujourd'hui</th><th scope="col">Dès sept. 2027</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">À un particulier</th><td data-l="Aujourd'hui">PDF par e&#8209;mail</td><td data-l="Dès sept. 2027">PDF par e&#8209;mail, toujours valable<small>Les montants sont déclarés par votre plateforme</small></td></tr>
+        <tr><th scope="row">À un professionnel</th><td data-l="Aujourd'hui">PDF par e&#8209;mail</td><td data-l="Dès sept. 2027">Factur-X, envoyée par votre plateforme agréée</td></tr>
+        <tr><th scope="row">De vos fournisseurs</th><td data-l="Aujourd'hui">Reçue sur votre plateforme agréée<small>Obligatoire depuis sept. 2026</small></td><td data-l="Dès sept. 2027">Inchangé</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="ac-pa-foot" data-tx-skip><b>Pas encore de plateforme agréée ?</b> On vous en propose une pendant la mise en place, et Talos est prêt au format Factur-X avant votre échéance du 1<sup>er</sup> septembre 2027.</p>
+  </div>
+</section>
 <!-- ═══ 6 · LE DUO ════════════════════════════════════════════════════════ -->
 <section class="t-asst ac-duo">
   <div class="shell">
@@ -1786,8 +1902,8 @@ html[data-theme="light"] h1 .h1-cat{color:#B4491A;-webkit-text-fill-color:#B4491
               fill="var(--lin)">AVANT</text>
         <text x="560" y="42" font-size="13" font-weight="700" letter-spacing="2.4"
               fill="var(--bronze)">AVEC TALOS</text>
-        <g font-size="16.5" fill="var(--lin)"><text x="92" y="107">Vous refaites la facture le dimanche</text><text x="92" y="173">Vous ressaisissez les lignes du devis</text><text x="92" y="239">Vous recalculez le reste à facturer</text><text x="92" y="305">Vous cherchez le bon taux de TVA</text><text x="92" y="371">Vous redoutez la réforme de 2026</text><text x="92" y="437">Votre comptable relance trois fois</text></g>
-        <g font-size="16.5" font-weight="600" fill="var(--parch)"><text x="612" y="107">Elle part le jour de la signature</text><text x="612" y="173">Rien n'est retapé</text><text x="612" y="239">Le cumul est juste à chaque situation</text><text x="612" y="305">Il est posé selon le chantier</text><text x="612" y="371">Factur-X prêt avant 2027</text><text x="612" y="437">L'export part en fin de mois</text></g>
+        <g font-size="16.5" fill="var(--lin)"><text x="92" y="107">Vous refaites la facture le dimanche</text><text x="92" y="173">Vous ressaisissez les lignes du devis</text><text x="92" y="239">Vous recalculez le reste à facturer</text><text x="92" y="305">Vous cherchez le bon taux de TVA</text><text x="92" y="371">Vous redoutez la facture électronique</text><text x="92" y="437">Votre comptable relance trois fois</text></g>
+        <g font-size="16.5" font-weight="600" fill="var(--parch)"><text x="612" y="107">Elle part le jour de la signature</text><text x="612" y="173">Rien n'est retapé</text><text x="612" y="239">Le cumul est juste à chaque situation</text><text x="612" y="305">Il est posé selon le chantier</text><text x="612" y="371">Votre plateforme agréée la transmet</text><text x="612" y="437">L'export part en fin de mois</text></g>
         <g fill="currentColor" color="var(--lin)">
           <g opacity=".14"><circle cx="62" cy="101" r="13"/><circle cx="62" cy="167" r="13"/><circle cx="62" cy="233" r="13"/><circle cx="62" cy="299" r="13"/><circle cx="62" cy="365" r="13"/><circle cx="62" cy="431" r="13"/></g>
           <g stroke="var(--lin)" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M57.5 96.5l9 9M66.5 96.5l-9 9"/><path d="M57.5 162.5l9 9M66.5 162.5l-9 9"/><path d="M57.5 228.5l9 9M66.5 228.5l-9 9"/><path d="M57.5 294.5l9 9M66.5 294.5l-9 9"/><path d="M57.5 360.5l9 9M66.5 360.5l-9 9"/><path d="M57.5 426.5l9 9M66.5 426.5l-9 9"/></g>
@@ -1809,7 +1925,7 @@ html[data-theme="light"] h1 .h1-cat{color:#B4491A;-webkit-text-fill-color:#B4491
         <tr><td class="av">Vous ressaisissez les lignes du devis</td><td class="ap">Rien n'est retapé</td></tr>
         <tr><td class="av">Vous recalculez le reste à facturer</td><td class="ap">Le cumul est juste à chaque situation</td></tr>
         <tr><td class="av">Vous cherchez le bon taux de TVA</td><td class="ap">Il est posé selon le chantier</td></tr>
-        <tr><td class="av">Vous redoutez la réforme de 2026</td><td class="ap">Factur-X prêt avant l'échéance de 2027</td></tr>
+        <tr><td class="av">Vous redoutez la facture électronique</td><td class="ap">Votre plateforme agréée la transmet</td></tr>
         <tr><td class="av">Votre comptable relance trois fois</td><td class="ap">L'export part en fin de mois</td></tr>
       </tbody>
     </table>
@@ -1823,7 +1939,7 @@ html[data-theme="light"] h1 .h1-cat{color:#B4491A;-webkit-text-fill-color:#B4491
   <div class="shell ac-cta-in">
     <img class="ac-cta-av" src="perso/avatar-facturation.webp" width="84" height="84" alt="" loading="lazy" decoding="async">
     <h2>Vous avez besoin d'une <em>facturation carrée</em> ?</h2>
-    <p>Il facture pendant que vous êtes sur le chantier, au bon montant et au bon format. La facture électronique arrive : il sera prêt avant votre échéance de septembre 2027.</p>
+    <p>Il facture pendant que vous êtes sur le chantier, au bon montant et au bon format. Pour la facture électronique, vous gardez votre plateforme agréée : il prépare, elle transmet.</p>
     <div class="actions">
       <button type="button" data-panier="facturation" data-panier-texte="Ajouter à mon équipe"><span data-panier-label>Ajouter à mon équipe</span><span data-panier-ico aria-hidden="true"></span></button>
       <a class="btn btn-2" href="reserver.html">Voir une démonstration</a>

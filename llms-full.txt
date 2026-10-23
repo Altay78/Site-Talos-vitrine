@@ -38,7 +38,10 @@ Vous gardez un contrôle total. Talos utilise strictement votre propre grille ta
 Aucune formation requise. Si vous savez envoyer un vocal sur WhatsApp, vous savez utiliser Talos. Vous parlez à l'IA comme à un associé, elle s'occupe du reste.
 
 **Est-ce conforme à la loi sur la facture électronique (Factur-X) ?**
-Les factures intègrent les mentions obligatoires du bâtiment, la TVA travaux, les acomptes et les situations, avec une numérotation sans trou. Le format électronique Factur-X sera prêt avant l'obligation d'émission des TPE (septembre 2027) ; d'ici là, vos factures PDF restent valables.
+Talos prépare la facture avec les mentions obligatoires du bâtiment et les nouvelles mentions de la réforme (SIREN du client, nature des travaux, adresse du chantier), puis votre plateforme agréée la transmet. Vos factures aux particuliers restent en PDF, même après la réforme. Pour vos clients professionnels, le format Factur-X sera prêt avant l'obligation d'émission des TPE, le 1er septembre 2027.
+
+**Dois-je changer de logiciel ou de plateforme pour la facture électronique ?**
+Non. Vous gardez la plateforme agréée de votre banque, de votre logiciel ou de votre comptable : Talos lui transmet vos factures au bon format. Vous n'en avez pas encore ? On vous en propose une pendant la mise en place.
 
 **Mes clients vont-ils savoir que c'est une IA qui répond ?**
 Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise. Dès qu'un échange demande une visite terrain, l'IA vous passe la main.
@@ -276,7 +279,9 @@ Je ne suis pas calé en informatique, est-ce dur à utiliser ?
 Aucune formation requise. Si vous savez envoyer un vocal sur WhatsApp, vous savez
 utiliser Talos. Vous parlez à l'IA comme à un associé, elle s'occupe du reste.
 Est-ce conforme à la loi sur la facture électronique (Factur-X) ?
-Les factures intègrent les mentions obligatoires du bâtiment, la TVA travaux, les acomptes et les situations, avec une numérotation sans trou. Le format électronique Factur-X sera prêt avant l'obligation d'émission des TPE (septembre 2027) ; d'ici là, vos factures PDF restent valables.
+Talos prépare la facture avec les mentions obligatoires du bâtiment et les nouvelles mentions de la réforme (SIREN du client, nature des travaux, adresse du chantier), puis votre plateforme agréée la transmet. Vos factures aux particuliers restent en PDF, même après la réforme. Pour vos clients professionnels, le format Factur-X sera prêt avant l'obligation d'émission des TPE, le 1er septembre 2027.
+Dois-je changer de logiciel ou de plateforme pour la facture électronique ?
+Non. Vous gardez la plateforme agréée de votre banque, de votre logiciel ou de votre comptable : Talos lui transmet vos factures au bon format. Vous n'en avez pas encore ? On vous en propose une pendant la mise en place.
 Mes clients vont-ils savoir que c'est une IA qui répond ?
 Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit
 le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise.
@@ -564,8 +569,8 @@ Numérotation sans trou ni doublon
 TVA et autoliquidation au bon taux
 Acomptes et situations déduits
 Mentions obligatoires posées
-Reprend votre numérotation
-Facturer sans erreur
+Prête pour la facture électronique
+Voir la facture électronique
 Archivage et export
 #### Tout est retrouvable en deux clics
 Dix ans d'archives · et un export mensuel propre
@@ -580,6 +585,24 @@ Il reprend votre numérotation là où elle en est et exporte dans le format que
 24 outils branchables
 Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
+La facture électronique
+### La réforme arrive, vous ne changez rien .
+Talos prépare la facture, votre plateforme agréée la transmet. Celle de votre banque, de votre logiciel ou de votre comptable : vous gardez la vôtre.
+01 · Talos
+#### Il prépare la facture
+Montants, TVA et mentions du bâtiment, plus les nouvelles mentions de la réforme : SIREN du client, nature des travaux, adresse du chantier.
+02 · Votre plateforme
+#### Elle la transmet
+Elle envoie la facture à vos clients professionnels et déclare les montants de vos ventes aux particuliers. Talos lui passe tout, au bon format.
+03 · Vous
+#### Vous validez, c'est tout
+Rien ne part sans vous. Pas de nouveau logiciel, pas de format à apprendre, pas de double saisie.
+Ce qui change pour vos factures
+Votre facture Aujourd'hui Dès sept. 2027
+À un particulier PDF par e-mail PDF par e-mail, toujours valable Les montants sont déclarés par votre plateforme
+À un professionnel PDF par e-mail Factur-X, envoyée par votre plateforme agréée
+De vos fournisseurs Reçue sur votre plateforme agréée Obligatoire depuis sept. 2026 Inchangé
+Pas encore de plateforme agréée ? On vous en propose une pendant la mise en place, et Talos est prêt au format Factur-X avant votre échéance du 1er septembre 2027.
 Encore plus fort à deux
 ### Combinez-le avec l'Assistante Trésorerie pour plus de résultats.
 Assistante trésorerie
@@ -593,10 +616,10 @@ Vous refaites la facture le dimanche Elle part le jour de la signature
 Vous ressaisissez les lignes du devis Rien n'est retapé
 Vous recalculez le reste à facturer Le cumul est juste à chaque situation
 Vous cherchez le bon taux de TVA Il est posé selon le chantier
-Vous redoutez la réforme de 2026 Factur-X prêt avant l'échéance de 2027
+Vous redoutez la facture électronique Votre plateforme agréée la transmet
 Votre comptable relance trois fois L'export part en fin de mois
 ### Vous avez besoin d'une facturation carrée ?
-Il facture pendant que vous êtes sur le chantier, au bon montant et au bon format. La facture électronique arrive : il sera prêt avant votre échéance de septembre 2027.
+Il facture pendant que vous êtes sur le chantier, au bon montant et au bon format. Pour la facture électronique, vous gardez votre plateforme agréée : il prépare, elle transmet.
 Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
