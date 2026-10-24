@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    TALOS · COMPOSANTS PARTAGÉS
-   La pastille d'annonce (.apill) et les menus volants de la barre (.tfly).
+   La pastille d'annonce (.apill), les menus volants de la barre (.tfly)
+   et le panneau latéral du téléphone (.tside).
 
    Chargée sur toutes les pages. Comme panier.css, elle ne lit pas --ink :
    à la racine c'est la couleur du texte, dans les sections .t-price & co
@@ -8,7 +9,7 @@
    jetons, réglés pour chaque thème.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.apill,.tfly{
+.apill,.tfly,.tside{
   --u-fg:#F5EFE9;
   --u-mut:rgba(245,239,233,.6);
   --u-faint:rgba(245,239,233,.38);
@@ -18,12 +19,15 @@
   --u-hi:rgba(255,255,255,.09);
   --u-glass:rgba(32,25,20,.62);
   --u-sheet:#1D1713;
+  --u-side:rgba(29,23,19,.86);
+  --u-ring:#211A16;
   --u-well:rgba(245,239,233,.06);
   --u-well-2:rgba(245,239,233,.1);
   --u-shadow:0 1px 1px rgba(0,0,0,.24),0 12px 28px -8px rgba(0,0,0,.55),0 32px 64px -24px rgba(0,0,0,.6);
   --u-ease:cubic-bezier(.32,.72,0,1);
   --u-font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif}
-html[data-theme="light"] .apill,html[data-theme="light"] .tfly{
+html[data-theme="light"] .apill,html[data-theme="light"] .tfly,
+html[data-theme="light"] .tside{
   --u-fg:#1C1310;
   --u-mut:rgba(28,19,16,.6);
   --u-faint:rgba(28,19,16,.38);
@@ -33,6 +37,8 @@ html[data-theme="light"] .apill,html[data-theme="light"] .tfly{
   --u-hi:rgba(255,255,255,.9);
   --u-glass:rgba(255,255,255,.72);
   --u-sheet:#FFFFFF;
+  --u-side:rgba(255,251,247,.84);
+  --u-ring:#FCF8F4;
   --u-well:rgba(40,25,16,.045);
   --u-well-2:rgba(40,25,16,.08);
   --u-shadow:0 1px 1px rgba(40,25,16,.05),0 12px 28px -10px rgba(40,25,16,.18),0 32px 64px -28px rgba(40,25,16,.22)}
@@ -186,4 +192,200 @@ html[data-theme="light"] .tfly-t.is-cta[aria-expanded="true"]{background:#E0631F
      droite de celui de la barre, on le rattrape */
   nav.tnav > .tnav-links{justify-self:center;position:relative;left:-5px}
   nav.tnav > .tnav-act{justify-self:end}
+}
+
+
+/* ── LE PANNEAU LATÉRAL DU TÉLÉPHONE ───────────────────────────────────
+   Sous 1240 px, le burger ouvre un panneau qui glisse depuis la droite,
+   détaché du bord comme une fenêtre : verre dépoli, rubriques en petites
+   capitales, page ouverte en pastille, sous-menus en arborescence, une
+   carte d'action en pied. L'équipe vient en premier, visage par visage :
+   c'est elle qu'on vend.
+
+   Tout est préfixé #tnav-menu : chaque page garde dans son <style> les
+   règles de l'ancienne liste (.tnav-menu a{padding:14px 16px…}), qu'un
+   simple sélecteur de classe ne battrait pas.
+   ──────────────────────────────────────────────────────────────────── */
+@media (max-width:1240px){ html:has(#tnav-wrap.open){overflow:hidden} }
+@media (min-width:1241px){ #tnav-menu{display:none} }
+
+/* le conteneur devient le voile, le panneau vit dedans */
+#tnav-menu{position:fixed;inset:0;z-index:80;width:auto;max-width:none;
+  display:block;padding:0;border:0;border-radius:0;box-shadow:none;transform:none;
+  background:rgba(10,7,5,.46);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease,visibility 0s linear .44s}
+html[data-theme="light"] #tnav-menu{background:rgba(40,25,16,.2);box-shadow:none}
+.tnav-wrap.open #tnav-menu{opacity:1;visibility:visible;pointer-events:auto;
+  transform:none;transition:opacity .3s ease}
+
+#tnav-menu a{padding:0;border-radius:0;font-size:inherit;font-weight:inherit;
+  letter-spacing:inherit;color:inherit;text-decoration:none}
+#tnav-menu a:hover{background:none}
+#tnav-menu ul{margin:0;padding:0;list-style:none}
+
+#tnav-menu .tside{position:absolute;top:10px;right:10px;bottom:10px;
+  width:min(372px,calc(100% - 46px));display:flex;flex-direction:column;
+  border-radius:26px;background:var(--u-side);border:1px solid var(--u-line);
+  box-shadow:inset 0 1px 0 var(--u-hi),var(--u-shadow);
+  -webkit-backdrop-filter:saturate(170%) blur(28px);backdrop-filter:saturate(170%) blur(28px);
+  font-family:var(--u-font);color:var(--u-fg);-webkit-font-smoothing:antialiased;
+  interpolate-size:allow-keywords;
+  transform:translateX(calc(100% + 24px));transition:transform .44s var(--u-ease)}
+.tnav-wrap.open #tnav-menu .tside{transform:none}
+
+/* la flèche à cheval sur le bord, comme celle de la maquette : elle range
+   le panneau d'où il vient. 30 px dessinés, 46 px de zone de doigt. */
+#tnav-menu .tside-x{position:absolute;left:-15px;top:31px;z-index:1;
+  display:grid;place-items:center;width:30px;height:30px;padding:0;
+  border-radius:50%;border:1px solid var(--u-line);background:var(--u-ring);
+  color:var(--u-mut);cursor:pointer;box-shadow:0 6px 16px -6px rgba(0,0,0,.45);
+  transition:color .2s ease,transform .25s var(--u-ease)}
+#tnav-menu .tside-x::before{content:"";position:absolute;inset:-8px}
+#tnav-menu .tside-x svg{width:14px;height:14px}
+#tnav-menu .tside-x:hover{color:var(--u-fg);transform:translateX(2px)}
+
+#tnav-menu .tside-brand{display:flex;align-items:center;gap:12px;flex:0 0 auto;
+  margin:0 12px;padding:18px 8px 16px;border-bottom:1px solid var(--u-line)}
+#tnav-menu .tside-logo{display:grid;place-items:center;flex:0 0 auto;width:40px;height:40px;
+  border-radius:12px;background:var(--u-well-2);color:var(--u-fg)}
+#tnav-menu .tside-logo svg{width:18px;height:21px}
+#tnav-menu .tside-id small{display:block;font-size:10.5px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--u-faint)}
+#tnav-menu .tside-id b{display:block;margin-top:2px;font-size:16px;font-weight:600;letter-spacing:-.02em}
+
+#tnav-menu .tside-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;
+  overscroll-behavior:contain;scrollbar-width:none;padding:4px 12px 14px;
+  /* le bas s'efface : on voit qu'il reste de quoi défiler */
+  -webkit-mask-image:linear-gradient(#000 calc(100% - 22px),transparent);
+  mask-image:linear-gradient(#000 calc(100% - 22px),transparent)}
+#tnav-menu .tside-scroll::-webkit-scrollbar{display:none}
+
+#tnav-menu .tside-lb{display:flex;align-items:center;justify-content:space-between;
+  margin:16px 8px 6px;font-size:10.5px;font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--u-faint)}
+#tnav-menu .tside-lb a{display:inline-flex;align-items:center;gap:3px;
+  font-size:12.5px;font-weight:500;letter-spacing:-.005em;text-transform:none;color:var(--u-acc)}
+#tnav-menu .tside-lb a svg{width:13px;height:13px;transition:transform .25s var(--u-ease)}
+#tnav-menu .tside-lb a:hover svg{transform:translateX(2px)}
+
+/* l'équipe : un visage, un nom, une mission — le point vert dit « en service » */
+#tnav-menu .tside-ag{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:12px;
+  align-items:center;padding:6px 8px;border-radius:14px;transition:background-color .18s ease}
+#tnav-menu .tside-ag:hover{background:var(--u-well)}
+#tnav-menu .tside-ag[aria-current="page"]{background:var(--u-well-2)}
+#tnav-menu .tside-av{position:relative;width:36px;height:36px}
+#tnav-menu .tside-av img{display:block;width:36px;height:36px;border-radius:50%;
+  object-fit:cover;background:var(--u-well-2)}
+#tnav-menu .tside-av::after{content:"";position:absolute;right:-1px;bottom:-1px;
+  width:10px;height:10px;border-radius:50%;background:#30D158;box-shadow:0 0 0 2px var(--u-ring)}
+#tnav-menu .tside-ag.is-soon .tside-av::after{display:none}
+#tnav-menu .tside-ag.is-soon img{filter:grayscale(.7);opacity:.7}
+#tnav-menu .tside-tx{min-width:0}
+#tnav-menu .tside-tx b{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:600;
+  letter-spacing:-.018em;line-height:1.25}
+#tnav-menu .tside-tx small{display:block;margin-top:2px;font-size:12px;line-height:1.3;
+  color:var(--u-mut);letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tnav-menu .tside-soon{flex:0 0 auto;padding:2px 7px;border-radius:99px;font-style:normal;
+  font-size:10.5px;font-weight:600;letter-spacing:0;background:var(--u-well-2);color:var(--u-mut)}
+
+/* la navigation : une icône par rubrique, les sous-pages en arborescence */
+#tnav-menu .tside-it{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;
+  padding:8px 10px;border-radius:13px;cursor:pointer;list-style:none;
+  font-size:14.5px;font-weight:500;letter-spacing:-.016em;color:var(--u-fg);
+  -webkit-tap-highlight-color:transparent;transition:background-color .18s ease}
+#tnav-menu summary.tside-it::-webkit-details-marker{display:none}
+#tnav-menu .tside-it:hover{background:var(--u-well)}
+#tnav-menu .tside-it[aria-current="page"],
+#tnav-menu .tside-grp.is-here:not([open]) > summary{background:var(--u-well-2)}
+#tnav-menu .tside-it:focus-visible,#tnav-menu .tside-ag:focus-visible,
+#tnav-menu .tside-sub a:focus-visible,#tnav-menu .tside-row:focus-visible,
+#tnav-menu .tside-x:focus-visible,#tnav-menu .tside-theme:focus-visible,
+#tnav-menu .tside-cta:focus-visible{outline:2px solid var(--u-acc);outline-offset:-2px}
+#tnav-menu .tside-ic{display:grid;place-items:center;flex:0 0 auto;width:22px;height:22px;color:var(--u-mut)}
+#tnav-menu .tside-ic svg{width:20px;height:20px}
+#tnav-menu .tside-it[aria-current="page"] .tside-ic,
+#tnav-menu .tside-grp.is-here .tside-ic{color:var(--u-acc)}
+#tnav-menu .tside-chev{width:14px;height:14px;margin-left:auto;color:var(--u-faint);
+  transition:transform .3s var(--u-ease)}
+#tnav-menu .tside-grp[open] .tside-chev{transform:rotate(180deg)}
+#tnav-menu .tside-grp::details-content{block-size:0;overflow:clip;
+  transition:block-size .34s var(--u-ease),content-visibility .34s allow-discrete}
+#tnav-menu .tside-grp[open]::details-content{block-size:auto}
+#tnav-menu .tside-sub{margin:2px 0 6px 20px;padding-left:12px;border-left:1px solid var(--u-line)}
+#tnav-menu .tside-sub a{display:block;padding:9px 12px;border-radius:11px;
+  font-size:13.5px;letter-spacing:-.01em;color:var(--u-mut);
+  transition:background-color .18s ease,color .18s ease}
+#tnav-menu .tside-sub a:hover{color:var(--u-fg);background:var(--u-well)}
+#tnav-menu .tside-sub a[aria-current="page"]{color:var(--u-fg);font-weight:500;background:var(--u-well-2)}
+
+/* la carte du pied : l'équipe en pile, une phrase, l'action principale */
+#tnav-menu .tside-card{flex:0 0 auto;margin:0 12px;padding:16px 16px 14px;border-radius:20px;
+  text-align:center;background:var(--u-well);border:1px solid var(--u-line)}
+#tnav-menu .tside-stack{display:flex;justify-content:center;margin-bottom:10px}
+#tnav-menu .tside-stack img{width:30px;height:30px;margin-left:-8px;border-radius:50%;
+  object-fit:cover;box-shadow:0 0 0 2px var(--u-ring)}
+#tnav-menu .tside-stack img:first-child{margin-left:0}
+#tnav-menu .tside-card b{display:block;font-size:14.5px;font-weight:600;letter-spacing:-.02em}
+#tnav-menu .tside-card .tside-pitch{display:block;margin-top:3px;font-size:12.5px;
+  line-height:1.4;color:var(--u-mut);letter-spacing:-.005em}
+/* #C5531C dans les deux thèmes : le #E0631F de la barre ne tient pas 4,5:1
+   sous un libellé blanc de 14 px */
+#tnav-menu .tside-cta{display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;margin-top:12px;border-radius:13px;background:#C5531C;color:#fff;
+  font-size:14px;font-weight:600;letter-spacing:-.016em;
+  box-shadow:0 10px 22px -10px rgba(197,83,28,.8);transition:filter .2s ease,transform .2s var(--u-ease)}
+#tnav-menu .tside-cta svg{width:17px;height:17px}
+#tnav-menu .tside-cta:hover{background:#C5531C;filter:brightness(.93)}
+#tnav-menu .tside-cta:active{transform:scale(.98)}
+
+#tnav-menu .tside-ft{display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;flex:0 0 auto;
+  margin:10px 12px 12px;padding-top:8px;border-top:1px solid var(--u-line)}
+#tnav-menu .tside-row,#tnav-menu .m-panier{display:flex;align-items:center;gap:12px;
+  flex:1 1 auto;min-height:44px;padding:8px 10px;border:0;border-radius:13px;background:none;
+  font:inherit;font-size:14.5px;font-weight:500;letter-spacing:-.016em;color:var(--u-fg);
+  text-align:left;cursor:pointer;transition:background-color .18s ease}
+#tnav-menu .m-panier{flex-basis:100%}
+/* « Mon équipe » arrive de panier.js sans icône : le sac, en masque */
+#tnav-menu .m-panier::before{content:"";flex:0 0 auto;width:20px;height:20px;
+  background:var(--u-mut);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.4 8h13.2l-1 11.1a2 2 0 0 1-2 1.9H8.4a2 2 0 0 1-2-1.9z'/%3E%3Cpath d='M9 10.4V7a3 3 0 0 1 6 0v3.4'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.4 8h13.2l-1 11.1a2 2 0 0 1-2 1.9H8.4a2 2 0 0 1-2-1.9z'/%3E%3Cpath d='M9 10.4V7a3 3 0 0 1 6 0v3.4'/%3E%3C/svg%3E") center/contain no-repeat}
+#tnav-menu .tside-row:hover,#tnav-menu .m-panier:hover{background:var(--u-well)}
+#tnav-menu .tside-row svg{width:20px;height:20px;color:var(--u-mut)}
+
+/* le thème en interrupteur : la pastille porte l'icône du thème affiché */
+#tnav-menu .tside-theme{position:relative;display:block;flex:0 0 auto;width:58px;height:32px;
+  margin-right:6px;padding:0;border-radius:99px;cursor:pointer;
+  background:var(--u-well-2);border:1px solid var(--u-line)}
+#tnav-menu .tside-theme::before{content:"";position:absolute;inset:-6px}
+#tnav-menu .tside-knob{position:absolute;top:2px;left:2px;display:grid;place-items:center;
+  width:26px;height:26px;border-radius:50%;background:var(--u-ring);color:var(--u-fg);
+  box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .32s var(--u-ease)}
+#tnav-menu .tside-knob svg{width:15px;height:15px}
+#tnav-menu .tside-theme .moon{display:block}
+#tnav-menu .tside-theme .sun{display:none}
+html[data-theme="light"] #tnav-menu .tside-knob{transform:translateX(26px);background:#fff}
+html[data-theme="light"] #tnav-menu .tside-theme .moon{display:none}
+html[data-theme="light"] #tnav-menu .tside-theme .sun{display:block}
+
+/* l'entrée : le panneau glisse, puis les lignes arrivent une à une */
+#tnav-menu .tside-scroll li,#tnav-menu .tside-card{opacity:0;transform:translateX(14px);
+  transition:opacity .3s ease,transform .4s var(--u-ease)}
+.tnav-wrap.open #tnav-menu .tside-scroll li,.tnav-wrap.open #tnav-menu .tside-card{
+  opacity:1;transform:none;transition-delay:calc(.08s + var(--i,0) * 28ms)}
+
+/* écran de téléphone : la carte passe sur une ligne, la pile de visages
+   à gauche du bouton — la navigation garde la place de défiler */
+@media (max-height:900px){
+  #tnav-menu .tside-card{display:flex;align-items:center;gap:12px;padding:8px 8px 8px 14px}
+  #tnav-menu .tside-card b,#tnav-menu .tside-card .tside-pitch{display:none}
+  #tnav-menu .tside-stack{flex:0 0 auto;margin:0}
+  #tnav-menu .tside-stack img{width:28px;height:28px}
+  #tnav-menu .tside-cta{flex:1 1 auto;margin:0}
+}
+@media (prefers-reduced-motion:reduce){
+  #tnav-menu,#tnav-menu .tside,#tnav-menu .tside-knob,#tnav-menu .tside-chev,
+  #tnav-menu .tside-grp::details-content{transition:none}
+  #tnav-menu .tside-scroll li,#tnav-menu .tside-card{opacity:1;transform:none;transition:none}
 }

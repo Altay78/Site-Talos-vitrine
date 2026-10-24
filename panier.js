@@ -219,7 +219,8 @@
       a.innerHTML = 'Mon équipe <span class="pn-n" aria-hidden="true">0</span>';
       a.addEventListener('click', function () { ouvrir(); });
       var esp = menu.querySelector('.m-esp');
-      menu.insertBefore(a, esp || null);
+      // le panneau latéral range .m-esp dans son pied, pas à la racine du menu
+      (esp ? esp.parentNode : menu).insertBefore(a, esp);
     }
   }
 

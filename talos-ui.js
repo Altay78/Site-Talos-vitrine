@@ -8,6 +8,8 @@
    Sans JS, les déclencheurs restent des boutons inertes et le menu du
    téléphone garde les mêmes liens : rien n'est perdu.
 
+   Le panneau latéral du téléphone (.tside) se referme aussi d'ici.
+
    Habillage dans talos-ui.css.
    ══════════════════════════════════════════════════════════════════ */
 (function () {
@@ -109,8 +111,34 @@
     });
   }
 
+  /* le panneau latéral du téléphone : le voile, la flèche du bord et
+     « Mon équipe » le referment. On repasse par le burger, qui tient
+     aria-expanded et la classe .open (script de chaque page). */
+  function poserSide() {
+    var menu = document.getElementById('tnav-menu');
+    var btn = document.getElementById('tnav-burger');
+    var wrap = document.getElementById('tnav-wrap');
+    if (!menu || !btn || !wrap || !menu.querySelector('.tside')) return;
+    var x = menu.querySelector('.tside-x');
+
+    menu.addEventListener('click', function (e) {
+      if (e.target === menu || e.target.closest('.tside-x, .m-panier')) {
+        var clavier = x.matches(':focus-visible');
+        btn.click();
+        if (clavier) btn.focus({ preventScroll: true });
+      }
+    });
+    /* ouvert au clavier : le focus entre dans le panneau */
+    btn.addEventListener('click', function () {
+      if (wrap.classList.contains('open') && btn.matches(':focus-visible')) {
+        setTimeout(function () { x.focus({ preventScroll: true }); }, 60);
+      }
+    });
+  }
+
   function init() {
     document.querySelectorAll('.tfly').forEach(poser);
+    poserSide();
 
     document.addEventListener('pointerdown', function (e) {
       if (ouvert && !ouvert.contains(e.target)) fermer(ouvert, false);
