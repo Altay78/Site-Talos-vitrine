@@ -478,7 +478,7 @@ Source : https://www.talos-ai.tech/assistant-facturation.html
 Agent IA facturation BTP : acomptes, situations, TVA | Talos
 Assistant facturation
 Le duo parfait Assistante trésorerie
-## Agent IA facturation BTP Vos factures partent sans que vous ayez à y penser .
+## Agent IA facturation BTP Vos factures se préparent sans que vous ayez à y penser .
 Branché sur vos outils
 Mise en place personnalisée
 Il transforme vos devis signés en factures, gère vos acomptes et vous aide à facturer chaque chantier au bon moment.
@@ -486,7 +486,7 @@ Génère vos factures automatiquement
 Gère acomptes et soldes
 Numérote vos factures sans erreur
 Applique la TVA adaptée
-Envoie vos factures aux clients
+Envoie vos factures dès votre feu vert
 Ajouter à mon équipe
 Voir une démonstration
 ### Facturez sans y penser .
@@ -494,8 +494,8 @@ Voir une démonstration
 #### Le devis signé devient une facture
 Dès la signature, la facture d'acompte est générée avec le bon montant, la bonne TVA et les mentions obligatoires. Rien à ressaisir.
 02 — Envoyer
-#### Elle part au client, pas dans vos brouillons
-La facture est envoyée dès qu'elle est prête, avec l'échéance et les conditions de paiement déjà posées.
+#### Elle part au client dès que vous validez
+La facture vous attend, prête : un clic pour valider et elle part, avec l'échéance et les conditions de paiement déjà posées.
 03 — Suivre
 #### Vous savez qui a payé quoi
 Émise, partiellement payée, soldée : chaque facture porte son état, et les échéances à surveiller remontent d'elles-mêmes.
@@ -515,12 +515,12 @@ Génération, numérotation et préparation automatisées.
 Chaque chantier est facturé au bon moment, sans oubli.
 Envoi — elle fait partir vos factures
 ### Une facture créée n'est utile que si elle arrive au client.
-Elle prépare et envoie vos factures directement au client, avec les bonnes informations et les bonnes conditions de paiement.
-Envoi automatique La facture part dès qu'elle est prête.
+Elle prépare vos factures et les envoie au client dès que vous les validez, avec les bonnes informations et les bonnes conditions de paiement.
+Envoi en un clic Vous validez, la facture part.
 Conditions de paiement Acompte, solde et échéance sont clairement indiqués.
 Suivi des factures Vous savez ce qui est envoyé, payé ou encore en attente.
 Vos factures restent parfois dans vos brouillons
-Envoi automatique dès qu'elles sont prêtes.
+Prêtes à valider, elles partent en un clic.
 Vous perdez du temps à vérifier ce qui a été payé
 Suivi centralisé des factures et des paiements.
 Vous devez régulièrement rappeler les échéances
@@ -544,7 +544,7 @@ Ce qu'il prend en charge
 Du devis signé jusqu'à l'export du comptable, voici exactement ce que votre assistant facturation fait à votre place.
 Émission dès la signature
 05 fonctionnalités
-#### Elle part sans que vous y pensiez
+#### Prête sans que vous y pensiez
 Dès la signature · sans une seule ressaisie
 Ce qu'il fait :
 Générée depuis le devis signé
