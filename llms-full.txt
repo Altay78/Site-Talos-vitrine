@@ -75,15 +75,15 @@ Offre de lancement Gagnez jusqu’à 690 € de mise en place
 Devis, relances, factures, rendez-vous : vos agents IA s’en chargent. Vous validez d’un clic.
 Réserver une démo Commander sans démo Gratuit • 2 min • Sans engagement
 ### On se branche à vos outils.
-Talos se connecte à 24 outils que les artisans utilisent déjà : messagerie, agenda, logiciels de devis du bâtiment (Batigest, EBP, Obat, Tolteck), comptabilité, paiement et signature électronique.
-Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Talos s’appuie sur n8n, qui se connecte à plus de 300 outils : messagerie, agenda, logiciels de devis du bâtiment (Batigest, EBP, Obat, Tolteck), comptabilité, paiement et signature électronique.
+Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Agents IA pour le BTP
 ### Talos, qu’est-ce que c’est ?
 Talos est une équipe d’agents IA pour les artisans et les entreprises
 du bâtiment. Quatre agents spécialisés préparent les devis, les factures, les rendez-vous et
 le tri des mails (la relance des impayés arrive bientôt), à partir de vos prix et de vos habitudes.
-Chaque document est validé par l’artisan avant envoi. Talos se connecte à 24 outils du
-métier, dont Batigest, EBP Bâtiment, Obat, Gmail et WhatsApp Business. L’offre démarre à
+Chaque document est validé par l’artisan avant envoi. Talos se connecte à plus de 300 outils du
+métier, dont Gmail, Google Agenda, WhatsApp Business, Stripe et Qonto. L’offre démarre à
 99 € par mois pour un agent, mise en place incluse, et plus de 30 artisans du bâtiment
 sont déjà accompagnés.
 Talos en bref
@@ -444,7 +444,7 @@ Ne plus relancer moi-même
 ### Vous gardez vos outils, il travaille avec .
 Pas de migration, pas de logiciel à apprendre, pas de données à ressaisir. Il se branche sur votre messagerie, votre agenda et vos outils actuels.
 24 outils branchables
-Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 Encore plus fort à deux
 ### Combinez-le avec l'Assistant Facturation pour plus de résultats.
@@ -583,7 +583,7 @@ Simplifier ma fin de mois
 ### Vous gardez votre compta et vos outils, il travaille avec .
 Il reprend votre numérotation là où elle en est et exporte dans le format que votre cabinet attend. Personne n'a à changer de logiciel, ni vous ni lui.
 24 outils branchables
-Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 La facture électronique
 ### La réforme arrive, vous ne changez rien .
@@ -738,7 +738,7 @@ Voir ma trésorerie à trois mois
 ### Vous gardez votre banque et vos outils, elle travaille avec .
 Elle n'a jamais accès à votre compte bancaire. Vous marquez une facture payée d'un clic, elle arrête aussitôt les relances.
 24 outils branchables
-Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 Encore plus fort à deux
 ### Combinez-la avec l'Assistant Facturation pour plus de résultats.
@@ -868,7 +868,7 @@ Réduire mes rendez-vous manqués
 ### Vous gardez votre agenda et vos outils, elle travaille avec .
 Elle écrit dans l'agenda que vous utilisez déjà et répond sur les canaux où vos clients vous écrivent. Rien de nouveau à installer sur votre téléphone.
 24 outils branchables
-Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 Encore plus fort à deux
 ### Combinez-la avec l'Assistant Commercial pour plus de résultats.
@@ -1006,7 +1006,7 @@ Ranger mes chantiers
 ### Vous gardez votre boîte mail, elle travaille dedans .
 On branche votre adresse professionnelle, pas votre boîte privée. Vos dossiers restent les vôtres : elle range, elle ne déménage rien.
 24 outils branchables
-Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Gmail Outlook Toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos, iCloud) Microsoft 365 Google Agenda WhatsApp Business Calendly Brevo Google Business Profile ChatGPT (OpenAI) Claude (Anthropic) Google Drive Dropbox Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets Stripe GoCardless PayPal Pennylane QuickBooks Batigest (Sage) EBP Bâtiment Obat Tolteck Yousign Excel / OneDrive Google Sheets
+Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 Encore plus fort à deux
 ### Combinez-la avec l'Assistante Client pour plus de résultats.
