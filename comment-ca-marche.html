@@ -3225,6 +3225,70 @@ h1 .h1-cat{display:block;margin:0 0 16px;font-family:ui-monospace,"SF Mono",Menl
   font-size:12.5px;line-height:1.4;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
   font-style:normal;color:#E0631F;-webkit-text-fill-color:#E0631F;background:none}
 html[data-theme="light"] h1 .h1-cat{color:#B4491A;-webkit-text-fill-color:#B4491A}
+
+/* ─────────────── HUB ───────────────
+   Référence Figma « electro wave » : un noyau, des courbes qui le rejoignent
+   à la verticale. Une trace lumineuse parcourt chaque fil vers Talos (gauche)
+   puis de Talos vers l'outil (droite). */
+.cm-hub{position:relative;max-width:1200px;margin:56px auto 44px;aspect-ratio:1200/520}
+.cm-hub-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.cm-hub-svg.m{display:none}
+.cm-hub-svg path{fill:none;stroke-linecap:round}
+.cm-hub-svg .glow path{stroke:var(--bronze);stroke-width:5;opacity:.28;filter:blur(5px)}
+.cm-hub-svg .wire path{stroke:rgba(var(--bronze-rgb),.75);stroke-width:1.4}
+.cm-hub-svg .flow path{stroke:#FFD2B0;stroke-width:2.2;stroke-dasharray:7 93;stroke-dashoffset:7;
+  filter:drop-shadow(0 0 4px var(--bronze));animation:cmHubFlow 4.4s cubic-bezier(.45,0,.2,1) infinite;
+  animation-delay:var(--d)}
+@keyframes cmHubFlow{0%{stroke-dashoffset:7;opacity:0}8%{opacity:1}62%{opacity:1}
+  70%,100%{stroke-dashoffset:-93;opacity:0}}
+html[data-theme="light"] .cm-hub-svg .glow path{opacity:.18}
+html[data-theme="light"] .cm-hub-svg .flow path{stroke:var(--bronze)}
+
+.cm-hub-core{position:absolute;left:50%;top:50%;z-index:2;transform:translate(-50%,-50%);
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:20%;min-width:172px;height:16.2%;min-height:64px;border-radius:999px;
+  background:#1B1714;border:1px solid rgba(246,238,231,.10);color:#F6EEE7;
+  font-size:clamp(20px,2.2vw,28px);font-weight:700;letter-spacing:-.8px;
+  box-shadow:0 0 0 6px rgba(var(--bronze-rgb),.06),0 20px 50px -18px rgba(0,0,0,.7)}
+.cm-hub-core svg{width:auto;height:44%}
+
+.cm-hub-src{position:absolute;inset:0;margin:0;padding:0;list-style:none;pointer-events:none}
+.cm-hub-src li{position:absolute;top:var(--y);display:flex;align-items:center;gap:12px;
+  transform:translateY(-50%)}
+.cm-hub-src.l li{left:0}
+.cm-hub-src.r li{right:0;flex-direction:row-reverse}
+.cm-hub-ic{display:grid;place-items:center;width:58px;height:58px;border-radius:17px;
+  background:var(--ink-2);border:1px solid var(--line-2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 10px 26px -12px rgba(0,0,0,.6)}
+html[data-theme="light"] .cm-hub-ic{background:#fff;box-shadow:0 1px 2px rgba(40,25,16,.06),0 10px 24px -14px rgba(40,25,16,.25)}
+.cm-hub-ic img{width:28px;height:28px;object-fit:contain}
+.cm-hub-ic img[src*="stripe"]{width:42px}
+.cm-hub-nm{position:absolute;top:calc(100% + 7px);left:50%;transform:translateX(-50%);
+  font-size:12px;font-weight:500;color:var(--lin);white-space:nowrap}
+.cm-hub-src li .cm-hub-ic{position:relative}
+.cm-hub-src.l .cm-hub-nm{left:29px}
+.cm-hub-src.r .cm-hub-nm{left:auto;right:29px;transform:translateX(50%)}
+
+@media (max-width:760px){
+  .cm-hub{aspect-ratio:360/440;max-width:420px;margin-top:40px}
+  .cm-hub-svg.d{display:none}
+  .cm-hub-svg.m{display:block}
+  .cm-hub-src li{top:var(--my)}
+  .cm-hub-ic{width:44px;height:44px;border-radius:13px}
+  .cm-hub-ic img{width:22px;height:22px}
+  .cm-hub-ic img[src*="stripe"]{width:34px}
+  .cm-hub-nm{display:none}
+  .cm-hub-core{width:44%;min-width:0;height:auto;min-height:0;padding:14px 0;font-size:20px;gap:9px}
+  .cm-hub-core svg{height:22px}
+}
+@media (prefers-reduced-motion:reduce){.cm-hub-svg .flow{display:none}}
+
+/* pastille sobre, la même que sur l'accueil */
+.tk{display:inline-flex;align-items:center;height:34px;padding:0 15px;border-radius:999px;
+  border:1px solid rgba(var(--parch-rgb),.12);background:rgba(var(--parch-rgb),.045);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  font:500 13.5px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.15px;
+  color:rgba(var(--parch-rgb),.84);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -3234,65 +3298,18 @@ html[data-theme="light"] h1 .h1-cat{color:#B4491A;-webkit-text-fill-color:#B4491
 <!-- ══════════ HERO ══════════ -->
 <section class="cm-hero" id="top">
   <div class="cm-in">
-    <span class="cm-k"><i></i>Comment ça fonctionne</span>
+    <span class="tk">Comment ça fonctionne</span>
     <h1><span class="h1-cat">Agents IA pour artisans du BTP</span>Vous continuez votre journée.<br>Talos continue votre <em>administratif</em>.</h1>
     <p class="lead">Vous n'avez rien à apprendre. Rien à installer. Nous configurons Talos
        pour qu'il travaille comme vous.</p>
 
-    <!-- plateau : ce qui entre, le noyau, ce qui sort -->
-    <div class="cm-board" aria-hidden="true">
-      <div class="cm-board-top">
-        <span>Flux de votre entreprise</span>
-        <span class="cm-live"><i></i>Talos actif</span>
-      </div>
-      <div class="cm-flow">
-
-        <div class="cm-col in">
-          <div class="cm-chip">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 17.9 8.85L 13.46 12.46C 12.62 13.13 11.44 13.13 10.6 12.46L 6.12 8.85"/><path d="M 16.91 21C 19.95 21.01 22 18.51 22 15.44L 22 8.57C 22 5.5 19.95 3 16.91 3L 7.09 3C 4.05 3 2 5.5 2 8.57L 2 15.44C 2 18.51 4.05 21.01 7.09 21L 16.91 21Z"/></svg>
-            Un email
-          </div>
-          <div class="cm-chip">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.07 19.07C 16.02 22.13 11.49 22.79 7.79 21.07C 7.24 20.85 6.79 20.68 6.37 20.68C 5.18 20.68 3.7 21.83 2.93 21.07C 2.17 20.3 3.32 18.82 3.32 17.63C 3.32 17.2 3.15 16.76 2.93 16.21C 1.21 12.51 1.87 7.98 4.93 4.93C 8.83 1.02 15.17 1.02 19.07 4.93C 22.98 8.84 22.97 15.17 19.07 19.07Z"/><path d="M15.94 12.41L15.95 12.41"/><path d="M11.93 12.41L11.94 12.41"/><path d="M7.92 12.41L7.93 12.41"/></svg>
-            Un message
-          </div>
-          <div class="cm-chip">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(2.500000, 2.500000)" stroke-width="1.5"> <path d="M9.03174073,9.97238745 C13.0208243,13.9603606 13.9257751,9.34671782 16.4656491,11.8848116 C18.9142765,14.3327574 20.32162,14.8232052 17.2192381,17.9247236 C16.8306352,18.2370218 14.3616115,21.9942591 5.68460336,13.3196663 C-2.99347825,4.64400029 0.761584769,2.17244427 1.07396994,1.78394958 C4.18386634,-1.32615434 4.6658627,0.0893829491 7.11449014,2.53732879 C9.6543641,5.07649576 5.04265719,5.9844143 9.03174073,9.97238745 Z"></path> </g></svg>
-            Un appel manqué
-          </div>
-          <div class="cm-chip">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 15.04 4.05C 16.05 4.45 16.36 5.85 16.77 6.3C 17.19 6.75 17.78 6.91 18.1 6.91C 19.84 6.91 21.25 8.32 21.25 10.05L 21.25 15.85C 21.25 18.18 19.36 20.07 17.03 20.07L 6.97 20.07C 4.64 20.07 2.75 18.18 2.75 15.85L 2.75 10.05C 2.75 8.32 4.16 6.91 5.9 6.91C 6.22 6.91 6.81 6.75 7.23 6.3C 7.64 5.85 7.95 4.45 8.96 4.05C 9.97 3.65 14.03 3.65 15.04 4.05Z"/><path d="M17.5 9.5L17.5 9.5"/><path d="M 15.18 13.13C 15.18 11.37 13.76 9.95 12 9.95C 10.24 9.95 8.82 11.37 8.82 13.13C 8.82 14.88 10.24 16.31 12 16.31C 13.76 16.31 15.18 14.88 15.18 13.13Z"/></svg>
-            Une photo de chantier
-          </div>
-        </div>
-
-        <div class="cm-core">
-          <svg viewBox="253 302 472 550" aria-hidden="true"><mask id="cmcore-marteau-1" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#cmcore-marteau-1)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg>
-          <span class="cm-core-lbl">Talos</span>
-        </div>
-
-        <div class="cm-col out">
-          <div class="cm-chip">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(3.000000, 2.000000)" stroke-width="1.5"> <line x1="12.7162" y1="14.2234" x2="5.4962" y2="14.2234"></line> <line x1="12.7162" y1="10.0369" x2="5.4962" y2="10.0369"></line> <line x1="8.2513" y1="5.8601" x2="5.4963" y2="5.8601"></line> <path d="M12.9086,0.7498 C12.9086,0.7498 5.2316,0.7538 5.2196,0.7538 C2.4596,0.7708 0.7506,2.5868 0.7506,5.3568 L0.7506,14.5528 C0.7506,17.3368 2.4726,19.1598 5.2566,19.1598 C5.2566,19.1598 12.9326,19.1568 12.9456,19.1568 C15.7056,19.1398 17.4156,17.3228 17.4156,14.5528 L17.4156,5.3568 C17.4156,2.5728 15.6926,0.7498 12.9086,0.7498 Z"></path> </g></svg>
-            Devis préparé <b>Prêt</b>
-          </div>
-          <div class="cm-chip">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 19.69 14.29C 20.51 13.32 21 12.06 21 10.69C 21 7.59 18.49 5.07 15.38 5.07H 8.61C 5.51 5.07 3 7.59 3 10.69C 3 13.79 5.51 16.3 8.61 16.3H 15.38"/><path d="M 12.77 13.68L 15.39 16.3L 12.77 18.93"/></svg>
-            Relance planifiée <b>Prêt</b>
-          </div>
-          <div class="cm-chip">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M 14.74 2.76L 8.08 2.76C 6 2.75 4.3 4.41 4.25 6.49L 4.25 17.2C 4.2 19.32 5.88 21.07 7.99 21.11C 8.02 21.11 8.05 21.12 8.08 21.11L 16.07 21.11C 18.17 21.03 19.82 19.3 19.8 17.2L 19.8 8.04L 14.74 2.76Z"/><path d="M 14.48 2.75L 14.48 5.66C 14.48 7.08 15.62 8.23 17.04 8.23L 19.8 8.23"/><path d="M14.29 15.36L8.89 15.36"/><path d="M12.24 11.61L8.89 11.61"/></svg>
-            Facture prête <b>Prêt</b>
-          </div>
-          <div class="cm-chip">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.09 9.4L20.92 9.4"/><path d="M16.44 13.31L16.45 13.31"/><path d="M12 13.31L12.01 13.31"/><path d="M7.56 13.31L7.57 13.31"/><path d="M16.44 17.2L16.45 17.2"/><path d="M12 17.2L12.01 17.2"/><path d="M7.56 17.2L7.57 17.2"/><path d="M16.04 2L16.04 5.29"/><path d="M7.97 2L7.97 5.29"/><path d="M 16.24 3.58L 7.77 3.58C 4.83 3.58 3 5.22 3 8.22L 3 17.27C 3 20.33 4.83 22 7.77 22L 16.23 22C 19.17 22 21 20.35 21 17.35L 21 8.22C 21.01 5.22 19.18 3.58 16.24 3.58Z"/></svg>
-            Rendez-vous posé <b>Prêt</b>
-          </div>
-        </div>
-
-        <span class="cm-wire l"><span></span></span>
-        <span class="cm-wire r"><span></span></span>
-      </div>
+<!-- hub : vos outils d'un côté, là où Talos agit de l'autre (maquette Figma « electro wave ») -->
+    <div class="cm-hub" role="img" aria-label="Talos relié à vos outils : WhatsApp, Gmail, Outlook, Google, Agenda, Stripe, Drive, PayPal">
+      <svg class="cm-hub-svg d" viewBox="0 0 1200 520" aria-hidden="true" focusable="false"><g class="glow"><path d="M66.0 40.0H310.1A213.9 186.0 0 0 1 524.0 226.0"/><path d="M66.0 150.0H436.6A87.4 76.0 0 0 1 524.0 226.0"/><path d="M66.0 370.0H436.6A87.4 76.0 0 0 0 524.0 294.0"/><path d="M66.0 480.0H310.1A213.9 186.0 0 0 0 524.0 294.0"/><path d="M676.0 226.0A213.9 186.0 0 0 1 889.9 40.0H1134.0"/><path d="M676.0 226.0A87.4 76.0 0 0 1 763.4 150.0H1134.0"/><path d="M676.0 294.0A87.4 76.0 0 0 0 763.4 370.0H1134.0"/><path d="M676.0 294.0A213.9 186.0 0 0 0 889.9 480.0H1134.0"/></g><g class="wire"><path d="M66.0 40.0H310.1A213.9 186.0 0 0 1 524.0 226.0"/><path d="M66.0 150.0H436.6A87.4 76.0 0 0 1 524.0 226.0"/><path d="M66.0 370.0H436.6A87.4 76.0 0 0 0 524.0 294.0"/><path d="M66.0 480.0H310.1A213.9 186.0 0 0 0 524.0 294.0"/><path d="M676.0 226.0A213.9 186.0 0 0 1 889.9 40.0H1134.0"/><path d="M676.0 226.0A87.4 76.0 0 0 1 763.4 150.0H1134.0"/><path d="M676.0 294.0A87.4 76.0 0 0 0 763.4 370.0H1134.0"/><path d="M676.0 294.0A213.9 186.0 0 0 0 889.9 480.0H1134.0"/></g><g class="flow"><path d="M66.0 40.0H310.1A213.9 186.0 0 0 1 524.0 226.0" pathLength="100" style="--d:0.00s"/><path d="M66.0 150.0H436.6A87.4 76.0 0 0 1 524.0 226.0" pathLength="100" style="--d:0.55s"/><path d="M66.0 370.0H436.6A87.4 76.0 0 0 0 524.0 294.0" pathLength="100" style="--d:1.10s"/><path d="M66.0 480.0H310.1A213.9 186.0 0 0 0 524.0 294.0" pathLength="100" style="--d:1.65s"/><path d="M676.0 226.0A213.9 186.0 0 0 1 889.9 40.0H1134.0" pathLength="100" style="--d:2.20s"/><path d="M676.0 226.0A87.4 76.0 0 0 1 763.4 150.0H1134.0" pathLength="100" style="--d:2.75s"/><path d="M676.0 294.0A87.4 76.0 0 0 0 763.4 370.0H1134.0" pathLength="100" style="--d:3.30s"/><path d="M676.0 294.0A213.9 186.0 0 0 0 889.9 480.0H1134.0" pathLength="100" style="--d:3.85s"/></g></svg>
+      <svg class="cm-hub-svg m" viewBox="0 0 360 440" aria-hidden="true" focusable="false"><g class="glow"><path d="M50.0 34.0H56.0A72.0 160.0 0 0 1 128.0 194.0"/><path d="M50.0 128.0H91.7A36.3 66.0 0 0 1 128.0 194.0"/><path d="M50.0 312.0H91.7A36.3 66.0 0 0 0 128.0 246.0"/><path d="M50.0 406.0H56.0A72.0 160.0 0 0 0 128.0 246.0"/><path d="M232.0 194.0A72.0 160.0 0 0 1 304.0 34.0H310.0"/><path d="M232.0 194.0A36.3 66.0 0 0 1 268.3 128.0H310.0"/><path d="M232.0 246.0A36.3 66.0 0 0 0 268.3 312.0H310.0"/><path d="M232.0 246.0A72.0 160.0 0 0 0 304.0 406.0H310.0"/></g><g class="wire"><path d="M50.0 34.0H56.0A72.0 160.0 0 0 1 128.0 194.0"/><path d="M50.0 128.0H91.7A36.3 66.0 0 0 1 128.0 194.0"/><path d="M50.0 312.0H91.7A36.3 66.0 0 0 0 128.0 246.0"/><path d="M50.0 406.0H56.0A72.0 160.0 0 0 0 128.0 246.0"/><path d="M232.0 194.0A72.0 160.0 0 0 1 304.0 34.0H310.0"/><path d="M232.0 194.0A36.3 66.0 0 0 1 268.3 128.0H310.0"/><path d="M232.0 246.0A36.3 66.0 0 0 0 268.3 312.0H310.0"/><path d="M232.0 246.0A72.0 160.0 0 0 0 304.0 406.0H310.0"/></g><g class="flow"><path d="M50.0 34.0H56.0A72.0 160.0 0 0 1 128.0 194.0" pathLength="100" style="--d:0.00s"/><path d="M50.0 128.0H91.7A36.3 66.0 0 0 1 128.0 194.0" pathLength="100" style="--d:0.55s"/><path d="M50.0 312.0H91.7A36.3 66.0 0 0 0 128.0 246.0" pathLength="100" style="--d:1.10s"/><path d="M50.0 406.0H56.0A72.0 160.0 0 0 0 128.0 246.0" pathLength="100" style="--d:1.65s"/><path d="M232.0 194.0A72.0 160.0 0 0 1 304.0 34.0H310.0" pathLength="100" style="--d:2.20s"/><path d="M232.0 194.0A36.3 66.0 0 0 1 268.3 128.0H310.0" pathLength="100" style="--d:2.75s"/><path d="M232.0 246.0A36.3 66.0 0 0 0 268.3 312.0H310.0" pathLength="100" style="--d:3.30s"/><path d="M232.0 246.0A72.0 160.0 0 0 0 304.0 406.0H310.0" pathLength="100" style="--d:3.85s"/></g></svg>
+      <div class="cm-hub-core"><svg viewBox="253 302 472 550" aria-hidden="true"><mask id="cmhub-marteau" maskUnits="userSpaceOnUse" x="253" y="302" width="472" height="550"><rect x="253" y="302" width="472" height="550" fill="#fff"/><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="#000" stroke="#000" stroke-width="32" stroke-linejoin="round"/></mask><g mask="url(#cmhub-marteau)"><path d="M 494 536 L 642 536 L 399 852 L 459 684 Z" fill="#C75C24"/></g><path d="M 310 302 L 725 302 L 688 406 L 558 406 L 502 640 L 372 640 L 400 406 L 362 406 C 338 409 316 430 300 457 C 291 472 265 468 258 447 C 250 420 255 389 263 363 C 276 324 288 302 310 302 Z" fill="currentColor"/></svg><span>Talos</span></div>
+      <ul class="cm-hub-src l"><li style="--y:7.69%;--my:7.73%"><span class="cm-hub-ic"><img src="logos/hub/whatsapp.svg" alt="" width="26" height="26" loading="lazy" decoding="async"></span><span class="cm-hub-nm">WhatsApp</span></li><li style="--y:28.85%;--my:29.09%"><span class="cm-hub-ic"><img src="logos/hub/gmail.svg" alt="" width="26" height="26" loading="lazy" decoding="async"></span><span class="cm-hub-nm">Gmail</span></li><li style="--y:71.15%;--my:70.91%"><span class="cm-hub-ic"><img src="logos/hub/microsoft-outlook.svg" alt="" width="26" height="26" loading="lazy" decoding="async"></span><span class="cm-hub-nm">Outlook</span></li><li style="--y:92.31%;--my:92.27%"><span class="cm-hub-ic"><img src="logos/hub/google.svg" alt="" width="26" height="26" loading="lazy" decoding="async"></span><span class="cm-hub-nm">Google</span></li></ul>
+      <ul class="cm-hub-src r"><li style="--y:7.69%;--my:7.73%"><span class="cm-hub-ic"><img src="logos/hub/google-calendar.svg" alt="" width="26" height="26" loading="lazy" decoding="async"></span><span class="cm-hub-nm">Agenda</span></li><li style="--y:28.85%;--my:29.09%"><span class="cm-hub-ic"><img src="logos/hub/stripe.svg" alt="" width="26" height="26" loading="lazy" decoding="async"></span><span class="cm-hub-nm">Stripe</span></li><li style="--y:71.15%;--my:70.91%"><span class="cm-hub-ic"><img src="logos/hub/google-drive.svg" alt="" width="26" height="26" loading="lazy" decoding="async"></span><span class="cm-hub-nm">Drive</span></li><li style="--y:92.31%;--my:92.27%"><span class="cm-hub-ic"><img src="logos/hub/paypal.svg" alt="" width="26" height="26" loading="lazy" decoding="async"></span><span class="cm-hub-nm">PayPal</span></li></ul>
     </div>
   </div>
 </section>
@@ -3303,7 +3320,7 @@ html[data-theme="light"] h1 .h1-cat{color:#B4491A;-webkit-text-fill-color:#B4491
   <div class="cm-in">
 
     <div class="cm-steps-head">
-      <span class="cm-k"><i></i>De la mise en route au quotidien</span>
+      <span class="tk">De la mise en route au quotidien</span>
       <h2>Six étapes. Vous n'en vivez <em>qu'une</em>.</h2>
     </div>
 
