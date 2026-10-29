@@ -6,8 +6,8 @@
 
 ## Produit
 
-- [Agents IA pour artisans du BTP : devis et factures](https://www.talos-ai.tech/): Des agents IA pour artisans du BTP : devis, factures, relances et rendez-vous préparés pendant le chantier. Vous validez. +30 artisans accompagnés.
-- [4 agents IA pour artisans du BTP : devis, factures, accueil](https://www.talos-ai.tech/offres.html): Quatre agents IA spécialisés pour artisans : devis, facturation, accueil client et tri des mails. Relance des impayés bientôt. Mise en place incluse.
+- [Agents IA pour artisans du BTP : devis et factures](https://www.talos-ai.tech/): Des agents IA pour artisans du BTP : devis, factures, relances et rendez-vous préparés pendant le chantier. Vous validez. Conforme RGPD.
+- [5 agents IA pour artisans du BTP : devis, factures, accueil](https://www.talos-ai.tech/offres.html): Cinq agents IA spécialisés pour artisans : devis, facturation, accueil client, tri des mails et relance des impayés. Mise en place incluse.
 - [Comment fonctionnent les agents IA Talos pour artisans](https://www.talos-ai.tech/comment-ca-marche.html): Rien à installer ni à apprendre : on configure vos agents IA sur vos habitudes, ils préparent devis, relances et factures. Vous validez, c'est tout.
 
 ## Agents IA
@@ -47,10 +47,10 @@ Non. Vous gardez la plateforme agréée de votre banque, de votre logiciel ou de
 Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise. Dès qu'un échange demande une visite terrain, l'IA vous passe la main.
 
 **Mes tarifs et données clients sont-ils en sécurité ?**
-Vos données restent confidentielles et stockées en Europe. Elles sont votre propriété exclusive et ne servent jamais à entraîner des modèles publics.
+Vos données restent confidentielles et sont traitées conformément au RGPD. Elles sont votre propriété exclusive et ne servent jamais à entraîner des modèles publics.
 
 **Est-ce que cela remplace mon comptable ou mon Excel ?**
-Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire actuelle et exporter vos fichiers pour votre comptable en 1 clic.
+Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire actuelle, et vos factures fournisseurs partent d’elles-mêmes chez votre comptable.
 
 ## Outils gratuits
 
@@ -76,22 +76,21 @@ Devis, relances, factures, rendez-vous : vos agents IA s’en chargent. Vous val
 Réserver une démo Commander sans démo Gratuit • 2 min • Sans engagement
 ### On se branche à vos outils.
 Talos s’appuie sur n8n, qui se connecte à plus de 300 outils : messagerie, agenda, logiciels de devis du bâtiment (Batigest, EBP, Obat, Tolteck), comptabilité, paiement et signature électronique.
-Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
+Branchables : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Agents IA pour le BTP
 ### Talos, qu’est-ce que c’est ?
 Talos est une équipe d’agents IA pour les artisans et les entreprises
-du bâtiment. Quatre agents spécialisés préparent les devis, les factures, les rendez-vous et
-le tri des mails (la relance des impayés arrive bientôt), à partir de vos prix et de vos habitudes.
+du bâtiment. Cinq agents spécialisés préparent les devis, les factures, les rendez-vous, le tri
+des mails et la relance des impayés, à partir de vos prix et de vos habitudes.
 Chaque document est validé par l’artisan avant envoi. Talos se connecte à plus de 300 outils du
-métier, dont Gmail, Google Agenda, WhatsApp Business, Stripe et Qonto. L’offre démarre à
-99 € par mois pour un agent, mise en place incluse, et plus de 30 artisans du bâtiment
-sont déjà accompagnés.
+métier, dont Gmail, Google Agenda, WhatsApp Business et Stripe. L’offre démarre à
+99 € par mois pour un agent, mise en place incluse. Talos est conforme au RGPD.
 Talos en bref
 Pour qui Artisans et TPE du bâtiment, en France
 Ce que font les agents Devis, factures, relances, rendez-vous, tri des mails
 Qui décide Vous : rien ne part sans votre validation
 Mise en route 0 formation, mise en place incluse
-Données Hébergées en Europe, jamais utilisées pour entraîner un modèle public
+Conforme RGPD, données jamais utilisées pour entraîner un modèle public
 Prix À partir de 99 € par mois pour un agent
 « Nous ne croyons pas à une IA qui remplace les humains. Nous croyons à une IA
 qui leur rend du temps. »
@@ -129,7 +128,7 @@ Ne laissez plus passer une demande.
 Agent : Assistante client
 Comment ça marche
 Réduire
-Chaque email, formulaire ou message est centralisé et transformé en une fiche client prête à être traitée.
+Chaque e-mail ou message WhatsApp est centralisé et transformé en une fiche client prête à être traitée.
 La demande client qui arrive
 #### Devis
 Vos devis en quelques minutes.
@@ -155,7 +154,7 @@ Votre planning s'organise tout seul.
 Prise de rendez-vous, rappels et organisation de vos journées.
 Le planning de la semaine
 Et ce n'est pas tout
-vos assistants. Devis, facturation, relation client, administratif, et bientôt la trésorerie : chacun a ses missions, vous prenez ceux dont vous avez besoin.
+vos assistants. Devis, facturation, relation client, administratif et trésorerie : chacun a ses missions, vous prenez ceux dont vous avez besoin.
 9:41
 Une fin de journée
 La réactivité client
@@ -171,7 +170,7 @@ Vos devis sont déjà prêts.
 #### La réactivité client
 Avant Le client attend trois jours.
 Il rappelle un autre artisan.
-Après Le client attend un quart d'heure.
+Après Le client a sa réponse sans attendre.
 Il signe avec vous.
 #### Trésorerie & relances
 Avant Vous relancez vous-même.
@@ -189,7 +188,7 @@ Livrer
 ####
 Sans mauvaise surprise
 0 formation nécessaire
-Hébergé en Europe
+Conforme RGPD
 100 % modifiable
 Je veux voir Talos sur mon entreprise
 Estimez vos gains
@@ -287,20 +286,20 @@ Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le 
 le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise.
 Dès qu'un échange demande une visite terrain, l'IA vous passe la main.
 Mes tarifs et données clients sont-ils en sécurité ?
-Vos données restent confidentielles et stockées en Europe. Elles sont votre propriété
+Vos données restent confidentielles et sont traitées conformément au RGPD. Elles sont votre propriété
 exclusive et ne servent jamais à entraîner des modèles publics.
 Est-ce que cela remplace mon comptable ou mon Excel ?
 Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire
-actuelle et exporter vos fichiers pour votre comptable en 1 clic.
+actuelle, et vos factures fournisseurs partent d’elles-mêmes chez votre comptable.
 
 ---
 
-# 4 agents IA pour artisans du BTP : devis, factures, accueil
+# 5 agents IA pour artisans du BTP : devis, factures, accueil
 
 Source : https://www.talos-ai.tech/offres.html
 
-4 agents IA pour artisans du BTP : devis, factures, accueil
-## 4 agents IA pour artisans du BTP Une équipe sur mesure
+5 agents IA pour artisans du BTP : devis, factures, accueil
+## 5 agents IA pour artisans du BTP Une équipe sur mesure
 Choisissez les assistants dont vous avez besoin. Ils prennent en charge les
 tâches qui vous prennent du temps, pendant que vous vous concentrez sur vos
 chantiers.
@@ -351,16 +350,16 @@ Branché sur vos outils
 Mise en place personnalisée
 Votre Assistant Commercial prend en charge vos prospects, prépare vos propositions, suit vos opportunités et relance vos clients pour vous aider à signer davantage de chantiers.
 Prépare vos devis et propositions commerciales
-Relance automatiquement vos prospects et devis
+Relance automatiquement vos devis
 Suit chaque opportunité jusqu'à la signature
 Envoie les devis pour signature électronique
-Centralise les échanges avec vos prospects
+Réunit vos demandes de devis, d’où qu’elles viennent
 Ajouter à mon équipe
 Voir une démonstration
 ### Vendez plus .
 01 — Capter
-#### Aucune demande ne reste sans réponse
-Le soir, le week-end, depuis le mail, le formulaire ou le SMS : il répond, récupère ce qui manque et vous remonte la demande complète.
+#### Vos demandes arrivent de partout
+Un e-mail, une note vocale, une photo, un plan : il capte la demande d’où qu’elle vienne, en reprend le chantier, l’adresse et le délai, et la transforme en devis.
 02 — Convertir
 #### Le devis part pendant que vous roulez
 Depuis une note vocale, une photo ou un e-mail, il chiffre sur votre grille tarifaire, envoie la proposition et récupère la signature en ligne.
@@ -373,7 +372,7 @@ Il prépare vos propositions commerciales, les adapte au besoin
 du client et les envoie rapidement. Vous pouvez vous concentrer sur le chantier, il s'occupe de faire
 avancer la vente.
 Préparation des devis Il transforme les informations du client en proposition commerciale prête à envoyer.
-Offres adaptées Il peut préparer différentes propositions — Éco, Standard, Premium — pour donner au client le choix.
+Offres adaptées Il prépare autant de devis que vous voulez en envoyer, chacun dans sa gamme : Éco, Standard ou Premium. Vous choisissez la gamme, il chiffre.
 Envoi & signature Il envoie le devis au client et récupère sa signature directement en ligne.
 Devis n° 2026-0312
 Mme Roussel · toiture 40 m²
@@ -400,30 +399,30 @@ SCI Bellevue a rouvert le devis deux fois — à traiter en priorité
 Ce qu'il prend en charge
 ### 4 missions, 22 fonctionnalités .
 De la demande reçue à 22 h jusqu'à l'acompte encaissé, voici exactement ce que votre assistant commercial fait à votre place.
-Captation 24 h/24
+Captation multi-sources
 05 fonctionnalités
-#### Rien ne se perd, même à 22 h
-Réponse immédiate · sur tous vos canaux
+#### Aucune demande ne se perd
+Chaque demande captée · d’où qu’elle vienne
 Ce qu'il fait :
-Répond le soir et le week-end
-Pose les questions manquantes
-Chantier, adresse, délai, budget
-Mail, formulaire et SMS réunis
+E-mails transférés à Talos
+Notes vocales dictées au chantier
+Photos, plans et PDF
+Chantier, adresse et délai repris
 Vous alerte sur les demandes chaudes
 Voir comment le devis part
 Chiffrage en minutes
 #### Le devis s'écrit pendant que vous roulez
-Cinq façons de le lancer · une seule grille tarifaire
+Plusieurs façons de le lancer · une seule grille tarifaire
 Depuis un e-mail client
 Depuis une note vocale
 Depuis une photo ou un plan
-Depuis le formulaire du site
+Depuis un devis vierge ou votre modèle
 Sur votre grille et vos marges
 Le voir chiffrer mes devis
 Signature en ligne
 #### Il repart signé, avec l'acompte
 Signature en ligne · acompte encaissé à la commande
-Variantes Éco, Standard, Premium
+Gamme Éco, Standard ou Premium
 Signature depuis son téléphone
 Acompte de 30 % à la signature
 Date de validité sur chaque devis
@@ -434,8 +433,8 @@ Relances J+3 · J+7 · J+14
 #### Il relance à votre place, et sait s'arrêter
 J+3, J+7, J+14 · puis plus rien
 Relance à J+3, courte et polie
-Relance à J+7, appel proposé
-Relance à J+14, validité rappelée
+Relance à J+7, validité rappelée
+Relance à J+14, dernier rappel
 S'arrête dès qu'il répond
 S'arrête à la signature
 Repère les devis relus
@@ -444,7 +443,7 @@ Ne plus relancer moi-même
 ### Vous gardez vos outils, il travaille avec .
 Pas de migration, pas de logiciel à apprendre, pas de données à ressaisir. Il se branche sur votre messagerie, votre agenda et vos outils actuels.
 24 outils branchables
-Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
+Branchables : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 Encore plus fort à deux
 ### Combinez-le avec l'Assistant Facturation pour plus de résultats.
@@ -455,8 +454,8 @@ Voir sa fiche
 Le changement
 ### Avant, et avec Talos .
 Avant Avec Talos
-Vous rappelez les demandes le soir Talos répond immédiatement
-Vous reprenez les infos à la main Talos les qualifie
+Vos demandes sont éparpillées Talos les réunit
+Vous reprenez les infos à la main Talos reprend les infos
 Vous faites vos devis le soir Talos les prépare
 Vous devez penser aux relances Talos les effectue
 Vous cherchez où en est chaque client Talos vous le signale
@@ -467,7 +466,7 @@ Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Sans engagement
-Données hébergées en Europe
+Conforme RGPD
 
 ---
 
@@ -583,7 +582,7 @@ Simplifier ma fin de mois
 ### Vous gardez votre compta et vos outils, il travaille avec .
 Il reprend votre numérotation là où elle en est et exporte dans le format que votre cabinet attend. Personne n'a à changer de logiciel, ni vous ni lui.
 24 outils branchables
-Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
+Branchables : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 La facture électronique
 ### La réforme arrive, vous ne changez rien .
@@ -624,7 +623,7 @@ Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Factur-X prêt avant sept. 2027
-Données hébergées en Europe
+Conforme RGPD
 
 ---
 
@@ -642,7 +641,7 @@ Elle repère vos impayés, relance vos clients et vous aide à anticiper vos enc
 Repère les factures en retard
 Relance automatiquement vos clients
 Prévoit vos encaissements
-Calcule les pénalités de retard
+Annonce les pénalités de retard
 Prépare les mises en demeure
 Ajouter à mon équipe
 Voir une démonstration
@@ -655,7 +654,7 @@ Dès qu'une échéance est dépassée, la facture bascule en impayé avec son an
 Un rappel poli, puis plus direct, puis la dernière chance avant mise en demeure. Chaque niveau est écrit, vous validez d'un clic.
 03 — Anticiper
 #### Vous savez ce qui rentre et quand
-Projection des encaissements semaine par semaine, et une alerte avant que le solde ne passe sous votre seuil.
+Projection des encaissements semaine par semaine. Si votre banque est connectée, une alerte avant que le solde ne passe sous votre seuil.
 Impayés — elle les repère avant vous
 ### Ne laissez plus vos impayés s'accumuler.
 Elle surveille vos échéances et vous signale immédiatement les factures qui dépassent leur date de paiement.
@@ -670,13 +669,13 @@ Détection dès le premier jour de retard, et suivi de l'ancienneté.
 Vous perdez du temps à vérifier qui vous doit quoi
 Une vision centralisée de tous vos impayés.
 Relances — elle récupère votre argent
-### Vos clients sont relancés. Vous n'avez rien à faire.
+### Vos clients sont relancés. Vous n'avez qu'à valider.
 Elle adapte chaque relance au retard et suit les échanges jusqu'au paiement.
 Relances automatiques J+7, J+15, J+30 : elle s'en charge.
 Relances adaptées Le ton évolue avec l'ancienneté du retard.
 Mise en demeure Elle prépare les courriers lorsque la situation l'exige.
 Vous devez courir après vos clients pour être payé
-Relances automatiques, sans intervention de votre part.
+Relances écrites pour vous, envoyées sur votre feu vert.
 Vous n'aimez pas réclamer votre argent
 Les relances partent à votre place, avec le bon ton.
 Vous ne savez pas quoi faire quand un client ne paie toujours pas
@@ -686,7 +685,7 @@ Trésorerie — bientôt disponible
 Elle projette vos encaissements et vous alerte lorsqu'un trou de trésorerie se profile.
 Projection des encaissements Vous savez ce qui devrait rentrer et quand.
 Prévision de trésorerie Elle vous donne une vision des prochaines semaines.
-Alertes de tension Vous êtes prévenu avant de passer dans le rouge.
+Alertes de tension Banque connectée : vous êtes prévenu avant de passer dans le rouge.
 Vous ne savez pas combien vous aurez le mois prochain
 Projection des encaissements à venir.
 Vous avez des décalages entre vos entrées et vos sorties
@@ -723,8 +722,8 @@ Pénalités et mise en demeure · aux bonnes mentions
 Pénalités au taux légal
 Indemnité de 40 € par facture
 Mise en demeure prête à envoyer
-Échéancier en trois ou quatre fois
-Pénalités annoncées dès le 2ᵉ rappel
+Échéancier en deux à quatre fois
+Pénalités annoncées au 3ᵉ rappel
 Réclamer ce qui m'est dû
 Prévision à 3 mois
 Bientôt
@@ -732,13 +731,13 @@ Bientôt
 Alerte tous les lundis à 8 h · solde prévu, retards, priorités
 Encaissements semaine par semaine
 Alerte hebdo par e-mail et SMS
-Signal sous votre seuil
+Seuil de solde, banque connectée
 Les priorités, montant en tête
 Voir ma trésorerie à trois mois
 ### Vous gardez votre banque et vos outils, elle travaille avec .
 Elle n'a jamais accès à votre compte bancaire. Vous marquez une facture payée d'un clic, elle arrête aussitôt les relances.
 24 outils branchables
-Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
+Branchables : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 Encore plus fort à deux
 ### Combinez-la avec l'Assistant Facturation pour plus de résultats.
@@ -752,7 +751,7 @@ Avant Avec Talos
 Vous découvrez les retards trop tard Talos les repère dès l'échéance
 Vous n'osez pas relancer vos clients Talos écrit la relance, vous validez
 Vous relancez tous sur le même ton Le ton monte d'un cran à chaque niveau
-Vous ne réclamez jamais les pénalités Elles sont calculées et annoncées
+Vous ne réclamez jamais les pénalités Elles sont annoncées au bon moment
 Vous ignorez ce qui rentre ce mois-ci La projection arrive chaque lundi
 Un impayé finit par passer à la perte Chaque facture est suivie jusqu'au solde
 ### Vous avez besoin d'une trésorerie tenue ?
@@ -761,7 +760,7 @@ Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Aucun virement possible
-Données hébergées en Europe
+Conforme RGPD
 
 ---
 
@@ -775,8 +774,8 @@ Le duo parfait Assistant commercial
 ## Agent IA accueil client et rendez-vous Vous êtes sur un chantier. Elle s'occupe de vos clients.
 Branché sur vos outils
 Mise en place personnalisée
-Votre Assistante Client répond aux demandes, qualifie les prospects et gère vos rendez-vous, même lorsque vous ne pouvez pas décrocher.
-Réponse automatique aux appels et demandes clients
+Votre Assistante Client répond aux demandes, qualifie les prospects et gère vos rendez-vous, même quand vous êtes sur un chantier.
+Réponse automatique aux messages clients
 Qualification des prospects
 Vérification de la zone d'intervention
 Prise et gestion des rendez-vous
@@ -829,13 +828,13 @@ Ce qu'elle prend en charge
 Du message reçu à 21 h jusqu'au rappel deux heures avant l'intervention, voici exactement ce que votre assistante client fait à votre place.
 Réponses 24/7
 05 fonctionnalités
-#### Personne ne tombe sur la messagerie
+#### Chaque message reçoit sa réponse
 Réponse en moins d'une minute · nuit, week-end et congés
 Ce qu'elle fait :
 Hors horaires, week-end et congés
 Réponses tirées de vos infos
 Aucun prix ferme sans vous
-E-mail, formulaire, SMS
+Sur WhatsApp Business
 Vous passe la main hors cadre
 Voir comment l'agenda se remplit
 Qualification automatique
@@ -852,7 +851,7 @@ Rendez-vous calés
 Créneaux compatibles · trajets compris
 Créneaux tirés de votre agenda
 Temps de trajet compris
-Ajout dans Google Agenda ou Outlook
+Ajout dans Google Agenda
 Récapitulatif envoyé au client
 Aucun rendez-vous hors zone
 Remplir mon agenda
@@ -861,14 +860,14 @@ Rappels J-1 et H-2
 J-1 et H-2 · par SMS et par e-mail
 Rappel la veille, heure et adresse
 Rappel deux heures avant
-Sur son canal habituel
-Confirmé dès qu'il répond
+Par SMS et par e-mail
+Confirmé d'un clic
 Replanifie en cas d'empêchement
 Réduire mes rendez-vous manqués
 ### Vous gardez votre agenda et vos outils, elle travaille avec .
 Elle écrit dans l'agenda que vous utilisez déjà et répond sur les canaux où vos clients vous écrivent. Rien de nouveau à installer sur votre téléphone.
 24 outils branchables
-Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
+Branchables : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 Encore plus fort à deux
 ### Combinez-la avec l'Assistant Commercial pour plus de résultats.
@@ -880,7 +879,7 @@ Le changement
 ### Avant, et avec Talos .
 Avant Avec Talos
 Vous rappelez le soir, entre deux repas Talos répond dans la minute
-Un appel manqué est un client perdu Chaque message reçoit une réponse
+Un message sans réponse est un client perdu Chaque message reçoit une réponse
 Vous posez les questions au téléphone La demande arrive déjà qualifiée
 Vous vous déplacez hors de votre zone Le secteur est vérifié avant le rendez-vous
 Vous enchaînez deux chantiers trop loin Le trajet est pris en compte
@@ -891,7 +890,7 @@ Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Sans engagement
-Données hébergées en Europe
+Conforme RGPD
 
 ---
 
@@ -941,7 +940,7 @@ Tâches — elle s'occupe du quotidien
 ### Les petites tâches ne devraient plus vous prendre vos soirées.
 Elle prend en charge les tâches administratives répétitives qui vous font perdre du temps chaque semaine.
 Préparation des documents Elle prépare les éléments dont vous avez besoin.
-Tâches répétitives Elle s'occupe des actions qui reviennent chaque semaine.
+IBAN vérifiés Elle s'occupe des actions qui reviennent chaque semaine.
 Rappels automatiques Elle vous rappelle ce qui ne doit pas être oublié.
 Vous passez trop de temps sur l'administratif
 Les tâches répétitives sont prises en charge.
@@ -974,7 +973,7 @@ Ce qu'elle fait :
 Six catégories dès la réception
 Adresses, dates et montants extraits
 Publicités écartées, jamais supprimées
-Accusé de réception au client
+Réponse rédigée, prête à valider
 Expéditeurs exclus sur demande
 Voir comment elle trie
 Résumés de fils
@@ -992,21 +991,21 @@ En haut de la pile · avec le motif de l'alerte
 Urgences chantier et administratives
 Échéances repérées dans le mail
 En haut de pile, motif inclus
-Pièces manquantes rappelées
+Échéances rappelées à J-2
 Ne plus rater une urgence
 Classement au chantier
 #### Chaque pièce à son chantier
 Détachée, nommée, rangée · et prête pour le comptable
 Rattaché au bon chantier
 Factures fournisseurs prêtes
-Devis, PV et attestations réunis
-Recherche en langage courant
+Transmises à votre comptable
+IBAN qui change signalé
 Une correction ne se répète pas
 Ranger mes chantiers
 ### Vous gardez votre boîte mail, elle travaille dedans .
 On branche votre adresse professionnelle, pas votre boîte privée. Vos dossiers restent les vôtres : elle range, elle ne déménage rien.
 24 outils branchables
-Déjà branchés : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
+Branchables : Gmail, Google Agenda, WhatsApp Business, toute messagerie IMAP (Orange, Free, SFR, OVH, Ionos), Outlook, Microsoft 365, Excel, OneDrive, Google Drive, Google Sheets, Stripe, Qonto, Pennylane, Yousign, Calendly, Brevo, ChatGPT, Claude.
 Et si votre outil n'est pas dans la liste ? On en parle pendant la mise en place, et on vous dit franchement ce qui est possible.
 Encore plus fort à deux
 ### Combinez-la avec l'Assistante Client pour plus de résultats.
@@ -1021,15 +1020,15 @@ Vous triez vos mails le soir C'est fait avant votre réveil
 Vous relisez vingt messages d'affilée Le fil tient en trois lignes
 Une urgence se perd dans la masse Elle passe en haut de la pile
 Vous cherchez une facture fournisseur Elle est au dossier du chantier
-Le client attend un signe de vie L'accusé de réception est parti
-Il manque une pièce au dossier Le manque vous est signalé
+Le client attend un signe de vie Sa réponse est prête à partir
+Un fournisseur change d'IBAN Elle vous le signale avant de payer
 ### Vous avez besoin d'une boîte mail tenue ?
 Elle trie la nuit et vous remet trois décisions le matin. Le reste est rangé, résumé, classé — et toujours consultable.
 Vous savez déjà ce qu'il vous faut ?
 Commander en ligne, sans rendez-vous
 Composer mon équipe
 Aucune suppression
-Données hébergées en Europe
+Conforme RGPD
 
 ---
 
@@ -1171,8 +1170,8 @@ Partiel. Le reste revient vers vous.
 ×18
 ~1 800 €
 Le faire soi-même
-10 h/semaine que vous ne facturez pas.
-Montants par mois, TVA non applicable — 10 h/semaine à environ 45 €/h. Ajustez avec le simulateur.
+Des heures que vous ne facturez pas.
+Montants par mois, TVA non applicable, donnés à titre indicatif. Faites votre calcul avec le simulateur.
 Et vous, combien perdez-vous vraiment ?
 Ces montants sont des moyennes. Mettez vos chiffres, le calcul se refait devant vous.
 Calculer mon manque à gagner

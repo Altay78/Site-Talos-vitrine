@@ -50,11 +50,10 @@
     { id: 'client',        nom: 'Assistante client',       sous: 'Réponses et rendez-vous' },
     { id: 'facturation',   nom: 'Assistant facturation',   sous: 'Factures, acomptes, situations' },
     { id: 'administratif', nom: 'Assistante administrative', sous: 'Tri des mails et classement' },
-    /* montrées, pas vendues : la trésorerie attend sa connexion bancaire,
-       la juridique ses modules dans l'application. Le jour où l'une sort,
-       on lui retire « bientot » — et on la remet en vente dans
-       talos-app/lib/souscription.ts. */
-    { id: 'tresorerie',    nom: 'Assistante trésorerie',   sous: 'Impayés et prévision', bientot: true },
+    { id: 'tresorerie',    nom: 'Assistante trésorerie',   sous: 'Impayés et prévision' },
+    /* montrée, pas vendue : la juridique attend ses modules dans l'application.
+       Le jour où elle sort, on lui retire « bientot » — et on la remet en vente
+       dans talos-app/lib/souscription.ts. */
     { id: 'juridique',     nom: 'Assistante juridique',    sous: 'Contrats et conformité', bientot: true }
   ];
 

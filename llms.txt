@@ -6,8 +6,8 @@
 
 ## Produit
 
-- [Agents IA pour artisans du BTP : devis et factures](https://www.talos-ai.tech/): Des agents IA pour artisans du BTP : devis, factures, relances et rendez-vous préparés pendant le chantier. Vous validez. +30 artisans accompagnés.
-- [4 agents IA pour artisans du BTP : devis, factures, accueil](https://www.talos-ai.tech/offres.html): Quatre agents IA spécialisés pour artisans : devis, facturation, accueil client et tri des mails. Relance des impayés bientôt. Mise en place incluse.
+- [Agents IA pour artisans du BTP : devis et factures](https://www.talos-ai.tech/): Des agents IA pour artisans du BTP : devis, factures, relances et rendez-vous préparés pendant le chantier. Vous validez. Conforme RGPD.
+- [5 agents IA pour artisans du BTP : devis, factures, accueil](https://www.talos-ai.tech/offres.html): Cinq agents IA spécialisés pour artisans : devis, facturation, accueil client, tri des mails et relance des impayés. Mise en place incluse.
 - [Comment fonctionnent les agents IA Talos pour artisans](https://www.talos-ai.tech/comment-ca-marche.html): Rien à installer ni à apprendre : on configure vos agents IA sur vos habitudes, ils préparent devis, relances et factures. Vous validez, c'est tout.
 
 ## Agents IA
@@ -48,10 +48,10 @@ Non. Vous gardez la plateforme agréée de votre banque, de votre logiciel ou de
 Oui : le client est prévenu qu'un assistant IA lui répond pour vous, comme le prévoit le règlement européen sur l'IA. Le ton reste naturel et suit l'image de votre entreprise. Dès qu'un échange demande une visite terrain, l'IA vous passe la main.
 
 **Mes tarifs et données clients sont-ils en sécurité ?**
-Vos données restent confidentielles et stockées en Europe. Elles sont votre propriété exclusive et ne servent jamais à entraîner des modèles publics.
+Vos données restent confidentielles et sont traitées conformément au RGPD. Elles sont votre propriété exclusive et ne servent jamais à entraîner des modèles publics.
 
 **Est-ce que cela remplace mon comptable ou mon Excel ?**
-Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire actuelle et exporter vos fichiers pour votre comptable en 1 clic.
+Non, Talos supprime juste votre paperasse. Vous pouvez importer votre grille tarifaire actuelle, et vos factures fournisseurs partent d’elles-mêmes chez votre comptable.
 
 ## Outils gratuits
 
